@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace POSsystem.Database
+{
+    public class SellingPriceDetails
+    {
+        public int id { get; set; }
+        public int purchaseid { get; set; }
+        public int item_id { get; set; }
+        public int sell_qty { get; set; }
+        public string sell_unit { get; set; }
+        public double sell_price { get; set; }
+        public string remark { get; set; }
+        public string Barcodeno { get; set; }
+    }
+}
