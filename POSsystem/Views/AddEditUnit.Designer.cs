@@ -33,38 +33,41 @@
             this.lbunitname = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.tbunitname = new System.Windows.Forms.TextBox();
+            this.name_mandatory = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbunitcode
             // 
             this.lbunitcode.AutoSize = true;
-            this.lbunitcode.Font = new System.Drawing.Font("Cambria", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbunitcode.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbunitcode.Location = new System.Drawing.Point(22, 92);
             this.lbunitcode.Name = "lbunitcode";
-            this.lbunitcode.Size = new System.Drawing.Size(113, 28);
+            this.lbunitcode.Size = new System.Drawing.Size(144, 25);
             this.lbunitcode.TabIndex = 11;
-            this.lbunitcode.Text = "Unit Code";
+            this.lbunitcode.Text = "Kode Kemasan";
             // 
             // tbunitcode
             // 
-            this.tbunitcode.Font = new System.Drawing.Font("Cambria", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbunitcode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tbunitcode.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbunitcode.Location = new System.Drawing.Point(27, 124);
             this.tbunitcode.Margin = new System.Windows.Forms.Padding(4);
             this.tbunitcode.MaxLength = 5;
             this.tbunitcode.Name = "tbunitcode";
-            this.tbunitcode.Size = new System.Drawing.Size(320, 36);
+            this.tbunitcode.Size = new System.Drawing.Size(320, 39);
             this.tbunitcode.TabIndex = 14;
             // 
             // lbunitname
             // 
             this.lbunitname.AutoSize = true;
-            this.lbunitname.Font = new System.Drawing.Font("Cambria", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbunitname.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbunitname.Location = new System.Drawing.Point(27, 187);
             this.lbunitname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbunitname.Name = "lbunitname";
-            this.lbunitname.Size = new System.Drawing.Size(121, 28);
+            this.lbunitname.Size = new System.Drawing.Size(149, 25);
             this.lbunitname.TabIndex = 16;
-            this.lbunitname.Text = "Unit Name";
+            this.lbunitname.Text = "Nama Kemasan";
             // 
             // btnSave
             // 
@@ -84,18 +87,43 @@
             // 
             // tbunitname
             // 
-            this.tbunitname.Font = new System.Drawing.Font("Cambria", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbunitname.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.tbunitname.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbunitname.Location = new System.Drawing.Point(27, 219);
             this.tbunitname.Margin = new System.Windows.Forms.Padding(4);
             this.tbunitname.Name = "tbunitname";
-            this.tbunitname.Size = new System.Drawing.Size(320, 36);
+            this.tbunitname.Size = new System.Drawing.Size(320, 39);
             this.tbunitname.TabIndex = 36;
+            // 
+            // name_mandatory
+            // 
+            this.name_mandatory.AutoSize = true;
+            this.name_mandatory.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.name_mandatory.ForeColor = System.Drawing.Color.Red;
+            this.name_mandatory.Location = new System.Drawing.Point(158, 96);
+            this.name_mandatory.Name = "name_mandatory";
+            this.name_mandatory.Size = new System.Drawing.Size(18, 24);
+            this.name_mandatory.TabIndex = 45;
+            this.name_mandatory.Text = "*";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(168, 188);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(18, 24);
+            this.label1.TabIndex = 46;
+            this.label1.Text = "*";
             // 
             // AddEditUnit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(373, 403);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.name_mandatory);
             this.Controls.Add(this.tbunitname);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lbunitname);
@@ -103,7 +131,7 @@
             this.Controls.Add(this.lbunitcode);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "AddEditUnit";
-            this.Text = "Pengaturan Unit";
+            this.Text = "HaskaTech POS";
             this.Title = "Pengaturan Unit";
             this.Load += new System.EventHandler(this.AddEditUnit_Load);
             this.Controls.SetChildIndex(this.lbunitcode, 0);
@@ -111,6 +139,8 @@
             this.Controls.SetChildIndex(this.lbunitname, 0);
             this.Controls.SetChildIndex(this.btnSave, 0);
             this.Controls.SetChildIndex(this.tbunitname, 0);
+            this.Controls.SetChildIndex(this.name_mandatory, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,5 +153,7 @@
         private System.Windows.Forms.Label lbunitname;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox tbunitname;
+        private System.Windows.Forms.Label name_mandatory;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -18,6 +18,7 @@ namespace POSsystem
         private BrandRepository brandRepository = new BrandRepository();
 
         public Brand Branddata { get; set; }
+        public List<Brand> BrandList { get; set; }
 
         public bool Editmode { get; set; }
 
@@ -29,38 +30,80 @@ namespace POSsystem
 
         private void btsave_Click(object sender, EventArgs e)
         {
+            BrandList = brandRepository.GetAll();
+
+            if (tbbrandname.Text == "")
+            {
+                MessageBox.Show("Yang bertanda Bintang tidak boleh kosong");
+            }
+            else
+            {
+                int samename = 0;
+
+                if (Editmode)
+                {
+                    Branddata.name = tbbrandname.Text;
+                    Branddata.remark = tbremark.Text;
+
+
+                    foreach (var existbrand in BrandList)
+                    {
+                        if (tbbrandname.Text == existbrand.name)
+                            samename = samename + 1;
+                    }
+
+                    if (samename > 0)
+                    {
+                        MessageBox.Show("Tidak boleh memasukkan nama merek yang sama");
+                        samename = 0;
+                    }
+                    else if (brandRepository.Update(Branddata))
+                    {
+                        MessageBox.Show("Data telah berhasil di ubah");
+                        Close();
+                    }
+                    else
+                        MessageBox.Show("Data baru gagal ditambahkan");
+                    
+
+                }
+                else
+                {
+                    var brand = new Brand();
+                    brand.name = tbbrandname.Text;
+                    brand.remark = tbremark.Text;
+
+
+                    foreach (var existbrand in BrandList)
+                    {
+                        if ( tbbrandname.Text == existbrand.name)
+                            samename = samename +  1;
+                    }
+
+                    if (samename > 0)
+                    {
+                        MessageBox.Show("Tidak boleh memasukkan nama merek yang sama");
+                        samename = 0;
+                    }
+                    else if (brandRepository.Add(brand))
+                    {
+                        MessageBox.Show("Data baru telah berhasil di tambahkan");
+                        Close();
+                    }
+                    else
+                        MessageBox.Show("Data baru gagal ditambahkan");
+                }
+            }
+
+
             
-
-            if (Editmode)
-            {
-                Branddata.name = tbbrandname.Text;
-                Branddata.remark = tbremark.Text;
-
-                if (brandRepository.Update(Branddata))
-                    MessageBox.Show("Data telah berhasil di ubah");
-                else
-                    MessageBox.Show("Data gagal di ubah");
-            }
-           else
-            {
-                var brand = new Brand();
-                brand.name = tbbrandname.Text;
-                brand.remark = tbremark.Text;
-                
-
-                if (brandRepository.Add(brand))
-                    MessageBox.Show("Data baru telah berhasil di tambahkan");
-                else
-                    MessageBox.Show("Data baru gagal ditambahkan");
-                
-            }
-
-            Close();
 
         }
 
+
         private void AddEditBrand_Load(object sender, EventArgs e)
         {
+
             if (Editmode)
             {
                 tbbrandname.Text = Branddata.name;

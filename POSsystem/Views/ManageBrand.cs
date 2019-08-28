@@ -1,6 +1,7 @@
 ﻿using POSsystem.Database;
 using POSsystem.Repository;
 using POSsystem.Views;
+using POSsystem.Views.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace POSsystem
 {
-    public partial class ManageBrand : Form
+    public partial class ManageBrand : BaseForm
     {
         public List<Brand> BrandList { get; set; }
 
@@ -46,10 +47,10 @@ namespace POSsystem
 
             foreach (var item in BrandList)
             {
-               
+
                 gvbrand.Rows.Add(item.id,
                     runningno, 
-                    item.name, 
+                    item.name,
                     item.remark);
 
                 runningno = runningno + 1;
@@ -67,35 +68,43 @@ namespace POSsystem
 
         private void bteditbrand_Click(object sender, EventArgs e)
         {
-            var id = Convert.ToInt32(gvbrand.Rows[gvbrand.CurrentCell.RowIndex].Cells[0].Value);
-            var brand = BrandList.FirstOrDefault(x => x.id == id);
-            if (brand != null)
+            if (gvbrand.SelectedRows.Count == 0)
+                MessageBox.Show("Tidak ada merek yang akan diubah");
+            else
             {
-                var form = new AddEditBrand();
-                form.Editmode = true;
-                form.Branddata = brand;
-                form.ShowDialog();
-                LoadData();
+                var id = Convert.ToInt32(gvbrand.Rows[gvbrand.CurrentCell.RowIndex].Cells[0].Value);
+                var brand = BrandList.FirstOrDefault(x => x.id == id);
+                if (brand != null)
+                {
+                    var form = new AddEditBrand();
+                    form.Editmode = true;
+                    form.Branddata = brand;
+                    form.ShowDialog();
+                    LoadData();
+                }
             }
-
 
         }
 
         private void btdeletebrand_Click(object sender, EventArgs e)
         {
-            var id = Convert.ToInt32(gvbrand.Rows[gvbrand.CurrentCell.RowIndex].Cells[0].Value);
-
-            var form = new ConfirmationDialog();
-            form.Message = "Apa anda yakin menghapus Brand terpilih?";
-            form.ShowDialog();
-
-            if (form.YES)
+            if (gvbrand.SelectedRows.Count == 0)
+                MessageBox.Show("Tidak ada merek yang akan dihapus");
+            else
             {
-                if (!brandRepository.Delete(id))
-                    MessageBox.Show("Gagal menghapus brand");
-                LoadData();
-            }
+                var id = Convert.ToInt32(gvbrand.Rows[gvbrand.CurrentCell.RowIndex].Cells[0].Value);
 
+                var form = new ConfirmationDialog();
+                form.Message = "Apa anda yakin menghapus Brand terpilih?";
+                form.ShowDialog();
+
+                if (form.YES)
+                {
+                    if (!brandRepository.Delete(id))
+                        MessageBox.Show("Gagal menghapus brand");
+                    LoadData();
+                }
+            }
 
         }
     }

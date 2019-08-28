@@ -18,6 +18,7 @@ namespace POSsystem.Views
         private UnitRepository unitRepository = new UnitRepository();
         public UnitItem UnitData { get; set; }
         public bool Editmode { get; set; }
+        public List<UnitItem> UnitList { get; set; }
         public AddEditUnit()
         {
             InitializeComponent();
@@ -36,28 +37,73 @@ namespace POSsystem.Views
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(Editmode)
-            {
-                UnitData.unitcode = tbunitcode.Text;
-                UnitData.description  = tbunitname.Text;
+            UnitList = unitRepository.GetAll();
+            int samenameorcode = 0;
 
-                if (unitRepository.Update(UnitData))
-                    MessageBox.Show("Data telah berhasil di ubah");
-                else
-                    MessageBox.Show("Data gagal di ubah");
-            }
+
+            if (tbunitcode.Text == "")
+                MessageBox.Show("Yang bertanda Bintang tidak boleh kosong");
+            else if (tbunitname.Text == "")
+                MessageBox.Show("Yang bertanda Bintang tidak boleh kosong");
             else
             {
-                var unitdetails = new UnitItem();
-                unitdetails.unitcode = tbunitcode.Text;
-                unitdetails.description = tbunitname.Text;
+                if (Editmode)
+                {
+                    UnitData.unitcode = tbunitcode.Text;
+                    UnitData.description = tbunitname.Text;
 
-                if (unitRepository.Add(unitdetails))
-                    MessageBox.Show("Data baru telah berhasil di tambahkan");
+                    foreach (var existingunit in UnitList)
+                    {
+                        if (tbunitcode.Text == existingunit.unitcode)
+                            samenameorcode += 1;
+                        else if (tbunitname.Text == existingunit.description)
+                            samenameorcode += 1;
+                    }
+
+                    if (samenameorcode > 1)
+                    {
+                        MessageBox.Show("Tidak boleh memasukkan nama atau kode kemasan yang sama");
+                        samenameorcode = 0;
+                    }
+                    else if (unitRepository.Update(UnitData))
+                    {
+                        MessageBox.Show("Data telah berhasil di ubah");
+                        Close();
+                    }
+                    else
+                        MessageBox.Show("Data gagal di ubah");
+                }
                 else
-                    MessageBox.Show("Data baru gagal ditambahkan");
+                {
+                    var unitdetails = new UnitItem();
+                    unitdetails.unitcode = tbunitcode.Text;
+                    unitdetails.description = tbunitname.Text;
+
+                    foreach (var existingunit in UnitList)
+                    {
+                        if (tbunitcode.Text == existingunit.unitcode)
+                            samenameorcode += 1;
+                        else if (tbunitname.Text == existingunit.description)
+                            samenameorcode += 1;
+                    }
+
+                    if (samenameorcode > 0)
+                    {
+                        MessageBox.Show("Tidak boleh memasukkan nama atau kode kemasan yang sama");
+                        samenameorcode = 0;
+                    }
+                    else if (unitRepository.Add(unitdetails))
+                    {
+                        MessageBox.Show("Data baru telah berhasil di tambahkan");
+                        Close();
+                    }
+                    else
+                        MessageBox.Show("Data baru gagal ditambahkan");
+                }
+                
             }
-            Close();
+
+            
             
 
         }

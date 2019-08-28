@@ -18,9 +18,16 @@ namespace POSsystem.Views
         private ProductRepository productRepository = new ProductRepository();
         private BrandRepository brandRepository = new BrandRepository();
         private UnitRepository unitRepository = new UnitRepository();
+        private PurchaseRepository purchaseRepository = new PurchaseRepository();
+        private SellingPriceRepository sellingPriceRepository = new SellingPriceRepository();
+
         public List<Brand> BrandList { get; set; }
         public List<UnitItem> UnitList { get; set; }
+        public List<PurchaseDetails> PurchaseList { get; set; }
+        public List<SellingPriceDetails> SellingPriceList { get; set; }
         public ProductDetails ProductData { get; set; }
+        public List<ProductDetails> ProductList { get; set; }
+
         public AddEditProduct()
         {
             InitializeComponent();
@@ -28,32 +35,49 @@ namespace POSsystem.Views
 
         public bool Editmode { get; set; }
 
-        private void LoadBrand()
-        {
-            BrandList = brandRepository.GetAll();
-        }
-
-        private void LoadUnit()
-        {
-            UnitList = unitRepository.GetAll();
-        }
-
-
-
 
         private void AddEditProduct_Load(object sender, EventArgs e)
         {
-            LoadBrand();
-            LoadUnit();
+            BrandList = brandRepository.GetAll();
+            UnitList = unitRepository.GetAll();
+
             cbbrand.DataSource = new BindingSource(BrandList, null);
             cbbrand.DisplayMember = "name";
             cbbrand.ValueMember = "id";
+
+            cbunitbulk.DataSource = new BindingSource(UnitList, null);
+            cbunitbulk.DisplayMember = "description";
+            cbunitbulk.ValueMember = "unitcode";
+
+            cbunitpcs.DataSource = new BindingSource(UnitList, null);
+            cbunitpcs.DisplayMember = "description";
+            cbunitpcs.ValueMember = "unitcode";
 
 
             if (Editmode)
             {
                 cbbrand.SelectedValue = ProductData.brand_id;
                 tbname.Text = ProductData.name;
+                cbunitbulk.SelectedValue = ProductData.unit_bulk;
+                cbunitpcs.SelectedValue = ProductData.unit_pcs;
+
+                PurchaseList = purchaseRepository.GetAll(ProductData.id);
+                SellingPriceList = sellingPriceRepository.GetAll(ProductData.id);
+
+                if (PurchaseList.Count != 0)
+                {
+                    cbunitbulk.Enabled = false;
+                    cbunitpcs.Enabled = false;
+                }
+
+                if (SellingPriceList.Count != 0)
+                {
+                    cbunitbulk.Enabled = false;
+                    cbunitpcs.Enabled = false;
+                }
+
+
+
             }
 
 
@@ -61,29 +85,80 @@ namespace POSsystem.Views
 
         private void btsave_Click(object sender, EventArgs e)
         {
+
+            ProductList = productRepository.GetAll((int)cbbrand.SelectedValue);
+            int samenameinsamebrand = 0;
+            
+
             if (Editmode)
             {
-                ProductData.brand_id = (int)cbbrand.SelectedValue;
-                ProductData.name = tbname.Text;
+                foreach (var existingname in ProductList)
+                {
+                    if (existingname.name == tbname.Text)
+                        samenameinsamebrand += 1;
+                }
 
-                if (productRepository.Update(ProductData))
-                    MessageBox.Show("Data telah berhasil di ubah");
+
+                if (tbname.Text == "")
+                    MessageBox.Show("Yang bertanda Bintang tidak boleh kosong");
+                else if (samenameinsamebrand > 0)
+                {
+                    MessageBox.Show("Tidak boleh memasukkan nama produk yang sama");
+                    samenameinsamebrand = 0;
+                }
                 else
-                    MessageBox.Show("Data gagal di ubah");
+                {
+                    ProductData.brand_id = (int)cbbrand.SelectedValue;
+                    ProductData.name = tbname.Text;
+                    ProductData.unit_bulk = cbunitbulk.SelectedValue.ToString();
+                    ProductData.unit_pcs = cbunitpcs.SelectedValue.ToString();
+
+                    if (productRepository.Update(ProductData))
+                    {
+                        MessageBox.Show("Data telah berhasil di ubah");
+                        Close();
+                    }
+                    else
+                        MessageBox.Show("Data gagal di ubah");
+                }
+
             }
             else
             {
-                var product = new ProductDetails();
-                product.brand_id = (int)cbbrand.SelectedValue;
-                product.name = tbname.Text;
+                foreach (var existingname in ProductList)
+                {
+                    if (existingname.name == tbname.Text)
+                        samenameinsamebrand += 1;
+                }
 
-
-                if (productRepository.Add(product))
-                    MessageBox.Show("Data baru telah berhasil di tambahkan");
+                if (tbname.Text == "")
+                    MessageBox.Show("Yang bertanda Bintang tidak boleh kosong");
+                else if (samenameinsamebrand > 0)
+                {
+                    MessageBox.Show("Tidak boleh memasukkan nama produk yang sama");
+                    samenameinsamebrand = 0;
+                }
                 else
-                    MessageBox.Show("Data baru gagal ditambahkan");
+                {
+                    var product = new ProductDetails();
+                    product.brand_id = (int)cbbrand.SelectedValue;
+                    product.name = tbname.Text;
+                    product.Stock = 0;
+                    product.unit_bulk = cbunitbulk.SelectedValue.ToString();
+                    product.unit_pcs = cbunitpcs.SelectedValue.ToString();
+
+
+                    if (productRepository.Add(product))
+                    {
+                        MessageBox.Show("Data baru telah berhasil di tambahkan");
+                        Close();
+                    }
+                    else
+                        MessageBox.Show("Data baru gagal ditambahkan");
+                }
+
             }
-            Close();
+            
         }
     }
 }

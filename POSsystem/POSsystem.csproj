@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -68,9 +71,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\LoginDetails.cs" />
+    <Compile Include="Database\PaymentModeDetails.cs" />
+    <Compile Include="Database\SaleHistoryDetails.cs" />
+    <Compile Include="Database\SaleListDetails.cs" />
+    <Compile Include="Database\SearchHistoryFilter.cs" />
     <Compile Include="Database\SellingPriceDetails.cs" />
     <Compile Include="Database\UnitItem.cs" />
     <Compile Include="Database\PurchaseDetails.cs" />
+    <Compile Include="Repository\LoginRepository.cs" />
+    <Compile Include="Repository\PaymentModeRepository.cs" />
+    <Compile Include="Repository\SaleHistoryRepository.cs" />
+    <Compile Include="Repository\SaleListRepository.cs" />
     <Compile Include="Repository\SellingPriceRepository.cs" />
     <Compile Include="Repository\UnitRepository.cs" />
     <Compile Include="Repository\PurchaseRepository.cs" />
@@ -119,11 +131,17 @@
     <Compile Include="Views\HistoryForm.Designer.cs">
       <DependentUpon>HistoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\loginForm.cs">
+    <Compile Include="Views\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\loginForm.Designer.cs">
-      <DependentUpon>loginForm.cs</DependentUpon>
+    <Compile Include="Views\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ManageBrand.cs">
       <SubType>Form</SubType>
@@ -165,6 +183,24 @@
     <Compile Include="Views\ManagePurchase.Designer.cs">
       <DependentUpon>ManagePurchase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\SaleDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SaleDetail.Designer.cs">
+      <DependentUpon>SaleDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\AuthenticationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Settings\AuthenticationForm.Designer.cs">
+      <DependentUpon>AuthenticationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Views\AddEditBrand.resx">
       <DependentUpon>AddEditBrand.cs</DependentUpon>
     </EmbeddedResource>
@@ -186,8 +222,11 @@
     <EmbeddedResource Include="Views\HistoryForm.resx">
       <DependentUpon>HistoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\loginForm.resx">
-      <DependentUpon>loginForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ManageBrand.resx">
       <DependentUpon>ManageBrand.cs</DependentUpon>
@@ -217,6 +256,15 @@
     <EmbeddedResource Include="Views\ManagePurchase.resx">
       <DependentUpon>ManagePurchase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\SaleDetail.resx">
+      <DependentUpon>SaleDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Settings\AuthenticationForm.resx">
+      <DependentUpon>AuthenticationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Settings\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -233,6 +281,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\POS_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\49-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+    <Content Include="Resources\trolley.png" />
+    <None Include="Resources\trolley1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -19,9 +19,13 @@ namespace POSsystem
     {
         public List<ProductDetails> ProductList { get; set; }
         public List<Brand> BrandList { get; set; }
+        public List<UnitItem> UnitList { get; set; }
 
         private ProductRepository productRepository = new ProductRepository();
         private BrandRepository brandRepository = new BrandRepository();
+        private UnitRepository unitRepository = new UnitRepository();
+
+
 
         public ManageProduct()
         {
@@ -40,34 +44,50 @@ namespace POSsystem
             Hide();
             form.ShowDialog();
             Show();
+            LoadData();
         }
 
         private void LoadData()
         {
-            BrandList = brandRepository.GetAll().ToList(); ;
-            ProductList = productRepository.GetAll().OrderBy(x => x.id).ThenBy(x => x.name).ToList();
-
-            gvitem.Rows.Clear();
-
-            foreach (var item in ProductList)
+            try
             {
-                var brand = BrandList.FirstOrDefault(x => x.id == item.brand_id);
+                BrandList = brandRepository.GetAll().ToList();
+                ProductList = productRepository.GetAll().OrderBy(x => x.id).ThenBy(x => x.name).ToList();
+                UnitList = unitRepository.GetAll();
 
-                gvitem.Rows.Add(
-                    item.id,
-                    brand != null ? brand.name :  " - ",
-                    item.name
-                    );
-                
+                gvitem.Rows.Clear();
+
+
+                foreach (var item in ProductList)
+                {
+                    var brand = BrandList.FirstOrDefault(x => x.id == item.brand_id);
+                    var unitbulkinfo = UnitList.FirstOrDefault(x => x.unitcode == item.unit_bulk);
+                    var unitpcsinfo = UnitList.FirstOrDefault(x => x.unitcode == item.unit_pcs);
+
+                    gvitem.Rows.Add(
+                        item.id,
+                        brand != null ? brand.name : " - ",
+                        item.name,
+                        unitbulkinfo != null ? unitbulkinfo.description : " - ",
+                        unitpcsinfo != null ? unitpcsinfo.description : " - ",
+                        item.Stock
+                        );
+
+                }
+
+
+                var cbData = BrandList;
+                cbData.Insert(0, new Brand { id = -1, name = "--- Pilih Brand ---" });
+
+                cbbrand.DataSource = new BindingSource(BrandList, null);
+                cbbrand.DisplayMember = "name";
+                cbbrand.ValueMember = "id";
             }
-
-
-            var cbData = BrandList;
-            cbData.Insert(0, new Brand { id = -1, name = "--- Pilih Brand ---" });
-
-            cbbrand.DataSource = new BindingSource(BrandList, null);
-            cbbrand.DisplayMember = "name";
-            cbbrand.ValueMember = "id";
+            catch (Exception ex)
+            {
+                var errMsg = "Details : " + ex.Message + Environment.NewLine + "Stacktrace : " + ex.StackTrace;
+                MessageBox.Show(errMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btadditem_Click(object sender, EventArgs e)
@@ -79,34 +99,45 @@ namespace POSsystem
 
         private void btedititem_Click(object sender, EventArgs e)
         {
-            var id = Convert.ToInt32(gvitem.Rows[gvitem.CurrentCell.RowIndex].Cells[0].Value);
-            var product = ProductList.FirstOrDefault(x => x.id == id);
-            if (product != null)
+            if (gvitem.SelectedRows.Count == 0)
+                MessageBox.Show("Tidak ada produk yang akan diubah");
+            else
             {
-                var form = new AddEditProduct();
-                form.Editmode = true;
-                form.ProductData = product;
-                form.ShowDialog();
-                LoadData();
+                var id = Convert.ToInt32(gvitem.Rows[gvitem.CurrentCell.RowIndex].Cells[0].Value);
+                var product = ProductList.FirstOrDefault(x => x.id == id);
+                if (product != null)
+                {
+                    var form = new AddEditProduct();
+                    form.Editmode = true;
+                    form.ProductData = product;
+                    form.ShowDialog();
+                    LoadData();
+                }
             }
 
         }
 
         private void btdeleteitem_Click(object sender, EventArgs e)
         {
-            var id = Convert.ToInt32(gvitem.Rows[gvitem.CurrentCell.RowIndex].Cells[0].Value);
-            
-            var form = new ConfirmationDialog();
-            form.Message = "Apa anda yakin menghapus produk terpilih?";
-            form.ShowDialog();
-
-            if (form.YES)
+            if (gvitem.SelectedRows.Count == 0)
+                MessageBox.Show("Tidak ada produk yang akan dihapus");
+            else
             {
-                    
-                if (!productRepository.Delete(id))
-                    MessageBox.Show("Gagal menghapus brand");
-                LoadData();
+                var id = Convert.ToInt32(gvitem.Rows[gvitem.CurrentCell.RowIndex].Cells[0].Value);
+
+                var form = new ConfirmationDialog();
+                form.Message = "Apa anda yakin menghapus produk terpilih?";
+                form.ShowDialog();
+
+                if (form.YES)
+                {
+
+                    if (!productRepository.Delete(id))
+                        MessageBox.Show("Gagal menghapus brand");
+                    LoadData();
+                }
             }
+
 
         }
 
@@ -119,7 +150,9 @@ namespace POSsystem
             {
                 var form = new ManagePurchase();
                 form.ProductData = product;
+                Hide();
                 form.ShowDialog();
+                Show();
                 LoadData();
             }
         }
@@ -130,6 +163,7 @@ namespace POSsystem
             Hide();
             form.ShowDialog();
             Show();
+            LoadData();
         }
 
         private void btsearch_Click(object sender, EventArgs e)

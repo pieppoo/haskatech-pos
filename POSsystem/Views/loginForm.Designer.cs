@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.lbPOS = new System.Windows.Forms.Label();
-            this.pbposicon = new System.Windows.Forms.PictureBox();
             this.btmasuk = new System.Windows.Forms.Button();
-            this.tbkatasandi = new System.Windows.Forms.TextBox();
-            this.tbnama = new System.Windows.Forms.TextBox();
+            this.tbpassword = new System.Windows.Forms.TextBox();
+            this.tbusername = new System.Windows.Forms.TextBox();
             this.lbkatasandi = new System.Windows.Forms.Label();
             this.lbnama = new System.Windows.Forms.Label();
+            this.llblSettings = new System.Windows.Forms.LinkLabel();
+            this.pbposicon = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbposicon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,17 +50,6 @@
             this.lbPOS.Size = new System.Drawing.Size(142, 75);
             this.lbPOS.TabIndex = 13;
             this.lbPOS.Text = "POS";
-            // 
-            // pbposicon
-            // 
-            this.pbposicon.ErrorImage = null;
-            this.pbposicon.Image = global::POSsystem.Properties.Resources.POS_icon;
-            this.pbposicon.Location = new System.Drawing.Point(41, 41);
-            this.pbposicon.Name = "pbposicon";
-            this.pbposicon.Size = new System.Drawing.Size(259, 293);
-            this.pbposicon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbposicon.TabIndex = 12;
-            this.pbposicon.TabStop = false;
             // 
             // btmasuk
             // 
@@ -74,21 +65,24 @@
             this.btmasuk.UseVisualStyleBackColor = false;
             this.btmasuk.Click += new System.EventHandler(this.btmasuk_Click);
             // 
-            // tbkatasandi
+            // tbpassword
             // 
-            this.tbkatasandi.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbkatasandi.Location = new System.Drawing.Point(327, 213);
-            this.tbkatasandi.Name = "tbkatasandi";
-            this.tbkatasandi.Size = new System.Drawing.Size(236, 26);
-            this.tbkatasandi.TabIndex = 10;
+            this.tbpassword.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbpassword.Location = new System.Drawing.Point(327, 213);
+            this.tbpassword.Name = "tbpassword";
+            this.tbpassword.PasswordChar = '*';
+            this.tbpassword.Size = new System.Drawing.Size(236, 26);
+            this.tbpassword.TabIndex = 10;
+            this.tbpassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginEnter_KeyDown);
             // 
-            // tbnama
+            // tbusername
             // 
-            this.tbnama.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbnama.Location = new System.Drawing.Point(327, 140);
-            this.tbnama.Name = "tbnama";
-            this.tbnama.Size = new System.Drawing.Size(236, 26);
-            this.tbnama.TabIndex = 9;
+            this.tbusername.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbusername.Location = new System.Drawing.Point(327, 140);
+            this.tbusername.Name = "tbusername";
+            this.tbusername.Size = new System.Drawing.Size(236, 26);
+            this.tbusername.TabIndex = 9;
+            this.tbusername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginEnter_KeyDown);
             // 
             // lbkatasandi
             // 
@@ -110,21 +104,48 @@
             this.lbnama.TabIndex = 7;
             this.lbnama.Text = "Nama";
             // 
+            // llblSettings
+            // 
+            this.llblSettings.AutoSize = true;
+            this.llblSettings.LinkColor = System.Drawing.Color.SteelBlue;
+            this.llblSettings.Location = new System.Drawing.Point(502, 343);
+            this.llblSettings.Name = "llblSettings";
+            this.llblSettings.Size = new System.Drawing.Size(61, 13);
+            this.llblSettings.TabIndex = 14;
+            this.llblSettings.TabStop = true;
+            this.llblSettings.Text = "SETTINGS";
+            this.llblSettings.VisitedLinkColor = System.Drawing.Color.SteelBlue;
+            this.llblSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llblSettings_LinkClicked);
+            // 
+            // pbposicon
+            // 
+            this.pbposicon.ErrorImage = null;
+            this.pbposicon.Image = global::POSsystem.Properties.Resources._49_512;
+            this.pbposicon.Location = new System.Drawing.Point(41, 41);
+            this.pbposicon.Name = "pbposicon";
+            this.pbposicon.Size = new System.Drawing.Size(259, 293);
+            this.pbposicon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbposicon.TabIndex = 12;
+            this.pbposicon.TabStop = false;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 375);
+            this.Controls.Add(this.llblSettings);
             this.Controls.Add(this.lbPOS);
             this.Controls.Add(this.pbposicon);
             this.Controls.Add(this.btmasuk);
-            this.Controls.Add(this.tbkatasandi);
-            this.Controls.Add(this.tbnama);
+            this.Controls.Add(this.tbpassword);
+            this.Controls.Add(this.tbusername);
             this.Controls.Add(this.lbkatasandi);
             this.Controls.Add(this.lbnama);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Login";
+            this.Text = "HaskaTech POS";
             ((System.ComponentModel.ISupportInitialize)(this.pbposicon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -136,10 +157,11 @@
         private System.Windows.Forms.Label lbPOS;
         private System.Windows.Forms.PictureBox pbposicon;
         private System.Windows.Forms.Button btmasuk;
-        private System.Windows.Forms.TextBox tbkatasandi;
-        private System.Windows.Forms.TextBox tbnama;
+        private System.Windows.Forms.TextBox tbpassword;
+        private System.Windows.Forms.TextBox tbusername;
         private System.Windows.Forms.Label lbkatasandi;
         private System.Windows.Forms.Label lbnama;
+        private System.Windows.Forms.LinkLabel llblSettings;
     }
 }
 

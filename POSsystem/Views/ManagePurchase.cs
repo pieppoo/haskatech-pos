@@ -46,14 +46,6 @@ namespace POSsystem.Views
                     var unitpcs = unitList.FirstOrDefault(x => x.unitcode == purchase.pcs_unit);
                     var itemname = ProductList.FirstOrDefault(x => x.id == purchase.itemid);
 
-                    //double all_total_container = 0;
-                    //all_total_container = purchase.total_in_pcs / purchase.qty_pcs_in_container;
-                    //int total_container_in_int = 0;
-                    //total_container_in_int = (int)all_total_container;
-                    //int balance_pcs_total = purchase.total_in_pcs - (total_container_in_int * (int)purchase.qty_pcs_in_container);
-                    //var final_total = total_container_in_int + " " + purchase.purchase_unit + " " + balance_pcs_total + " " + purchase.pcs_unit;
-
-                    Console.WriteLine("hai");
 
                     gvpurchase.Rows.Add(
                         purchase.id,
@@ -63,7 +55,7 @@ namespace POSsystem.Views
                         purchase.purchase_price,
                         purchase.qty_pcs_in_container,
                         unitpcs != null ? unitpcs.description : " - ",
-                        //final_total,
+                        purchase.total_in_pcs,
                         purchase.Created_datetime
                         );
 
@@ -79,16 +71,16 @@ namespace POSsystem.Views
 
         private void gvwarehouse_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var id = Convert.ToInt32(gvpurchase.Rows[e.RowIndex].Cells[0].Value);
-            var purchase = purchaseList.FirstOrDefault(x => x.id == id);
+            //var id = Convert.ToInt32(gvpurchase.Rows[e.RowIndex].Cells[0].Value);
+            //var purchase = purchaseList.FirstOrDefault(x => x.id == id);
 
-            if (purchase != null)
-            {
-                var form = new ManageSellingPrice();
-                form.PurchaseData = purchase;
-                form.ShowDialog();
-                LoadData();
-            }
+            //if (purchase != null)
+            //{
+            //    var form = new ManageSellingPrice();
+            //    form.PurchaseData = purchase;
+            //    form.ShowDialog();
+            //    LoadData();
+            //}
         }
 
         private void btadditem_Click(object sender, EventArgs e)
@@ -102,33 +94,71 @@ namespace POSsystem.Views
 
         private void btdeleteitem_Click(object sender, EventArgs e)
         {
-            var id = Convert.ToInt32(gvpurchase.Rows[gvpurchase.CurrentCell.RowIndex].Cells[0].Value);
-
-            var form = new ConfirmationDialog();
-            form.Message = "Apa anda yakin menghapus harga jual terpilih?";
-            form.ShowDialog();
-
-            if (form.YES)
+            if (gvpurchase.SelectedRows.Count == 0)
+                MessageBox.Show("Tidak ada barang yang akan dihapus");
+            else
             {
+                var id = Convert.ToInt32(gvpurchase.Rows[gvpurchase.CurrentCell.RowIndex].Cells[0].Value);
+                var purchaseinfo = purchaseList.FirstOrDefault(x => x.id == id);
 
-                if (!purchaseRepository.Delete(id))
-                    MessageBox.Show("Gagal menghapus harga");
+                var form = new ConfirmationDialog();
+                form.Message = "Apa anda yakin menghapus harga jual terpilih?";
+                form.ShowDialog();
+
+
+                int initial_total = purchaseinfo.purchase_qty * purchaseinfo.qty_pcs_in_container;
+
+
+                if (form.YES)
+                {
+                    if (initial_total != purchaseinfo.total_in_pcs)
+                        MessageBox.Show("Anda tidak boleh menghapus barang yang sudah terjual");
+                    else
+                    {
+                        ProductData.Stock = ProductData.Stock - purchaseinfo.total_in_pcs;
+                        if (productRepository.Update(ProductData))
+                        {
+                            if (!purchaseRepository.Delete(id))
+                                MessageBox.Show("Gagal menghapus harga");
+                        }
+                        else
+                            MessageBox.Show("Gagal menghapus harga karena error pada penguran stok");
+                    }
+
+                }
                 LoadData();
             }
+            
         }
 
         private void btedititem_Click(object sender, EventArgs e)
         {
-            var id = Convert.ToInt32(gvpurchase.Rows[gvpurchase.CurrentCell.RowIndex].Cells[0].Value);
-            var purchaseUpdate = purchaseList.FirstOrDefault(x => x.id == id);
-            if (purchaseUpdate != null)
+            if (gvpurchase.SelectedRows.Count == 0)
+                MessageBox.Show("Tidak ada barang yang akan diubah");
+            else
             {
-                var form = new AddEditPurchase();
-                form.Editmode = true;
-                form.PurchaseData = purchaseUpdate;
-                form.ShowDialog();
-                LoadData();
+                var id = Convert.ToInt32(gvpurchase.Rows[gvpurchase.CurrentCell.RowIndex].Cells[0].Value);
+                var purchaseUpdate = purchaseList.FirstOrDefault(x => x.id == id);
+                if (purchaseUpdate != null)
+                {
+                    var form = new AddEditPurchase();
+                    form.Editmode = true;
+                    form.PurchaseData = purchaseUpdate;
+                    form.ShowDialog();
+                    LoadData();
+                }
             }
+
+        }
+
+        private void btnSellPrice_Click(object sender, EventArgs e)
+        {
+            var form = new ManageSellingPrice();
+            form.ProductData = ProductData;
+            Hide();
+            form.ShowDialog();
+            Show();
+            LoadData();
 
         }
     }

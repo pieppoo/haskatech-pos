@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gvsellprice = new System.Windows.Forms.DataGridView();
             this.btnnewprice = new System.Windows.Forms.Button();
             this.bteditprice = new System.Windows.Forms.Button();
@@ -46,6 +47,14 @@
             // 
             this.gvsellprice.AllowUserToAddRows = false;
             this.gvsellprice.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvsellprice.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gvsellprice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvsellprice.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.warehouseid,
@@ -60,6 +69,8 @@
             this.gvsellprice.MultiSelect = false;
             this.gvsellprice.Name = "gvsellprice";
             this.gvsellprice.ReadOnly = true;
+            this.gvsellprice.RowHeadersVisible = false;
+            this.gvsellprice.RowTemplate.Height = 30;
             this.gvsellprice.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvsellprice.Size = new System.Drawing.Size(662, 299);
             this.gvsellprice.TabIndex = 15;
@@ -146,14 +157,14 @@
             // 
             // perUnit
             // 
-            this.perUnit.HeaderText = "/ unit";
+            this.perUnit.HeaderText = "per Kemasan";
             this.perUnit.Name = "perUnit";
             this.perUnit.ReadOnly = true;
             // 
             // barcodeno
             // 
             this.barcodeno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.barcodeno.HeaderText = "barcodeno";
+            this.barcodeno.HeaderText = "Nomor Barcode";
             this.barcodeno.Name = "barcodeno";
             this.barcodeno.ReadOnly = true;
             // 
@@ -168,7 +179,7 @@
             this.Controls.Add(this.gvsellprice);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "ManageSellingPrice";
-            this.Text = "Daftar Harga Jual";
+            this.Text = "HaskaTech POS";
             this.Title = "Daftar Harga Jual";
             this.Load += new System.EventHandler(this.ManageSellingPrice_Load);
             this.Controls.SetChildIndex(this.gvsellprice, 0);

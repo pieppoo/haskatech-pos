@@ -27,9 +27,12 @@ namespace POSsystem.Repository
             var result = false;
             try
             {
-                string sql = string.Format("insert into item (brand_id, name ) values ({0}, '{1}')",
+                string sql = string.Format("insert into item (brand_id, name, stock, unit_bulk, unit_pcs ) values ({0}, '{1}', {2}, '{3}', '{4}')",
                                             product.brand_id,
-                                            product.name
+                                            product.name,
+                                            product.Stock,
+                                            product.unit_bulk,
+                                            product.unit_pcs
                                             );
                 Console.WriteLine(sql);
 
@@ -74,7 +77,22 @@ namespace POSsystem.Repository
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                throw;
+                return null;
+            }
+        }
+
+        public List<ProductDetails> GetAll(int brandid)
+        {
+            try
+            {
+                var queryResult = dbConnection.Query<ProductDetails>("SELECT * FROM item where brand_id = " + brandid);
+
+                return queryResult.ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
             }
         }
 
@@ -129,10 +147,13 @@ namespace POSsystem.Repository
             var result = false;
             try
             {
-                string sql = string.Format("UPDATE item SET brand_id = {1}, name = '{2}'  WHERE ID = {0}",
+                string sql = string.Format("UPDATE item SET brand_id = {1}, name = '{2}', stock = {3}, unit_bulk = '{4}', unit_pcs = '{5}'  WHERE ID = {0}",
                                             product.id,
                                             product.brand_id,
-                                            product.name);
+                                            product.name,
+                                            product.Stock,
+                                            product.unit_bulk,
+                                            product.unit_pcs);
                                             
                 Console.WriteLine(sql);
 
@@ -146,5 +167,7 @@ namespace POSsystem.Repository
 
             return result;
         }
+
+
     }
 }

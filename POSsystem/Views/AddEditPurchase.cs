@@ -25,15 +25,19 @@ namespace POSsystem.Views
         private ProductRepository productRepository = new ProductRepository();
         private UnitRepository unitRepository = new UnitRepository();
         private PurchaseRepository purchaseRepository = new PurchaseRepository();
+        private BrandRepository brandRepository = new BrandRepository();
+
         public PurchaseDetails PurchaseData { get; set; }
         public ProductDetails ProductData { get; set; }
         public List<UnitItem> UnitList { get; set; }
+        public List<Brand> BrandList { get; set; }
         public List<ProductDetails> ProductList { get; set; }
 
-        private void AddEditWarehouse_Load(object sender, EventArgs e)
+        private void AddEditPurchase_Load(object sender, EventArgs e)
         {
             ProductList = productRepository.GetAll().ToList();
-            LoadUnit();
+            BrandList = brandRepository.GetAll().ToList();
+            UnitList = unitRepository.GetAll();
 
             cbpcsunit.DataSource = new BindingSource(UnitList, null);
             cbpcsunit.DisplayMember = "description";
@@ -42,6 +46,8 @@ namespace POSsystem.Views
             cbunitpurchase.DataSource = new BindingSource(UnitList, null);
             cbunitpurchase.DisplayMember = "description";
             cbunitpurchase.ValueMember = "unitcode";
+
+            
 
             if (Editmode)
             {
@@ -65,15 +71,17 @@ namespace POSsystem.Views
             }
             else
             {
+                
                 var Productinfo = ProductList.FirstOrDefault(x => x.id == ProductData.id);
+                //var unitbulkinfo = UnitList.FirstOrDefault(x => x.unitcode == ProductData.unit_bulk);
+                //var unitpcsinfo = UnitList.FirstOrDefault(x => x.unitcode == ProductData.unit_pcs);
                 tbname.Text = Productinfo.name;
+                cbpcsunit.SelectedValue = ProductData.unit_pcs;
+                cbunitpurchase.SelectedValue = ProductData.unit_bulk;
             }
         }
 
-        private void LoadUnit()
-        {
-            UnitList = unitRepository.GetAll();
-        }
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -86,6 +94,7 @@ namespace POSsystem.Views
                 PurchaseData.pcs_unit = cbpcsunit.SelectedValue.ToString();
                 PurchaseData.total_in_pcs = int.Parse(tbtotal.Text);
 
+
                 if (purchaseRepository.Update(PurchaseData))
                     MessageBox.Show("Data telah berhasil di ubah");
                 else
@@ -94,19 +103,32 @@ namespace POSsystem.Views
             }
             else
             {
-                var warehouse = new PurchaseDetails();
-                warehouse.itemid = ProductData.id;
-                warehouse.purchase_price = long.Parse(tbpurchaseprice.Text);
-                warehouse.purchase_qty = int.Parse(numpurchaseqty.Text);
-                warehouse.purchase_unit = cbunitpurchase.SelectedValue.ToString();
-                warehouse.qty_pcs_in_container = int.Parse(numpcsincontainer.Text);
-                warehouse.pcs_unit = cbpcsunit.SelectedValue.ToString();
-                warehouse.total_in_pcs = int.Parse(tbtotal.Text);
+                var purchase = new PurchaseDetails();
+                purchase.itemid = ProductData.id;
+                purchase.purchase_price = long.Parse(tbpurchaseprice.Text);
+                purchase.purchase_qty = int.Parse(numpurchaseqty.Text);
+                purchase.purchase_unit = cbunitpurchase.SelectedValue.ToString();
+                purchase.qty_pcs_in_container = int.Parse(numpcsincontainer.Text);
+                purchase.pcs_unit = cbpcsunit.SelectedValue.ToString();
+                purchase.total_in_pcs = int.Parse(tbtotal.Text);
 
-                if (purchaseRepository.Add(warehouse))
-                    MessageBox.Show("Data baru telah berhasil di tambahkan");
+
+                
+                ProductData.Stock = int.Parse(tbtotal.Text)+ProductData.Stock;
+
+
+
+                if (productRepository.Update(ProductData))
+                {
+                    if (purchaseRepository.Add(purchase))
+                        MessageBox.Show("Data baru telah berhasil di tambahkan");
+                    else
+                        MessageBox.Show("Data baru gagal ditambahkan");
+                }
                 else
-                    MessageBox.Show("Data baru gagal ditambahkan");
+                    MessageBox.Show("Gagal memperbaharui stock");
+
+
 
             }
             Close();

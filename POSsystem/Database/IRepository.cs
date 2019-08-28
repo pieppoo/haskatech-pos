@@ -14,6 +14,7 @@ namespace POSsystem.Database
         bool Update(T entity);
         bool Delete(int id);
         List<T> Search(params object[] args);
+
     }
 }
 

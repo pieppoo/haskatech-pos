@@ -31,7 +31,7 @@ namespace POSsystem.Views
 
         private void LoadData()
         {
-            SellpriceList = sellingPriceRepository.GetAll(PurchaseData.id);
+            SellpriceList = sellingPriceRepository.GetAll(ProductData.id);
             unitList = unitRepository.GetAll().ToList();
             ProductList = productRepository.GetAll().ToList();
 
@@ -67,7 +67,7 @@ namespace POSsystem.Views
         private void btnnewprice_Click(object sender, EventArgs e)
         {
             var form = new AddEditSellPrice();
-            form.PurchaseData = PurchaseData;
+            form.ProductData = ProductData;
             form.ShowDialog();
             LoadData();
 
@@ -75,33 +75,45 @@ namespace POSsystem.Views
 
         private void bteditprice_Click(object sender, EventArgs e)
         {
-            var id = Convert.ToInt32(gvsellprice.Rows[gvsellprice.CurrentCell.RowIndex].Cells[2].Value);
-            var itemprice = SellpriceList.FirstOrDefault(x => x.id == id);
-            if (itemprice != null)
+            if (gvsellprice.SelectedRows.Count == 0)
+                MessageBox.Show("Tidak ada harga yang akan diubah");
+            else
             {
-                var form = new AddEditSellPrice();
-                form.Editmode = true;
-                form.SellingPriceData = itemprice;
-                form.ShowDialog();
-                LoadData();
+                var id = Convert.ToInt32(gvsellprice.Rows[gvsellprice.CurrentCell.RowIndex].Cells[2].Value);
+                var itemprice = SellpriceList.FirstOrDefault(x => x.id == id);
+                if (itemprice != null)
+                {
+                    var form = new AddEditSellPrice();
+                    form.Editmode = true;
+                    form.SellingPriceData = itemprice;
+                    form.ShowDialog();
+                    LoadData();
+                }
             }
+
         }
 
         private void btndeleteprice_Click(object sender, EventArgs e)
         {
-            var id = Convert.ToInt32(gvsellprice.Rows[gvsellprice.CurrentCell.RowIndex].Cells[2].Value);
-
-            var form = new ConfirmationDialog();
-            form.Message = "Apa anda yakin menghapus harga jual terpilih?";
-            form.ShowDialog();
-
-            if (form.YES)
+            if (gvsellprice.SelectedRows.Count == 0)
+                MessageBox.Show("Tidak ada harga yang akan dihapus");
+            else
             {
+                var id = Convert.ToInt32(gvsellprice.Rows[gvsellprice.CurrentCell.RowIndex].Cells[2].Value);
 
-                if (!sellingPriceRepository.Delete(id))
-                    MessageBox.Show("Gagal menghapus harga");
-                LoadData();
+                var form = new ConfirmationDialog();
+                form.Message = "Apa anda yakin menghapus harga jual terpilih?";
+                form.ShowDialog();
+
+                if (form.YES)
+                {
+
+                    if (!sellingPriceRepository.Delete(id))
+                        MessageBox.Show("Gagal menghapus harga");
+                    LoadData();
+                }
             }
+
         }
     }
 }

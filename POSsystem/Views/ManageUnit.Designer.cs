@@ -49,7 +49,7 @@
             this.btdeleteunit.Name = "btdeleteunit";
             this.btdeleteunit.Size = new System.Drawing.Size(106, 59);
             this.btdeleteunit.TabIndex = 14;
-            this.btdeleteunit.Text = "Hapus Unit";
+            this.btdeleteunit.Text = "Hapus Kemasan";
             this.btdeleteunit.UseVisualStyleBackColor = false;
             this.btdeleteunit.Click += new System.EventHandler(this.btdeleteunit_Click);
             // 
@@ -64,7 +64,7 @@
             this.bteditunit.Name = "bteditunit";
             this.bteditunit.Size = new System.Drawing.Size(106, 59);
             this.bteditunit.TabIndex = 13;
-            this.bteditunit.Text = "Edit Unit";
+            this.bteditunit.Text = "Edit Kemasan";
             this.bteditunit.UseVisualStyleBackColor = false;
             this.bteditunit.Click += new System.EventHandler(this.bteditunit_Click);
             // 
@@ -79,7 +79,7 @@
             this.btaddunit.Name = "btaddunit";
             this.btaddunit.Size = new System.Drawing.Size(106, 59);
             this.btaddunit.TabIndex = 12;
-            this.btaddunit.Text = "Tambah Unit";
+            this.btaddunit.Text = "Tambah Kemasan";
             this.btaddunit.UseVisualStyleBackColor = false;
             this.btaddunit.Click += new System.EventHandler(this.btaddunit_Click);
             // 
@@ -93,9 +93,11 @@
             this.code,
             this.name});
             this.gvunititem.Location = new System.Drawing.Point(27, 76);
+            this.gvunititem.MultiSelect = false;
             this.gvunititem.Name = "gvunititem";
             this.gvunititem.ReadOnly = true;
             this.gvunititem.RowHeadersVisible = false;
+            this.gvunititem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvunititem.Size = new System.Drawing.Size(388, 262);
             this.gvunititem.TabIndex = 15;
             // 
@@ -109,15 +111,15 @@
             // code
             // 
             this.code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.code.HeaderText = "Unit Code";
+            this.code.HeaderText = "Kode Kemasan";
             this.code.Name = "code";
             this.code.ReadOnly = true;
-            this.code.Width = 95;
+            this.code.Width = 118;
             // 
             // name
             // 
             this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.name.HeaderText = "Unit Name";
+            this.name.HeaderText = "Nama Kemasan";
             this.name.Name = "name";
             this.name.ReadOnly = true;
             // 
@@ -132,8 +134,8 @@
             this.Controls.Add(this.btaddunit);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "ManageUnit";
-            this.Text = "Daftar Unit";
-            this.Title = "Daftar Unit";
+            this.Text = "HaskaTech POS";
+            this.Title = "Daftar Kemasan";
             this.Load += new System.EventHandler(this.ManageUnit_Load);
             this.Controls.SetChildIndex(this.btaddunit, 0);
             this.Controls.SetChildIndex(this.bteditunit, 0);

@@ -53,32 +53,44 @@ namespace POSsystem.Views
 
         private void bteditunit_Click(object sender, EventArgs e)
         {
-            var id = Convert.ToInt32(gvunititem.Rows[gvunititem.CurrentCell.RowIndex].Cells[0].Value);
-            var unitselected = UnitList.FirstOrDefault(x => x.id == id);
-            if (unitselected != null)
+            if (gvunititem.SelectedRows.Count == 0)
+                MessageBox.Show("Tidak ada kemasan yang akan diubah");
+            else
             {
-                var form = new AddEditUnit();
-                form.Editmode = true;
-                form.UnitData = unitselected;
-                form.ShowDialog();
-                LoadData();
+                var id = Convert.ToInt32(gvunititem.Rows[gvunititem.CurrentCell.RowIndex].Cells[0].Value);
+                var unitselected = UnitList.FirstOrDefault(x => x.id == id);
+                if (unitselected != null)
+                {
+                    var form = new AddEditUnit();
+                    form.Editmode = true;
+                    form.UnitData = unitselected;
+                    form.ShowDialog();
+                    LoadData();
+                }
             }
+
         }
 
         private void btdeleteunit_Click(object sender, EventArgs e)
         {
-            var id = Convert.ToInt32(gvunititem.Rows[gvunititem.CurrentCell.RowIndex].Cells[0].Value);
-
-            var form = new ConfirmationDialog();
-            form.Message = "Apa anda yakin menghapus Brand terpilih?";
-            form.ShowDialog();
-
-            if (form.YES)
+            if (gvunititem.SelectedRows.Count == 0)
+                MessageBox.Show("Tidak ada kemasan yang akan dihapus");
+            else
             {
-                if (!unitRepository.Delete(id))
-                    MessageBox.Show("Gagal menghapus brand");
-                LoadData();
+                var id = Convert.ToInt32(gvunititem.Rows[gvunititem.CurrentCell.RowIndex].Cells[0].Value);
+
+                var form = new ConfirmationDialog();
+                form.Message = "Apa anda yakin menghapus Brand terpilih?";
+                form.ShowDialog();
+
+                if (form.YES)
+                {
+                    if (!unitRepository.Delete(id))
+                        MessageBox.Show("Gagal menghapus brand");
+                    LoadData();
+                }
             }
+
         }
     }
 }

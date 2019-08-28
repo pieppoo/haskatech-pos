@@ -75,6 +75,21 @@ namespace POSsystem.Repository
             }
         }
 
+        public List<UnitItem> GetAll(int itemid)
+        {
+            try
+            {
+                var queryResult = dbConnection.Query<UnitItem>("select ref_unit.unitcode, ref_unit.description from ref_unit join item on ref_unit.unitcode = item.unit_pcs or ref_unit.unitcode = item.unit_bulk where item.id =  " + itemid);
+                return queryResult.ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
+            return null;
+        }
+
         public UnitItem GetById(int id)
         {
             throw new NotImplementedException();
@@ -105,6 +120,11 @@ namespace POSsystem.Repository
             }
 
             return result;
+        }
+
+        public bool UpdateStock(ProductDetails stock)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -26,20 +26,24 @@ namespace POSsystem.Views
         private ProductRepository productRepository = new ProductRepository();
 
         public SellingPriceDetails SellingPriceData { get; set; }
+        public ProductDetails ProductData { get; set; }
         public PurchaseDetails PurchaseData { get; set; }
         public List<ProductDetails> ProductList { get; set; }
         public List<UnitItem> UnitList { get; set; }
+        public List<SellingPriceDetails> SellingPriceList { get; set; }
+
         private void AddEditSellPrice_Load(object sender, EventArgs e)
         {
-            ProductList = productRepository.GetAll().ToList();
-            LoadUnit();
-           
-            cbunitsell.DataSource = new BindingSource(UnitList, null);
-            cbunitsell.DisplayMember = "description";
-            cbunitsell.ValueMember = "unitcode";
+            ProductList = productRepository.GetAll();
 
             if (Editmode)
             {
+                UnitList = unitRepository.GetAll();
+                cbunitsell.DataSource = new BindingSource(UnitList, null);
+                cbunitsell.DisplayMember = "description";
+                cbunitsell.ValueMember = "unitcode";
+                cbunitsell.Enabled = false;
+
                 var itemname = ProductList.FirstOrDefault(x => x.id == SellingPriceData.item_id);
                 tbitemname.Text = itemname.name;
                 tbsellprice.Text = SellingPriceData.sell_price.ToString();
@@ -48,16 +52,15 @@ namespace POSsystem.Views
             }
             else
             {
-                var itemname = ProductList.FirstOrDefault(x => x.id == PurchaseData.itemid);
-                tbitemname.Text = itemname.name;
+                UnitList = unitRepository.GetAll(ProductData.id);
+                cbunitsell.DataSource = new BindingSource(UnitList, null);
+                cbunitsell.DisplayMember = "description";
+                cbunitsell.ValueMember = "unitcode";
+                tbitemname.Text = ProductData.name;
             }
    
         }
 
-        private void LoadUnit()
-        {
-            UnitList = unitRepository.GetAll();
-        }
 
         private void btsave_Click(object sender, EventArgs e)
         {
@@ -67,26 +70,78 @@ namespace POSsystem.Views
                 SellingPriceData.sell_unit = cbunitsell.SelectedValue.ToString();
                 SellingPriceData.Barcodeno = tbbarcodeno.Text;
 
-                if (sellingPriceRepository.Update(SellingPriceData))
-                    MessageBox.Show("Data telah berhasil di ubah");
+                ////if (string.IsNullOrWhiteSpace(tbbarcodeno.Text))
+                ////{
+                ////    tbbarcodeno.Text = "null";
+                ////    Console.WriteLine("hai");
+                ////}
+
+                SellingPriceList = sellingPriceRepository.GetAll(SellingPriceData.item_id);
+                int samebarcode = 0;
+
+                foreach (var Item in SellingPriceList)
+                {
+                    if (SellingPriceData.id != Item.id)
+                    {
+                        if (tbbarcodeno.Text == "")
+                        {
+                            samebarcode = 0;
+                        }
+                        else if (Item.Barcodeno == tbbarcodeno.Text)
+                        {
+                            samebarcode = samebarcode + 1;
+                        }
+                    }
+
+                    
+                }
+
+                if (samebarcode > 0)
+                    MessageBox.Show("Barcode yang anda masukkan sudah terdaftar, data gagal diubah");
                 else
-                    MessageBox.Show("Data gagal di ubah");
+                {
+                    if (sellingPriceRepository.Update(SellingPriceData))
+                        MessageBox.Show("Data telah berhasil di ubah");
+                    else
+                        MessageBox.Show("Data gagal di ubah");
+                }
+
+                samebarcode = 0;
+
 
             }
             else
             {
                 var sellprice = new SellingPriceDetails();
-                sellprice.item_id = PurchaseData.itemid;
+                sellprice.item_id = ProductData.id;
                 sellprice.sell_qty = 1;
-                sellprice.purchaseid = PurchaseData.id;
                 sellprice.sell_price = long.Parse(tbsellprice.Text);
                 sellprice.sell_unit = cbunitsell.SelectedValue.ToString();
                 sellprice.Barcodeno = tbbarcodeno.Text;
 
-                if (sellingPriceRepository.Add(sellprice))
-                    MessageBox.Show("Data baru telah berhasil di tambahkan");
+                SellingPriceList = sellingPriceRepository.GetAll(ProductData.id);
+                int samebarcode = 0;
+
+                foreach (var Item in SellingPriceList)
+                {
+                    if (Item.Barcodeno == tbbarcodeno.Text)
+                    {
+                        samebarcode = samebarcode + 1;
+                    }
+
+                }
+
+                if (samebarcode > 0)
+                    MessageBox.Show("Barcode yang anda masukkan sudah terdaftar, data gagal diubah");
                 else
-                    MessageBox.Show("Data baru gagal ditambahkan");
+                {
+
+                    if (sellingPriceRepository.Add(sellprice))
+                        MessageBox.Show("Data baru telah berhasil di tambahkan");
+                    else
+                        MessageBox.Show("Data baru gagal ditambahkan");
+                }
+                samebarcode = 0;
             }
             Close();
         }

@@ -96,23 +96,23 @@ namespace POSsystem.Repository
             throw new NotImplementedException();
         }
 
-        public bool Update(PurchaseDetails warehouse)
+        public bool Update(PurchaseDetails purchase)
         {
             var result = false;
             try
             {
                 string sql = string.Format("UPDATE purchase_item SET purchase_qty = {1}, purchase_unit = '{2}', purchase_price = {3}, pcs_unit = '{4}', qty_pcs_in_container = {5}, total_in_pcs = {6} WHERE ID = {0}",
-                                           warehouse.id,
-                                           warehouse.purchase_qty,
-                                           warehouse.purchase_unit,
-                                           warehouse.purchase_price,
-                                           warehouse.pcs_unit,
-                                           warehouse.qty_pcs_in_container, 
-                                           warehouse.total_in_pcs);
+                                           purchase.id,
+                                           purchase.purchase_qty,
+                                           purchase.purchase_unit,
+                                           purchase.purchase_price,
+                                           purchase.pcs_unit,
+                                           purchase.qty_pcs_in_container,
+                                           purchase.total_in_pcs);
 
                 Console.WriteLine(sql);
 
-                var count = dbConnection.Execute(sql, warehouse);
+                var count = dbConnection.Execute(sql, purchase);
                 result = count > 0;
             }
             catch (Exception ex)
@@ -122,6 +122,8 @@ namespace POSsystem.Repository
 
             return result;
         }
+
+
     }
 }
 

@@ -25,13 +25,12 @@ namespace POSsystem.Repository
             var result = false;
             try
             {
-                string sql = string.Format("insert into selling_price (item_id, sell_qty, sell_unit, sell_price, Barcodeno, purchaseid ) values ({0}, {1}, '{2}', {3}, '{4}', {5})",
+                string sql = string.Format("insert into selling_price (item_id, sell_qty, sell_unit, sell_price, Barcodeno ) values ({0}, {1}, '{2}', {3}, '{4}')",
                                             sellingPrice.item_id,
                                             sellingPrice.sell_qty,
                                             sellingPrice.sell_unit,
                                             sellingPrice.sell_price,
-                                            sellingPrice.Barcodeno,
-                                            sellingPrice.purchaseid
+                                            sellingPrice.Barcodeno
                                             );
                 Console.WriteLine(sql);
 
@@ -70,11 +69,11 @@ namespace POSsystem.Repository
             throw new NotImplementedException();
         }
 
-        public List<SellingPriceDetails> GetAll(int purchaseid)
+        public List<SellingPriceDetails> GetAll(int itemid)
         {
             try
             {
-                var queryResult = dbConnection.Query<SellingPriceDetails>("SELECT * from selling_price where purchaseid = " + purchaseid);
+                var queryResult = dbConnection.Query<SellingPriceDetails>("SELECT * from selling_price where item_id = " + itemid);
 
                 return queryResult.ToList();
             }
@@ -105,7 +104,7 @@ namespace POSsystem.Repository
                                            sellingPrice.id,
                                            sellingPrice.sell_unit,
                                            sellingPrice.sell_price,
-                                           sellingPrice.Barcodeno);
+                                           string.IsNullOrWhiteSpace(sellingPrice.Barcodeno) ? "null" : "'" + sellingPrice.Barcodeno + "'");
 
                 Console.WriteLine(sql);
 
@@ -119,6 +118,8 @@ namespace POSsystem.Repository
 
             return result;
         }
+
+
     }
 }
 
