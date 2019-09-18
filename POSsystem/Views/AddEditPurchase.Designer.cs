@@ -82,8 +82,9 @@
             0});
             this.tbpurchaseprice.Name = "tbpurchaseprice";
             this.tbpurchaseprice.Size = new System.Drawing.Size(313, 39);
-            this.tbpurchaseprice.TabIndex = 27;
+            this.tbpurchaseprice.TabIndex = 0;
             this.tbpurchaseprice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbpurchaseprice.ThousandsSeparator = true;
             // 
             // lbpurchaseprice
             // 
@@ -92,9 +93,9 @@
             this.lbpurchaseprice.Location = new System.Drawing.Point(399, 101);
             this.lbpurchaseprice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbpurchaseprice.Name = "lbpurchaseprice";
-            this.lbpurchaseprice.Size = new System.Drawing.Size(105, 25);
+            this.lbpurchaseprice.Size = new System.Drawing.Size(151, 25);
             this.lbpurchaseprice.TabIndex = 26;
-            this.lbpurchaseprice.Text = "Harga Beli";
+            this.lbpurchaseprice.Text = "Harga Beli (Rp)";
             // 
             // numpurchaseqty
             // 
@@ -108,7 +109,7 @@
             0});
             this.numpurchaseqty.Name = "numpurchaseqty";
             this.numpurchaseqty.Size = new System.Drawing.Size(318, 39);
-            this.numpurchaseqty.TabIndex = 29;
+            this.numpurchaseqty.TabIndex = 1;
             this.numpurchaseqty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numpurchaseqty.ValueChanged += new System.EventHandler(this.numQuantityAndPriceValueChanged);
             // 
@@ -133,7 +134,7 @@
             this.cbunitpurchase.Margin = new System.Windows.Forms.Padding(4);
             this.cbunitpurchase.Name = "cbunitpurchase";
             this.cbunitpurchase.Size = new System.Drawing.Size(313, 40);
-            this.cbunitpurchase.TabIndex = 32;
+            this.cbunitpurchase.TabIndex = 2;
             // 
             // lbpurchaseunit
             // 
@@ -148,6 +149,7 @@
             // 
             // numpcsincontainer
             // 
+            this.numpcsincontainer.Enabled = false;
             this.numpcsincontainer.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numpcsincontainer.Location = new System.Drawing.Point(48, 354);
             this.numpcsincontainer.Margin = new System.Windows.Forms.Padding(4);
@@ -157,8 +159,9 @@
             0,
             0});
             this.numpcsincontainer.Name = "numpcsincontainer";
+            this.numpcsincontainer.ReadOnly = true;
             this.numpcsincontainer.Size = new System.Drawing.Size(318, 39);
-            this.numpcsincontainer.TabIndex = 34;
+            this.numpcsincontainer.TabIndex = 3;
             this.numpcsincontainer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numpcsincontainer.ValueChanged += new System.EventHandler(this.numQuantityAndPriceValueChanged);
             // 
@@ -183,7 +186,7 @@
             this.cbpcsunit.Margin = new System.Windows.Forms.Padding(4);
             this.cbpcsunit.Name = "cbpcsunit";
             this.cbpcsunit.Size = new System.Drawing.Size(313, 40);
-            this.cbpcsunit.TabIndex = 36;
+            this.cbpcsunit.TabIndex = 4;
             // 
             // lbpcsunit
             // 
@@ -205,7 +208,7 @@
             this.tbtotal.Name = "tbtotal";
             this.tbtotal.ReadOnly = true;
             this.tbtotal.Size = new System.Drawing.Size(318, 33);
-            this.tbtotal.TabIndex = 37;
+            this.tbtotal.TabIndex = 5;
             // 
             // lbtotal
             // 

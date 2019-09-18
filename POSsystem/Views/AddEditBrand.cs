@@ -49,7 +49,10 @@ namespace POSsystem
                     foreach (var existbrand in BrandList)
                     {
                         if (tbbrandname.Text == existbrand.name)
-                            samename = samename + 1;
+                        {
+                                if (existbrand.id != Branddata.id)
+                                    samename += 1;
+                        }
                     }
 
                     if (samename > 0)

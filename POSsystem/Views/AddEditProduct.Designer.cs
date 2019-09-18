@@ -38,6 +38,9 @@
             this.cbunitbulk = new System.Windows.Forms.ComboBox();
             this.lbbulkunit = new System.Windows.Forms.Label();
             this.name_mandatory = new System.Windows.Forms.Label();
+            this.nbqty = new System.Windows.Forms.NumericUpDown();
+            this.lbqty = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.nbqty)).BeginInit();
             this.SuspendLayout();
             // 
             // lbmerek
@@ -70,8 +73,8 @@
             this.tbname.Margin = new System.Windows.Forms.Padding(4);
             this.tbname.Multiline = true;
             this.tbname.Name = "tbname";
-            this.tbname.Size = new System.Drawing.Size(475, 43);
-            this.tbname.TabIndex = 18;
+            this.tbname.Size = new System.Drawing.Size(472, 43);
+            this.tbname.TabIndex = 1;
             // 
             // cbbrand
             // 
@@ -81,8 +84,8 @@
             this.cbbrand.Location = new System.Drawing.Point(24, 111);
             this.cbbrand.Margin = new System.Windows.Forms.Padding(4);
             this.cbbrand.Name = "cbbrand";
-            this.cbbrand.Size = new System.Drawing.Size(475, 40);
-            this.cbbrand.TabIndex = 29;
+            this.cbbrand.Size = new System.Drawing.Size(472, 40);
+            this.cbbrand.TabIndex = 0;
             // 
             // btnSave
             // 
@@ -94,8 +97,8 @@
             this.btnSave.Location = new System.Drawing.Point(24, 364);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(475, 57);
-            this.btnSave.TabIndex = 33;
+            this.btnSave.Size = new System.Drawing.Size(472, 57);
+            this.btnSave.TabIndex = 4;
             this.btnSave.Text = "Simpan";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btsave_Click);
@@ -104,16 +107,16 @@
             // 
             this.cbunitpcs.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbunitpcs.FormattingEnabled = true;
-            this.cbunitpcs.Location = new System.Drawing.Point(276, 290);
+            this.cbunitpcs.Location = new System.Drawing.Point(337, 290);
             this.cbunitpcs.Name = "cbunitpcs";
-            this.cbunitpcs.Size = new System.Drawing.Size(223, 40);
-            this.cbunitpcs.TabIndex = 42;
+            this.cbunitpcs.Size = new System.Drawing.Size(159, 40);
+            this.cbunitpcs.TabIndex = 3;
             // 
             // lbunitpcs
             // 
             this.lbunitpcs.AutoSize = true;
             this.lbunitpcs.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbunitpcs.Location = new System.Drawing.Point(271, 262);
+            this.lbunitpcs.Location = new System.Drawing.Point(332, 262);
             this.lbunitpcs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbunitpcs.Name = "lbunitpcs";
             this.lbunitpcs.Size = new System.Drawing.Size(160, 25);
@@ -126,8 +129,8 @@
             this.cbunitbulk.FormattingEnabled = true;
             this.cbunitbulk.Location = new System.Drawing.Point(24, 290);
             this.cbunitbulk.Name = "cbunitbulk";
-            this.cbunitbulk.Size = new System.Drawing.Size(223, 40);
-            this.cbunitbulk.TabIndex = 40;
+            this.cbunitbulk.Size = new System.Drawing.Size(159, 40);
+            this.cbunitbulk.TabIndex = 2;
             // 
             // lbbulkunit
             // 
@@ -151,11 +154,37 @@
             this.name_mandatory.TabIndex = 43;
             this.name_mandatory.Text = "*";
             // 
+            // nbqty
+            // 
+            this.nbqty.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nbqty.Location = new System.Drawing.Point(212, 290);
+            this.nbqty.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.nbqty.Name = "nbqty";
+            this.nbqty.Size = new System.Drawing.Size(96, 39);
+            this.nbqty.TabIndex = 44;
+            // 
+            // lbqty
+            // 
+            this.lbqty.AutoSize = true;
+            this.lbqty.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbqty.Location = new System.Drawing.Point(207, 262);
+            this.lbqty.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbqty.Name = "lbqty";
+            this.lbqty.Size = new System.Drawing.Size(33, 25);
+            this.lbqty.TabIndex = 45;
+            this.lbqty.Text = "isi";
+            // 
             // AddEditProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 456);
+            this.ClientSize = new System.Drawing.Size(528, 455);
+            this.Controls.Add(this.lbqty);
+            this.Controls.Add(this.nbqty);
             this.Controls.Add(this.name_mandatory);
             this.Controls.Add(this.cbunitpcs);
             this.Controls.Add(this.lbunitpcs);
@@ -181,6 +210,9 @@
             this.Controls.SetChildIndex(this.lbunitpcs, 0);
             this.Controls.SetChildIndex(this.cbunitpcs, 0);
             this.Controls.SetChildIndex(this.name_mandatory, 0);
+            this.Controls.SetChildIndex(this.nbqty, 0);
+            this.Controls.SetChildIndex(this.lbqty, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.nbqty)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,5 +229,7 @@
         private System.Windows.Forms.ComboBox cbunitbulk;
         private System.Windows.Forms.Label lbbulkunit;
         private System.Windows.Forms.Label name_mandatory;
+        private System.Windows.Forms.NumericUpDown nbqty;
+        private System.Windows.Forms.Label lbqty;
     }
 }

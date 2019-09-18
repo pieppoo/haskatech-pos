@@ -55,7 +55,7 @@
             this.tbbrandname.Margin = new System.Windows.Forms.Padding(4);
             this.tbbrandname.Name = "tbbrandname";
             this.tbbrandname.Size = new System.Drawing.Size(435, 39);
-            this.tbbrandname.TabIndex = 13;
+            this.tbbrandname.TabIndex = 0;
             // 
             // tbremark
             // 
@@ -66,7 +66,7 @@
             this.tbremark.Multiline = true;
             this.tbremark.Name = "tbremark";
             this.tbremark.Size = new System.Drawing.Size(435, 73);
-            this.tbremark.TabIndex = 15;
+            this.tbremark.TabIndex = 1;
             // 
             // lbremark
             // 
@@ -90,7 +90,7 @@
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(435, 61);
-            this.btnSave.TabIndex = 34;
+            this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Simpan";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btsave_Click);

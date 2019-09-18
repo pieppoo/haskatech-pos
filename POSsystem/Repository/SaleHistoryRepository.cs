@@ -9,6 +9,7 @@ using Dapper;
 using MySql.Data.MySqlClient;
 using POSsystem.Database;
 using POSsystem.Properties;
+
 namespace POSsystem.Repository
 {
     public class SaleHistoryRepository : IRepository<SaleHistoryDetails>
@@ -20,9 +21,35 @@ namespace POSsystem.Repository
             dbConnection = new MySqlConnection(Settings.Default.connection_string);
         }
 
-        public bool Add(SaleHistoryDetails entity)
+        public bool Add(SaleHistoryDetails historydata)
         {
-            throw new NotImplementedException();
+            var result = false;
+            try
+            {
+                string sql = string.Format("insert into salehistory (datesale, originaltotal, discount, totalsale, payment_mode, username, cardno, cardreference, guid, balanceamt) " +
+                                            "value ('{0}', {1}, {2}, {3}, {4}, '{5}', '{6}', '{7}','{8}', {9})",
+                                            historydata.datesale.ToString("yyyy-MM-dd HH:mm:ss"),
+                                            historydata.originaltotal,
+                                            historydata.discount,
+                                            historydata.totalsale,
+                                            historydata.payment_mode,
+                                            historydata.username,
+                                            historydata.cardno,
+                                            historydata.cardreference,
+                                            historydata.guid,
+                                            historydata.balanceamt
+                                            );
+                Console.WriteLine(sql);
+
+                var count = dbConnection.Execute(sql);
+                result = count > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
         }
 
         public bool Delete(int id)
@@ -48,6 +75,19 @@ namespace POSsystem.Repository
         public SaleHistoryDetails GetById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public SaleHistoryDetails GetByGUID(string guid)
+        {
+            try
+            {
+                return dbConnection.Query<SaleHistoryDetails>("SELECT * FROM salehistory WHERE guid = '" + guid +"';").FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
         public List<SaleHistoryDetails> Search(params object[] args)

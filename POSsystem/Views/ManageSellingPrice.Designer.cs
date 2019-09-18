@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gvsellprice = new System.Windows.Forms.DataGridView();
             this.btnnewprice = new System.Windows.Forms.Button();
             this.bteditprice = new System.Windows.Forms.Button();
@@ -151,7 +152,9 @@
             // 
             // sellprice
             // 
-            this.sellprice.HeaderText = "Harga Jual";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.sellprice.DefaultCellStyle = dataGridViewCellStyle2;
+            this.sellprice.HeaderText = "Harga Jual (Rp)";
             this.sellprice.Name = "sellprice";
             this.sellprice.ReadOnly = true;
             // 

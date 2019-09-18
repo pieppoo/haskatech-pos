@@ -28,16 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gvsaledetail = new System.Windows.Forms.DataGridView();
+            this.lbtotal = new System.Windows.Forms.Label();
+            this.tbtotal = new System.Windows.Forms.TextBox();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.historyid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitsell = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceinpcs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oritotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.disc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totalsell = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lbtotal = new System.Windows.Forms.Label();
-            this.tbtotal = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.gvsaledetail)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,14 +59,39 @@
             this.qty,
             this.unitsell,
             this.priceinpcs,
+            this.oritotal,
+            this.disc,
             this.totalsell});
             this.gvsaledetail.Location = new System.Drawing.Point(22, 75);
             this.gvsaledetail.MultiSelect = false;
             this.gvsaledetail.Name = "gvsaledetail";
             this.gvsaledetail.ReadOnly = true;
             this.gvsaledetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvsaledetail.Size = new System.Drawing.Size(663, 292);
+            this.gvsaledetail.Size = new System.Drawing.Size(747, 292);
             this.gvsaledetail.TabIndex = 11;
+            // 
+            // lbtotal
+            // 
+            this.lbtotal.AutoSize = true;
+            this.lbtotal.Font = new System.Drawing.Font("Cambria", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbtotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbtotal.Location = new System.Drawing.Point(399, 385);
+            this.lbtotal.Name = "lbtotal";
+            this.lbtotal.Size = new System.Drawing.Size(182, 28);
+            this.lbtotal.TabIndex = 12;
+            this.lbtotal.Text = "Total Penjualan";
+            // 
+            // tbtotal
+            // 
+            this.tbtotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbtotal.Enabled = false;
+            this.tbtotal.Font = new System.Drawing.Font("Cambria", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbtotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.tbtotal.Location = new System.Drawing.Point(600, 377);
+            this.tbtotal.Name = "tbtotal";
+            this.tbtotal.ReadOnly = true;
+            this.tbtotal.Size = new System.Drawing.Size(169, 36);
+            this.tbtotal.TabIndex = 13;
             // 
             // id
             // 
@@ -82,7 +113,7 @@
             this.itemname.HeaderText = "Nama barang";
             this.itemname.Name = "itemname";
             this.itemname.ReadOnly = true;
-            this.itemname.Width = 109;
+            this.itemname.Width = 119;
             // 
             // qty
             // 
@@ -98,44 +129,42 @@
             // 
             // priceinpcs
             // 
-            this.priceinpcs.HeaderText = "Harga perBarang";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.priceinpcs.DefaultCellStyle = dataGridViewCellStyle1;
+            this.priceinpcs.HeaderText = "Harga perBarang (Rp)";
             this.priceinpcs.Name = "priceinpcs";
             this.priceinpcs.ReadOnly = true;
+            // 
+            // oritotal
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.oritotal.DefaultCellStyle = dataGridViewCellStyle2;
+            this.oritotal.HeaderText = "Total Awal (Rp)";
+            this.oritotal.Name = "oritotal";
+            this.oritotal.ReadOnly = true;
+            // 
+            // disc
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.disc.DefaultCellStyle = dataGridViewCellStyle3;
+            this.disc.HeaderText = "Diskaun (Rp)";
+            this.disc.Name = "disc";
+            this.disc.ReadOnly = true;
             // 
             // totalsell
             // 
             this.totalsell.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.totalsell.HeaderText = "Total harga";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.totalsell.DefaultCellStyle = dataGridViewCellStyle4;
+            this.totalsell.HeaderText = "Total Akhir (Rp)";
             this.totalsell.Name = "totalsell";
             this.totalsell.ReadOnly = true;
-            // 
-            // lbtotal
-            // 
-            this.lbtotal.AutoSize = true;
-            this.lbtotal.Font = new System.Drawing.Font("Cambria", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbtotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.lbtotal.Location = new System.Drawing.Point(285, 385);
-            this.lbtotal.Name = "lbtotal";
-            this.lbtotal.Size = new System.Drawing.Size(182, 28);
-            this.lbtotal.TabIndex = 12;
-            this.lbtotal.Text = "Total Penjualan";
-            // 
-            // tbtotal
-            // 
-            this.tbtotal.Enabled = false;
-            this.tbtotal.Font = new System.Drawing.Font("Cambria", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbtotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.tbtotal.Location = new System.Drawing.Point(485, 382);
-            this.tbtotal.Name = "tbtotal";
-            this.tbtotal.ReadOnly = true;
-            this.tbtotal.Size = new System.Drawing.Size(200, 36);
-            this.tbtotal.TabIndex = 13;
             // 
             // SaleDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(705, 438);
+            this.ClientSize = new System.Drawing.Size(781, 438);
             this.Controls.Add(this.tbtotal);
             this.Controls.Add(this.lbtotal);
             this.Controls.Add(this.gvsaledetail);
@@ -156,14 +185,16 @@
         #endregion
 
         private System.Windows.Forms.DataGridView gvsaledetail;
+        private System.Windows.Forms.Label lbtotal;
+        private System.Windows.Forms.TextBox tbtotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn historyid;
         private System.Windows.Forms.DataGridViewTextBoxColumn itemname;
         private System.Windows.Forms.DataGridViewTextBoxColumn qty;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitsell;
         private System.Windows.Forms.DataGridViewTextBoxColumn priceinpcs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oritotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn disc;
         private System.Windows.Forms.DataGridViewTextBoxColumn totalsell;
-        private System.Windows.Forms.Label lbtotal;
-        private System.Windows.Forms.TextBox tbtotal;
     }
 }

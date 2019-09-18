@@ -80,9 +80,9 @@
             this.lbsellprice.Location = new System.Drawing.Point(36, 270);
             this.lbsellprice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbsellprice.Name = "lbsellprice";
-            this.lbsellprice.Size = new System.Drawing.Size(104, 25);
+            this.lbsellprice.Size = new System.Drawing.Size(150, 25);
             this.lbsellprice.TabIndex = 22;
-            this.lbsellprice.Text = "Harga Jual";
+            this.lbsellprice.Text = "Harga Jual (Rp)";
             // 
             // cbunitsell
             // 
@@ -93,7 +93,7 @@
             this.cbunitsell.Margin = new System.Windows.Forms.Padding(4);
             this.cbunitsell.Name = "cbunitsell";
             this.cbunitsell.Size = new System.Drawing.Size(126, 40);
-            this.cbunitsell.TabIndex = 24;
+            this.cbunitsell.TabIndex = 1;
             // 
             // tbsellprice
             // 
@@ -107,8 +107,9 @@
             0});
             this.tbsellprice.Name = "tbsellprice";
             this.tbsellprice.Size = new System.Drawing.Size(208, 39);
-            this.tbsellprice.TabIndex = 25;
+            this.tbsellprice.TabIndex = 0;
             this.tbsellprice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbsellprice.ThousandsSeparator = true;
             // 
             // btsave
             // 
@@ -121,7 +122,7 @@
             this.btsave.Margin = new System.Windows.Forms.Padding(4);
             this.btsave.Name = "btsave";
             this.btsave.Size = new System.Drawing.Size(357, 67);
-            this.btsave.TabIndex = 26;
+            this.btsave.TabIndex = 3;
             this.btsave.Text = "Simpan";
             this.btsave.UseVisualStyleBackColor = false;
             this.btsave.Click += new System.EventHandler(this.btsave_Click);
@@ -143,7 +144,7 @@
             this.tbbarcodeno.Location = new System.Drawing.Point(40, 385);
             this.tbbarcodeno.Name = "tbbarcodeno";
             this.tbbarcodeno.Size = new System.Drawing.Size(352, 39);
-            this.tbbarcodeno.TabIndex = 28;
+            this.tbbarcodeno.TabIndex = 2;
             // 
             // AddEditSellPrice
             // 

@@ -1,4 +1,5 @@
-﻿using POSsystem.Database;
+﻿using POSsystem.Common;
+using POSsystem.Database;
 using POSsystem.Repository;
 using POSsystem.Views;
 using POSsystem.Views.Base;
@@ -40,7 +41,7 @@ namespace POSsystem.Views
             foreach (var item in SaleDetailList)
             {
                 var product = ProductList.FirstOrDefault(x => x.id == item.itemid);
-                var unitsell = UnitList.FirstOrDefault(x => x.unitcode == item.Unitsale);
+                var unitsell = UnitList.FirstOrDefault(x => x.unitcode == item.unitsale);
 
                 gvsaledetail.Rows.Add(
                     item.id,
@@ -48,17 +49,16 @@ namespace POSsystem.Views
                     product != null ? product.name : " - ",
                     item.qtysale,
                     unitsell != null ? unitsell.description : " - ",
-                    item.priceperitem,
-                    item.totalprice
+                    Utils.ToRupiah(item.priceperitem),
+                    Utils.ToRupiah(item.originaltotal),
+                    Utils.ToRupiah(item.discount),
+                    Utils.ToRupiah(item.totalprice)
                     );
 
                 total = total + item.totalprice;
             }
 
-            tbtotal.Text = "Rp " + string.Format("{0:N} ", total);
-
- 
-            
+            tbtotal.Text = Utils.ToRupiahWithSymbol(total);
         }
 
         private void SaleDetail_Load(object sender, EventArgs e)

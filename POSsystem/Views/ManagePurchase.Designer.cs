@@ -29,8 +29,11 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gvpurchase = new System.Windows.Forms.DataGridView();
+            this.btdeleteitem = new System.Windows.Forms.Button();
+            this.btedititem = new System.Windows.Forms.Button();
+            this.btadditem = new System.Windows.Forms.Button();
+            this.btnSellPrice = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.purchase_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,10 +43,6 @@
             this.pcs_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PCStotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dateitemin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btdeleteitem = new System.Windows.Forms.Button();
-            this.btedititem = new System.Windows.Forms.Button();
-            this.btadditem = new System.Windows.Forms.Button();
-            this.btnSellPrice = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvpurchase)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,14 +50,6 @@
             // 
             this.gvpurchase.AllowUserToAddRows = false;
             this.gvpurchase.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvpurchase.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gvpurchase.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvpurchase.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -70,14 +61,6 @@
             this.pcs_unit,
             this.PCStotal,
             this.Dateitemin});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvpurchase.DefaultCellStyle = dataGridViewCellStyle2;
             this.gvpurchase.Location = new System.Drawing.Point(21, 95);
             this.gvpurchase.Name = "gvpurchase";
             this.gvpurchase.ReadOnly = true;
@@ -87,68 +70,6 @@
             this.gvpurchase.Size = new System.Drawing.Size(865, 311);
             this.gvpurchase.TabIndex = 11;
             this.gvpurchase.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvwarehouse_CellDoubleClick);
-            // 
-            // id
-            // 
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // itemname
-            // 
-            this.itemname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.itemname.HeaderText = "Nama barang";
-            this.itemname.Name = "itemname";
-            this.itemname.ReadOnly = true;
-            this.itemname.Width = 130;
-            // 
-            // purchase_qty
-            // 
-            this.purchase_qty.FillWeight = 70F;
-            this.purchase_qty.HeaderText = "Jumlah beli";
-            this.purchase_qty.Name = "purchase_qty";
-            this.purchase_qty.ReadOnly = true;
-            this.purchase_qty.Width = 70;
-            // 
-            // purchase_unit
-            // 
-            this.purchase_unit.HeaderText = "Kemasan Beli";
-            this.purchase_unit.Name = "purchase_unit";
-            this.purchase_unit.ReadOnly = true;
-            // 
-            // purchase_price
-            // 
-            this.purchase_price.HeaderText = "Harga Beli";
-            this.purchase_price.Name = "purchase_price";
-            this.purchase_price.ReadOnly = true;
-            // 
-            // qty_pcs_in_container
-            // 
-            this.qty_pcs_in_container.HeaderText = "Jumlah eceran perKemasan";
-            this.qty_pcs_in_container.Name = "qty_pcs_in_container";
-            this.qty_pcs_in_container.ReadOnly = true;
-            this.qty_pcs_in_container.Width = 120;
-            // 
-            // pcs_unit
-            // 
-            this.pcs_unit.HeaderText = "Kemasan Eceran";
-            this.pcs_unit.Name = "pcs_unit";
-            this.pcs_unit.ReadOnly = true;
-            // 
-            // PCStotal
-            // 
-            this.PCStotal.HeaderText = "Total Seluruh dalam eceran";
-            this.PCStotal.Name = "PCStotal";
-            this.PCStotal.ReadOnly = true;
-            this.PCStotal.Visible = false;
-            // 
-            // Dateitemin
-            // 
-            this.Dateitemin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Dateitemin.HeaderText = "Tanggal Penambahan Barang";
-            this.Dateitemin.Name = "Dateitemin";
-            this.Dateitemin.ReadOnly = true;
             // 
             // btdeleteitem
             // 
@@ -210,6 +131,70 @@
             this.btnSellPrice.Text = "Edit Harga Jual";
             this.btnSellPrice.UseVisualStyleBackColor = false;
             this.btnSellPrice.Click += new System.EventHandler(this.btnSellPrice_Click);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // itemname
+            // 
+            this.itemname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.itemname.HeaderText = "Nama barang";
+            this.itemname.Name = "itemname";
+            this.itemname.ReadOnly = true;
+            this.itemname.Width = 119;
+            // 
+            // purchase_qty
+            // 
+            this.purchase_qty.FillWeight = 70F;
+            this.purchase_qty.HeaderText = "Jumlah beli";
+            this.purchase_qty.Name = "purchase_qty";
+            this.purchase_qty.ReadOnly = true;
+            this.purchase_qty.Width = 70;
+            // 
+            // purchase_unit
+            // 
+            this.purchase_unit.HeaderText = "Kemasan Beli";
+            this.purchase_unit.Name = "purchase_unit";
+            this.purchase_unit.ReadOnly = true;
+            // 
+            // purchase_price
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.purchase_price.DefaultCellStyle = dataGridViewCellStyle1;
+            this.purchase_price.HeaderText = "Harga Beli (Rp)";
+            this.purchase_price.Name = "purchase_price";
+            this.purchase_price.ReadOnly = true;
+            // 
+            // qty_pcs_in_container
+            // 
+            this.qty_pcs_in_container.HeaderText = "Jumlah eceran perKemasan";
+            this.qty_pcs_in_container.Name = "qty_pcs_in_container";
+            this.qty_pcs_in_container.ReadOnly = true;
+            this.qty_pcs_in_container.Width = 120;
+            // 
+            // pcs_unit
+            // 
+            this.pcs_unit.HeaderText = "Kemasan Eceran";
+            this.pcs_unit.Name = "pcs_unit";
+            this.pcs_unit.ReadOnly = true;
+            // 
+            // PCStotal
+            // 
+            this.PCStotal.HeaderText = "Total Seluruh dalam eceran";
+            this.PCStotal.Name = "PCStotal";
+            this.PCStotal.ReadOnly = true;
+            this.PCStotal.Visible = false;
+            // 
+            // Dateitemin
+            // 
+            this.Dateitemin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Dateitemin.HeaderText = "Tanggal Penambahan Barang";
+            this.Dateitemin.Name = "Dateitemin";
+            this.Dateitemin.ReadOnly = true;
             // 
             // ManagePurchase
             // 

@@ -60,7 +60,7 @@
             this.btmasuk.Location = new System.Drawing.Point(327, 258);
             this.btmasuk.Name = "btmasuk";
             this.btmasuk.Size = new System.Drawing.Size(236, 60);
-            this.btmasuk.TabIndex = 11;
+            this.btmasuk.TabIndex = 2;
             this.btmasuk.Text = "Masuk";
             this.btmasuk.UseVisualStyleBackColor = false;
             this.btmasuk.Click += new System.EventHandler(this.btmasuk_Click);
@@ -72,7 +72,7 @@
             this.tbpassword.Name = "tbpassword";
             this.tbpassword.PasswordChar = '*';
             this.tbpassword.Size = new System.Drawing.Size(236, 26);
-            this.tbpassword.TabIndex = 10;
+            this.tbpassword.TabIndex = 1;
             this.tbpassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginEnter_KeyDown);
             // 
             // tbusername
@@ -81,7 +81,7 @@
             this.tbusername.Location = new System.Drawing.Point(327, 140);
             this.tbusername.Name = "tbusername";
             this.tbusername.Size = new System.Drawing.Size(236, 26);
-            this.tbusername.TabIndex = 9;
+            this.tbusername.TabIndex = 0;
             this.tbusername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginEnter_KeyDown);
             // 
             // lbkatasandi

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using POSsystem.Common;
 
 namespace POSsystem.Views
 {
@@ -52,7 +53,7 @@ namespace POSsystem.Views
                         itemname != null ? itemname.name : " - ",
                         purchase.purchase_qty,
                         unitpurchase != null ? unitpurchase.description : " - ",
-                        purchase.purchase_price,
+                        Utils.ToRupiah(purchase.purchase_price),
                         purchase.qty_pcs_in_container,
                         unitpcs != null ? unitpcs.description : " - ",
                         purchase.total_in_pcs,
@@ -116,7 +117,7 @@ namespace POSsystem.Views
                     else
                     {
                         ProductData.Stock = ProductData.Stock - purchaseinfo.total_in_pcs;
-                        if (productRepository.Update(ProductData))
+                        if (productRepository.updateproductstock(ProductData))
                         {
                             if (!purchaseRepository.Delete(id))
                                 MessageBox.Show("Gagal menghapus harga");

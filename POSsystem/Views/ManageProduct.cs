@@ -20,6 +20,7 @@ namespace POSsystem
         public List<ProductDetails> ProductList { get; set; }
         public List<Brand> BrandList { get; set; }
         public List<UnitItem> UnitList { get; set; }
+        public LoginDetails userdata { get; set; }
 
         private ProductRepository productRepository = new ProductRepository();
         private BrandRepository brandRepository = new BrandRepository();
@@ -49,6 +50,15 @@ namespace POSsystem
 
         private void LoadData()
         {
+            if (userdata.user_role == "kasir")
+            {
+                btadditem.Visible = false;
+                btedititem.Visible = false;
+                btdeleteitem.Visible = false;
+                btunitmanage.Visible = false;
+                btmanagebrand.Visible = false;
+            }
+
             try
             {
                 BrandList = brandRepository.GetAll().ToList();
@@ -64,13 +74,19 @@ namespace POSsystem
                     var unitbulkinfo = UnitList.FirstOrDefault(x => x.unitcode == item.unit_bulk);
                     var unitpcsinfo = UnitList.FirstOrDefault(x => x.unitcode == item.unit_pcs);
 
+                    int stockbulk = (item.Stock / item.qty_pcs_in_container);
+                    int stockpcs = item.Stock - (stockbulk * item.qty_pcs_in_container);
+                    var itemstock = stockbulk + " " + unitbulkinfo.description + " " + stockpcs + " " + unitpcsinfo.description; 
+
+
                     gvitem.Rows.Add(
                         item.id,
                         brand != null ? brand.name : " - ",
                         item.name,
                         unitbulkinfo != null ? unitbulkinfo.description : " - ",
                         unitpcsinfo != null ? unitpcsinfo.description : " - ",
-                        item.Stock
+                        itemstock,
+                        item.qty_pcs_in_container
                         );
 
                 }
@@ -143,18 +159,22 @@ namespace POSsystem
 
         private void gvitem_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var id = Convert.ToInt32(gvitem.Rows[e.RowIndex].Cells[0].Value);
-            var product = ProductList.FirstOrDefault(x => x.id == id);
-
-            if (product != null)
+            if (userdata.user_role == "admin")
             {
-                var form = new ManagePurchase();
-                form.ProductData = product;
-                Hide();
-                form.ShowDialog();
-                Show();
-                LoadData();
+                var id = Convert.ToInt32(gvitem.Rows[e.RowIndex].Cells[0].Value);
+                var product = ProductList.FirstOrDefault(x => x.id == id);
+
+                if (product != null)
+                {
+                    var form = new ManagePurchase();
+                    form.ProductData = product;
+                    Hide();
+                    form.ShowDialog();
+                    Show();
+                    LoadData();
+                }
             }
+
         }
 
         private void btunitmanage_Click(object sender, EventArgs e)
@@ -189,15 +209,22 @@ namespace POSsystem
                 foreach (var item in result)
                 {
                     var brand = BrandList.FirstOrDefault(x => x.id == item.brand_id);
+                    var unitbulkinfo = UnitList.FirstOrDefault(x => x.unitcode == item.unit_bulk);
+                    var unitpcsinfo = UnitList.FirstOrDefault(x => x.unitcode == item.unit_pcs);
 
                     gvitem.Rows.Add(
                         item.id,
                         brand != null ? brand.name : " - ",
-                        item.name
+                        item.name,
+                        unitbulkinfo != null ? unitbulkinfo.description : " - ",
+                        unitpcsinfo != null ? unitpcsinfo.description : " - ",
+                        item.Stock
                         );
 
                 }
             }
+            else
+                MessageBox.Show("Barang tidak ditemukan");
         }
 
         private void btnreset_Click(object sender, EventArgs e)

@@ -71,16 +71,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Utils.cs" />
+    <Compile Include="Database\QtySaleItem.cs" />
     <Compile Include="Database\LoginDetails.cs" />
     <Compile Include="Database\PaymentModeDetails.cs" />
     <Compile Include="Database\SaleHistoryDetails.cs" />
+    <Compile Include="Database\SaleItemsDetail.cs" />
     <Compile Include="Database\SaleListDetails.cs" />
     <Compile Include="Database\SearchHistoryFilter.cs" />
     <Compile Include="Database\SellingPriceDetails.cs" />
+    <Compile Include="Database\TempNewSale.cs" />
     <Compile Include="Database\UnitItem.cs" />
     <Compile Include="Database\PurchaseDetails.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\PaymentModeRepository.cs" />
+    <Compile Include="Repository\SaleFindItemRepository.cs" />
     <Compile Include="Repository\SaleHistoryRepository.cs" />
     <Compile Include="Repository\SaleListRepository.cs" />
     <Compile Include="Repository\SellingPriceRepository.cs" />
@@ -183,11 +193,29 @@
     <Compile Include="Views\ManagePurchase.Designer.cs">
       <DependentUpon>ManagePurchase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\PayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PayForm.Designer.cs">
+      <DependentUpon>PayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\POSSalesEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\POSSalesEntry.Designer.cs">
+      <DependentUpon>POSSalesEntry.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\SaleDetail.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\SaleDetail.Designer.cs">
       <DependentUpon>SaleDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchItemList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\SearchItemList.Designer.cs">
+      <DependentUpon>SearchItemList.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\AuthenticationForm.cs">
       <SubType>Form</SubType>
@@ -236,14 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Views\ManageSellingPrice.resx">
       <DependentUpon>ManageSellingPrice.cs</DependentUpon>
     </EmbeddedResource>
@@ -256,8 +279,17 @@
     <EmbeddedResource Include="Views\ManagePurchase.resx">
       <DependentUpon>ManagePurchase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\PayForm.resx">
+      <DependentUpon>PayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\POSSalesEntry.resx">
+      <DependentUpon>POSSalesEntry.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\SaleDetail.resx">
       <DependentUpon>SaleDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SearchItemList.resx">
+      <DependentUpon>SearchItemList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Settings\AuthenticationForm.resx">
       <DependentUpon>AuthenticationForm.cs</DependentUpon>
@@ -287,6 +319,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\search.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\print.png" />
+    <None Include="Resources\printing.png" />
     <Content Include="Resources\trolley.png" />
     <None Include="Resources\trolley1.png" />
   </ItemGroup>

@@ -60,6 +60,7 @@ namespace POSsystem.Views
                 tbname.Text = ProductData.name;
                 cbunitbulk.SelectedValue = ProductData.unit_bulk;
                 cbunitpcs.SelectedValue = ProductData.unit_pcs;
+                nbqty.Value = ProductData.qty_pcs_in_container;
 
                 PurchaseList = purchaseRepository.GetAll(ProductData.id);
                 SellingPriceList = sellingPriceRepository.GetAll(ProductData.id);
@@ -76,7 +77,8 @@ namespace POSsystem.Views
                     cbunitpcs.Enabled = false;
                 }
 
-
+                nbqty.ReadOnly = true;
+                nbqty.Enabled = false;
 
             }
 
@@ -95,7 +97,11 @@ namespace POSsystem.Views
                 foreach (var existingname in ProductList)
                 {
                     if (existingname.name == tbname.Text)
-                        samenameinsamebrand += 1;
+                    {
+                        if (existingname.id != ProductData.id)
+                            samenameinsamebrand += 1;
+                    }
+                        
                 }
 
 
@@ -109,11 +115,9 @@ namespace POSsystem.Views
                 else
                 {
                     ProductData.brand_id = (int)cbbrand.SelectedValue;
-                    ProductData.name = tbname.Text;
-                    ProductData.unit_bulk = cbunitbulk.SelectedValue.ToString();
-                    ProductData.unit_pcs = cbunitpcs.SelectedValue.ToString();
+                    ProductData.name = tbname.Text;;
 
-                    if (productRepository.Update(ProductData))
+                    if (productRepository.Updatenameandbrand(ProductData))
                     {
                         MessageBox.Show("Data telah berhasil di ubah");
                         Close();

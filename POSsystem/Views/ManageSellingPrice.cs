@@ -1,4 +1,5 @@
-﻿using POSsystem.Database;
+﻿using POSsystem.Common;
+using POSsystem.Database;
 using POSsystem.Repository;
 using POSsystem.Views.Base;
 using System;
@@ -49,7 +50,7 @@ namespace POSsystem.Views
                         item.item_id,
                         item.id,
                         itemname != null ? itemname.name : " - ",
-                        item.sell_price,
+                        Utils.ToRupiah(item.sell_price),
                         unitname != null ? unitname.description : " - ",
                         item.Barcodeno
                         );

@@ -123,6 +123,28 @@ namespace POSsystem.Repository
             return result;
         }
 
+        public bool Updatestock(PurchaseDetails purchase)
+        {
+            var result = false;
+            try
+            {
+                string sql = string.Format("UPDATE purchase_item SET total_in_pcs = {1}  WHERE ID = {0}",
+                                           purchase.id,
+                                           purchase.total_in_pcs);
+
+                Console.WriteLine(sql);
+
+                var count = dbConnection.Execute(sql, purchase);
+                result = count > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
+        }
+
 
     }
 }

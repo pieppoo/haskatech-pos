@@ -27,12 +27,13 @@ namespace POSsystem.Repository
             var result = false;
             try
             {
-                string sql = string.Format("insert into item (brand_id, name, stock, unit_bulk, unit_pcs ) values ({0}, '{1}', {2}, '{3}', '{4}')",
+                string sql = string.Format("insert into item (brand_id, name, stock, unit_bulk, unit_pcs, qty_pcs_in_container ) values ({0}, '{1}', {2}, '{3}', '{4}', {5})",
                                             product.brand_id,
                                             product.name,
                                             product.Stock,
                                             product.unit_bulk,
-                                            product.unit_pcs
+                                            product.unit_pcs,
+                                            product.qty_pcs_in_container
                                             );
                 Console.WriteLine(sql);
 
@@ -144,17 +145,41 @@ namespace POSsystem.Repository
 
         public bool Update(ProductDetails product)
         {
+            throw new NotImplementedException();
+        }
+
+        public bool Updatenameandbrand(ProductDetails product)
+        {
             var result = false;
             try
             {
-                string sql = string.Format("UPDATE item SET brand_id = {1}, name = '{2}', stock = {3}, unit_bulk = '{4}', unit_pcs = '{5}'  WHERE ID = {0}",
+                string sql = string.Format("UPDATE item SET name = '{1}', brand_id = {2} WHERE ID = {0}",
                                             product.id,
-                                            product.brand_id,
                                             product.name,
-                                            product.Stock,
-                                            product.unit_bulk,
-                                            product.unit_pcs);
+                                            product.brand_id);
                                             
+                Console.WriteLine(sql);
+
+                var count = dbConnection.Execute(sql, product);
+                result = count > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
+        }
+
+        public bool updateproductstock(ProductDetails product)
+        {
+            var result = false;
+            try
+            {
+                string sql = string.Format("UPDATE item SET Stock = {1} WHERE ID = {0}",
+                                            product.id,
+                                            product.Stock);
+
                 Console.WriteLine(sql);
 
                 var count = dbConnection.Execute(sql, product);

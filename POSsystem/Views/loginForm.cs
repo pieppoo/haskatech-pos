@@ -49,7 +49,7 @@ namespace POSsystem
 
                                     if(loginRepository.Update(login_info))
                                     {
-                                        if(item.user_role == "admin")
+                                        if (item.user_role == "admin")
                                         {
                                             var form = new MainForm();
                                             form.userdata = login_info;
@@ -66,6 +66,7 @@ namespace POSsystem
                                             Close();
                                         }
 
+                          
                                     }
                                     else
                                         MessageBox.Show("Error when updating last login");

@@ -1,4 +1,5 @@
-﻿using POSsystem.Database;
+﻿using POSsystem.Common;
+using POSsystem.Database;
 using POSsystem.Repository;
 using POSsystem.Views;
 using POSsystem.Views.Base;
@@ -28,6 +29,8 @@ namespace POSsystem
 
         public void LoadData()
         {
+            int totalingv = 0;
+
             try
             {
                 SaleHistoryList = saleHistoryRepository.GetAll().OrderBy(x => x.id).ToList();
@@ -42,9 +45,12 @@ namespace POSsystem
                     gvhistory.Rows.Add(
                         item.id,
                         item.datesale.ToString("dd-MM-yyyy HH:mm:ss"),
-                        item.totalsale,
-                        paymode != null ? paymode.description : " - "
+                        paymode != null ? paymode.description : " - ",
+                        Utils.ToRupiah(item.originaltotal),
+                        Utils.ToRupiah(item.discount),
+                        Utils.ToRupiah(item.totalsale)
                         );
+                    totalingv += item.totalsale;
 
                 }
 
@@ -54,6 +60,8 @@ namespace POSsystem
                 cbpaymentmode.DataSource = new BindingSource(PaymentModeList, null);
                 cbpaymentmode.DisplayMember =  "description" ;
                 cbpaymentmode.ValueMember = "id";
+
+                tbtotalgv.Text = Utils.ToRupiahWithSymbol(totalingv);
             }
             catch (Exception ex)
             {
@@ -64,7 +72,12 @@ namespace POSsystem
 
         private void btpenjualanbaru_Click(object sender, EventArgs e)
         {
-
+            var form = new POSSalesEntry();
+            form.userdata = userdata;
+            Hide();
+            form.ShowDialog();
+            Show();
+            LoadData();
         }
 
         private void HistoryForm_Load(object sender, EventArgs e)
@@ -72,6 +85,8 @@ namespace POSsystem
             LoadData();
 
             dtpfrom.CustomFormat = dtpto.CustomFormat = " ";
+            if (userdata.user_role == "admin")
+                btfinditem.Visible = false;
         }
 
         private void gvhistory_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -90,17 +105,44 @@ namespace POSsystem
             }
         }
 
-        private void btsearch_Click(object sender, EventArgs e)
+
+        private void dtpfrom_ValueChanged(object sender, EventArgs e)
+        {
+            dtpfrom.CustomFormat = "dd-MMM-yyyy";
+            dtpto.MinDate = dtpfrom.Value;
+
+            if (!dtpto.Enabled)
+            {
+                dtpto.Value = dtpfrom.Value;
+                dtpto.Enabled = true;
+            }
+        }
+
+        private void dtpto_ValueChanged(object sender, EventArgs e)
+        {
+            dtpto.CustomFormat = "dd-MMM-yyyy";
+        }
+
+        private void btfinditem_Click(object sender, EventArgs e)
+        {
+            var form = new ManageProduct();
+            form.userdata = userdata;
+            //Hide();
+            form.ShowDialog();
+            //Show();
+        }
+
+        private void pbsearch_Click(object sender, EventArgs e)
         {
             var searchinfo = new SearchHistoryFilter();
-
+            int totalingv = 0;
 
             if ((int)cbpaymentmode.SelectedValue != -1)
             {
                 searchinfo.payment_mode = (int)cbpaymentmode.SelectedValue;
             }
 
-            if(!string.IsNullOrWhiteSpace(dtpfrom.CustomFormat))
+            if (!string.IsNullOrWhiteSpace(dtpfrom.CustomFormat))
                 searchinfo.dateFrom = dtpfrom.Value.Date;
 
             if (!string.IsNullOrWhiteSpace(dtpto.CustomFormat))
@@ -119,40 +161,27 @@ namespace POSsystem
                     gvhistory.Rows.Add(
                         item.id,
                         item.datesale,
-                        item.totalsale,
-                        pymtmode != null ? pymtmode.description : " - "
+                        pymtmode != null ? pymtmode.description : " - ",
+                        Utils.ToRupiah(item.originaltotal),
+                        Utils.ToRupiah(item.discount),
+                        Utils.ToRupiah(item.totalsale)
                         );
 
+                    totalingv += item.totalsale;
+
+
                 }
+                tbtotalgv.Text = Utils.ToRupiahWithSymbol(totalingv);
             }
         }
 
-
-
-        private void btnreset_Click(object sender, EventArgs e)
+        private void pbreset_Click(object sender, EventArgs e)
         {
             LoadData();
-
+            dtpto.ResetText();
+            dtpfrom.ResetText();
             dtpfrom.CustomFormat = dtpto.CustomFormat = " ";
             dtpto.Enabled = false;
-        }
-
-
-        private void dtpfrom_ValueChanged(object sender, EventArgs e)
-        {
-            dtpfrom.CustomFormat = "dd-MMM-yyyy";
-            dtpto.MinDate = dtpfrom.Value;
-
-            if (!dtpto.Enabled)
-            {
-                dtpto.Value = dtpfrom.Value;
-                dtpto.Enabled = true;
-            }
-        }
-
-        private void dtpto_ValueChanged(object sender, EventArgs e)
-        {
-            dtpto.CustomFormat = "dd-MMM-yyyy";
         }
     }
 }

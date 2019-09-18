@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace POSsystem.Database
 {
-    public class SaleListDetails
+    public class SaleItemsDetail
     {
-        public int id { get; set; }
-        public int historyid { get; set; }
         public int itemid { get; set; }
         public int qtysale { get; set; }
-        public int priceperitem { get; set; }
-        public int totalprice { get; set; }
         public string unitsale { get; set; }
+        public int priceperitem { get; set; }
         public int originaltotal { get; set; }
         public int discount { get; set; }
+        public int totalprice { get; set; }
     }
 }

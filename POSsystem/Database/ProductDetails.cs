@@ -14,5 +14,6 @@ namespace POSsystem.Database
         public int Stock { get; set; }
         public string unit_bulk { get; set; }
         public string unit_pcs { get; set; }
+        public int qty_pcs_in_container { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using POSsystem.Common;
 
 namespace POSsystem.Views
 {
@@ -71,11 +72,8 @@ namespace POSsystem.Views
             }
             else
             {
-                
-                var Productinfo = ProductList.FirstOrDefault(x => x.id == ProductData.id);
-                //var unitbulkinfo = UnitList.FirstOrDefault(x => x.unitcode == ProductData.unit_bulk);
-                //var unitpcsinfo = UnitList.FirstOrDefault(x => x.unitcode == ProductData.unit_pcs);
-                tbname.Text = Productinfo.name;
+                numpcsincontainer.Value = ProductData.qty_pcs_in_container;
+                tbname.Text = ProductData.name;
                 cbpcsunit.SelectedValue = ProductData.unit_pcs;
                 cbunitpurchase.SelectedValue = ProductData.unit_bulk;
             }
@@ -105,7 +103,7 @@ namespace POSsystem.Views
             {
                 var purchase = new PurchaseDetails();
                 purchase.itemid = ProductData.id;
-                purchase.purchase_price = long.Parse(tbpurchaseprice.Text);
+                purchase.purchase_price = Utils.ToNumbers(tbpurchaseprice.Text);
                 purchase.purchase_qty = int.Parse(numpurchaseqty.Text);
                 purchase.purchase_unit = cbunitpurchase.SelectedValue.ToString();
                 purchase.qty_pcs_in_container = int.Parse(numpcsincontainer.Text);
@@ -116,17 +114,20 @@ namespace POSsystem.Views
                 
                 ProductData.Stock = int.Parse(tbtotal.Text)+ProductData.Stock;
 
-
-
-                if (productRepository.Update(ProductData))
+                if (purchaseRepository.Add(purchase))
                 {
-                    if (purchaseRepository.Add(purchase))
+                    if (productRepository.updateproductstock(ProductData))
+                    {
                         MessageBox.Show("Data baru telah berhasil di tambahkan");
+                    }
                     else
-                        MessageBox.Show("Data baru gagal ditambahkan");
+                        MessageBox.Show("Gagal memperbaharui stock");
+                    
                 }
                 else
-                    MessageBox.Show("Gagal memperbaharui stock");
+                    MessageBox.Show("Data baru gagal ditambahkan");
+
+                
 
 
 

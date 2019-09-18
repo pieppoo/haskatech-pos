@@ -56,7 +56,7 @@
             this.tbunitcode.MaxLength = 5;
             this.tbunitcode.Name = "tbunitcode";
             this.tbunitcode.Size = new System.Drawing.Size(320, 39);
-            this.tbunitcode.TabIndex = 14;
+            this.tbunitcode.TabIndex = 0;
             // 
             // lbunitname
             // 
@@ -80,7 +80,7 @@
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(320, 67);
-            this.btnSave.TabIndex = 35;
+            this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Simpan";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -93,7 +93,7 @@
             this.tbunitname.Margin = new System.Windows.Forms.Padding(4);
             this.tbunitname.Name = "tbunitname";
             this.tbunitname.Size = new System.Drawing.Size(320, 39);
-            this.tbunitname.TabIndex = 36;
+            this.tbunitname.TabIndex = 1;
             // 
             // name_mandatory
             // 

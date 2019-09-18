@@ -1,4 +1,5 @@
-﻿using POSsystem.Database;
+﻿using POSsystem.Common;
+using POSsystem.Database;
 using POSsystem.Repository;
 using POSsystem.Views.Base;
 using System;
@@ -66,7 +67,7 @@ namespace POSsystem.Views
         {
             if (Editmode)
             {
-                SellingPriceData.sell_price = int.Parse(tbsellprice.Text);
+                SellingPriceData.sell_price = Utils.ToNumbers(tbsellprice.Text);
                 SellingPriceData.sell_unit = cbunitsell.SelectedValue.ToString();
                 SellingPriceData.Barcodeno = tbbarcodeno.Text;
 
@@ -115,7 +116,7 @@ namespace POSsystem.Views
                 var sellprice = new SellingPriceDetails();
                 sellprice.item_id = ProductData.id;
                 sellprice.sell_qty = 1;
-                sellprice.sell_price = long.Parse(tbsellprice.Text);
+                sellprice.sell_price = Utils.ToNumbers(tbsellprice.Text);
                 sellprice.sell_unit = cbunitsell.SelectedValue.ToString();
                 sellprice.Barcodeno = tbbarcodeno.Text;
 

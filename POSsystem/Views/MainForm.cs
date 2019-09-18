@@ -22,6 +22,7 @@ namespace POSsystem.Views
         private void btnproduct_Click(object sender, EventArgs e)
         {
             var form = new ManageProduct();
+            form.userdata = userdata;
             Hide();
             form.ShowDialog();
             Show();
@@ -30,6 +31,7 @@ namespace POSsystem.Views
         private void btnhistory_Click(object sender, EventArgs e)
         {
             var form = new HistoryForm();
+            form.userdata = userdata;
             Hide();
             form.ShowDialog();
             Show();

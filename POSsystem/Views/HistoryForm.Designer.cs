@@ -28,12 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistoryForm));
             this.gvhistory = new System.Windows.Forms.DataGridView();
             this.IDSell = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DatetimeSell = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalSell = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PayMode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oritotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalSell = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RemarkSell = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btpenjualanbaru = new System.Windows.Forms.Button();
             this.lb_datesearch = new System.Windows.Forms.Label();
@@ -41,11 +46,16 @@
             this.dtpfrom = new System.Windows.Forms.DateTimePicker();
             this.dtpto = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnreset = new System.Windows.Forms.Button();
-            this.btsearch = new System.Windows.Forms.Button();
             this.cbpaymentmode = new System.Windows.Forms.ComboBox();
-            this.btnprint = new System.Windows.Forms.Button();
+            this.tbtotalgv = new System.Windows.Forms.TextBox();
+            this.btfinditem = new System.Windows.Forms.Button();
+            this.pbprint = new System.Windows.Forms.PictureBox();
+            this.pbsearch = new System.Windows.Forms.PictureBox();
+            this.pbreset = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.gvhistory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbprint)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbsearch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbreset)).BeginInit();
             this.SuspendLayout();
             // 
             // gvhistory
@@ -56,13 +66,16 @@
             this.gvhistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDSell,
             this.DatetimeSell,
-            this.TotalSell,
             this.PayMode,
+            this.oritotal,
+            this.discount,
+            this.TotalSell,
             this.RemarkSell});
             this.gvhistory.Location = new System.Drawing.Point(24, 227);
             this.gvhistory.Margin = new System.Windows.Forms.Padding(4);
             this.gvhistory.Name = "gvhistory";
             this.gvhistory.ReadOnly = true;
+            this.gvhistory.RowHeadersVisible = false;
             this.gvhistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvhistory.Size = new System.Drawing.Size(650, 246);
             this.gvhistory.TabIndex = 8;
@@ -87,14 +100,6 @@
             this.DatetimeSell.ReadOnly = true;
             this.DatetimeSell.Width = 172;
             // 
-            // TotalSell
-            // 
-            this.TotalSell.FillWeight = 70F;
-            this.TotalSell.HeaderText = "Total Penjualan";
-            this.TotalSell.Name = "TotalSell";
-            this.TotalSell.ReadOnly = true;
-            this.TotalSell.Width = 145;
-            // 
             // PayMode
             // 
             this.PayMode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -102,6 +107,32 @@
             this.PayMode.HeaderText = "Tipe Pembayaran";
             this.PayMode.Name = "PayMode";
             this.PayMode.ReadOnly = true;
+            // 
+            // oritotal
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.oritotal.DefaultCellStyle = dataGridViewCellStyle1;
+            this.oritotal.HeaderText = "Total Awal (Rp)";
+            this.oritotal.Name = "oritotal";
+            this.oritotal.ReadOnly = true;
+            // 
+            // discount
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.discount.DefaultCellStyle = dataGridViewCellStyle2;
+            this.discount.HeaderText = "diskaun (Rp)";
+            this.discount.Name = "discount";
+            this.discount.ReadOnly = true;
+            // 
+            // TotalSell
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.TotalSell.DefaultCellStyle = dataGridViewCellStyle3;
+            this.TotalSell.FillWeight = 70F;
+            this.TotalSell.HeaderText = "Total Akhir (Rp)";
+            this.TotalSell.Name = "TotalSell";
+            this.TotalSell.ReadOnly = true;
+            this.TotalSell.Width = 145;
             // 
             // RemarkSell
             // 
@@ -120,7 +151,7 @@
             this.btpenjualanbaru.Location = new System.Drawing.Point(24, 490);
             this.btpenjualanbaru.Margin = new System.Windows.Forms.Padding(4);
             this.btpenjualanbaru.Name = "btpenjualanbaru";
-            this.btpenjualanbaru.Size = new System.Drawing.Size(233, 55);
+            this.btpenjualanbaru.Size = new System.Drawing.Size(197, 55);
             this.btpenjualanbaru.TabIndex = 14;
             this.btpenjualanbaru.Text = "Penjualan baru";
             this.btpenjualanbaru.UseVisualStyleBackColor = false;
@@ -156,7 +187,7 @@
             this.dtpfrom.Name = "dtpfrom";
             this.dtpfrom.Size = new System.Drawing.Size(183, 32);
             this.dtpfrom.TabIndex = 20;
-            this.dtpfrom.Value = new System.DateTime(2019, 8, 26, 16, 27, 41, 0);
+            this.dtpfrom.Value = new System.DateTime(2019, 8, 30, 0, 0, 0, 0);
             this.dtpfrom.ValueChanged += new System.EventHandler(this.dtpfrom_ValueChanged);
             // 
             // dtpto
@@ -167,51 +198,22 @@
             this.dtpto.Enabled = false;
             this.dtpto.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpto.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpto.Location = new System.Drawing.Point(264, 179);
+            this.dtpto.Location = new System.Drawing.Point(263, 179);
             this.dtpto.Name = "dtpto";
             this.dtpto.Size = new System.Drawing.Size(190, 32);
             this.dtpto.TabIndex = 21;
+            this.dtpto.Value = new System.DateTime(2019, 8, 30, 0, 0, 0, 0);
             this.dtpto.ValueChanged += new System.EventHandler(this.dtpto_ValueChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(225, 184);
+            this.label1.Location = new System.Drawing.Point(222, 184);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 22);
             this.label1.TabIndex = 22;
             this.label1.Text = "to";
-            // 
-            // btnreset
-            // 
-            this.btnreset.BackColor = System.Drawing.Color.Goldenrod;
-            this.btnreset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnreset.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnreset.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnreset.Location = new System.Drawing.Point(509, 99);
-            this.btnreset.Margin = new System.Windows.Forms.Padding(4);
-            this.btnreset.Name = "btnreset";
-            this.btnreset.Size = new System.Drawing.Size(165, 50);
-            this.btnreset.TabIndex = 23;
-            this.btnreset.Text = "Reset";
-            this.btnreset.UseVisualStyleBackColor = false;
-            this.btnreset.Click += new System.EventHandler(this.btnreset_Click);
-            // 
-            // btsearch
-            // 
-            this.btsearch.BackColor = System.Drawing.Color.Goldenrod;
-            this.btsearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btsearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btsearch.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btsearch.Location = new System.Drawing.Point(509, 170);
-            this.btsearch.Margin = new System.Windows.Forms.Padding(4);
-            this.btsearch.Name = "btsearch";
-            this.btsearch.Size = new System.Drawing.Size(165, 50);
-            this.btsearch.TabIndex = 24;
-            this.btsearch.Text = "Cari";
-            this.btsearch.UseVisualStyleBackColor = false;
-            this.btsearch.Click += new System.EventHandler(this.btsearch_Click);
             // 
             // cbpaymentmode
             // 
@@ -220,32 +222,82 @@
             this.cbpaymentmode.FormattingEnabled = true;
             this.cbpaymentmode.Location = new System.Drawing.Point(23, 108);
             this.cbpaymentmode.Name = "cbpaymentmode";
-            this.cbpaymentmode.Size = new System.Drawing.Size(431, 33);
+            this.cbpaymentmode.Size = new System.Drawing.Size(430, 33);
             this.cbpaymentmode.TabIndex = 25;
             // 
-            // btnprint
+            // tbtotalgv
             // 
-            this.btnprint.BackColor = System.Drawing.Color.Teal;
-            this.btnprint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnprint.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnprint.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnprint.Location = new System.Drawing.Point(441, 490);
-            this.btnprint.Margin = new System.Windows.Forms.Padding(4);
-            this.btnprint.Name = "btnprint";
-            this.btnprint.Size = new System.Drawing.Size(233, 55);
-            this.btnprint.TabIndex = 26;
-            this.btnprint.Text = "Print";
-            this.btnprint.UseVisualStyleBackColor = false;
+            this.tbtotalgv.Enabled = false;
+            this.tbtotalgv.Font = new System.Drawing.Font("Segoe UI", 23.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbtotalgv.Location = new System.Drawing.Point(486, 493);
+            this.tbtotalgv.Name = "tbtotalgv";
+            this.tbtotalgv.ReadOnly = true;
+            this.tbtotalgv.Size = new System.Drawing.Size(187, 49);
+            this.tbtotalgv.TabIndex = 27;
+            // 
+            // btfinditem
+            // 
+            this.btfinditem.BackColor = System.Drawing.Color.Teal;
+            this.btfinditem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btfinditem.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btfinditem.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btfinditem.Location = new System.Drawing.Point(254, 493);
+            this.btfinditem.Margin = new System.Windows.Forms.Padding(4);
+            this.btfinditem.Name = "btfinditem";
+            this.btfinditem.Size = new System.Drawing.Size(197, 55);
+            this.btfinditem.TabIndex = 28;
+            this.btfinditem.Text = "Cari Barang";
+            this.btfinditem.UseVisualStyleBackColor = false;
+            this.btfinditem.Click += new System.EventHandler(this.btfinditem_Click);
+            // 
+            // pbprint
+            // 
+            this.pbprint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pbprint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbprint.Image = global::POSsystem.Properties.Resources.printing;
+            this.pbprint.Location = new System.Drawing.Point(596, 122);
+            this.pbprint.Name = "pbprint";
+            this.pbprint.Size = new System.Drawing.Size(77, 63);
+            this.pbprint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbprint.TabIndex = 31;
+            this.pbprint.TabStop = false;
+            // 
+            // pbsearch
+            // 
+            this.pbsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbsearch.Image = global::POSsystem.Properties.Resources.search;
+            this.pbsearch.Location = new System.Drawing.Point(499, 82);
+            this.pbsearch.Name = "pbsearch";
+            this.pbsearch.Size = new System.Drawing.Size(77, 63);
+            this.pbsearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbsearch.TabIndex = 30;
+            this.pbsearch.TabStop = false;
+            this.pbsearch.Click += new System.EventHandler(this.pbsearch_Click);
+            // 
+            // pbreset
+            // 
+            this.pbreset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pbreset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbreset.Image = global::POSsystem.Properties.Resources.Refresh;
+            this.pbreset.Location = new System.Drawing.Point(499, 157);
+            this.pbreset.Name = "pbreset";
+            this.pbreset.Size = new System.Drawing.Size(77, 63);
+            this.pbreset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbreset.TabIndex = 29;
+            this.pbreset.TabStop = false;
+            this.pbreset.Click += new System.EventHandler(this.pbreset_Click);
             // 
             // HistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 558);
-            this.Controls.Add(this.btnprint);
+            this.Controls.Add(this.pbprint);
+            this.Controls.Add(this.pbsearch);
+            this.Controls.Add(this.pbreset);
+            this.Controls.Add(this.btfinditem);
+            this.Controls.Add(this.tbtotalgv);
             this.Controls.Add(this.cbpaymentmode);
-            this.Controls.Add(this.btsearch);
-            this.Controls.Add(this.btnreset);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dtpto);
             this.Controls.Add(this.dtpfrom);
@@ -266,11 +318,16 @@
             this.Controls.SetChildIndex(this.dtpfrom, 0);
             this.Controls.SetChildIndex(this.dtpto, 0);
             this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.btnreset, 0);
-            this.Controls.SetChildIndex(this.btsearch, 0);
             this.Controls.SetChildIndex(this.cbpaymentmode, 0);
-            this.Controls.SetChildIndex(this.btnprint, 0);
+            this.Controls.SetChildIndex(this.tbtotalgv, 0);
+            this.Controls.SetChildIndex(this.btfinditem, 0);
+            this.Controls.SetChildIndex(this.pbreset, 0);
+            this.Controls.SetChildIndex(this.pbsearch, 0);
+            this.Controls.SetChildIndex(this.pbprint, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gvhistory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbprint)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbsearch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbreset)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,14 +341,18 @@
         private System.Windows.Forms.DateTimePicker dtpfrom;
         private System.Windows.Forms.DateTimePicker dtpto;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnreset;
-        private System.Windows.Forms.Button btsearch;
         private System.Windows.Forms.ComboBox cbpaymentmode;
+        private System.Windows.Forms.TextBox tbtotalgv;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDSell;
         private System.Windows.Forms.DataGridViewTextBoxColumn DatetimeSell;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalSell;
         private System.Windows.Forms.DataGridViewTextBoxColumn PayMode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oritotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalSell;
         private System.Windows.Forms.DataGridViewTextBoxColumn RemarkSell;
-        private System.Windows.Forms.Button btnprint;
+        private System.Windows.Forms.Button btfinditem;
+        private System.Windows.Forms.PictureBox pbreset;
+        private System.Windows.Forms.PictureBox pbsearch;
+        private System.Windows.Forms.PictureBox pbprint;
     }
 }
