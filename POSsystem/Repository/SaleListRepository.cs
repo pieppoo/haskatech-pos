@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Dapper;
 using MySql.Data.MySqlClient;
 using POSsystem.Database;
+using POSsystem.Model.Database;
 using POSsystem.Properties;
 
 namespace POSsystem.Repository
@@ -60,6 +61,35 @@ namespace POSsystem.Repository
             try
             {
                 var queryResult = dbConnection.Query<SaleListDetails>("SELECT * from saledetail where historyid = " + historyid);
+
+                return queryResult.ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+
+            }
+            return null;
+        }
+
+        public List<DetailReportMonthly> GetReportDetail(int datesale)
+        {
+            try
+            {
+                var sqlquery = "select  saledetail.itemid as itemid, item.`name` as item_name, " +
+                    "sum(case when saledetail.unitsale = item.unit_pcs Then saledetail.qtysale " +
+                    "when saledetail.unitsale = item.unit_bulk then saledetail.qtysale * item.qty_pcs_in_container " +
+                    "else 1 end) as totalQTY, item.qty_pcs_in_container as pcsqty, " +
+                    "sum(saledetail.originaltotal) as subtotal, sum(saledetail.discount) as discount, " +
+                    "sum(saledetail.totalprice) as grandtotal, " +
+                    "item.unit_bulk as unit_bulk, item.unit_pcs as unit_pcs " +
+                    "from saledetail join salehistory on saledetail.historyid = salehistory.id " +
+                    "join item on item.id = saledetail.itemid " +
+                    "where MONTH(salehistory.datesale) = " + datesale + " group by saledetail.itemid";
+
+                var queryResult = dbConnection.Query<DetailReportMonthly>(sqlquery);
+
+                    
 
                 return queryResult.ToList();
             }

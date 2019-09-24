@@ -96,7 +96,7 @@
             this.nbpay.Name = "nbpay";
             this.nbpay.ReadOnly = true;
             this.nbpay.Size = new System.Drawing.Size(227, 47);
-            this.nbpay.TabIndex = 22;
+            this.nbpay.TabIndex = 3;
             this.nbpay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nbpay.ThousandsSeparator = true;
             this.nbpay.ValueChanged += new System.EventHandler(this.payamounFinaltotal_changed);
@@ -113,7 +113,7 @@
             0});
             this.nbdiscount.Name = "nbdiscount";
             this.nbdiscount.Size = new System.Drawing.Size(201, 39);
-            this.nbdiscount.TabIndex = 24;
+            this.nbdiscount.TabIndex = 2;
             this.nbdiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nbdiscount.ThousandsSeparator = true;
             this.nbdiscount.ValueChanged += new System.EventHandler(this.nbgotdiscount);
@@ -139,7 +139,7 @@
             this.tbpay.Margin = new System.Windows.Forms.Padding(4);
             this.tbpay.Name = "tbpay";
             this.tbpay.Size = new System.Drawing.Size(467, 57);
-            this.tbpay.TabIndex = 27;
+            this.tbpay.TabIndex = 6;
             this.tbpay.Text = "Bayar";
             this.tbpay.UseVisualStyleBackColor = false;
             this.tbpay.Click += new System.EventHandler(this.tbpay_Click);
@@ -197,7 +197,7 @@
             this.rbcardflag.Location = new System.Drawing.Point(119, 14);
             this.rbcardflag.Name = "rbcardflag";
             this.rbcardflag.Size = new System.Drawing.Size(88, 32);
-            this.rbcardflag.TabIndex = 32;
+            this.rbcardflag.TabIndex = 1;
             this.rbcardflag.TabStop = true;
             this.rbcardflag.Text = "Kartu";
             this.rbcardflag.UseVisualStyleBackColor = true;
@@ -212,7 +212,7 @@
             this.tbreferenceno.Name = "tbreferenceno";
             this.tbreferenceno.ReadOnly = true;
             this.tbreferenceno.Size = new System.Drawing.Size(201, 31);
-            this.tbreferenceno.TabIndex = 33;
+            this.tbreferenceno.TabIndex = 5;
             this.tbreferenceno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbreference
@@ -232,7 +232,7 @@
             this.rbcash.Location = new System.Drawing.Point(11, 14);
             this.rbcash.Name = "rbcash";
             this.rbcash.Size = new System.Drawing.Size(88, 32);
-            this.rbcash.TabIndex = 35;
+            this.rbcash.TabIndex = 0;
             this.rbcash.TabStop = true;
             this.rbcash.Text = "Tunai";
             this.rbcash.UseVisualStyleBackColor = true;
@@ -254,10 +254,11 @@
             this.tbcardno.Enabled = false;
             this.tbcardno.Font = new System.Drawing.Font("Cambria", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbcardno.Location = new System.Drawing.Point(13, 378);
+            this.tbcardno.MaxLength = 16;
             this.tbcardno.Name = "tbcardno";
             this.tbcardno.ReadOnly = true;
             this.tbcardno.Size = new System.Drawing.Size(201, 31);
-            this.tbcardno.TabIndex = 36;
+            this.tbcardno.TabIndex = 4;
             this.tbcardno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // panel1

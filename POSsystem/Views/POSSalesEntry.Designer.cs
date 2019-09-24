@@ -49,7 +49,6 @@
             this.unitcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btpay = new System.Windows.Forms.Button();
             this.btnewsale = new System.Windows.Forms.Button();
-            this.btprint = new System.Windows.Forms.Button();
             this.lbbarcode = new System.Windows.Forms.Label();
             this.lbitemname = new System.Windows.Forms.Label();
             this.tbitemname = new System.Windows.Forms.TextBox();
@@ -89,6 +88,7 @@
             this.item_id,
             this.unitcode});
             this.gvsales.Location = new System.Drawing.Point(12, 85);
+            this.gvsales.MultiSelect = false;
             this.gvsales.Name = "gvsales";
             this.gvsales.RowHeadersVisible = false;
             this.gvsales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -187,10 +187,10 @@
             this.btpay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btpay.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btpay.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btpay.Location = new System.Drawing.Point(332, 390);
+            this.btpay.Location = new System.Drawing.Point(438, 390);
             this.btpay.Margin = new System.Windows.Forms.Padding(4);
             this.btpay.Name = "btpay";
-            this.btpay.Size = new System.Drawing.Size(128, 53);
+            this.btpay.Size = new System.Drawing.Size(182, 53);
             this.btpay.TabIndex = 4;
             this.btpay.Text = "Bayar";
             this.btpay.UseVisualStyleBackColor = false;
@@ -205,26 +205,11 @@
             this.btnewsale.Location = new System.Drawing.Point(12, 390);
             this.btnewsale.Margin = new System.Windows.Forms.Padding(4);
             this.btnewsale.Name = "btnewsale";
-            this.btnewsale.Size = new System.Drawing.Size(128, 53);
+            this.btnewsale.Size = new System.Drawing.Size(182, 53);
             this.btnewsale.TabIndex = 2;
             this.btnewsale.Text = "Penjualan Baru";
             this.btnewsale.UseVisualStyleBackColor = false;
             this.btnewsale.Click += new System.EventHandler(this.btnewsale_Click);
-            // 
-            // btprint
-            // 
-            this.btprint.BackColor = System.Drawing.Color.Teal;
-            this.btprint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btprint.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btprint.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btprint.Location = new System.Drawing.Point(172, 390);
-            this.btprint.Margin = new System.Windows.Forms.Padding(4);
-            this.btprint.Name = "btprint";
-            this.btprint.Size = new System.Drawing.Size(128, 53);
-            this.btprint.TabIndex = 3;
-            this.btprint.Text = "Print Resit";
-            this.btprint.UseVisualStyleBackColor = false;
-            this.btprint.Click += new System.EventHandler(this.btprint_Click);
             // 
             // lbbarcode
             // 
@@ -395,10 +380,10 @@
             this.btdelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btdelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btdelete.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btdelete.Location = new System.Drawing.Point(492, 390);
+            this.btdelete.Location = new System.Drawing.Point(225, 390);
             this.btdelete.Margin = new System.Windows.Forms.Padding(4);
             this.btdelete.Name = "btdelete";
-            this.btdelete.Size = new System.Drawing.Size(128, 53);
+            this.btdelete.Size = new System.Drawing.Size(182, 53);
             this.btdelete.TabIndex = 5;
             this.btdelete.Text = "Hapus";
             this.btdelete.UseVisualStyleBackColor = false;
@@ -428,7 +413,6 @@
             this.Controls.Add(this.lbitemname);
             this.Controls.Add(this.tbitemname);
             this.Controls.Add(this.lbbarcode);
-            this.Controls.Add(this.btprint);
             this.Controls.Add(this.btnewsale);
             this.Controls.Add(this.btpay);
             this.Controls.Add(this.gvsales);
@@ -452,7 +436,6 @@
         private System.Windows.Forms.DataGridView gvsales;
         private System.Windows.Forms.Button btpay;
         private System.Windows.Forms.Button btnewsale;
-        private System.Windows.Forms.Button btprint;
         private System.Windows.Forms.Label lbbarcode;
         private System.Windows.Forms.Label lbitemname;
         private System.Windows.Forms.TextBox tbitemname;

@@ -79,9 +79,11 @@ namespace POSsystem.Views
 
                 SellingPriceList = sellingPriceRepository.GetAll(SellingPriceData.item_id);
                 int samebarcode = 0;
+                int sameunit = 0;
 
                 foreach (var Item in SellingPriceList)
                 {
+                    int kk = 0;
                     if (SellingPriceData.id != Item.id)
                     {
                         if (tbbarcodeno.Text == "")
@@ -90,7 +92,14 @@ namespace POSsystem.Views
                         }
                         else if (Item.Barcodeno == tbbarcodeno.Text)
                         {
-                            samebarcode = samebarcode + 1;
+                            samebarcode += 1;
+                            break;
+                        }
+
+                        if(SellingPriceData.sell_unit == Item.sell_unit)
+                        {
+                            sameunit += 1;
+                            break;
                         }
                     }
 
@@ -98,11 +107,16 @@ namespace POSsystem.Views
                 }
 
                 if (samebarcode > 0)
-                    MessageBox.Show("Barcode yang anda masukkan sudah terdaftar, data gagal diubah");
+                    MessageBox.Show("Barcode yang anda masukkan telah terdaftar, silahkan masukkan barcode no lainnya");
+                else if (sameunit > 0)
+                    MessageBox.Show("Harga jual untuk kemasan ini sudah ada, silahkan pilih kemasan lainnya");
                 else
                 {
                     if (sellingPriceRepository.Update(SellingPriceData))
+                    {
                         MessageBox.Show("Data telah berhasil di ubah");
+                        Close();
+                    }
                     else
                         MessageBox.Show("Data gagal di ubah");
                 }
@@ -122,29 +136,47 @@ namespace POSsystem.Views
 
                 SellingPriceList = sellingPriceRepository.GetAll(ProductData.id);
                 int samebarcode = 0;
+                int sameunit = 0;
 
                 foreach (var Item in SellingPriceList)
                 {
-                    if (Item.Barcodeno == tbbarcodeno.Text)
+                    if (tbbarcodeno.Text == "")
+                        samebarcode = 0;
+                    else if (Item.Barcodeno == tbbarcodeno.Text)
                     {
                         samebarcode = samebarcode + 1;
+                        break;
+                    }
+
+
+                    if (sellprice.sell_unit == Item.sell_unit)
+                    {
+                        sameunit += 1;
+                        break;
                     }
 
                 }
 
                 if (samebarcode > 0)
-                    MessageBox.Show("Barcode yang anda masukkan sudah terdaftar, data gagal diubah");
+                    MessageBox.Show("Barcode yang anda masukkan sudah terdaftar");
+                else if (sameunit > 0)
+                    MessageBox.Show("Harga jual untuk kemasan ini sudah ada, silahkan pilih kemasan lain");
                 else
                 {
 
                     if (sellingPriceRepository.Add(sellprice))
+                    {
                         MessageBox.Show("Data baru telah berhasil di tambahkan");
+                        Close();
+                    }
+
                     else
                         MessageBox.Show("Data baru gagal ditambahkan");
                 }
                 samebarcode = 0;
+                sameunit = 0;
             }
-            Close();
+            
         }
     }
 }

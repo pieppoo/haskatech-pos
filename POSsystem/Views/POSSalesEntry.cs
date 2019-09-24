@@ -1,4 +1,5 @@
-﻿using POSsystem.Common;
+﻿using HASKA.POS.RECEIPT;
+using POSsystem.Common;
 using POSsystem.Database;
 using POSsystem.Repository;
 using POSsystem.Views;
@@ -22,6 +23,9 @@ namespace POSsystem.Views
         public List<UnitItem> UnitInfo { get; set; }
         public LoginDetails userdata { get; set; }
 
+        int collsqtyindex = 2;
+        int rowfocusindex = 0;
+
         private SaleFindItemRepository saleFindItemRepository = new SaleFindItemRepository();
         private ProductRepository productRepository = new ProductRepository();
         private UnitRepository unitRepository = new UnitRepository();
@@ -41,6 +45,13 @@ namespace POSsystem.Views
             tbpay.Clear();
             tbbalance.Clear();
             gvsales.Rows.Clear();
+            tbbarcodeno.Enabled = true;
+            tbitemname.Enabled = true;
+            iconsearch.Enabled = true;
+            btdelete.Enabled = true;
+            btpay.Enabled = true;
+            gvsales.ReadOnly = false;
+            SelectedItemPriceDetails.Clear();
         }
 
         private void tbbarcodeno_KeyDown(object sender, KeyEventArgs e)
@@ -51,16 +62,22 @@ namespace POSsystem.Views
                 
                 try
                 {
-                    var salesPrice = saleFindItemRepository.GetByBarcodeNo(barcodeno);
-                    if (salesPrice != null)
+                    if(!string.IsNullOrEmpty(tbbarcodeno.Text))
                     {
-                        DisplayData(salesPrice);
+                        var salesPrice = saleFindItemRepository.GetByBarcodeNo(barcodeno);
+                        if (salesPrice != null)
+                        {
+                            DisplayData(salesPrice);
+                            gvsales.CurrentCell = gvsales.Rows[rowfocusindex].Cells[collsqtyindex];
+                            gvsales.BeginEdit(true);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Barang tidak ditemukan");
+                            tbbarcodeno.Clear();
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Barang tidak ditemukan");
-                        tbbarcodeno.Clear();
-                    }
+
                         
                 }
                 catch (Exception ex)
@@ -96,6 +113,7 @@ namespace POSsystem.Views
                 var discount = Convert.ToInt32(gvsales.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                 var oritotal = Convert.ToInt32(Utils.ToNumbers(gvsales.Rows[e.RowIndex].Cells["oritotal"].Value.ToString()));
                 gvsales.Rows[e.RowIndex].Cells["totalsale"].Value = Utils.ToRupiah( oritotal - discount);
+                gvsales.Rows[e.RowIndex].Cells["discount"].Value = Utils.ToRupiah(discount);
                 calculateTotal();
             }
         }
@@ -116,7 +134,13 @@ namespace POSsystem.Views
                 form.QueriedItemName = item_name;
                 form.ShowDialog();
 
-                DisplayData(form.SelectedItemDetails);
+                if (form.SelectedItemDetails != null)
+                {
+                    DisplayData(form.SelectedItemDetails);
+                    gvsales.CurrentCell = gvsales.Rows[rowfocusindex].Cells[collsqtyindex];
+                    gvsales.BeginEdit(true);
+                }
+
             }
         }
 
@@ -141,6 +165,9 @@ namespace POSsystem.Views
                         priceDetails.item_id,
                         priceDetails.sell_unit
                         );
+
+                    rowfocusindex = gvsales.Rows.Count - 1;
+
                 }
                 else
                 {
@@ -154,6 +181,7 @@ namespace POSsystem.Views
                     cellOriTotal.Value = Utils.ToRupiah(priceDetails.sell_price * newQty);
 
                     row.Cells["totalsale"].Value = Utils.ToRupiah(priceDetails.sell_price * newQty);
+                    //rowfocusindex = row;
                 }
 
                 SelectedItemPriceDetails.Add(priceDetails);
@@ -177,6 +205,7 @@ namespace POSsystem.Views
             else
             {
                 var saleList = new List<SaleItemsDetail>();
+                var itemlistforreceipt = new List<ItemDetails>();
 
                 foreach (DataGridViewRow row in gvsales.Rows)
                 {
@@ -190,6 +219,19 @@ namespace POSsystem.Views
                     itemDetail.totalprice = Convert.ToInt32(Utils.ToNumbers(row.Cells["totalsale"].Value.ToString()));
 
                     saleList.Add(itemDetail);
+
+                    var receiptdetail = new ItemDetails();
+                    receiptdetail.ItemName = Convert.ToString(row.Cells["Itemname"].Value);
+                    receiptdetail.Quantity = Convert.ToString(row.Cells["qtysale"].Value + " " + row.Cells["unitcode"].Value);
+                    receiptdetail.UnitPrice = Convert.ToString(row.Cells["pcsprice"].Value);
+                    receiptdetail.SubTotal = Convert.ToString(row.Cells["oritotal"].Value);
+
+                    int disc = Convert.ToInt32(Utils.ToNumbers(row.Cells["discount"].Value.ToString()));
+                    if (disc > 0)
+                        receiptdetail.Discount = Convert.ToString(row.Cells["discount"].Value);
+
+
+                    itemlistforreceipt.Add(receiptdetail);
                 }
 
                 var form = new PayForm();
@@ -197,19 +239,48 @@ namespace POSsystem.Views
                 form.SaleItemList = saleList;
                 form.totaltopay = Utils.ToNumbers(tbtotaltopay.Text);
                 form.ShowDialog();
-                reloadafterpay(form.saleHistory);
+                if(form.saleHistory != null)
+                {
+                
+                    reloadafterpay(form.saleHistory);
+
+                    //show receipt
+                    var receiptData = new ReceiptData();
+                    receiptData.ItemList = itemlistforreceipt;
+                    receiptData.StoreName = "TOKO IN SADAR";
+                    receiptData.ReceiptID = form.saleHistory.id.ToString();
+                    receiptData.Datetime = form.saleHistory.datesale.ToString();
+
+                    receiptData.TotalItem = itemlistforreceipt.Count.ToString();
+                    receiptData.SubTotal = Convert.ToString(Utils.ToRupiah(form.saleHistory.originaltotal));
+                    receiptData.Discount = Convert.ToString(Utils.ToRupiah(form.saleHistory.discount));
+                    receiptData.GrandTotal = Convert.ToString(Utils.ToRupiah(form.saleHistory.totalsale));
+                    receiptData.TotalPaid = Convert.ToString(Utils.ToRupiah(form.saleHistory.balanceamt + form.saleHistory.totalsale));
+                    receiptData.Balance = Convert.ToString(Utils.ToRupiah(form.saleHistory.balanceamt));
+
+                    if (form.saleHistory.payment_mode == 1)
+                        receiptData.SalePaymentMethod = PaymentMethod.Cash;
+                    else
+                    {
+                        receiptData.SalePaymentMethod = PaymentMethod.Card;
+
+                        string cardno = form.saleHistory.cardno.ToString();
+                        string substr = cardno.Substring(cardno.Length - 4);
+
+                        cardno = "************" + substr;
+
+                        receiptData.CardNo = cardno;
+                        receiptData.RefNo = form.saleHistory.cardreference.ToString();
+                    }
+
+                    var receipt = new Receipt { Data = receiptData };
+                    receipt.CompileReceipt();
+                    receipt.ShowPreviewDialog();
+                }
             }
 
         }
 
-        private void btprint_Click(object sender, EventArgs e)
-        {
-            if(tbbalance.Text != "")
-            {
-                MessageBox.Show("do some code to print");
-            }
-
-        }
 
         private void tbitemname_KeyDown(object sender, KeyEventArgs e)
         {
@@ -234,14 +305,16 @@ namespace POSsystem.Views
             tbtotaltopay.Text = Utils.ToRupiah(historydetails.totalsale);
         }
 
+
+
         private void btdelete_Click(object sender, EventArgs e)
         {
             if (gvsales.SelectedRows.Count == 0)
                 MessageBox.Show("Tidak ada barang yang akan dihapus");
             else
             {
-                // var id = Convert.ToInt32(gvsales.Rows[gvsales.CurrentCell.RowIndex].Cells[0].Value);
-
+                var selid = Convert.ToInt32(gvsales.Rows[gvsales.CurrentCell.RowIndex].Cells["salesId"].Value);
+                SelectedItemPriceDetails.RemoveAll(x => x.id == selid);
                 gvsales.Rows.RemoveAt(gvsales.CurrentCell.RowIndex);
                 calculateTotal();
 

@@ -74,11 +74,12 @@ namespace POSsystem
                     var unitbulkinfo = UnitList.FirstOrDefault(x => x.unitcode == item.unit_bulk);
                     var unitpcsinfo = UnitList.FirstOrDefault(x => x.unitcode == item.unit_pcs);
 
+                    var itemstock = "stock";
+                                        
                     int stockbulk = (item.Stock / item.qty_pcs_in_container);
                     int stockpcs = item.Stock - (stockbulk * item.qty_pcs_in_container);
-                    var itemstock = stockbulk + " " + unitbulkinfo.description + " " + stockpcs + " " + unitpcsinfo.description; 
-
-
+                    itemstock = stockbulk + " " + unitbulkinfo.description + " " + stockpcs + " " + unitpcsinfo.description;
+                                                
                     gvitem.Rows.Add(
                         item.id,
                         brand != null ? brand.name : " - ",
@@ -163,6 +164,7 @@ namespace POSsystem
             {
                 var id = Convert.ToInt32(gvitem.Rows[e.RowIndex].Cells[0].Value);
                 var product = ProductList.FirstOrDefault(x => x.id == id);
+
 
                 if (product != null)
                 {

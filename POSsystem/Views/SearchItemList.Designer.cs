@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gvresultitem = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemname = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +58,7 @@
             this.gvresultitem.Size = new System.Drawing.Size(573, 309);
             this.gvresultitem.TabIndex = 11;
             this.gvresultitem.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvresultitem_CellDoubleClick);
+            this.gvresultitem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gvresultitem_KeyDown);
             // 
             // id
             // 
@@ -84,8 +85,8 @@
             // saleprice
             // 
             this.saleprice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.saleprice.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.saleprice.DefaultCellStyle = dataGridViewCellStyle1;
             this.saleprice.HeaderText = "Harga Jual (Rp)";
             this.saleprice.Name = "saleprice";
             this.saleprice.ReadOnly = true;

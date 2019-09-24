@@ -148,15 +148,16 @@ namespace POSsystem.Repository
             throw new NotImplementedException();
         }
 
-        public bool Updatenameandbrand(ProductDetails product)
+        public bool Update3items(ProductDetails product)
         {
             var result = false;
             try
             {
-                string sql = string.Format("UPDATE item SET name = '{1}', brand_id = {2} WHERE ID = {0}",
+                string sql = string.Format("UPDATE item SET name = '{1}', brand_id = {2}, qty_pcs_in_container = {3} WHERE ID = {0}",
                                             product.id,
                                             product.name,
-                                            product.brand_id);
+                                            product.brand_id,
+                                            product.qty_pcs_in_container);
                                             
                 Console.WriteLine(sql);
 

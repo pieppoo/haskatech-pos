@@ -33,7 +33,7 @@ namespace POSsystem
 
             try
             {
-                SaleHistoryList = saleHistoryRepository.GetAll().OrderBy(x => x.id).ToList();
+                SaleHistoryList = saleHistoryRepository.GetbyNowDate().OrderByDescending(x => x.id).ToList();
                 PaymentModeList = paymentModeRepository.GetAll().ToList();
 
                 gvhistory.Rows.Clear();
@@ -82,11 +82,14 @@ namespace POSsystem
 
         private void HistoryForm_Load(object sender, EventArgs e)
         {
+            dtpfrom.Value = DateTime.Now;
+            dtpto.Value = DateTime.Now;
             LoadData();
 
             dtpfrom.CustomFormat = dtpto.CustomFormat = " ";
             if (userdata.user_role == "admin")
                 btfinditem.Visible = false;
+
         }
 
         private void gvhistory_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

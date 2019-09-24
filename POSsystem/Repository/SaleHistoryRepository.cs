@@ -72,6 +72,36 @@ namespace POSsystem.Repository
             }
         }
 
+        public List<SaleHistoryDetails> GetbyNowDate()
+        {
+            try
+            {
+                var queryResult = dbConnection.Query<SaleHistoryDetails>("select * from salehistory where date(datesale) = date(NOW())");
+
+                return queryResult.ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public List<SaleHistoryDetails> Getbymonth(int selectedmonth)
+        {
+            try
+            {
+                var queryResult = dbConnection.Query<SaleHistoryDetails>("select * from salehistory where month(datesale) = " + selectedmonth);
+
+                return queryResult.ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
         public SaleHistoryDetails GetById(int id)
         {
             throw new NotImplementedException();

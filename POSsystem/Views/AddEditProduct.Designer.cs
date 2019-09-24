@@ -71,9 +71,10 @@
             this.tbname.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbname.Location = new System.Drawing.Point(24, 201);
             this.tbname.Margin = new System.Windows.Forms.Padding(4);
+            this.tbname.MaxLength = 50;
             this.tbname.Multiline = true;
             this.tbname.Name = "tbname";
-            this.tbname.Size = new System.Drawing.Size(472, 43);
+            this.tbname.Size = new System.Drawing.Size(472, 110);
             this.tbname.TabIndex = 1;
             // 
             // cbbrand
@@ -94,7 +95,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.Transparent;
-            this.btnSave.Location = new System.Drawing.Point(24, 364);
+            this.btnSave.Location = new System.Drawing.Point(24, 400);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(472, 57);
@@ -107,7 +108,7 @@
             // 
             this.cbunitpcs.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbunitpcs.FormattingEnabled = true;
-            this.cbunitpcs.Location = new System.Drawing.Point(337, 290);
+            this.cbunitpcs.Location = new System.Drawing.Point(337, 343);
             this.cbunitpcs.Name = "cbunitpcs";
             this.cbunitpcs.Size = new System.Drawing.Size(159, 40);
             this.cbunitpcs.TabIndex = 3;
@@ -116,7 +117,7 @@
             // 
             this.lbunitpcs.AutoSize = true;
             this.lbunitpcs.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbunitpcs.Location = new System.Drawing.Point(332, 262);
+            this.lbunitpcs.Location = new System.Drawing.Point(332, 315);
             this.lbunitpcs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbunitpcs.Name = "lbunitpcs";
             this.lbunitpcs.Size = new System.Drawing.Size(160, 25);
@@ -127,7 +128,7 @@
             // 
             this.cbunitbulk.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbunitbulk.FormattingEnabled = true;
-            this.cbunitbulk.Location = new System.Drawing.Point(24, 290);
+            this.cbunitbulk.Location = new System.Drawing.Point(24, 343);
             this.cbunitbulk.Name = "cbunitbulk";
             this.cbunitbulk.Size = new System.Drawing.Size(159, 40);
             this.cbunitbulk.TabIndex = 2;
@@ -136,7 +137,7 @@
             // 
             this.lbbulkunit.AutoSize = true;
             this.lbbulkunit.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbbulkunit.Location = new System.Drawing.Point(19, 262);
+            this.lbbulkunit.Location = new System.Drawing.Point(19, 315);
             this.lbbulkunit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbbulkunit.Name = "lbbulkunit";
             this.lbbulkunit.Size = new System.Drawing.Size(164, 25);
@@ -157,7 +158,7 @@
             // nbqty
             // 
             this.nbqty.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nbqty.Location = new System.Drawing.Point(212, 290);
+            this.nbqty.Location = new System.Drawing.Point(212, 343);
             this.nbqty.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -171,7 +172,7 @@
             // 
             this.lbqty.AutoSize = true;
             this.lbqty.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbqty.Location = new System.Drawing.Point(207, 262);
+            this.lbqty.Location = new System.Drawing.Point(207, 315);
             this.lbqty.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbqty.Name = "lbqty";
             this.lbqty.Size = new System.Drawing.Size(33, 25);
@@ -182,7 +183,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 455);
+            this.ClientSize = new System.Drawing.Size(528, 466);
             this.Controls.Add(this.lbqty);
             this.Controls.Add(this.nbqty);
             this.Controls.Add(this.name_mandatory);

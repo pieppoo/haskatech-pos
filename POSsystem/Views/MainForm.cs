@@ -36,5 +36,14 @@ namespace POSsystem.Views
             form.ShowDialog();
             Show();
         }
+
+        private void btreport_Click(object sender, EventArgs e)
+        {
+            var form = new Report();
+            form.userdata = userdata;
+            Hide();
+            form.ShowDialog();
+            Show();
+        }
     }
 }

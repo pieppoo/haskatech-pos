@@ -17,11 +17,13 @@ namespace POSsystem.Views
 {
     public partial class PayForm : BaseForm
     {
+        private bool isLoaded;
         public int totaltopay;
+        
         public LoginDetails userdata { get; set; }
         public List<SaleItemsDetail> SaleItemList { get; set; }
         public SaleHistoryDetails saleHistory { get; set; }
-
+        public SaleHistoryDetails salesummary { get; set; }
 
         private SaleHistoryRepository saleHistoryRepository = new SaleHistoryRepository();
         private SaleListRepository saleListRepository = new SaleListRepository();
@@ -39,6 +41,7 @@ namespace POSsystem.Views
             nbpay.Text = Utils.ToRupiah(totaltopay);
             tbbalance.Text = "0";
             TickleForeColor();
+            isLoaded = true;
         }
 
         private void numberbox_KeyPress(object sender, KeyPressEventArgs e)
@@ -52,8 +55,17 @@ namespace POSsystem.Views
             int totaltopay = Utils.ToNumbers(tbtotaltopay.Text);
             int payamount = Utils.ToNumbers(nbpay.Text);
 
-            tbbalance.Text = Utils.ToRupiah(payamount - totaltopay);
-            TickleForeColor();
+            if (payamount < totaltopay)
+            {
+                tbbalance.Text = Utils.ToRupiah(payamount - totaltopay);
+                TickleForeColor();
+                MessageBox.Show("Uang yang dibayar tidak mencukupi");
+            }
+            else
+            {
+                tbbalance.Text = Utils.ToRupiah(payamount - totaltopay);
+                TickleForeColor();
+            }
         }
 
         private void calculatetptaltopay()
@@ -61,13 +73,21 @@ namespace POSsystem.Views
             int discount = Utils.ToNumbers(nbdiscount.Text);
             int oritotal = Utils.ToNumbers(tboritotal.Text);
 
-            tbtotaltopay.Text = Utils.ToRupiah(oritotal - discount);
-            TickleForeColor();
-        }
+            if (discount > oritotal)
+            {
+                nbpay.Text = tboritotal.Text;
+                nbdiscount.Text = "0";
+                TickleForeColor();
+                MessageBox.Show("Diskon melebihi total belanja");
+            }
+            else
+            {
+                tbtotaltopay.Text = Utils.ToRupiah(oritotal - discount);
+                TickleForeColor();
+                nbpay.Text = Utils.ToRupiah(oritotal - discount);
+            }
 
-        private void payamounFinaltotal_changed(object sender, EventArgs e)
-        {
-            calculateBalance();
+
         }
 
         private void nbgotdiscount(object sender, EventArgs e)
@@ -75,6 +95,14 @@ namespace POSsystem.Views
             calculatetptaltopay();
 
         }
+
+        private void payamounFinaltotal_changed(object sender, EventArgs e)
+        {
+            if(isLoaded)
+                calculateBalance();
+        }
+
+
 
         private void Paymoderadiobutton_CheckedChanged(object sender, EventArgs e)
         {
@@ -101,6 +129,7 @@ namespace POSsystem.Views
 
                 tbcardno.Clear();
                 tbreferenceno.Clear();
+                
             }
         }
 
@@ -113,193 +142,173 @@ namespace POSsystem.Views
 
         private void tbpay_Click(object sender, EventArgs e)
         {
+            int discount = Utils.ToNumbers(nbdiscount.Text);
+            int oritotal = Utils.ToNumbers(tboritotal.Text);
+            int payamount = Utils.ToNumbers(nbpay.Text);
+            int finaltotal = Utils.ToNumbers(tbtotaltopay.Text);
 
             if (!rbcardflag.Checked && !rbcash.Checked)
                 MessageBox.Show("Silahkan pilih tipe pembayaran");
-            else
+            else if (rbcardflag.Checked)
             {
-                var salesummary = new SaleHistoryDetails();
+                if (tbreferenceno.Text == "" && tbcardno.Text == "")
+                    MessageBox.Show("Nomer kartu dan nomer reference t idak boleh kosong");
+                else if (tbcardno.Text == "")
+                    MessageBox.Show("Silahkan isi nomer kartu");
+                else if (tbreferenceno.Text == "")
+                    MessageBox.Show("Silahkan isi nomer reference");
+                else
+                    savedatapayment();
+            }
+            else if(discount > oritotal)
+                MessageBox.Show("Diskon melebihi total belanja");
+            else if (payamount < finaltotal)
+                MessageBox.Show("Uang yang dibayar tidak mencukupi");
+            else
+                savedatapayment();
+        }
 
-                if (rbcash.Checked)
-                {
-                    salesummary.payment_mode = 1;
-                }
-                else if (rbcardflag.Checked)
-                {
-                    salesummary.payment_mode = 2;
+        private void savedatapayment()
+        {
+            salesummary = new SaleHistoryDetails();
+            if (rbcardflag.Checked)
+                salesummary.payment_mode = 2;
+            else if (rbcash.Checked)
+                salesummary.payment_mode = 1;
+            salesummary.cardno = tbcardno.Text;
+            salesummary.cardreference = tbreferenceno.Text;
 
-                    if (tbreferenceno.Text == "" && tbcardno.Text == "")
-                        MessageBox.Show("Nomer kartu dan nomer reference t idak boleh kosong");
-                    else if (tbcardno.Text == "")
-                        MessageBox.Show("Silahkan isi nomer kartu");
-                    else if (tbreferenceno.Text == "")
-                        MessageBox.Show("Silahkan isi nomer reference");
-                    else
+            salesummary.datesale = DateTime.Now;
+            salesummary.originaltotal = Utils.ToNumbers(tboritotal.Text);
+            salesummary.discount = Utils.ToNumbers(nbdiscount.Text);
+            salesummary.totalsale = Utils.ToNumbers(tbtotaltopay.Text);
+            salesummary.username = userdata.username;
+            salesummary.guid = Guid.NewGuid().ToString();
+            salesummary.balanceamt = Utils.ToNumbers(tbbalance.Text);
+
+
+            //-------------- checked whether the item has stock------------------
+
+            int SaleQyt = 0;
+            var product = productRepository.GetAll();
+            var msgnotenoughstock = "Stok item ini tidak cukup : ";
+            bool notenoughstock = false;
+
+            //we need to sum up all sale if the same product, this variable will hold all total, sample we sell 5 DUS of indomie and 10 BKS indome
+            //the total sale will be (5 x 40) + 10 = 210
+            var SaleQtyInItem = new List<QtySaleItem>();
+
+            foreach (var saledetails in SaleItemList)
+            {
+                var producttosale = product.FirstOrDefault(x => x.id == saledetails.itemid);
+                SaleQyt = saledetails.qtysale * producttosale.qty_pcs_in_container;
+                if (saledetails.unitsale == producttosale.unit_pcs)
+                    SaleQyt = saledetails.qtysale;
+
+                var qtyitemdetail = new QtySaleItem();
+                qtyitemdetail.itemid = saledetails.itemid;
+
+                if (SaleQtyInItem.Count > 0)
+                {
+                    int currindex = 0;
+
+                    foreach (var item in SaleQtyInItem)
                     {
-                        salesummary.cardno = tbcardno.Text;
-                        salesummary.cardreference = tbreferenceno.Text;
-                    }
-                }
 
-                salesummary.datesale = DateTime.Now;
-                salesummary.originaltotal = Utils.ToNumbers(tboritotal.Text);
-                salesummary.discount = Utils.ToNumbers(nbdiscount.Text);
-                salesummary.totalsale = Utils.ToNumbers(tbtotaltopay.Text);
-                salesummary.username = userdata.username;
-                salesummary.guid = Guid.NewGuid().ToString();
-                salesummary.balanceamt = Utils.ToNumbers(tbbalance.Text);
 
-                //-------------- checked whether the item has stock------------------
-
-                int SaleQyt = 0;
-                var product = productRepository.GetAll();
-                var msgnotenoughstock = "Stok item ini tidak cukup : ";
-                bool notenoughstock = false;
-                
-                //we need to sum up all sale if the same product, this variable will hold all total, sample we sell 5 DUS of indomie and 10 BKS indome
-                //the total sale will be (5 x 40) + 10 = 210
-                var SaleQtyInItem = new List<QtySaleItem>();
-
-                foreach (var saledetails in SaleItemList)
-                {
-                    var producttosale = product.FirstOrDefault(x => x.id == saledetails.itemid);
-                    SaleQyt = saledetails.qtysale * producttosale.qty_pcs_in_container;
-                    if (saledetails.unitsale == producttosale.unit_pcs)
-                        SaleQyt = saledetails.qtysale;
-
-                    var qtyitemdetail = new QtySaleItem();
-                    qtyitemdetail.itemid = saledetails.itemid;
-
-                    if (SaleQtyInItem.Count >0 )
-                    {
-                        int currindex = 0;
-
-                        foreach (var item in SaleQtyInItem)
+                        if (item.itemid == saledetails.itemid)
                         {
-                            
+                            qtyitemdetail.saleqty = item.saleqty + SaleQyt;
+                            SaleQtyInItem.RemoveAt(currindex);
+                            break;
 
-                            if (item.itemid == saledetails.itemid)
-                            {
-                                qtyitemdetail.saleqty = item.saleqty + SaleQyt;
-                                SaleQtyInItem.RemoveAt(currindex);
-                                break;
-
-                            }
-                            else
-                                qtyitemdetail.saleqty = SaleQyt;
-
-                            currindex++;
-
-                        }
-                        SaleQtyInItem.Add(qtyitemdetail);
-                    }
-                    else
-                    {
-                        qtyitemdetail.saleqty = SaleQyt;
-                        SaleQtyInItem.Add(qtyitemdetail);
-                    }
-
-                }
-
-                foreach (var item in SaleQtyInItem)
-                {
-                    var producttosale = product.FirstOrDefault(x => x.id == item.itemid);
-                    if (item.saleqty > producttosale.Stock)
-                    {
-                        msgnotenoughstock = msgnotenoughstock + producttosale.name + ", ";
-                        notenoughstock = true;
-                    }
-                }
-
-
-                //foreach (var saledetails in SaleItemList)
-                //{
-                //    var producttosale = product.FirstOrDefault(x => x.id == saledetails.itemid);
-                //    SaleQyt = saledetails.qtysale * producttosale.qty_pcs_in_container;
-                //    if (saledetails.unitsale == producttosale.unit_pcs)
-                //        SaleQyt = saledetails.qtysale;
-
-                //    if (producttosale.Stock < balancesaleqty)
-                //    {
-
-                //    }
-                //    else if (producttosale.Stock < SaleQyt)
-                //    {
-                //        bool containsSearchResult = msgnotenoughstock.Contains(producttosale.name);
-                //        if (containsSearchResult == false)
-                //        {
-                //            msgnotenoughstock = msgnotenoughstock + producttosale.name + ", ";
-                //            notenoughstock = true;
-                //        }
-
-                //    }
-                //    else
-                //        balancesaleqty = producttosale.Stock - SaleQyt;
-                //}
-                //------------------------------------------------------------------------------
-
-
-                if (notenoughstock == true)
-                    MessageBox.Show(msgnotenoughstock);
-                else if (saleHistoryRepository.Add(salesummary))
-                {
-                    saleHistory = saleHistoryRepository.GetByGUID(salesummary.guid);
-
-                    if (SaleItemList != null)
-                    {
-                        if (saleListRepository.AddMany(SaleItemList, saleHistory.id))
-                        {
-                            var saledetails = saleListRepository.GetAll(saleHistory.id);
-                            int qtysalebalance = 0;
-
-                            foreach (var item in saledetails)
-                            {
-                                
-                                var productToUpdate = product.FirstOrDefault(x => x.id == item.itemid);
-                                var purchasedata = purchaseRepository.GetAll(item.itemid).OrderBy(x => x.id).ToList();
-                                int sellinpcs = item.qtysale * productToUpdate.qty_pcs_in_container;
-                                
-                                if (item.unitsale == productToUpdate.unit_pcs)
-                                    sellinpcs = item.qtysale;
-
-                                productToUpdate.Stock -= sellinpcs;
-
-                                if (!productRepository.updateproductstock(productToUpdate))
-                                    MessageBox.Show("Gagal mmengupdate stok barang");
-
-                                qtysalebalance = sellinpcs;
-
-                                foreach (var purchase in purchasedata)
-                                {
-                                    //check if stock(total_in_pcs field) in purchase table of the current row less than sale qty and its not 0
-                                    //set that stock to 0 because all the stock has been sell. the remaining sale qty will deduct in another row of that product.
-                                    if (purchase.total_in_pcs < qtysalebalance && purchase.total_in_pcs != 0) 
-                                    {
-                                        qtysalebalance -= purchase.total_in_pcs;
-                                        purchase.total_in_pcs = 0;
-                                    }
-                                    else if (purchase.total_in_pcs > qtysalebalance)
-                                    {
-                                        //if the stock in purchase table greater than the sale qty then we need to deduct stock with the sale qty
-                                        purchase.total_in_pcs -= qtysalebalance;
-                                        qtysalebalance = 0;
-                                    }
-
-                                    if (!purchaseRepository.Updatestock(purchase))
-                                        MessageBox.Show("Gagal Mengupdate stok");
-
-                                }
-                            }
-                            MessageBox.Show("Pembayaran telah berhasil");
-                            Close();
                         }
                         else
-                            MessageBox.Show("Gagal Menyimpan detail penjualan");
+                            qtyitemdetail.saleqty = SaleQyt;
+
+                        currindex++;
+
                     }
+                    SaleQtyInItem.Add(qtyitemdetail);
                 }
                 else
-                    MessageBox.Show("Gagal menyimpan summary penjualan");
+                {
+                    qtyitemdetail.saleqty = SaleQyt;
+                    SaleQtyInItem.Add(qtyitemdetail);
+                }
+
             }
+
+            foreach (var item in SaleQtyInItem)
+            {
+                var producttosale = product.FirstOrDefault(x => x.id == item.itemid);
+                if (item.saleqty > producttosale.Stock)
+                {
+                    msgnotenoughstock = msgnotenoughstock + producttosale.name + ", ";
+                    notenoughstock = true;
+                }
+            }
+
+            if (notenoughstock == true)
+                MessageBox.Show(msgnotenoughstock);
+            else if (saleHistoryRepository.Add(salesummary))
+            {
+                saleHistory = saleHistoryRepository.GetByGUID(salesummary.guid);
+
+                if (SaleItemList != null)
+                {
+                    if (saleListRepository.AddMany(SaleItemList, saleHistory.id))
+                    {
+                        var saledetails = saleListRepository.GetAll(saleHistory.id);
+                        int qtysalebalance = 0;
+
+                        foreach (var item in saledetails)
+                        {
+
+                            var productToUpdate = product.FirstOrDefault(x => x.id == item.itemid);
+                            var purchasedata = purchaseRepository.GetAll(item.itemid).OrderBy(x => x.id).ToList();
+                            int sellinpcs = item.qtysale * productToUpdate.qty_pcs_in_container;
+
+                            if (item.unitsale == productToUpdate.unit_pcs)
+                                sellinpcs = item.qtysale;
+
+                            productToUpdate.Stock -= sellinpcs;
+
+                            if (!productRepository.updateproductstock(productToUpdate))
+                                MessageBox.Show("Gagal mmengupdate stok barang");
+
+                            qtysalebalance = sellinpcs;
+
+                            foreach (var purchase in purchasedata)
+                            {
+                                //check if stock(total_in_pcs field) in purchase table of the current row less than sale qty and its not 0
+                                //set that stock to 0 because all the stock has been sell. the remaining sale qty will deduct in another row of that product.
+                                if (purchase.total_in_pcs < qtysalebalance && purchase.total_in_pcs != 0)
+                                {
+                                    qtysalebalance -= purchase.total_in_pcs;
+                                    purchase.total_in_pcs = 0;
+                                }
+                                else if (purchase.total_in_pcs > qtysalebalance)
+                                {
+                                    //if the stock in purchase table greater than the sale qty then we need to deduct stock with the sale qty
+                                    purchase.total_in_pcs -= qtysalebalance;
+                                    qtysalebalance = 0;
+                                }
+
+                                if (!purchaseRepository.Updatestock(purchase))
+                                    MessageBox.Show("Gagal Mengupdate stok");
+
+                            }
+                        }
+                        MessageBox.Show("Pembayaran telah berhasil");
+                        Close();
+                    }
+                    else
+                        MessageBox.Show("Gagal Menyimpan detail penjualan");
+                }
+            }
+            else
+                MessageBox.Show("Gagal menyimpan summary penjualan");
         }
     }
 }

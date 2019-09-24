@@ -77,12 +77,12 @@ namespace POSsystem.Views
                     cbunitpcs.Enabled = false;
                 }
 
-                nbqty.ReadOnly = true;
-                nbqty.Enabled = false;
-
+                if ( ProductData.Stock > 0)
+                {
+                    nbqty.ReadOnly = true;
+                    nbqty.Enabled = false;
+                }
             }
-
-
         }
 
         private void btsave_Click(object sender, EventArgs e)
@@ -116,8 +116,9 @@ namespace POSsystem.Views
                 {
                     ProductData.brand_id = (int)cbbrand.SelectedValue;
                     ProductData.name = tbname.Text;;
+                    ProductData.qty_pcs_in_container = (int)nbqty.Value;
 
-                    if (productRepository.Updatenameandbrand(ProductData))
+                    if (productRepository.Update3items(ProductData))
                     {
                         MessageBox.Show("Data telah berhasil di ubah");
                         Close();
@@ -142,6 +143,8 @@ namespace POSsystem.Views
                     MessageBox.Show("Tidak boleh memasukkan nama produk yang sama");
                     samenameinsamebrand = 0;
                 }
+                else if (nbqty.Value == 0)
+                    MessageBox.Show("Isi tidak boleh nol (0)");
                 else
                 {
                     var product = new ProductDetails();
@@ -150,6 +153,7 @@ namespace POSsystem.Views
                     product.Stock = 0;
                     product.unit_bulk = cbunitbulk.SelectedValue.ToString();
                     product.unit_pcs = cbunitpcs.SelectedValue.ToString();
+                    product.qty_pcs_in_container = (int)nbqty.Value;
 
 
                     if (productRepository.Add(product))

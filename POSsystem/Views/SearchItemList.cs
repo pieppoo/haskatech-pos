@@ -53,22 +53,26 @@ namespace POSsystem.Views
             {
                 foreach (var item in result)
                 {
-                    productsaledata = saleFindItemRepository.GetAll(item.id);
-                    if (productsaledata != null)
+                    if (item.Stock != 0)
                     {
-                        foreach (var sale in productsaledata)
+                        productsaledata = saleFindItemRepository.GetAll(item.id);
+                        if (productsaledata != null)
                         {
-                            var unitdata = UnitList.FirstOrDefault(x => x.unitcode == sale.sell_unit);
+                            foreach (var sale in productsaledata)
+                            {
+                                var unitdata = UnitList.FirstOrDefault(x => x.unitcode == sale.sell_unit);
 
-                            gvresultitem.Rows.Add(
-                                sale.id,
-                                item.name,
-                                unitdata != null ? unitdata.description : " - ",
-                                Utils.ToRupiah(sale.sell_price),
-                                sale.Barcodeno != null ? sale.Barcodeno : " - "
-                                );
+                                gvresultitem.Rows.Add(
+                                    sale.id,
+                                    item.name,
+                                    unitdata != null ? unitdata.description : " - ",
+                                    Utils.ToRupiah(sale.sell_price),
+                                    sale.Barcodeno != null ? sale.Barcodeno : " - "
+                                    );
+                            }
                         }
                     }
+
                 }
             }
         }
@@ -78,6 +82,25 @@ namespace POSsystem.Views
             var id = Convert.ToInt32(gvresultitem.Rows[e.RowIndex].Cells[0].Value);
             SelectedItemDetails = SellingPriceList.FirstOrDefault(x => x.id == id);
             Close();
+        }
+
+        private void gvresultitem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    int indx = Convert.ToInt32(gvresultitem.CurrentCell.RowIndex);
+                    var id = Convert.ToInt32(gvresultitem.Rows[indx].Cells[0].Value);
+                    SelectedItemDetails = SellingPriceList.FirstOrDefault(x => x.id == id);
+                    Close();
+                }
+                catch (Exception ex)
+                {
+                    var errMsg = "Details : " + ex.Message + Environment.NewLine + "Stacktrace : " + ex.StackTrace;
+                    MessageBox.Show(errMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

@@ -42,11 +42,50 @@
     <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.Data.v10.2">
+      <HintPath>..\..\devExpress dll\DevExpress.Data.v10.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.2">
+      <HintPath>..\..\devExpress dll\DevExpress.Utils.v10.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.2">
+      <HintPath>..\..\devExpress dll\DevExpress.XtraBars.v10.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.2">
+      <HintPath>..\..\devExpress dll\DevExpress.XtraEditors.v10.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v10.2">
+      <HintPath>..\..\devExpress dll\DevExpress.XtraPrinting.v10.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v10.2">
+      <HintPath>..\..\devExpress dll\DevExpress.XtraReports.v10.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v10.2">
+      <HintPath>..\..\devExpress dll\DevExpress.XtraTreeList.v10.2.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
+    <Reference Include="HASKA-POS-RECEIPT">
+      <HintPath>..\..\devExpress dll\HASKA-POS-RECEIPT.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.DocumentObjectModel-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.Rendering-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\MigraDoc.RtfRendering-gdi.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.17.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.17\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\PdfSharp-gdi.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting-gdi, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-gdi.1.50.5147\lib\net20\PdfSharp.Charting-gdi.dll</HintPath>
     </Reference>
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
@@ -71,18 +110,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ReportDetailsGenerator.cs" />
+    <Compile Include="Common\ReportGenerator.cs" />
     <Compile Include="Common\Utils.cs" />
-    <Compile Include="Database\QtySaleItem.cs" />
-    <Compile Include="Database\LoginDetails.cs" />
-    <Compile Include="Database\PaymentModeDetails.cs" />
-    <Compile Include="Database\SaleHistoryDetails.cs" />
-    <Compile Include="Database\SaleItemsDetail.cs" />
-    <Compile Include="Database\SaleListDetails.cs" />
-    <Compile Include="Database\SearchHistoryFilter.cs" />
-    <Compile Include="Database\SellingPriceDetails.cs" />
-    <Compile Include="Database\TempNewSale.cs" />
-    <Compile Include="Database\UnitItem.cs" />
-    <Compile Include="Database\PurchaseDetails.cs" />
+    <Compile Include="Model\Database\DetailReportMonthly.cs" />
+    <Compile Include="Model\Database\QtySaleItem.cs" />
+    <Compile Include="Model\Database\LoginDetails.cs" />
+    <Compile Include="Model\Database\PaymentModeDetails.cs" />
+    <Compile Include="Model\Database\SaleHistoryDetails.cs" />
+    <Compile Include="Model\Database\SaleItemsDetail.cs" />
+    <Compile Include="Model\Database\SaleListDetails.cs" />
+    <Compile Include="Model\Database\SearchHistoryFilter.cs" />
+    <Compile Include="Model\Database\SellingPriceDetails.cs" />
+    <Compile Include="Model\Database\TempNewSale.cs" />
+    <Compile Include="Model\Database\UnitItem.cs" />
+    <Compile Include="Model\Database\PurchaseDetails.cs" />
+    <Compile Include="Model\SalesDetailReportDetails.cs" />
+    <Compile Include="Model\SalesReportDetails.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,8 +146,8 @@
     <Compile Include="Views\AddEditBrand.Designer.cs">
       <DependentUpon>AddEditBrand.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database\Brand.cs" />
-    <Compile Include="Database\IRepository.cs" />
+    <Compile Include="Model\Database\Brand.cs" />
+    <Compile Include="Model\Database\IRepository.cs" />
     <Compile Include="Views\AddEditProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,7 +178,7 @@
     <Compile Include="Views\Base\BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database\ProductDetails.cs" />
+    <Compile Include="Model\Database\ProductDetails.cs" />
     <Compile Include="Views\HistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +248,12 @@
     </Compile>
     <Compile Include="Views\POSSalesEntry.Designer.cs">
       <DependentUpon>POSSalesEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Report.Designer.cs">
+      <DependentUpon>Report.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\SaleDetail.cs">
       <SubType>Form</SubType>
@@ -284,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\POSSalesEntry.resx">
       <DependentUpon>POSSalesEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report.resx">
+      <DependentUpon>Report.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SaleDetail.resx">
       <DependentUpon>SaleDetail.cs</DependentUpon>

@@ -59,7 +59,7 @@
             this.tbitemname.Multiline = true;
             this.tbitemname.Name = "tbitemname";
             this.tbitemname.ReadOnly = true;
-            this.tbitemname.Size = new System.Drawing.Size(352, 93);
+            this.tbitemname.Size = new System.Drawing.Size(385, 93);
             this.tbitemname.TabIndex = 19;
             // 
             // lbunitsell
@@ -92,7 +92,7 @@
             this.cbunitsell.Location = new System.Drawing.Point(266, 299);
             this.cbunitsell.Margin = new System.Windows.Forms.Padding(4);
             this.cbunitsell.Name = "cbunitsell";
-            this.cbunitsell.Size = new System.Drawing.Size(126, 40);
+            this.cbunitsell.Size = new System.Drawing.Size(159, 40);
             this.cbunitsell.TabIndex = 1;
             // 
             // tbsellprice
@@ -121,7 +121,7 @@
             this.btsave.Location = new System.Drawing.Point(40, 438);
             this.btsave.Margin = new System.Windows.Forms.Padding(4);
             this.btsave.Name = "btsave";
-            this.btsave.Size = new System.Drawing.Size(357, 67);
+            this.btsave.Size = new System.Drawing.Size(385, 67);
             this.btsave.TabIndex = 3;
             this.btsave.Text = "Simpan";
             this.btsave.UseVisualStyleBackColor = false;
@@ -143,14 +143,14 @@
             this.tbbarcodeno.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbbarcodeno.Location = new System.Drawing.Point(40, 385);
             this.tbbarcodeno.Name = "tbbarcodeno";
-            this.tbbarcodeno.Size = new System.Drawing.Size(352, 39);
+            this.tbbarcodeno.Size = new System.Drawing.Size(385, 39);
             this.tbbarcodeno.TabIndex = 2;
             // 
             // AddEditSellPrice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(433, 545);
+            this.ClientSize = new System.Drawing.Size(471, 545);
             this.Controls.Add(this.tbbarcodeno);
             this.Controls.Add(this.lbbarcodeno);
             this.Controls.Add(this.btsave);

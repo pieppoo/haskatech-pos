@@ -49,11 +49,9 @@
             this.cbpaymentmode = new System.Windows.Forms.ComboBox();
             this.tbtotalgv = new System.Windows.Forms.TextBox();
             this.btfinditem = new System.Windows.Forms.Button();
-            this.pbprint = new System.Windows.Forms.PictureBox();
             this.pbsearch = new System.Windows.Forms.PictureBox();
             this.pbreset = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.gvhistory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbprint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbsearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbreset)).BeginInit();
             this.SuspendLayout();
@@ -146,12 +144,12 @@
             // 
             this.btpenjualanbaru.BackColor = System.Drawing.Color.Teal;
             this.btpenjualanbaru.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btpenjualanbaru.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btpenjualanbaru.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btpenjualanbaru.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btpenjualanbaru.Location = new System.Drawing.Point(24, 490);
             this.btpenjualanbaru.Margin = new System.Windows.Forms.Padding(4);
             this.btpenjualanbaru.Name = "btpenjualanbaru";
-            this.btpenjualanbaru.Size = new System.Drawing.Size(197, 55);
+            this.btpenjualanbaru.Size = new System.Drawing.Size(147, 55);
             this.btpenjualanbaru.TabIndex = 14;
             this.btpenjualanbaru.Text = "Penjualan baru";
             this.btpenjualanbaru.UseVisualStyleBackColor = false;
@@ -229,44 +227,32 @@
             // 
             this.tbtotalgv.Enabled = false;
             this.tbtotalgv.Font = new System.Drawing.Font("Segoe UI", 23.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbtotalgv.Location = new System.Drawing.Point(486, 493);
+            this.tbtotalgv.Location = new System.Drawing.Point(399, 493);
             this.tbtotalgv.Name = "tbtotalgv";
             this.tbtotalgv.ReadOnly = true;
-            this.tbtotalgv.Size = new System.Drawing.Size(187, 49);
+            this.tbtotalgv.Size = new System.Drawing.Size(274, 49);
             this.tbtotalgv.TabIndex = 27;
             // 
             // btfinditem
             // 
             this.btfinditem.BackColor = System.Drawing.Color.Teal;
             this.btfinditem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btfinditem.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btfinditem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btfinditem.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btfinditem.Location = new System.Drawing.Point(254, 493);
+            this.btfinditem.Location = new System.Drawing.Point(211, 490);
             this.btfinditem.Margin = new System.Windows.Forms.Padding(4);
             this.btfinditem.Name = "btfinditem";
-            this.btfinditem.Size = new System.Drawing.Size(197, 55);
+            this.btfinditem.Size = new System.Drawing.Size(147, 55);
             this.btfinditem.TabIndex = 28;
             this.btfinditem.Text = "Cari Barang";
             this.btfinditem.UseVisualStyleBackColor = false;
             this.btfinditem.Click += new System.EventHandler(this.btfinditem_Click);
             // 
-            // pbprint
-            // 
-            this.pbprint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pbprint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbprint.Image = global::POSsystem.Properties.Resources.printing;
-            this.pbprint.Location = new System.Drawing.Point(596, 122);
-            this.pbprint.Name = "pbprint";
-            this.pbprint.Size = new System.Drawing.Size(77, 63);
-            this.pbprint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbprint.TabIndex = 31;
-            this.pbprint.TabStop = false;
-            // 
             // pbsearch
             // 
             this.pbsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbsearch.Image = global::POSsystem.Properties.Resources.search;
-            this.pbsearch.Location = new System.Drawing.Point(499, 82);
+            this.pbsearch.Location = new System.Drawing.Point(494, 124);
             this.pbsearch.Name = "pbsearch";
             this.pbsearch.Size = new System.Drawing.Size(77, 63);
             this.pbsearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -279,7 +265,7 @@
             this.pbreset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pbreset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbreset.Image = global::POSsystem.Properties.Resources.Refresh;
-            this.pbreset.Location = new System.Drawing.Point(499, 157);
+            this.pbreset.Location = new System.Drawing.Point(596, 124);
             this.pbreset.Name = "pbreset";
             this.pbreset.Size = new System.Drawing.Size(77, 63);
             this.pbreset.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -292,7 +278,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 558);
-            this.Controls.Add(this.pbprint);
             this.Controls.Add(this.pbsearch);
             this.Controls.Add(this.pbreset);
             this.Controls.Add(this.btfinditem);
@@ -323,9 +308,7 @@
             this.Controls.SetChildIndex(this.btfinditem, 0);
             this.Controls.SetChildIndex(this.pbreset, 0);
             this.Controls.SetChildIndex(this.pbsearch, 0);
-            this.Controls.SetChildIndex(this.pbprint, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gvhistory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbprint)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbsearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbreset)).EndInit();
             this.ResumeLayout(false);
@@ -353,6 +336,5 @@
         private System.Windows.Forms.Button btfinditem;
         private System.Windows.Forms.PictureBox pbreset;
         private System.Windows.Forms.PictureBox pbsearch;
-        private System.Windows.Forms.PictureBox pbprint;
     }
 }
