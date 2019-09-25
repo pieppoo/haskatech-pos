@@ -34,5 +34,17 @@ namespace POSsystem.Properties {
                 this["connection_string"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string reportFolder {
+            get {
+                return ((string)(this["reportFolder"]));
+            }
+            set {
+                this["reportFolder"] = value;
+            }
+        }
     }
 }

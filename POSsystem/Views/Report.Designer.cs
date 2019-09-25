@@ -35,6 +35,8 @@
             this.cbdetailReport = new System.Windows.Forms.ComboBox();
             this.lbdetailreport = new System.Windows.Forms.Label();
             this.lbyear = new System.Windows.Forms.Label();
+            this.tbReportFolder = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.printmonthlyreport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.printdetailreport)).BeginInit();
             this.SuspendLayout();
@@ -116,14 +118,38 @@
             this.lbyear.TabIndex = 36;
             this.lbyear.Text = "Tahun : 2019";
             // 
+            // tbReportFolder
+            // 
+            this.tbReportFolder.BackColor = System.Drawing.SystemColors.Control;
+            this.tbReportFolder.Font = new System.Drawing.Font("Cambria", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbReportFolder.Location = new System.Drawing.Point(33, 313);
+            this.tbReportFolder.MaxLength = 16;
+            this.tbReportFolder.Name = "tbReportFolder";
+            this.tbReportFolder.ReadOnly = true;
+            this.tbReportFolder.Size = new System.Drawing.Size(390, 31);
+            this.tbReportFolder.TabIndex = 37;
+            this.tbReportFolder.DoubleClick += new System.EventHandler(this.tbReportFolder_DoubleClick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.label1.Location = new System.Drawing.Point(31, 298);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 14);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Folder Laporan";
+            // 
             // Report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(455, 310);
+            this.ClientSize = new System.Drawing.Size(455, 356);
+            this.Controls.Add(this.tbReportFolder);
             this.Controls.Add(this.lbyear);
             this.Controls.Add(this.printdetailreport);
             this.Controls.Add(this.cbdetailReport);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lbdetailreport);
             this.Controls.Add(this.printmonthlyreport);
             this.Controls.Add(this.cbmonthlyreport);
@@ -137,9 +163,11 @@
             this.Controls.SetChildIndex(this.cbmonthlyreport, 0);
             this.Controls.SetChildIndex(this.printmonthlyreport, 0);
             this.Controls.SetChildIndex(this.lbdetailreport, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.cbdetailReport, 0);
             this.Controls.SetChildIndex(this.printdetailreport, 0);
             this.Controls.SetChildIndex(this.lbyear, 0);
+            this.Controls.SetChildIndex(this.tbReportFolder, 0);
             ((System.ComponentModel.ISupportInitialize)(this.printmonthlyreport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.printdetailreport)).EndInit();
             this.ResumeLayout(false);
@@ -156,5 +184,7 @@
         private System.Windows.Forms.ComboBox cbdetailReport;
         private System.Windows.Forms.Label lbdetailreport;
         private System.Windows.Forms.Label lbyear;
+        private System.Windows.Forms.TextBox tbReportFolder;
+        private System.Windows.Forms.Label label1;
     }
 }

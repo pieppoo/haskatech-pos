@@ -31,9 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gvsellprice = new System.Windows.Forms.DataGridView();
-            this.btnnewprice = new System.Windows.Forms.Button();
-            this.bteditprice = new System.Windows.Forms.Button();
-            this.btndeleteprice = new System.Windows.Forms.Button();
             this.warehouseid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sellid = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,6 +38,9 @@
             this.sellprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.perUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.barcodeno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnnewprice = new System.Windows.Forms.Button();
+            this.bteditprice = new System.Windows.Forms.Button();
+            this.btndeleteprice = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvsellprice)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,53 +73,10 @@
             this.gvsellprice.RowHeadersVisible = false;
             this.gvsellprice.RowTemplate.Height = 30;
             this.gvsellprice.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvsellprice.Size = new System.Drawing.Size(662, 299);
+            this.gvsellprice.Size = new System.Drawing.Size(662, 202);
             this.gvsellprice.TabIndex = 15;
-            // 
-            // btnnewprice
-            // 
-            this.btnnewprice.BackColor = System.Drawing.Color.Teal;
-            this.btnnewprice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnnewprice.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnnewprice.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnnewprice.Location = new System.Drawing.Point(31, 464);
-            this.btnnewprice.Margin = new System.Windows.Forms.Padding(4);
-            this.btnnewprice.Name = "btnnewprice";
-            this.btnnewprice.Size = new System.Drawing.Size(167, 62);
-            this.btnnewprice.TabIndex = 16;
-            this.btnnewprice.Text = "Harga Baru";
-            this.btnnewprice.UseVisualStyleBackColor = false;
-            this.btnnewprice.Click += new System.EventHandler(this.btnnewprice_Click);
-            // 
-            // bteditprice
-            // 
-            this.bteditprice.BackColor = System.Drawing.Color.Teal;
-            this.bteditprice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bteditprice.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bteditprice.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.bteditprice.Location = new System.Drawing.Point(278, 464);
-            this.bteditprice.Margin = new System.Windows.Forms.Padding(4);
-            this.bteditprice.Name = "bteditprice";
-            this.bteditprice.Size = new System.Drawing.Size(167, 62);
-            this.bteditprice.TabIndex = 17;
-            this.bteditprice.Text = "Edit Harga";
-            this.bteditprice.UseVisualStyleBackColor = false;
-            this.bteditprice.Click += new System.EventHandler(this.bteditprice_Click);
-            // 
-            // btndeleteprice
-            // 
-            this.btndeleteprice.BackColor = System.Drawing.Color.Teal;
-            this.btndeleteprice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btndeleteprice.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btndeleteprice.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btndeleteprice.Location = new System.Drawing.Point(525, 464);
-            this.btndeleteprice.Margin = new System.Windows.Forms.Padding(4);
-            this.btndeleteprice.Name = "btndeleteprice";
-            this.btndeleteprice.Size = new System.Drawing.Size(167, 62);
-            this.btndeleteprice.TabIndex = 18;
-            this.btndeleteprice.Text = "Hapus Harga";
-            this.btndeleteprice.UseVisualStyleBackColor = false;
-            this.btndeleteprice.Click += new System.EventHandler(this.btndeleteprice_Click);
+            this.gvsellprice.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvsellprice_CellContentDoubleClick);
+            this.gvsellprice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gvsellprice_KeyDown);
             // 
             // warehouseid
             // 
@@ -171,11 +128,56 @@
             this.barcodeno.Name = "barcodeno";
             this.barcodeno.ReadOnly = true;
             // 
+            // btnnewprice
+            // 
+            this.btnnewprice.BackColor = System.Drawing.Color.Teal;
+            this.btnnewprice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnnewprice.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnnewprice.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnnewprice.Location = new System.Drawing.Point(31, 342);
+            this.btnnewprice.Margin = new System.Windows.Forms.Padding(4);
+            this.btnnewprice.Name = "btnnewprice";
+            this.btnnewprice.Size = new System.Drawing.Size(167, 76);
+            this.btnnewprice.TabIndex = 16;
+            this.btnnewprice.Text = "Harga Baru\r\n(F1)\r\n";
+            this.btnnewprice.UseVisualStyleBackColor = false;
+            this.btnnewprice.Click += new System.EventHandler(this.btnnewprice_Click);
+            // 
+            // bteditprice
+            // 
+            this.bteditprice.BackColor = System.Drawing.Color.Teal;
+            this.bteditprice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bteditprice.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bteditprice.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.bteditprice.Location = new System.Drawing.Point(278, 342);
+            this.bteditprice.Margin = new System.Windows.Forms.Padding(4);
+            this.bteditprice.Name = "bteditprice";
+            this.bteditprice.Size = new System.Drawing.Size(167, 76);
+            this.bteditprice.TabIndex = 17;
+            this.bteditprice.Text = "Edit Harga\r\n(F2)";
+            this.bteditprice.UseVisualStyleBackColor = false;
+            this.bteditprice.Click += new System.EventHandler(this.bteditprice_Click);
+            // 
+            // btndeleteprice
+            // 
+            this.btndeleteprice.BackColor = System.Drawing.Color.Teal;
+            this.btndeleteprice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btndeleteprice.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btndeleteprice.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btndeleteprice.Location = new System.Drawing.Point(525, 342);
+            this.btndeleteprice.Margin = new System.Windows.Forms.Padding(4);
+            this.btndeleteprice.Name = "btndeleteprice";
+            this.btndeleteprice.Size = new System.Drawing.Size(167, 76);
+            this.btndeleteprice.TabIndex = 18;
+            this.btndeleteprice.Text = "Hapus Harga\r\n(F3)";
+            this.btndeleteprice.UseVisualStyleBackColor = false;
+            this.btndeleteprice.Click += new System.EventHandler(this.btndeleteprice_Click);
+            // 
             // ManageSellingPrice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 558);
+            this.ClientSize = new System.Drawing.Size(723, 445);
             this.Controls.Add(this.btndeleteprice);
             this.Controls.Add(this.bteditprice);
             this.Controls.Add(this.btnnewprice);

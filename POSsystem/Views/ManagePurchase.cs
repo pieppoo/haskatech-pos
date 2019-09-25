@@ -70,20 +70,6 @@ namespace POSsystem.Views
             LoadData();
         }
 
-        private void gvwarehouse_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //var id = Convert.ToInt32(gvpurchase.Rows[e.RowIndex].Cells[0].Value);
-            //var purchase = purchaseList.FirstOrDefault(x => x.id == id);
-
-            //if (purchase != null)
-            //{
-            //    var form = new ManageSellingPrice();
-            //    form.PurchaseData = purchase;
-            //    form.ShowDialog();
-            //    LoadData();
-            //}
-        }
-
         private void btadditem_Click(object sender, EventArgs e)
         {
 
@@ -103,7 +89,7 @@ namespace POSsystem.Views
                 var purchaseinfo = purchaseList.FirstOrDefault(x => x.id == id);
 
                 var form = new ConfirmationDialog();
-                form.Message = "Apa anda yakin menghapus harga jual terpilih?";
+                form.Message = "Apa anda yakin menghapus barang terpilih?";
                 form.ShowDialog();
 
 
@@ -123,33 +109,13 @@ namespace POSsystem.Views
                                 MessageBox.Show("Gagal menghapus harga");
                         }
                         else
-                            MessageBox.Show("Gagal menghapus harga karena error pada penguran stok");
+                            MessageBox.Show("Gagal menghapus harga karena error pada pengurangan stok");
                     }
 
                 }
                 LoadData();
             }
             
-        }
-
-        private void btedititem_Click(object sender, EventArgs e)
-        {
-            if (gvpurchase.SelectedRows.Count == 0)
-                MessageBox.Show("Tidak ada barang yang akan diubah");
-            else
-            {
-                var id = Convert.ToInt32(gvpurchase.Rows[gvpurchase.CurrentCell.RowIndex].Cells[0].Value);
-                var purchaseUpdate = purchaseList.FirstOrDefault(x => x.id == id);
-                if (purchaseUpdate != null)
-                {
-                    var form = new AddEditPurchase();
-                    form.Editmode = true;
-                    form.PurchaseData = purchaseUpdate;
-                    form.ShowDialog();
-                    LoadData();
-                }
-            }
-
         }
 
         private void btnSellPrice_Click(object sender, EventArgs e)
@@ -161,6 +127,36 @@ namespace POSsystem.Views
             Show();
             LoadData();
 
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.F1))
+            {
+                btadditem.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F2))
+            {
+                btdeleteitem.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F3))
+            {
+                btnSellPrice.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Delete))
+            {
+                btdeleteitem.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Escape))
+            {
+                Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

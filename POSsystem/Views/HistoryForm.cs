@@ -176,6 +176,10 @@ namespace POSsystem
                 }
                 tbtotalgv.Text = Utils.ToRupiahWithSymbol(totalingv);
             }
+            else
+                MessageBox.Show("Data Riwayat Penjualan tidak ditemukan");
+
+            gvhistory.Focus();
         }
 
         private void pbreset_Click(object sender, EventArgs e)
@@ -185,6 +189,48 @@ namespace POSsystem
             dtpfrom.ResetText();
             dtpfrom.CustomFormat = dtpto.CustomFormat = " ";
             dtpto.Enabled = false;
+            gvhistory.Focus();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.F1))
+            {
+                btpenjualanbaru.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F2))
+            {
+                btfinditem.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F3))
+            {
+                pbsearch_Click(null, null);
+                return true;
+            }
+            else if (keyData == (Keys.F4))
+            {
+                pbreset_Click(null, null);
+                return true;
+            }
+            else if (keyData == (Keys.F5))
+            {
+                cbpaymentmode.Focus();
+                return true;
+            }
+            else if (keyData == (Keys.Escape))
+            {
+                Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void cbpaymentmode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                pbsearch_Click(null, null);
         }
     }
 }

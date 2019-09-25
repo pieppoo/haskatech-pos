@@ -56,6 +56,7 @@
             this.tbbrandname.Name = "tbbrandname";
             this.tbbrandname.Size = new System.Drawing.Size(435, 39);
             this.tbbrandname.TabIndex = 0;
+            this.tbbrandname.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbbrandname_KeyDown);
             // 
             // tbremark
             // 
@@ -67,6 +68,7 @@
             this.tbremark.Name = "tbremark";
             this.tbremark.Size = new System.Drawing.Size(435, 73);
             this.tbremark.TabIndex = 1;
+            this.tbremark.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbremark_KeyDown);
             // 
             // lbremark
             // 

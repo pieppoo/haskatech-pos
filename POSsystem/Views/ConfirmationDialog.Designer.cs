@@ -56,7 +56,7 @@
             this.btnYes.Margin = new System.Windows.Forms.Padding(4);
             this.btnYes.Name = "btnYes";
             this.btnYes.Size = new System.Drawing.Size(138, 52);
-            this.btnYes.TabIndex = 27;
+            this.btnYes.TabIndex = 1;
             this.btnYes.Text = "Ya";
             this.btnYes.UseVisualStyleBackColor = false;
             this.btnYes.Click += new System.EventHandler(this.btyes_Click);
@@ -74,7 +74,7 @@
             this.btnNo.Margin = new System.Windows.Forms.Padding(4);
             this.btnNo.Name = "btnNo";
             this.btnNo.Size = new System.Drawing.Size(138, 52);
-            this.btnNo.TabIndex = 27;
+            this.btnNo.TabIndex = 0;
             this.btnNo.Text = "Tidak";
             this.btnNo.UseVisualStyleBackColor = false;
             this.btnNo.Click += new System.EventHandler(this.btno_Click);

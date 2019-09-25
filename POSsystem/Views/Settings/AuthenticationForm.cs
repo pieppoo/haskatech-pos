@@ -21,6 +21,8 @@ namespace POSsystem.Views.Settings
             else
             {
                 MessageBox.Show("Sandi Salah", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                tbPassword.Focus();
+                tbPassword.SelectAll();
             }
         }
 

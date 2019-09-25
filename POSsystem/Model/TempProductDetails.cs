@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POSsystem.Database
+namespace POSsystem.Model
 {
-    public class ProductDetails
+    public class TempProductDetails
     {
         public int id { get; set; }
         public int brand_id { get; set; }
         public string name { get; set; }
-        public int Stock { get; set; }
+        public string Stock { get; set; }
         public string unit_bulk { get; set; }
         public string unit_pcs { get; set; }
         public int qty_pcs_in_container { get; set; }

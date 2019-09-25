@@ -30,18 +30,22 @@ namespace POSsystem.Views
 
         private void LoadData()
         {
-            UnitList = unitRepository.GetAll().OrderBy(x => x.description).ToList();
+            UnitList = unitRepository.GetAll().OrderBy(x => x.unitcode).ThenBy(x => x.description).ToList();
 
             gvunititem.Rows.Clear();
+            int runningno = 1;
 
             foreach (var item in UnitList)
             {
                 gvunititem.Rows.Add(
                     item.id,
+                    runningno,
                     item.unitcode,
                     item.description);
 
+                runningno += 1;
             }
+            runningno = 1;
         }
 
         private void btaddunit_Click(object sender, EventArgs e)
@@ -80,17 +84,63 @@ namespace POSsystem.Views
                 var id = Convert.ToInt32(gvunititem.Rows[gvunititem.CurrentCell.RowIndex].Cells[0].Value);
 
                 var form = new ConfirmationDialog();
-                form.Message = "Apa anda yakin menghapus Brand terpilih?";
+                form.Message = "Apa anda yakin menghapus Kemasan terpilih?";
                 form.ShowDialog();
 
                 if (form.YES)
                 {
                     if (!unitRepository.Delete(id))
-                        MessageBox.Show("Gagal menghapus brand");
+                        MessageBox.Show("Gagal menghapus Kemasan");
                     LoadData();
                 }
             }
 
+        }
+
+        private void gvunititem_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            bteditunit.PerformClick();
+        }
+
+        private void gvunititem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (gvunititem.Rows.Count > 0)
+                {
+                    bteditunit.PerformClick();
+                }
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.F1))
+            {
+                btaddunit.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F2))
+            {
+                bteditunit.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F3))
+            {
+                btdeleteunit.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Delete))
+            {
+                btdeleteunit.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Escape))
+            {
+                Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

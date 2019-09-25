@@ -32,6 +32,7 @@ namespace POSsystem.Views
         public PayForm()
         {
             InitializeComponent();
+            rbcash.Checked = true;
         }
 
         private void PayForm_Load(object sender, EventArgs e)
@@ -139,34 +140,6 @@ namespace POSsystem.Views
             tbtotaltopay.ForeColor = Color.Firebrick;
         }
 
-
-        private void tbpay_Click(object sender, EventArgs e)
-        {
-            int discount = Utils.ToNumbers(nbdiscount.Text);
-            int oritotal = Utils.ToNumbers(tboritotal.Text);
-            int payamount = Utils.ToNumbers(nbpay.Text);
-            int finaltotal = Utils.ToNumbers(tbtotaltopay.Text);
-
-            if (!rbcardflag.Checked && !rbcash.Checked)
-                MessageBox.Show("Silahkan pilih tipe pembayaran");
-            else if (rbcardflag.Checked)
-            {
-                if (tbreferenceno.Text == "" && tbcardno.Text == "")
-                    MessageBox.Show("Nomer kartu dan nomer reference t idak boleh kosong");
-                else if (tbcardno.Text == "")
-                    MessageBox.Show("Silahkan isi nomer kartu");
-                else if (tbreferenceno.Text == "")
-                    MessageBox.Show("Silahkan isi nomer reference");
-                else
-                    savedatapayment();
-            }
-            else if(discount > oritotal)
-                MessageBox.Show("Diskon melebihi total belanja");
-            else if (payamount < finaltotal)
-                MessageBox.Show("Uang yang dibayar tidak mencukupi");
-            else
-                savedatapayment();
-        }
 
         private void savedatapayment()
         {
@@ -309,6 +282,55 @@ namespace POSsystem.Views
             }
             else
                 MessageBox.Show("Gagal menyimpan summary penjualan");
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+
+            if (keyData == (Keys.Escape))
+            {
+                if (MessageBox.Show("Anda yakin keluar dari halaman pembayaran ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    Close();
+                return true;
+            }
+            else if(keyData == (Keys.F5))
+            {
+                btpay.PerformClick();
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void btpay_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("complete pembayaran?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                int discount = Utils.ToNumbers(nbdiscount.Text);
+                int oritotal = Utils.ToNumbers(tboritotal.Text);
+                int payamount = Utils.ToNumbers(nbpay.Text);
+                int finaltotal = Utils.ToNumbers(tbtotaltopay.Text);
+
+                if (!rbcardflag.Checked && !rbcash.Checked)
+                    MessageBox.Show("Silahkan pilih tipe pembayaran");
+                else if (rbcardflag.Checked)
+                {
+                    if (tbreferenceno.Text == "" && tbcardno.Text == "")
+                        MessageBox.Show("Nomer kartu dan nomer reference t idak boleh kosong");
+                    else if (tbcardno.Text == "")
+                        MessageBox.Show("Silahkan isi nomer kartu");
+                    else if (tbreferenceno.Text == "")
+                        MessageBox.Show("Silahkan isi nomer reference");
+                    else
+                        savedatapayment();
+                }
+                else if (discount > oritotal)
+                    MessageBox.Show("Diskon melebihi total belanja");
+                else if (payamount < finaltotal)
+                    MessageBox.Show("Uang yang dibayar tidak mencukupi");
+                else
+                    savedatapayment();
+            }
+
+            
         }
     }
 }

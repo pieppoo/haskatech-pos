@@ -49,7 +49,7 @@ namespace POSsystem
             {
 
                 gvbrand.Rows.Add(item.id,
-                    runningno, 
+                    runningno,
                     item.name,
                     item.remark);
 
@@ -106,6 +106,47 @@ namespace POSsystem
                 }
             }
 
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.F1))
+            {
+                btaddbrand.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F2))
+            {
+                bteditbrand.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F3))
+            {
+                btdeletebrand.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Delete))
+            {
+                btdeletebrand.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Escape))
+            {
+                Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void gvbrand_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (gvbrand.Rows.Count > 0)
+                {
+                    bteditbrand.PerformClick();
+                }
+            }
         }
     }
 }

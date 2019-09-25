@@ -3,11 +3,8 @@ using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using POSsystem.Model;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using BorderStyle = MigraDoc.DocumentObjectModel.BorderStyle;
 using TabAlignment = MigraDoc.DocumentObjectModel.TabAlignment;
@@ -17,8 +14,11 @@ namespace POSsystem.Common
     public class ReportGenerator
     {
         public SalesReportDetails ReportData { get; set; }
+        public string ReportFolder { get; set; }
 
         private Document document;
+
+        
 
         public void GenerateReport()
         {
@@ -43,11 +43,19 @@ namespace POSsystem.Common
             // Layout and render document to PDF
             pdfRenderer.RenderDocument();
 
+            if (string.IsNullOrEmpty(ReportFolder))
+            {
+                ReportFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "report");
+                if (!Directory.Exists(ReportFolder))
+                    Directory.CreateDirectory(ReportFolder);               
+            }
+
             // Save the document...
             string filename = "Laporan_Bulanan_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
-            pdfRenderer.PdfDocument.Save(filename);
+            var filepath = Path.Combine(ReportFolder, filename);
+            pdfRenderer.PdfDocument.Save(filepath);
             // ...and start a viewer.
-            Process.Start(filename);
+            Process.Start(filepath);
         }
 
         private void DefineStyles()

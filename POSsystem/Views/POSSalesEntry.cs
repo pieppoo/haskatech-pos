@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,18 +65,26 @@ namespace POSsystem.Views
                 {
                     if(!string.IsNullOrEmpty(tbbarcodeno.Text))
                     {
+                        var selectedproduct = new ProductDetails();
                         var salesPrice = saleFindItemRepository.GetByBarcodeNo(barcodeno);
-                        if (salesPrice != null)
+                        selectedproduct = productRepository.GetById(salesPrice.item_id);
+                        if(selectedproduct.Stock > 0)
                         {
-                            DisplayData(salesPrice);
-                            gvsales.CurrentCell = gvsales.Rows[rowfocusindex].Cells[collsqtyindex];
-                            gvsales.BeginEdit(true);
+                            if (salesPrice != null)
+                            {
+                                DisplayData(salesPrice);
+                                gvsales.CurrentCell = gvsales.Rows[rowfocusindex].Cells[collsqtyindex];
+                                gvsales.BeginEdit(true);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Barang tidak ditemukan");
+                                tbbarcodeno.Clear();
+                            }
                         }
                         else
-                        {
-                            MessageBox.Show("Barang tidak ditemukan");
-                            tbbarcodeno.Clear();
-                        }
+                            MessageBox.Show("STOK " + selectedproduct.name + " KOSONG");
+
                     }
 
                         
@@ -88,20 +97,23 @@ namespace POSsystem.Views
             }
         }
 
-
         private void tbbarcodeno_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
 
+        private void gvsales_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
         private void gvsales_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            
+
             if (e.ColumnIndex == 2)
             {
-                var newqty = Convert.ToInt32(gvsales.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                 var pcsprice = Convert.ToDouble(gvsales.Rows[e.RowIndex].Cells["pcsprice"].Value);
-
+                var newqty = Convert.ToInt32(gvsales.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                 gvsales.Rows[e.RowIndex].Cells["oritotal"].Value = Utils.ToRupiah(newqty * pcsprice);
                 gvsales.Rows[e.RowIndex].Cells["totalsale"].Value = Utils.ToRupiah(newqty * pcsprice);
 
@@ -115,6 +127,40 @@ namespace POSsystem.Views
                 gvsales.Rows[e.RowIndex].Cells["totalsale"].Value = Utils.ToRupiah( oritotal - discount);
                 gvsales.Rows[e.RowIndex].Cells["discount"].Value = Utils.ToRupiah(discount);
                 calculateTotal();
+            }
+
+            tbbarcodeno.Focus();
+        }
+
+        private void gvsales_CausesValidationChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gvsales_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.ColumnIndex == 2) // 1 should be your column index
+            {
+                int i;
+
+                if (!int.TryParse(Convert.ToString(e.FormattedValue), out i))
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("Anda memasukkan jumlah yang salah");
+                }
+
+            }
+
+            if (e.ColumnIndex == 6)
+            {
+                int i;
+
+                if (!int.TryParse(Convert.ToString(e.FormattedValue), out i))
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("Anda memasukkan jumlah yang salah");
+                }
+
             }
         }
 
@@ -241,7 +287,6 @@ namespace POSsystem.Views
                 form.ShowDialog();
                 if(form.saleHistory != null)
                 {
-                
                     reloadafterpay(form.saleHistory);
 
                     //show receipt
@@ -309,16 +354,62 @@ namespace POSsystem.Views
 
         private void btdelete_Click(object sender, EventArgs e)
         {
+            TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
+
             if (gvsales.SelectedRows.Count == 0)
                 MessageBox.Show("Tidak ada barang yang akan dihapus");
             else
             {
-                var selid = Convert.ToInt32(gvsales.Rows[gvsales.CurrentCell.RowIndex].Cells["salesId"].Value);
-                SelectedItemPriceDetails.RemoveAll(x => x.id == selid);
-                gvsales.Rows.RemoveAt(gvsales.CurrentCell.RowIndex);
-                calculateTotal();
+                string itemname = gvsales.Rows[gvsales.CurrentCell.RowIndex].Cells["Itemname"].Value.ToString();
+                itemname = myTI.ToLower(itemname);
+
+                if (MessageBox.Show("Anda yakin menghapus " + itemname + " ?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    var selid = Convert.ToInt32(gvsales.Rows[gvsales.CurrentCell.RowIndex].Cells["salesId"].Value);
+                    SelectedItemPriceDetails.RemoveAll(x => x.id == selid);
+                    gvsales.Rows.RemoveAt(gvsales.CurrentCell.RowIndex);
+                    calculateTotal();
+                }
 
             }
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.F1))
+            {
+                tbbarcodeno.Focus();
+                return true;
+            }
+            else if (keyData == (Keys.F2))
+            {
+                tbitemname.Focus();
+                return true;
+            }
+            else if (keyData == (Keys.F3))
+            {
+                btnewsale.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F4))
+            {
+                btdelete.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F5))
+            {
+                btpay.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Escape))
+            {
+                if (MessageBox.Show("Anda yakin keluar dari halaman penjualan ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
     }
 }

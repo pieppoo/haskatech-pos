@@ -31,10 +31,15 @@
             this.tbConnectionString = new System.Windows.Forms.TextBox();
             this.lbbrandname = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbReportFolder = new System.Windows.Forms.TextBox();
+            this.btnBrowseReportFolder = new System.Windows.Forms.Button();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
             // tbConnectionString
             // 
+            this.tbConnectionString.Font = new System.Drawing.Font("Consolas", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.tbConnectionString.Location = new System.Drawing.Point(13, 38);
             this.tbConnectionString.Margin = new System.Windows.Forms.Padding(4);
             this.tbConnectionString.Multiline = true;
@@ -46,11 +51,11 @@
             // lbbrandname
             // 
             this.lbbrandname.AutoSize = true;
-            this.lbbrandname.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.lbbrandname.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbbrandname.Location = new System.Drawing.Point(13, 14);
             this.lbbrandname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbbrandname.Name = "lbbrandname";
-            this.lbbrandname.Size = new System.Drawing.Size(163, 17);
+            this.lbbrandname.Size = new System.Drawing.Size(156, 17);
             this.lbbrandname.TabIndex = 17;
             this.lbbrandname.Text = "DB Connection String";
             // 
@@ -61,21 +66,61 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSave.Location = new System.Drawing.Point(263, 128);
+            this.btnSave.Location = new System.Drawing.Point(265, 195);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(185, 49);
+            this.btnSave.Size = new System.Drawing.Size(183, 49);
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Simpan";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(13, 121);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(104, 17);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Report Folder";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // tbReportFolder
+            // 
+            this.tbReportFolder.Location = new System.Drawing.Point(13, 145);
+            this.tbReportFolder.Margin = new System.Windows.Forms.Padding(4);
+            this.tbReportFolder.Name = "tbReportFolder";
+            this.tbReportFolder.ReadOnly = true;
+            this.tbReportFolder.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbReportFolder.Size = new System.Drawing.Size(358, 23);
+            this.tbReportFolder.TabIndex = 0;
+            // 
+            // btnBrowseReportFolder
+            // 
+            this.btnBrowseReportFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBrowseReportFolder.BackColor = System.Drawing.Color.Gray;
+            this.btnBrowseReportFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBrowseReportFolder.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btnBrowseReportFolder.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBrowseReportFolder.Location = new System.Drawing.Point(380, 141);
+            this.btnBrowseReportFolder.Name = "btnBrowseReportFolder";
+            this.btnBrowseReportFolder.Size = new System.Drawing.Size(68, 31);
+            this.btnBrowseReportFolder.TabIndex = 1;
+            this.btnBrowseReportFolder.Text = "Browse";
+            this.btnBrowseReportFolder.UseVisualStyleBackColor = false;
+            this.btnBrowseReportFolder.Click += new System.EventHandler(this.btnBrowseReportFolder_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 189);
+            this.ClientSize = new System.Drawing.Size(462, 256);
+            this.Controls.Add(this.tbReportFolder);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.tbConnectionString);
             this.Controls.Add(this.lbbrandname);
+            this.Controls.Add(this.btnBrowseReportFolder);
             this.Controls.Add(this.btnSave);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -98,5 +143,9 @@
         private System.Windows.Forms.TextBox tbConnectionString;
         private System.Windows.Forms.Label lbbrandname;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbReportFolder;
+        private System.Windows.Forms.Button btnBrowseReportFolder;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
     }
 }

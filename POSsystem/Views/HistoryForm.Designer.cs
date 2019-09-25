@@ -51,6 +51,8 @@
             this.btfinditem = new System.Windows.Forms.Button();
             this.pbsearch = new System.Windows.Forms.PictureBox();
             this.pbreset = new System.Windows.Forms.PictureBox();
+            this.lbF3 = new System.Windows.Forms.Label();
+            this.lbF4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gvhistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbsearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbreset)).BeginInit();
@@ -76,7 +78,7 @@
             this.gvhistory.RowHeadersVisible = false;
             this.gvhistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvhistory.Size = new System.Drawing.Size(650, 246);
-            this.gvhistory.TabIndex = 8;
+            this.gvhistory.TabIndex = 0;
             this.gvhistory.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvhistory_CellDoubleClick);
             // 
             // IDSell
@@ -150,8 +152,8 @@
             this.btpenjualanbaru.Margin = new System.Windows.Forms.Padding(4);
             this.btpenjualanbaru.Name = "btpenjualanbaru";
             this.btpenjualanbaru.Size = new System.Drawing.Size(147, 55);
-            this.btpenjualanbaru.TabIndex = 14;
-            this.btpenjualanbaru.Text = "Penjualan baru";
+            this.btpenjualanbaru.TabIndex = 1;
+            this.btpenjualanbaru.Text = "Penjualan baru\r\n(F1)";
             this.btpenjualanbaru.UseVisualStyleBackColor = false;
             this.btpenjualanbaru.Click += new System.EventHandler(this.btpenjualanbaru_Click);
             // 
@@ -184,7 +186,7 @@
             this.dtpfrom.Location = new System.Drawing.Point(24, 179);
             this.dtpfrom.Name = "dtpfrom";
             this.dtpfrom.Size = new System.Drawing.Size(183, 32);
-            this.dtpfrom.TabIndex = 20;
+            this.dtpfrom.TabIndex = 4;
             this.dtpfrom.Value = new System.DateTime(2019, 8, 30, 0, 0, 0, 0);
             this.dtpfrom.ValueChanged += new System.EventHandler(this.dtpfrom_ValueChanged);
             // 
@@ -199,7 +201,7 @@
             this.dtpto.Location = new System.Drawing.Point(263, 179);
             this.dtpto.Name = "dtpto";
             this.dtpto.Size = new System.Drawing.Size(190, 32);
-            this.dtpto.TabIndex = 21;
+            this.dtpto.TabIndex = 5;
             this.dtpto.Value = new System.DateTime(2019, 8, 30, 0, 0, 0, 0);
             this.dtpto.ValueChanged += new System.EventHandler(this.dtpto_ValueChanged);
             // 
@@ -221,7 +223,8 @@
             this.cbpaymentmode.Location = new System.Drawing.Point(23, 108);
             this.cbpaymentmode.Name = "cbpaymentmode";
             this.cbpaymentmode.Size = new System.Drawing.Size(430, 33);
-            this.cbpaymentmode.TabIndex = 25;
+            this.cbpaymentmode.TabIndex = 3;
+            this.cbpaymentmode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbpaymentmode_KeyDown);
             // 
             // tbtotalgv
             // 
@@ -243,8 +246,8 @@
             this.btfinditem.Margin = new System.Windows.Forms.Padding(4);
             this.btfinditem.Name = "btfinditem";
             this.btfinditem.Size = new System.Drawing.Size(147, 55);
-            this.btfinditem.TabIndex = 28;
-            this.btfinditem.Text = "Cari Barang";
+            this.btfinditem.TabIndex = 2;
+            this.btfinditem.Text = "Cari Barang\r\n(F2)";
             this.btfinditem.UseVisualStyleBackColor = false;
             this.btfinditem.Click += new System.EventHandler(this.btfinditem_Click);
             // 
@@ -273,11 +276,35 @@
             this.pbreset.TabStop = false;
             this.pbreset.Click += new System.EventHandler(this.pbreset_Click);
             // 
+            // lbF3
+            // 
+            this.lbF3.AutoSize = true;
+            this.lbF3.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbF3.ForeColor = System.Drawing.Color.DarkRed;
+            this.lbF3.Location = new System.Drawing.Point(549, 113);
+            this.lbF3.Name = "lbF3";
+            this.lbF3.Size = new System.Drawing.Size(27, 19);
+            this.lbF3.TabIndex = 31;
+            this.lbF3.Text = "F3";
+            // 
+            // lbF4
+            // 
+            this.lbF4.AutoSize = true;
+            this.lbF4.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbF4.ForeColor = System.Drawing.Color.DarkRed;
+            this.lbF4.Location = new System.Drawing.Point(660, 113);
+            this.lbF4.Name = "lbF4";
+            this.lbF4.Size = new System.Drawing.Size(27, 19);
+            this.lbF4.TabIndex = 32;
+            this.lbF4.Text = "F4";
+            // 
             // HistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 558);
+            this.Controls.Add(this.lbF4);
+            this.Controls.Add(this.lbF3);
             this.Controls.Add(this.pbsearch);
             this.Controls.Add(this.pbreset);
             this.Controls.Add(this.btfinditem);
@@ -308,6 +335,8 @@
             this.Controls.SetChildIndex(this.btfinditem, 0);
             this.Controls.SetChildIndex(this.pbreset, 0);
             this.Controls.SetChildIndex(this.pbsearch, 0);
+            this.Controls.SetChildIndex(this.lbF3, 0);
+            this.Controls.SetChildIndex(this.lbF4, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gvhistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbsearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbreset)).EndInit();
@@ -336,5 +365,7 @@
         private System.Windows.Forms.Button btfinditem;
         private System.Windows.Forms.PictureBox pbreset;
         private System.Windows.Forms.PictureBox pbsearch;
+        private System.Windows.Forms.Label lbF3;
+        private System.Windows.Forms.Label lbF4;
     }
 }

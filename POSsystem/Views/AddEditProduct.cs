@@ -137,7 +137,7 @@ namespace POSsystem.Views
                 }
 
                 if (tbname.Text == "")
-                    MessageBox.Show("Yang bertanda Bintang tidak boleh kosong");
+                    MessageBox.Show(" Yang bertanda Bintang tidak boleh kosong");
                 else if (samenameinsamebrand > 0)
                 {
                     MessageBox.Show("Tidak boleh memasukkan nama produk yang sama");
@@ -167,6 +167,22 @@ namespace POSsystem.Views
 
             }
             
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Enter))
+            {
+                btnSave.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Escape))
+            {
+                if (MessageBox.Show("Apa Anda Yakin keluar tanpa menyimpan data?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

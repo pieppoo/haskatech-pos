@@ -35,6 +35,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POSSalesEntry));
             this.gvsales = new System.Windows.Forms.DataGridView();
             this.salesId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,6 +76,17 @@
             // 
             this.gvsales.AllowUserToAddRows = false;
             this.gvsales.AllowUserToDeleteRows = false;
+            this.gvsales.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvsales.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gvsales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvsales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.salesId,
@@ -92,9 +104,10 @@
             this.gvsales.Name = "gvsales";
             this.gvsales.RowHeadersVisible = false;
             this.gvsales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvsales.Size = new System.Drawing.Size(609, 290);
+            this.gvsales.Size = new System.Drawing.Size(672, 347);
             this.gvsales.TabIndex = 11;
             this.gvsales.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvsales_CellEndEdit);
+            this.gvsales.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gvsales_CellValidating);
             // 
             // salesId
             // 
@@ -105,66 +118,67 @@
             // Itemname
             // 
             this.Itemname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Itemname.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Itemname.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Itemname.FillWeight = 75F;
             this.Itemname.HeaderText = "Nama Barang";
             this.Itemname.Name = "Itemname";
             this.Itemname.ReadOnly = true;
             // 
             // qtysale
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.qtysale.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.qtysale.DefaultCellStyle = dataGridViewCellStyle3;
             this.qtysale.FillWeight = 50F;
-            this.qtysale.HeaderText = "Jumlah beli";
+            this.qtysale.HeaderText = "Jumlah";
             this.qtysale.Name = "qtysale";
             this.qtysale.Width = 50;
             // 
             // unitsale
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.unitsale.DefaultCellStyle = dataGridViewCellStyle3;
-            this.unitsale.FillWeight = 75F;
+            this.unitsale.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.unitsale.DefaultCellStyle = dataGridViewCellStyle4;
+            this.unitsale.FillWeight = 25F;
             this.unitsale.HeaderText = "Kemasan";
             this.unitsale.Name = "unitsale";
             this.unitsale.ReadOnly = true;
-            this.unitsale.Width = 75;
             // 
             // pcsprice
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.pcsprice.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.pcsprice.DefaultCellStyle = dataGridViewCellStyle5;
             this.pcsprice.FillWeight = 85F;
-            this.pcsprice.HeaderText = "Harga satuan (Rp)";
+            this.pcsprice.HeaderText = "Harga satuan";
             this.pcsprice.Name = "pcsprice";
             this.pcsprice.ReadOnly = true;
             this.pcsprice.Width = 85;
             // 
             // oritotal
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.oritotal.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.oritotal.DefaultCellStyle = dataGridViewCellStyle6;
             this.oritotal.FillWeight = 85F;
-            this.oritotal.HeaderText = "Total Awal (Rp)";
+            this.oritotal.HeaderText = "Total Awal";
             this.oritotal.Name = "oritotal";
             this.oritotal.ReadOnly = true;
             this.oritotal.Width = 85;
             // 
             // discount
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.discount.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.discount.DefaultCellStyle = dataGridViewCellStyle7;
             this.discount.FillWeight = 85F;
-            this.discount.HeaderText = "Diskon (Rp)";
+            this.discount.HeaderText = "Diskon";
             this.discount.Name = "discount";
             this.discount.Width = 85;
             // 
             // totalsale
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.totalsale.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.totalsale.DefaultCellStyle = dataGridViewCellStyle8;
             this.totalsale.FillWeight = 85F;
-            this.totalsale.HeaderText = "Total Akhir (Rp)";
+            this.totalsale.HeaderText = "Total Akhir";
             this.totalsale.Name = "totalsale";
             this.totalsale.ReadOnly = true;
             this.totalsale.Width = 85;
@@ -183,31 +197,33 @@
             // 
             // btpay
             // 
+            this.btpay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btpay.BackColor = System.Drawing.Color.Teal;
             this.btpay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btpay.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btpay.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btpay.Location = new System.Drawing.Point(438, 390);
+            this.btpay.Location = new System.Drawing.Point(502, 447);
             this.btpay.Margin = new System.Windows.Forms.Padding(4);
             this.btpay.Name = "btpay";
             this.btpay.Size = new System.Drawing.Size(182, 53);
             this.btpay.TabIndex = 4;
-            this.btpay.Text = "Bayar";
+            this.btpay.Text = "BAYAR\r\n(F5)";
             this.btpay.UseVisualStyleBackColor = false;
             this.btpay.Click += new System.EventHandler(this.btpay_Click);
             // 
             // btnewsale
             // 
+            this.btnewsale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnewsale.BackColor = System.Drawing.Color.Teal;
             this.btnewsale.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnewsale.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnewsale.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnewsale.Location = new System.Drawing.Point(12, 390);
+            this.btnewsale.Location = new System.Drawing.Point(12, 447);
             this.btnewsale.Margin = new System.Windows.Forms.Padding(4);
             this.btnewsale.Name = "btnewsale";
             this.btnewsale.Size = new System.Drawing.Size(182, 53);
             this.btnewsale.TabIndex = 2;
-            this.btnewsale.Text = "Penjualan Baru";
+            this.btnewsale.Text = "PENJUALAN BARU \r\n(F3)";
             this.btnewsale.UseVisualStyleBackColor = false;
             this.btnewsale.Click += new System.EventHandler(this.btnewsale_Click);
             // 
@@ -225,7 +241,7 @@
             // 
             this.lbitemname.AutoSize = true;
             this.lbitemname.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbitemname.Location = new System.Drawing.Point(333, 21);
+            this.lbitemname.Location = new System.Drawing.Point(367, 21);
             this.lbitemname.Name = "lbitemname";
             this.lbitemname.Size = new System.Drawing.Size(122, 25);
             this.lbitemname.TabIndex = 13;
@@ -234,7 +250,7 @@
             // tbitemname
             // 
             this.tbitemname.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbitemname.Location = new System.Drawing.Point(338, 50);
+            this.tbitemname.Location = new System.Drawing.Point(372, 50);
             this.tbitemname.Name = "tbitemname";
             this.tbitemname.Size = new System.Drawing.Size(233, 30);
             this.tbitemname.TabIndex = 1;
@@ -337,6 +353,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.tbdiscount);
             this.groupBox1.Controls.Add(this.tboritotal);
             this.groupBox1.Controls.Add(this.lboritotal);
@@ -347,9 +365,9 @@
             this.groupBox1.Controls.Add(this.tbtotaltopay);
             this.groupBox1.Controls.Add(this.lbtotaltopay);
             this.groupBox1.Controls.Add(this.lbpay);
-            this.groupBox1.Location = new System.Drawing.Point(627, 21);
+            this.groupBox1.Location = new System.Drawing.Point(693, 50);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(170, 434);
+            this.groupBox1.Size = new System.Drawing.Size(170, 447);
             this.groupBox1.TabIndex = 32;
             this.groupBox1.TabStop = false;
             // 
@@ -376,16 +394,17 @@
             // 
             // btdelete
             // 
+            this.btdelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btdelete.BackColor = System.Drawing.Color.Teal;
             this.btdelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btdelete.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btdelete.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btdelete.Location = new System.Drawing.Point(225, 390);
+            this.btdelete.Location = new System.Drawing.Point(256, 447);
             this.btdelete.Margin = new System.Windows.Forms.Padding(4);
             this.btdelete.Name = "btdelete";
             this.btdelete.Size = new System.Drawing.Size(182, 53);
             this.btdelete.TabIndex = 5;
-            this.btdelete.Text = "Hapus";
+            this.btdelete.Text = "HAPUS\r\n(F4)";
             this.btdelete.UseVisualStyleBackColor = false;
             this.btdelete.Click += new System.EventHandler(this.btdelete_Click);
             // 
@@ -393,9 +412,9 @@
             // 
             this.iconsearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.iconsearch.Image = global::POSsystem.Properties.Resources.search;
-            this.iconsearch.Location = new System.Drawing.Point(577, 50);
+            this.iconsearch.Location = new System.Drawing.Point(611, 50);
             this.iconsearch.Name = "iconsearch";
-            this.iconsearch.Size = new System.Drawing.Size(44, 30);
+            this.iconsearch.Size = new System.Drawing.Size(73, 30);
             this.iconsearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.iconsearch.TabIndex = 31;
             this.iconsearch.TabStop = false;
@@ -405,7 +424,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(812, 460);
+            this.ClientSize = new System.Drawing.Size(875, 517);
             this.Controls.Add(this.btdelete);
             this.Controls.Add(this.tbbarcodeno);
             this.Controls.Add(this.groupBox1);
@@ -418,6 +437,8 @@
             this.Controls.Add(this.gvsales);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "POSSalesEntry";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "HaskaTech POS";

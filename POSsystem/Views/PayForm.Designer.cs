@@ -34,7 +34,7 @@
             this.nbpay = new System.Windows.Forms.NumericUpDown();
             this.nbdiscount = new System.Windows.Forms.NumericUpDown();
             this.lbdiscount = new System.Windows.Forms.Label();
-            this.tbpay = new System.Windows.Forms.Button();
+            this.btpay = new System.Windows.Forms.Button();
             this.tbbalance = new System.Windows.Forms.TextBox();
             this.lbbalance = new System.Windows.Forms.Label();
             this.tbtotaltopay = new System.Windows.Forms.TextBox();
@@ -96,7 +96,7 @@
             this.nbpay.Name = "nbpay";
             this.nbpay.ReadOnly = true;
             this.nbpay.Size = new System.Drawing.Size(227, 47);
-            this.nbpay.TabIndex = 3;
+            this.nbpay.TabIndex = 0;
             this.nbpay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nbpay.ThousandsSeparator = true;
             this.nbpay.ValueChanged += new System.EventHandler(this.payamounFinaltotal_changed);
@@ -129,20 +129,20 @@
             this.lbdiscount.TabIndex = 23;
             this.lbdiscount.Text = "Diskon (Rp)";
             // 
-            // tbpay
+            // btpay
             // 
-            this.tbpay.BackColor = System.Drawing.Color.Teal;
-            this.tbpay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.tbpay.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbpay.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.tbpay.Location = new System.Drawing.Point(13, 494);
-            this.tbpay.Margin = new System.Windows.Forms.Padding(4);
-            this.tbpay.Name = "tbpay";
-            this.tbpay.Size = new System.Drawing.Size(467, 57);
-            this.tbpay.TabIndex = 6;
-            this.tbpay.Text = "Bayar";
-            this.tbpay.UseVisualStyleBackColor = false;
-            this.tbpay.Click += new System.EventHandler(this.tbpay_Click);
+            this.btpay.BackColor = System.Drawing.Color.Teal;
+            this.btpay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btpay.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btpay.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btpay.Location = new System.Drawing.Point(13, 494);
+            this.btpay.Margin = new System.Windows.Forms.Padding(4);
+            this.btpay.Name = "btpay";
+            this.btpay.Size = new System.Drawing.Size(467, 57);
+            this.btpay.TabIndex = 1;
+            this.btpay.Text = "Bayar";
+            this.btpay.UseVisualStyleBackColor = false;
+            this.btpay.Click += new System.EventHandler(this.btpay_Click);
             // 
             // tbbalance
             // 
@@ -212,7 +212,7 @@
             this.tbreferenceno.Name = "tbreferenceno";
             this.tbreferenceno.ReadOnly = true;
             this.tbreferenceno.Size = new System.Drawing.Size(201, 31);
-            this.tbreferenceno.TabIndex = 5;
+            this.tbreferenceno.TabIndex = 4;
             this.tbreferenceno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbreference
@@ -258,7 +258,7 @@
             this.tbcardno.Name = "tbcardno";
             this.tbcardno.ReadOnly = true;
             this.tbcardno.Size = new System.Drawing.Size(201, 31);
-            this.tbcardno.TabIndex = 4;
+            this.tbcardno.TabIndex = 3;
             this.tbcardno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // panel1
@@ -284,7 +284,7 @@
             this.Controls.Add(this.lbtotaltopay);
             this.Controls.Add(this.tbbalance);
             this.Controls.Add(this.lbbalance);
-            this.Controls.Add(this.tbpay);
+            this.Controls.Add(this.btpay);
             this.Controls.Add(this.nbdiscount);
             this.Controls.Add(this.lbdiscount);
             this.Controls.Add(this.nbpay);
@@ -304,7 +304,7 @@
             this.Controls.SetChildIndex(this.nbpay, 0);
             this.Controls.SetChildIndex(this.lbdiscount, 0);
             this.Controls.SetChildIndex(this.nbdiscount, 0);
-            this.Controls.SetChildIndex(this.tbpay, 0);
+            this.Controls.SetChildIndex(this.btpay, 0);
             this.Controls.SetChildIndex(this.lbbalance, 0);
             this.Controls.SetChildIndex(this.tbbalance, 0);
             this.Controls.SetChildIndex(this.lbtotaltopay, 0);
@@ -330,7 +330,7 @@
         private System.Windows.Forms.NumericUpDown nbpay;
         private System.Windows.Forms.NumericUpDown nbdiscount;
         private System.Windows.Forms.Label lbdiscount;
-        private System.Windows.Forms.Button tbpay;
+        private System.Windows.Forms.Button btpay;
         private System.Windows.Forms.TextBox tbbalance;
         private System.Windows.Forms.Label lbbalance;
         private System.Windows.Forms.TextBox tbtotaltopay;

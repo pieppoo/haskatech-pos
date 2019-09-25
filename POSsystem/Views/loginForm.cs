@@ -30,59 +30,51 @@ namespace POSsystem
             {
                 if (tbpassword.Text != "")
                 {
+
                     LoginList = loginRepository.GetAll(tbusername.Text);
 
-                    if (LoginList.Count > 0)
+                    if (LoginList != null)
                     {
-                        foreach (var item in LoginList)
+                        if (LoginList.Count > 0)
                         {
-                            if (item.status_code == "A")
+                            foreach (var item in LoginList)
                             {
-                                if (item.password == tbpassword.Text)
+                                if (item.status_code == "A")
                                 {
-                                    var login_info = new LoginDetails();
-                                    login_info.id = item.id;
-                                    login_info.password = tbpassword.Text;
-                                    login_info.username = tbusername.Text;
-                                    login_info.lastlogin = DateTime.Now.ToString();
-                                    login_info.user_role = item.user_role;
-
-                                    if(loginRepository.Update(login_info))
+                                    if (item.password == tbpassword.Text)
                                     {
-                                        if (item.user_role == "admin")
+                                        var login_info = new LoginDetails();
+                                        login_info.id = item.id;
+                                        login_info.password = tbpassword.Text;
+                                        login_info.username = tbusername.Text;
+                                        login_info.lastlogin = DateTime.Now.ToString();
+                                        login_info.user_role = item.user_role;
+                                        login_info.name = item.name;
+
+                                        if (loginRepository.Updatelastlogin(login_info))
                                         {
-                                            var form = new MainForm();
-                                            form.userdata = login_info;
-                                            Hide();
-                                            form.ShowDialog();
-                                            Close();
+                                                var form = new MainForm();
+                                                form.userdata = login_info;
+                                                Hide();
+                                                form.ShowDialog();
+                                                Close();
                                         }
                                         else
-                                        {
-                                            var form = new HistoryForm();
-                                            form.userdata = login_info;
-                                            Hide();
-                                            form.ShowDialog();
-                                            Close();
-                                        }
+                                            MessageBox.Show("Ada error pada saat mengupdate last login");
 
-                          
                                     }
                                     else
-                                        MessageBox.Show("Error when updating last login");
-
-
+                                        MessageBox.Show("Anda memasukkan kata sandi yang salah");
                                 }
                                 else
-                                    MessageBox.Show("Anda memasukkan kata sandi yang salah");
+                                    MessageBox.Show("Pengguna ini sudah tidak aktif");
                             }
-                            else
-                                MessageBox.Show("Pengguna ini sudah tidak aktif");
-
                         }
+                        else
+                            MessageBox.Show("Nama anda belum terdaftar");
                     }
                     else
-                        MessageBox.Show("Nama anda belum terdaftar");
+                        MessageBox.Show("koneksi ke database mati");
                 }
                 else
                     MessageBox.Show("Anda belum memasukkan kata sandi");
@@ -106,6 +98,21 @@ namespace POSsystem
             {
                 btmasuk.PerformClick();
             }
+        }
+
+        private void LoginForm_Activated(object sender, EventArgs e)
+        {
+            loginRepository  = new LoginRepository();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Escape))
+            {
+                Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

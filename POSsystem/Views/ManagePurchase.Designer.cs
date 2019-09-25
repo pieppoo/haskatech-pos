@@ -28,12 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gvpurchase = new System.Windows.Forms.DataGridView();
-            this.btdeleteitem = new System.Windows.Forms.Button();
-            this.btedititem = new System.Windows.Forms.Button();
-            this.btadditem = new System.Windows.Forms.Button();
-            this.btnSellPrice = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.itemname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.purchase_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +39,9 @@
             this.pcs_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PCStotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dateitemin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btdeleteitem = new System.Windows.Forms.Button();
+            this.btadditem = new System.Windows.Forms.Button();
+            this.btnSellPrice = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvpurchase)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,68 +68,6 @@
             this.gvpurchase.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvpurchase.Size = new System.Drawing.Size(865, 311);
             this.gvpurchase.TabIndex = 11;
-            this.gvpurchase.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvwarehouse_CellDoubleClick);
-            // 
-            // btdeleteitem
-            // 
-            this.btdeleteitem.BackColor = System.Drawing.Color.Teal;
-            this.btdeleteitem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btdeleteitem.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btdeleteitem.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btdeleteitem.Location = new System.Drawing.Point(675, 423);
-            this.btdeleteitem.Margin = new System.Windows.Forms.Padding(4);
-            this.btdeleteitem.Name = "btdeleteitem";
-            this.btdeleteitem.Size = new System.Drawing.Size(211, 53);
-            this.btdeleteitem.TabIndex = 14;
-            this.btdeleteitem.Text = "Hapus Barang";
-            this.btdeleteitem.UseVisualStyleBackColor = false;
-            this.btdeleteitem.Click += new System.EventHandler(this.btdeleteitem_Click);
-            // 
-            // btedititem
-            // 
-            this.btedititem.BackColor = System.Drawing.Color.Teal;
-            this.btedititem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btedititem.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btedititem.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btedititem.Location = new System.Drawing.Point(348, 423);
-            this.btedititem.Margin = new System.Windows.Forms.Padding(4);
-            this.btedititem.Name = "btedititem";
-            this.btedititem.Size = new System.Drawing.Size(211, 53);
-            this.btedititem.TabIndex = 13;
-            this.btedititem.Text = "Edit Barang";
-            this.btedititem.UseVisualStyleBackColor = false;
-            this.btedititem.Visible = false;
-            this.btedititem.Click += new System.EventHandler(this.btedititem_Click);
-            // 
-            // btadditem
-            // 
-            this.btadditem.BackColor = System.Drawing.Color.Teal;
-            this.btadditem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btadditem.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btadditem.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btadditem.Location = new System.Drawing.Point(21, 423);
-            this.btadditem.Margin = new System.Windows.Forms.Padding(4);
-            this.btadditem.Name = "btadditem";
-            this.btadditem.Size = new System.Drawing.Size(211, 53);
-            this.btadditem.TabIndex = 12;
-            this.btadditem.Text = "Tambah Barang";
-            this.btadditem.UseVisualStyleBackColor = false;
-            this.btadditem.Click += new System.EventHandler(this.btadditem_Click);
-            // 
-            // btnSellPrice
-            // 
-            this.btnSellPrice.BackColor = System.Drawing.Color.Teal;
-            this.btnSellPrice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSellPrice.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSellPrice.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSellPrice.Location = new System.Drawing.Point(348, 423);
-            this.btnSellPrice.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSellPrice.Name = "btnSellPrice";
-            this.btnSellPrice.Size = new System.Drawing.Size(211, 53);
-            this.btnSellPrice.TabIndex = 15;
-            this.btnSellPrice.Text = "Edit Harga Jual";
-            this.btnSellPrice.UseVisualStyleBackColor = false;
-            this.btnSellPrice.Click += new System.EventHandler(this.btnSellPrice_Click);
             // 
             // id
             // 
@@ -145,7 +82,7 @@
             this.itemname.HeaderText = "Nama barang";
             this.itemname.Name = "itemname";
             this.itemname.ReadOnly = true;
-            this.itemname.Width = 119;
+            this.itemname.Width = 109;
             // 
             // purchase_qty
             // 
@@ -163,8 +100,8 @@
             // 
             // purchase_price
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.purchase_price.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.purchase_price.DefaultCellStyle = dataGridViewCellStyle4;
             this.purchase_price.HeaderText = "Harga Beli (Rp)";
             this.purchase_price.Name = "purchase_price";
             this.purchase_price.ReadOnly = true;
@@ -196,6 +133,51 @@
             this.Dateitemin.Name = "Dateitemin";
             this.Dateitemin.ReadOnly = true;
             // 
+            // btdeleteitem
+            // 
+            this.btdeleteitem.BackColor = System.Drawing.Color.Teal;
+            this.btdeleteitem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btdeleteitem.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btdeleteitem.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btdeleteitem.Location = new System.Drawing.Point(348, 423);
+            this.btdeleteitem.Margin = new System.Windows.Forms.Padding(4);
+            this.btdeleteitem.Name = "btdeleteitem";
+            this.btdeleteitem.Size = new System.Drawing.Size(211, 53);
+            this.btdeleteitem.TabIndex = 14;
+            this.btdeleteitem.Text = "Hapus Barang (F2)";
+            this.btdeleteitem.UseVisualStyleBackColor = false;
+            this.btdeleteitem.Click += new System.EventHandler(this.btdeleteitem_Click);
+            // 
+            // btadditem
+            // 
+            this.btadditem.BackColor = System.Drawing.Color.Teal;
+            this.btadditem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btadditem.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btadditem.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btadditem.Location = new System.Drawing.Point(21, 423);
+            this.btadditem.Margin = new System.Windows.Forms.Padding(4);
+            this.btadditem.Name = "btadditem";
+            this.btadditem.Size = new System.Drawing.Size(211, 53);
+            this.btadditem.TabIndex = 12;
+            this.btadditem.Text = "Tambah Barang (F1)";
+            this.btadditem.UseVisualStyleBackColor = false;
+            this.btadditem.Click += new System.EventHandler(this.btadditem_Click);
+            // 
+            // btnSellPrice
+            // 
+            this.btnSellPrice.BackColor = System.Drawing.Color.Peru;
+            this.btnSellPrice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSellPrice.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSellPrice.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnSellPrice.Location = new System.Drawing.Point(675, 423);
+            this.btnSellPrice.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSellPrice.Name = "btnSellPrice";
+            this.btnSellPrice.Size = new System.Drawing.Size(211, 53);
+            this.btnSellPrice.TabIndex = 15;
+            this.btnSellPrice.Text = "Edit Harga Jual (F3)";
+            this.btnSellPrice.UseVisualStyleBackColor = false;
+            this.btnSellPrice.Click += new System.EventHandler(this.btnSellPrice_Click);
+            // 
             // ManagePurchase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -203,7 +185,6 @@
             this.ClientSize = new System.Drawing.Size(907, 500);
             this.Controls.Add(this.btnSellPrice);
             this.Controls.Add(this.btdeleteitem);
-            this.Controls.Add(this.btedititem);
             this.Controls.Add(this.btadditem);
             this.Controls.Add(this.gvpurchase);
             this.Margin = new System.Windows.Forms.Padding(5);
@@ -213,7 +194,6 @@
             this.Load += new System.EventHandler(this.ManageWarehouse_Load);
             this.Controls.SetChildIndex(this.gvpurchase, 0);
             this.Controls.SetChildIndex(this.btadditem, 0);
-            this.Controls.SetChildIndex(this.btedititem, 0);
             this.Controls.SetChildIndex(this.btdeleteitem, 0);
             this.Controls.SetChildIndex(this.btnSellPrice, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gvpurchase)).EndInit();
@@ -225,7 +205,6 @@
 
         private System.Windows.Forms.DataGridView gvpurchase;
         private System.Windows.Forms.Button btdeleteitem;
-        private System.Windows.Forms.Button btedititem;
         private System.Windows.Forms.Button btadditem;
         private System.Windows.Forms.Button btnSellPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;

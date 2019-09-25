@@ -90,10 +90,15 @@ namespace POSsystem.Views
             {
                 try
                 {
-                    int indx = Convert.ToInt32(gvresultitem.CurrentCell.RowIndex);
-                    var id = Convert.ToInt32(gvresultitem.Rows[indx].Cells[0].Value);
-                    SelectedItemDetails = SellingPriceList.FirstOrDefault(x => x.id == id);
-                    Close();
+                    if(gvresultitem.Rows.Count != 0)
+                    {
+                        int indx = Convert.ToInt32(gvresultitem.CurrentCell.RowIndex);
+                        var id = Convert.ToInt32(gvresultitem.Rows[indx].Cells[0].Value);
+                        SelectedItemDetails = SellingPriceList.FirstOrDefault(x => x.id == id);
+                        Close();
+                    }
+                    else
+                        Close();
                 }
                 catch (Exception ex)
                 {
@@ -101,6 +106,16 @@ namespace POSsystem.Views
                     MessageBox.Show(errMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Escape))
+            {
+                Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.gvbrand = new System.Windows.Forms.DataGridView();
-            this.btdeletebrand = new System.Windows.Forms.Button();
-            this.bteditbrand = new System.Windows.Forms.Button();
-            this.btaddbrand = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.No = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.brandname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remaark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btdeletebrand = new System.Windows.Forms.Button();
+            this.bteditbrand = new System.Windows.Forms.Button();
+            this.btaddbrand = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gvbrand)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,51 +59,7 @@
             this.gvbrand.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvbrand.Size = new System.Drawing.Size(612, 262);
             this.gvbrand.TabIndex = 12;
-            // 
-            // btdeletebrand
-            // 
-            this.btdeletebrand.BackColor = System.Drawing.Color.Teal;
-            this.btdeletebrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btdeletebrand.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btdeletebrand.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btdeletebrand.Location = new System.Drawing.Point(454, 353);
-            this.btdeletebrand.Margin = new System.Windows.Forms.Padding(4);
-            this.btdeletebrand.Name = "btdeletebrand";
-            this.btdeletebrand.Size = new System.Drawing.Size(181, 55);
-            this.btdeletebrand.TabIndex = 15;
-            this.btdeletebrand.Text = "Hapus Merek";
-            this.btdeletebrand.UseVisualStyleBackColor = false;
-            this.btdeletebrand.Click += new System.EventHandler(this.btdeletebrand_Click);
-            // 
-            // bteditbrand
-            // 
-            this.bteditbrand.BackColor = System.Drawing.Color.Teal;
-            this.bteditbrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bteditbrand.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bteditbrand.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.bteditbrand.Location = new System.Drawing.Point(239, 353);
-            this.bteditbrand.Margin = new System.Windows.Forms.Padding(4);
-            this.bteditbrand.Name = "bteditbrand";
-            this.bteditbrand.Size = new System.Drawing.Size(181, 55);
-            this.bteditbrand.TabIndex = 14;
-            this.bteditbrand.Text = "Edit Merek";
-            this.bteditbrand.UseVisualStyleBackColor = false;
-            this.bteditbrand.Click += new System.EventHandler(this.bteditbrand_Click);
-            // 
-            // btaddbrand
-            // 
-            this.btaddbrand.BackColor = System.Drawing.Color.Teal;
-            this.btaddbrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btaddbrand.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btaddbrand.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btaddbrand.Location = new System.Drawing.Point(24, 353);
-            this.btaddbrand.Margin = new System.Windows.Forms.Padding(4);
-            this.btaddbrand.Name = "btaddbrand";
-            this.btaddbrand.Size = new System.Drawing.Size(181, 55);
-            this.btaddbrand.TabIndex = 13;
-            this.btaddbrand.Text = "Tambah Merek";
-            this.btaddbrand.UseVisualStyleBackColor = false;
-            this.btaddbrand.Click += new System.EventHandler(this.btaddbrand_Click);
+            this.gvbrand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gvbrand_KeyDown);
             // 
             // id
             // 
@@ -130,6 +86,51 @@
             this.remaark.HeaderText = "Keterangan";
             this.remaark.Name = "remaark";
             this.remaark.ReadOnly = true;
+            // 
+            // btdeletebrand
+            // 
+            this.btdeletebrand.BackColor = System.Drawing.Color.Teal;
+            this.btdeletebrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btdeletebrand.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btdeletebrand.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btdeletebrand.Location = new System.Drawing.Point(454, 353);
+            this.btdeletebrand.Margin = new System.Windows.Forms.Padding(4);
+            this.btdeletebrand.Name = "btdeletebrand";
+            this.btdeletebrand.Size = new System.Drawing.Size(181, 65);
+            this.btdeletebrand.TabIndex = 15;
+            this.btdeletebrand.Text = "Hapus Merek\r\n(F3)";
+            this.btdeletebrand.UseVisualStyleBackColor = false;
+            this.btdeletebrand.Click += new System.EventHandler(this.btdeletebrand_Click);
+            // 
+            // bteditbrand
+            // 
+            this.bteditbrand.BackColor = System.Drawing.Color.Teal;
+            this.bteditbrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bteditbrand.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bteditbrand.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.bteditbrand.Location = new System.Drawing.Point(239, 353);
+            this.bteditbrand.Margin = new System.Windows.Forms.Padding(4);
+            this.bteditbrand.Name = "bteditbrand";
+            this.bteditbrand.Size = new System.Drawing.Size(181, 65);
+            this.bteditbrand.TabIndex = 14;
+            this.bteditbrand.Text = "Edit Merek\r\n(F2)";
+            this.bteditbrand.UseVisualStyleBackColor = false;
+            this.bteditbrand.Click += new System.EventHandler(this.bteditbrand_Click);
+            // 
+            // btaddbrand
+            // 
+            this.btaddbrand.BackColor = System.Drawing.Color.Teal;
+            this.btaddbrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btaddbrand.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btaddbrand.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btaddbrand.Location = new System.Drawing.Point(24, 353);
+            this.btaddbrand.Margin = new System.Windows.Forms.Padding(4);
+            this.btaddbrand.Name = "btaddbrand";
+            this.btaddbrand.Size = new System.Drawing.Size(181, 65);
+            this.btaddbrand.TabIndex = 13;
+            this.btaddbrand.Text = "Tambah Merek\r\n(F1)";
+            this.btaddbrand.UseVisualStyleBackColor = false;
+            this.btaddbrand.Click += new System.EventHandler(this.btaddbrand_Click);
             // 
             // ManageBrand
             // 

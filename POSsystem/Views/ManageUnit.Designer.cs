@@ -33,6 +33,7 @@
             this.btaddunit = new System.Windows.Forms.Button();
             this.gvunititem = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.runno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvunititem)).BeginInit();
@@ -44,12 +45,12 @@
             this.btdeleteunit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btdeleteunit.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btdeleteunit.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btdeleteunit.Location = new System.Drawing.Point(168, 354);
+            this.btdeleteunit.Location = new System.Drawing.Point(381, 354);
             this.btdeleteunit.Margin = new System.Windows.Forms.Padding(4);
             this.btdeleteunit.Name = "btdeleteunit";
-            this.btdeleteunit.Size = new System.Drawing.Size(106, 59);
+            this.btdeleteunit.Size = new System.Drawing.Size(162, 59);
             this.btdeleteunit.TabIndex = 14;
-            this.btdeleteunit.Text = "Hapus Kemasan";
+            this.btdeleteunit.Text = "Hapus Kemasan\r\n(F3)";
             this.btdeleteunit.UseVisualStyleBackColor = false;
             this.btdeleteunit.Click += new System.EventHandler(this.btdeleteunit_Click);
             // 
@@ -59,12 +60,12 @@
             this.bteditunit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bteditunit.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bteditunit.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.bteditunit.Location = new System.Drawing.Point(309, 354);
+            this.bteditunit.Location = new System.Drawing.Point(204, 354);
             this.bteditunit.Margin = new System.Windows.Forms.Padding(4);
             this.bteditunit.Name = "bteditunit";
-            this.bteditunit.Size = new System.Drawing.Size(106, 59);
+            this.bteditunit.Size = new System.Drawing.Size(162, 59);
             this.bteditunit.TabIndex = 13;
-            this.bteditunit.Text = "Edit Kemasan";
+            this.bteditunit.Text = "Edit Kemasan\r\n(F2)";
             this.bteditunit.UseVisualStyleBackColor = false;
             this.bteditunit.Click += new System.EventHandler(this.bteditunit_Click);
             // 
@@ -77,9 +78,9 @@
             this.btaddunit.Location = new System.Drawing.Point(27, 354);
             this.btaddunit.Margin = new System.Windows.Forms.Padding(4);
             this.btaddunit.Name = "btaddunit";
-            this.btaddunit.Size = new System.Drawing.Size(106, 59);
+            this.btaddunit.Size = new System.Drawing.Size(162, 59);
             this.btaddunit.TabIndex = 12;
-            this.btaddunit.Text = "Tambah Kemasan";
+            this.btaddunit.Text = "Tambah Kemasan\r\n(F1)";
             this.btaddunit.UseVisualStyleBackColor = false;
             this.btaddunit.Click += new System.EventHandler(this.btaddunit_Click);
             // 
@@ -90,6 +91,7 @@
             this.gvunititem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvunititem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
+            this.runno,
             this.code,
             this.name});
             this.gvunititem.Location = new System.Drawing.Point(27, 76);
@@ -98,8 +100,10 @@
             this.gvunititem.ReadOnly = true;
             this.gvunititem.RowHeadersVisible = false;
             this.gvunititem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvunititem.Size = new System.Drawing.Size(388, 262);
+            this.gvunititem.Size = new System.Drawing.Size(516, 262);
             this.gvunititem.TabIndex = 15;
+            this.gvunititem.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvunititem_CellContentDoubleClick);
+            this.gvunititem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gvunititem_KeyDown);
             // 
             // id
             // 
@@ -107,6 +111,12 @@
             this.id.Name = "id";
             this.id.ReadOnly = true;
             this.id.Visible = false;
+            // 
+            // runno
+            // 
+            this.runno.HeaderText = "No";
+            this.runno.Name = "runno";
+            this.runno.ReadOnly = true;
             // 
             // code
             // 
@@ -127,7 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(443, 440);
+            this.ClientSize = new System.Drawing.Size(570, 430);
             this.Controls.Add(this.gvunititem);
             this.Controls.Add(this.btdeleteunit);
             this.Controls.Add(this.bteditunit);
@@ -152,6 +162,7 @@
         private System.Windows.Forms.Button btaddunit;
         private System.Windows.Forms.DataGridView gvunititem;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn runno;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
     }

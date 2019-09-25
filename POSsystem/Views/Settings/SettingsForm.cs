@@ -32,6 +32,7 @@ namespace POSsystem.Views.Settings
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.reportFolder = tbReportFolder.Text;
             Properties.Settings.Default.connection_string = tbConnectionString.Text;
             Properties.Settings.Default.Save();
             MessageBox.Show("Setting telah disimpan", "Setting", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -46,5 +47,14 @@ namespace POSsystem.Views.Settings
             }
         }
 
+        private void btnBrowseReportFolder_Click(object sender, EventArgs e)
+        {
+            var result = folderBrowserDialog.ShowDialog();
+
+            if(result == DialogResult.OK)
+            {
+                tbReportFolder.Text = folderBrowserDialog.SelectedPath;
+            }
+        }
     }
 }

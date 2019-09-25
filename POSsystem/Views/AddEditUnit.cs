@@ -107,5 +107,19 @@ namespace POSsystem.Views
             
 
         }
+
+        private void tbunitcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                tbunitname.Focus();
+        }
+
+        private void tbunitname_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnSave.PerformClick();
+            }
+        }
     }
 }

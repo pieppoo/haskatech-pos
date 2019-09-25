@@ -7,9 +7,8 @@ using POSsystem.Repository;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BorderStyle = MigraDoc.DocumentObjectModel.BorderStyle;
 using TabAlignment = MigraDoc.DocumentObjectModel.TabAlignment;
@@ -21,6 +20,7 @@ namespace POSsystem.Common
     {
         public SalesDetailReportDetails ReportData { get; set; }
         public List<UnitItem> UnitList { get; set; }
+        public string ReportFolder { get; set; }
 
         private UnitRepository unitRepository = new UnitRepository();
 
@@ -49,11 +49,20 @@ namespace POSsystem.Common
             // Layout and render document to PDF
             pdfRenderer.RenderDocument();
 
+            if (string.IsNullOrEmpty(ReportFolder))
+            {
+                ReportFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "report");
+                if (!Directory.Exists(ReportFolder))
+                    Directory.CreateDirectory(ReportFolder);
+            }
+
             // Save the document...
             string filename = "Detail_Laporan_Bulanan_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
-            pdfRenderer.PdfDocument.Save(filename);
+            var filepath = Path.Combine(ReportFolder, filename);
+            pdfRenderer.PdfDocument.Save(filepath);
             // ...and start a viewer.
-            Process.Start(filename);
+            Process.Start(filepath);
+
         }
 
         private void DefineStyles()

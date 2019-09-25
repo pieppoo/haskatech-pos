@@ -94,6 +94,7 @@
             this.cbunitsell.Name = "cbunitsell";
             this.cbunitsell.Size = new System.Drawing.Size(159, 40);
             this.cbunitsell.TabIndex = 1;
+            this.cbunitsell.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbunitsell_KeyDown);
             // 
             // tbsellprice
             // 
@@ -110,6 +111,7 @@
             this.tbsellprice.TabIndex = 0;
             this.tbsellprice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tbsellprice.ThousandsSeparator = true;
+            this.tbsellprice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbsellprice_KeyDown);
             // 
             // btsave
             // 
@@ -145,6 +147,7 @@
             this.tbbarcodeno.Name = "tbbarcodeno";
             this.tbbarcodeno.Size = new System.Drawing.Size(385, 39);
             this.tbbarcodeno.TabIndex = 2;
+            this.tbbarcodeno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbbarcodeno_KeyDown);
             // 
             // AddEditSellPrice
             // 

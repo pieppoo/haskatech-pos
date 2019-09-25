@@ -127,6 +127,7 @@
     <Compile Include="Model\Database\PurchaseDetails.cs" />
     <Compile Include="Model\SalesDetailReportDetails.cs" />
     <Compile Include="Model\SalesReportDetails.cs" />
+    <Compile Include="Model\TempProductDetails.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -179,6 +180,12 @@
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Database\ProductDetails.cs" />
+    <Compile Include="Views\LoadingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LoadingDialog.Designer.cs">
+      <DependentUpon>LoadingDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\HistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +209,12 @@
     </Compile>
     <Compile Include="Views\ManageBrand.Designer.cs">
       <DependentUpon>ManageBrand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManagePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ManagePassword.Designer.cs">
+      <DependentUpon>ManagePassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ManageProduct.cs">
       <SubType>Form</SubType>
@@ -297,6 +310,9 @@
     <EmbeddedResource Include="Views\Base\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\LoadingDialog.resx">
+      <DependentUpon>LoadingDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\HistoryForm.resx">
       <DependentUpon>HistoryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -308,6 +324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ManageBrand.resx">
       <DependentUpon>ManageBrand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ManagePassword.resx">
+      <DependentUpon>ManagePassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ManageProduct.resx">
       <DependentUpon>ManageProduct.cs</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿using POSsystem.Database;
+using POSsystem.Model;
 using POSsystem.Repository;
 using POSsystem.Views;
 using POSsystem.Views.Base;
@@ -62,11 +63,10 @@ namespace POSsystem
             try
             {
                 BrandList = brandRepository.GetAll().ToList();
-                ProductList = productRepository.GetAll().OrderBy(x => x.id).ThenBy(x => x.name).ToList();
+                //ProductList = productRepository.GetAll().OrderBy(x => x.brand_id).ThenBy(x => x.name).ToList();
+                ProductList = productRepository.GetAll().ToList();
                 UnitList = unitRepository.GetAll();
-
-                gvitem.Rows.Clear();
-
+                var tempproductlist = new List<TempProductDetails>();
 
                 foreach (var item in ProductList)
                 {
@@ -79,17 +79,32 @@ namespace POSsystem
                     int stockbulk = (item.Stock / item.qty_pcs_in_container);
                     int stockpcs = item.Stock - (stockbulk * item.qty_pcs_in_container);
                     itemstock = stockbulk + " " + unitbulkinfo.description + " " + stockpcs + " " + unitpcsinfo.description;
-                                                
+
+                    var itemDetail = new TempProductDetails();
+                    itemDetail.id = item.id;
+                    itemDetail.brand_id = item.brand_id;
+                    itemDetail.name = item.name;
+                    itemDetail.unit_bulk = unitbulkinfo != null ? unitbulkinfo.description : " - ";
+                    itemDetail.unit_pcs = unitpcsinfo != null ? unitpcsinfo.description : " - ";
+                    itemDetail.Stock = itemstock;
+                    itemDetail.qty_pcs_in_container = item.qty_pcs_in_container;
+                    itemDetail.brandname = brand != null ? brand.name : " - ";
+                    tempproductlist.Add(itemDetail);
+                }
+
+                gvitem.Rows.Clear();
+
+                foreach (var item in tempproductlist.OrderBy(x => x.brandname))
+                {
                     gvitem.Rows.Add(
                         item.id,
-                        brand != null ? brand.name : " - ",
+                        item.brandname,
                         item.name,
-                        unitbulkinfo != null ? unitbulkinfo.description : " - ",
-                        unitpcsinfo != null ? unitpcsinfo.description : " - ",
-                        itemstock,
+                        item.unit_bulk,
+                        item.unit_pcs,
+                        item.Stock,
                         item.qty_pcs_in_container
                         );
-
                 }
 
 
@@ -105,6 +120,7 @@ namespace POSsystem
                 var errMsg = "Details : " + ex.Message + Environment.NewLine + "Stacktrace : " + ex.StackTrace;
                 MessageBox.Show(errMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            gvitem.Focus();
         }
 
         private void btadditem_Click(object sender, EventArgs e)
@@ -150,7 +166,7 @@ namespace POSsystem
                 {
 
                     if (!productRepository.Delete(id))
-                        MessageBox.Show("Gagal menghapus brand");
+                        MessageBox.Show("Gagal menghapus produk");
                     LoadData();
                 }
             }
@@ -177,6 +193,31 @@ namespace POSsystem
                 }
             }
 
+        }
+
+        private void gvitem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if(gvitem.Rows.Count > 0)
+                {
+                    int currIndex = gvitem.CurrentRow.Index;
+                    var id = Convert.ToInt32(gvitem.Rows[currIndex].Cells[0].Value);
+                    var product = ProductList.FirstOrDefault(x => x.id == id);
+
+
+                    if (product != null)
+                    {
+                        var form = new ManagePurchase();
+                        form.ProductData = product;
+                        Hide();
+                        form.ShowDialog();
+                        Show();
+                        LoadData();
+                    }
+                }
+
+            }
         }
 
         private void btunitmanage_Click(object sender, EventArgs e)
@@ -242,5 +283,67 @@ namespace POSsystem
                 btsearch.PerformClick();
             }
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.F1))
+            {
+                tbitemname.Focus();
+                return true;
+            }
+            else if (keyData == (Keys.F2))
+            {
+                cbbrand.Focus();
+                return true;
+            }
+            else if (keyData == (Keys.F3))
+            {
+                btsearch.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F4))
+            {
+                btnreset.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F5))
+            {
+                btadditem.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F6))
+            {
+                btedititem.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F7))
+            {
+                btdeleteitem.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F8))
+            {
+                btmanagebrand.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F9))
+            {
+                btunitmanage.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Delete))
+            {
+                btdeleteitem.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Escape))
+            {
+                Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
     }
 }

@@ -8,7 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,7 @@ namespace POSsystem.Views
         private SaleHistoryRepository saleHistoryRepository = new SaleHistoryRepository();
         private PaymentModeRepository paymentModeRepository = new PaymentModeRepository();
         private SaleListRepository saleListRepository = new SaleListRepository();
+        
         public Report()
         {
             InitializeComponent();
@@ -61,115 +64,190 @@ namespace POSsystem.Views
             cbdetailReport.DisplayMember = "Value";
             cbdetailReport.ValueMember = "Key";
 
+            if (string.IsNullOrEmpty(Properties.Settings.Default.reportFolder))
+            {
+                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "report");
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+                tbReportFolder.Text = Properties.Settings.Default.reportFolder = path;
+                Properties.Settings.Default.Save();
+            }
+            else
+            {
+                if (!Directory.Exists(Properties.Settings.Default.reportFolder))
+                    Directory.CreateDirectory(Properties.Settings.Default.reportFolder);
+
+                tbReportFolder.Text = Properties.Settings.Default.reportFolder;
+            }
         }
 
-        private void printmonthlyreport_Click(object sender, EventArgs e)
+        private async void printmonthlyreport_Click(object sender, EventArgs e)
         {
-            int selectedmonth = (int)cbmonthlyreport.SelectedValue; 
-            var Monthlysaledetail = saleHistoryRepository.Getbymonth(selectedmonth);
-            var PaymentModeList = paymentModeRepository.GetAll();
-            int cashtrxcount = 0;
-            int cardtrxcount = 0;
-            int subtotal = 0;
-            int discount = 0;
-            int grandtotal = 0;
+            if (cbmonthlyreport.SelectedIndex == 0)
+                return;
 
-            var saleDetails = new List<SalesReportDetails.SaleDetail>();
+            var loadingDialog = new LoadingDialog();
+            loadingDialog.Message = "Memproses laporan...";
+            loadingDialog.TimeoutSec = 5;
+            int selectedmonth = (int)cbmonthlyreport.SelectedValue;
 
-            foreach (var item in Monthlysaledetail)
+            var compileReportTask = Task.Run(async() =>
             {
-                var paymode = PaymentModeList.FirstOrDefault(x => x.id == item.payment_mode);
+                var Monthlysaledetail = saleHistoryRepository.Getbymonth(selectedmonth);
+                var PaymentModeList = paymentModeRepository.GetAll();
+                int cashtrxcount = 0;
+                int cardtrxcount = 0;
+                int subtotal = 0;
+                int discount = 0;
+                int grandtotal = 0;
 
-                if (paymode.description == "Tunai")
-                    cashtrxcount += 1;
-                else
-                    cardtrxcount += 1;
+                var saleDetails = new List<SalesReportDetails.SaleDetail>();
 
-                subtotal = subtotal + item.originaltotal;
-                discount = discount + item.discount;
-                grandtotal = grandtotal + item.totalsale;
-
-                saleDetails.Add(new SalesReportDetails.SaleDetail
+                foreach (var item in Monthlysaledetail)
                 {
-                    Timestamp = item.datesale,
-                    PaymentMode = paymode.description,
-                    SubTotal = Utils.ToRupiah(item.originaltotal),
-                    Discount = Utils.ToRupiah(item.discount),
-                    Total = Utils.ToRupiah(item.totalsale),
-                    CardNo = item.cardno,
-                    CardRef = item.cardreference
+                    var paymode = PaymentModeList.FirstOrDefault(x => x.id == item.payment_mode);
+
+                    if (paymode.description == "Tunai")
+                        cashtrxcount += 1;
+                    else
+                        cardtrxcount += 1;
+
+                    subtotal = subtotal + item.originaltotal;
+                    discount = discount + item.discount;
+                    grandtotal = grandtotal + item.totalsale;
+
+                    saleDetails.Add(new SalesReportDetails.SaleDetail
+                    {
+                        Timestamp = item.datesale,
+                        PaymentMode = paymode.description,
+                        SubTotal = Utils.ToRupiah(item.originaltotal),
+                        Discount = Utils.ToRupiah(item.discount),
+                        Total = Utils.ToRupiah(item.totalsale),
+                        CardNo = item.cardno,
+                        CardRef = item.cardreference
+                    });
+                }
+
+                var reportData = new SalesReportDetails();
+                reportData.Title = "Toko In Sadar";
+                reportData.SubTitle = "Laporan Bulanan Penjualan";
+                reportData.DateRange = new DateTime(DateTime.Now.Year, selectedmonth, 1);
+                reportData.TrxCount = Monthlysaledetail.Count;
+                reportData.CardTrxCount = cardtrxcount;
+                reportData.CashTrxCount = cashtrxcount;
+                reportData.SubTotal = Utils.ToRupiah(subtotal);
+                reportData.Discount = Utils.ToRupiah(discount);
+                reportData.GrandTotal = Utils.ToRupiah(grandtotal);
+                reportData.SaleDetails = saleDetails;
+
+                await Task.Delay(1000);
+
+                Invoke((MethodInvoker)delegate {
+                    loadingDialog.EnableClosingForm();
+                    loadingDialog.Close();
                 });
+
+                return reportData;
+            });
+
+            try
+            {
+                loadingDialog.ShowDialog(this);
+                var result = await compileReportTask;
+
+                var gen = new ReportGenerator();
+                gen.ReportData = result;
+                gen.ReportFolder = Properties.Settings.Default.reportFolder;
+                gen.GenerateReport();
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
+        }
 
-            var reportData = new SalesReportDetails();
-            reportData.Title = "Toko In Sadar";
-            reportData.SubTitle = "Laporan Bulanan Penjualan";
-            reportData.DateRange = new DateTime(DateTime.Now.Year, selectedmonth, 1);
-            reportData.TrxCount = Monthlysaledetail.Count;
-            reportData.CardTrxCount = cardtrxcount;
-            reportData.CashTrxCount = cashtrxcount;
-            reportData.SubTotal = Utils.ToRupiah(subtotal);
-            reportData.Discount = Utils.ToRupiah(discount);
-            reportData.GrandTotal = Utils.ToRupiah(grandtotal);
-            reportData.SaleDetails = saleDetails;
+        private async void printdetailreport_Click(object sender, EventArgs e)
+        {
+            if (cbdetailReport.SelectedIndex == 0)
+                return;
 
-            var gen = new ReportGenerator();
-            gen.ReportData = reportData;
+            var loadingDialog = new LoadingDialog();
+            loadingDialog.Message = "Memproses laporan...";
+            loadingDialog.TimeoutSec = 5;
+            int selectedmonth = (int)cbdetailReport.SelectedValue;
+
+            var compileTask = Task.Run(async() => 
+            {
+                var DetailReportList = saleListRepository.GetReportDetail(selectedmonth);
+                var Monthlysaledetail = saleHistoryRepository.Getbymonth(selectedmonth);
+                int subtotal = 0;
+                int discount = 0;
+                int additional_discount = 0;
+                int grandtotal = 0;
+
+                //get additional discoutn from salehistorytable
+                foreach (var item in Monthlysaledetail)
+                {
+                    additional_discount = discount + item.discount;
+                }
+                //---------------------------------------------------------
+
+                var saleDetails = new List<SalesDetailReportDetails.SaleDetail>();
+
+                foreach (var item in DetailReportList)
+                {
+
+                    subtotal = subtotal + item.subtotal;
+                    discount = discount + item.discount;
+                    grandtotal = grandtotal + item.grandtotal;
+
+                    saleDetails.Add(new SalesDetailReportDetails.SaleDetail
+                    {
+                        item_name = item.item_name,
+                        totalQTY = item.totalQTY.ToString(),
+                        subTotal = Utils.ToRupiah(item.subtotal),
+                        discount = Utils.ToRupiah(item.discount),
+                        total = Utils.ToRupiah(item.grandtotal),
+                        pcsqty = item.pcsqty.ToString(),
+                        unit_bulk = item.unit_bulk,
+                        unit_pcs = item.unit_pcs,
+                    });
+                }
+
+                var reportData = new SalesDetailReportDetails();
+                reportData.Title = "Toko In Sadar";
+                reportData.SubTitle = "Detail Laporan Bulanan";
+                reportData.DateRange = new DateTime(DateTime.Now.Year, selectedmonth, 1);
+                reportData.SubTotal = Utils.ToRupiah(subtotal);
+                reportData.Discount = Utils.ToRupiah(discount);
+                reportData.additional_discount = Utils.ToRupiah(additional_discount);
+                reportData.GrandTotal = Utils.ToRupiah(grandtotal);
+                reportData.SaleDetails = saleDetails;
+
+                await Task.Delay(1000);
+
+                Invoke((MethodInvoker)delegate {
+                    loadingDialog.EnableClosingForm();
+                    loadingDialog.Close();
+                });
+
+                return reportData;
+            });
+
+            loadingDialog.ShowDialog(this);
+            var result = await compileTask;
+            
+            var gen = new ReportDetailsGenerator();
+            gen.ReportData = result;
+            gen.ReportFolder = Properties.Settings.Default.reportFolder;
             gen.GenerateReport();
         }
 
-        private void printdetailreport_Click(object sender, EventArgs e)
+        private void tbReportFolder_DoubleClick(object sender, EventArgs e)
         {
-            int selectedmonth = (int)cbdetailReport.SelectedValue;
-            var DetailReportList = saleListRepository.GetReportDetail(selectedmonth);
-            var Monthlysaledetail = saleHistoryRepository.Getbymonth(selectedmonth);
-            int subtotal = 0;
-            int discount = 0;
-            int additional_discount = 0;
-            int grandtotal = 0;
-
-            //get additional discoutn from salehistorytable
-            foreach (var item in Monthlysaledetail)
-            {
-                additional_discount = discount + item.discount;
-            }
-            //---------------------------------------------------------
-
-            var saleDetails = new List<SalesDetailReportDetails.SaleDetail>();
-
-            foreach (var item in DetailReportList)
-            {
-
-                subtotal = subtotal + item.subtotal;
-                discount = discount + item.discount;
-                grandtotal = grandtotal + item.grandtotal;
-
-                saleDetails.Add(new SalesDetailReportDetails.SaleDetail
-                {
-                    item_name = item.item_name,
-                    totalQTY = item.totalQTY.ToString(),
-                    subTotal = Utils.ToRupiah(item.subtotal),
-                    discount = Utils.ToRupiah(item.discount),
-                    total = Utils.ToRupiah(item.grandtotal),
-                    pcsqty = item.pcsqty.ToString(),
-                    unit_bulk = item.unit_bulk,
-                    unit_pcs = item.unit_pcs,
-                 });
-            }
-
-            var reportData = new SalesDetailReportDetails();
-            reportData.Title = "Toko In Sadar";
-            reportData.SubTitle = "Detail Laporan Bulanan";
-            reportData.DateRange = new DateTime(DateTime.Now.Year, selectedmonth, 1);
-            reportData.SubTotal = Utils.ToRupiah(subtotal);
-            reportData.Discount = Utils.ToRupiah(discount);
-            reportData.additional_discount = Utils.ToRupiah(additional_discount);
-            reportData.GrandTotal = Utils.ToRupiah(grandtotal);
-            reportData.SaleDetails = saleDetails;
-
-            var gen = new ReportDetailsGenerator();
-            gen.ReportData = reportData;
-            gen.GenerateReport();
+            Process.Start(@tbReportFolder.Text);
         }
     }
 }

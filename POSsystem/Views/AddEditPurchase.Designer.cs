@@ -57,7 +57,7 @@
             this.tbname.Name = "tbname";
             this.tbname.ReadOnly = true;
             this.tbname.Size = new System.Drawing.Size(318, 68);
-            this.tbname.TabIndex = 20;
+            this.tbname.TabIndex = 77;
             // 
             // lbname
             // 
@@ -67,7 +67,7 @@
             this.lbname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbname.Name = "lbname";
             this.lbname.Size = new System.Drawing.Size(135, 25);
-            this.lbname.TabIndex = 19;
+            this.lbname.TabIndex = 78;
             this.lbname.Text = "Nama Produk";
             // 
             // tbpurchaseprice
@@ -85,6 +85,7 @@
             this.tbpurchaseprice.TabIndex = 0;
             this.tbpurchaseprice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tbpurchaseprice.ThousandsSeparator = true;
+            this.tbpurchaseprice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbpurchaseprice_KeyDown);
             // 
             // lbpurchaseprice
             // 
@@ -112,6 +113,7 @@
             this.numpurchaseqty.TabIndex = 1;
             this.numpurchaseqty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numpurchaseqty.ValueChanged += new System.EventHandler(this.numQuantityAndPriceValueChanged);
+            this.numpurchaseqty.KeyDown += new System.Windows.Forms.KeyEventHandler(this.numpurchaseqty_KeyDown);
             // 
             // lbpurchaseqty
             // 
@@ -134,7 +136,7 @@
             this.cbunitpurchase.Margin = new System.Windows.Forms.Padding(4);
             this.cbunitpurchase.Name = "cbunitpurchase";
             this.cbunitpurchase.Size = new System.Drawing.Size(313, 40);
-            this.cbunitpurchase.TabIndex = 2;
+            this.cbunitpurchase.TabIndex = 55;
             // 
             // lbpurchaseunit
             // 
@@ -161,7 +163,7 @@
             this.numpcsincontainer.Name = "numpcsincontainer";
             this.numpcsincontainer.ReadOnly = true;
             this.numpcsincontainer.Size = new System.Drawing.Size(318, 39);
-            this.numpcsincontainer.TabIndex = 3;
+            this.numpcsincontainer.TabIndex = 88;
             this.numpcsincontainer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numpcsincontainer.ValueChanged += new System.EventHandler(this.numQuantityAndPriceValueChanged);
             // 
@@ -186,7 +188,7 @@
             this.cbpcsunit.Margin = new System.Windows.Forms.Padding(4);
             this.cbpcsunit.Name = "cbpcsunit";
             this.cbpcsunit.Size = new System.Drawing.Size(313, 40);
-            this.cbpcsunit.TabIndex = 4;
+            this.cbpcsunit.TabIndex = 56;
             // 
             // lbpcsunit
             // 
@@ -208,7 +210,7 @@
             this.tbtotal.Name = "tbtotal";
             this.tbtotal.ReadOnly = true;
             this.tbtotal.Size = new System.Drawing.Size(318, 33);
-            this.tbtotal.TabIndex = 5;
+            this.tbtotal.TabIndex = 89;
             // 
             // lbtotal
             // 
@@ -232,7 +234,7 @@
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(313, 67);
-            this.btnSave.TabIndex = 40;
+            this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Simpan";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);

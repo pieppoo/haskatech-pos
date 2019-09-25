@@ -57,6 +57,7 @@
             this.tbunitcode.Name = "tbunitcode";
             this.tbunitcode.Size = new System.Drawing.Size(320, 39);
             this.tbunitcode.TabIndex = 0;
+            this.tbunitcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbunitcode_KeyDown);
             // 
             // lbunitname
             // 
@@ -94,6 +95,7 @@
             this.tbunitname.Name = "tbunitname";
             this.tbunitname.Size = new System.Drawing.Size(320, 39);
             this.tbunitname.TabIndex = 1;
+            this.tbunitname.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbunitname_KeyDown);
             // 
             // name_mandatory
             // 

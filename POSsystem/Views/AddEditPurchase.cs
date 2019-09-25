@@ -101,38 +101,40 @@ namespace POSsystem.Views
             }
             else
             {
-                var purchase = new PurchaseDetails();
-                purchase.itemid = ProductData.id;
-                purchase.purchase_price = Utils.ToNumbers(tbpurchaseprice.Text);
-                purchase.purchase_qty = int.Parse(numpurchaseqty.Text);
-                purchase.purchase_unit = cbunitpurchase.SelectedValue.ToString();
-                purchase.qty_pcs_in_container = int.Parse(numpcsincontainer.Text);
-                purchase.pcs_unit = cbpcsunit.SelectedValue.ToString();
-                purchase.total_in_pcs = int.Parse(tbtotal.Text);
-
-
-                
-                ProductData.Stock = int.Parse(tbtotal.Text)+ProductData.Stock;
-
-                if (purchaseRepository.Add(purchase))
+                if (tbpurchaseprice.Value == 0 || numpurchaseqty.Value == 0)
+                    MessageBox.Show("Harga beli atau jumlah beli tidak boleh nol (0)");
+                else
                 {
-                    if (productRepository.updateproductstock(ProductData))
+                    var purchase = new PurchaseDetails();
+                    purchase.itemid = ProductData.id;
+                    purchase.purchase_price = Utils.ToNumbers(tbpurchaseprice.Text);
+                    purchase.purchase_qty = int.Parse(numpurchaseqty.Text);
+                    purchase.purchase_unit = cbunitpurchase.SelectedValue.ToString();
+                    purchase.qty_pcs_in_container = int.Parse(numpcsincontainer.Text);
+                    purchase.pcs_unit = cbpcsunit.SelectedValue.ToString();
+                    purchase.total_in_pcs = int.Parse(tbtotal.Text);
+
+
+
+                    ProductData.Stock = int.Parse(tbtotal.Text) + ProductData.Stock;
+
+                    if (purchaseRepository.Add(purchase))
                     {
-                        MessageBox.Show("Data baru telah berhasil di tambahkan");
+                        if (productRepository.updateproductstock(ProductData))
+                        {
+                            MessageBox.Show("Data baru telah berhasil di tambahkan");
+                            Close();
+                        }
+                        else
+                            MessageBox.Show("Gagal memperbaharui stock");
+
                     }
                     else
-                        MessageBox.Show("Gagal memperbaharui stock");
-                    
+                        MessageBox.Show("Data baru gagal ditambahkan");
                 }
-                else
-                    MessageBox.Show("Data baru gagal ditambahkan");
-
-                
-
-
 
             }
-            Close();
+            
         }
 
         private void calculatetotal()
@@ -144,6 +146,29 @@ namespace POSsystem.Views
         private void numQuantityAndPriceValueChanged(object sender, EventArgs e)
         {
             calculatetotal();
+        }
+
+        private void tbpurchaseprice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+                numpurchaseqty.Focus();
+        }
+
+        private void numpurchaseqty_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btnSave.PerformClick();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Escape))
+            {
+                if (MessageBox.Show("Apa Anda Yakin keluar tanpa menyimpan data?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

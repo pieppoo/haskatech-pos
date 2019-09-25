@@ -99,19 +99,20 @@
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(472, 57);
-            this.btnSave.TabIndex = 4;
+            this.btnSave.TabIndex = 5;
             this.btnSave.Text = "Simpan";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btsave_Click);
             // 
             // cbunitpcs
             // 
+            this.cbunitpcs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbunitpcs.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbunitpcs.FormattingEnabled = true;
             this.cbunitpcs.Location = new System.Drawing.Point(337, 343);
             this.cbunitpcs.Name = "cbunitpcs";
             this.cbunitpcs.Size = new System.Drawing.Size(159, 40);
-            this.cbunitpcs.TabIndex = 3;
+            this.cbunitpcs.TabIndex = 4;
             // 
             // lbunitpcs
             // 
@@ -126,6 +127,7 @@
             // 
             // cbunitbulk
             // 
+            this.cbunitbulk.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbunitbulk.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbunitbulk.FormattingEnabled = true;
             this.cbunitbulk.Location = new System.Drawing.Point(24, 343);
@@ -166,7 +168,7 @@
             0});
             this.nbqty.Name = "nbqty";
             this.nbqty.Size = new System.Drawing.Size(96, 39);
-            this.nbqty.TabIndex = 44;
+            this.nbqty.TabIndex = 3;
             // 
             // lbqty
             // 

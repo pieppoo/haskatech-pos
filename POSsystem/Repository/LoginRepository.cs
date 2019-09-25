@@ -72,12 +72,39 @@ namespace POSsystem.Repository
 
         public bool Update(LoginDetails userdetail)
         {
+            throw new NotImplementedException();
+        }
+
+        public bool Updatelastlogin(LoginDetails userdetail)
+        {
             var result = false;
             try
             {
                 string sql = string.Format("UPDATE user SET lastlogin = '{1}' WHERE ID = {0}",
                                             userdetail.id,
                                             userdetail.lastlogin);
+
+                Console.WriteLine(sql);
+
+                var count = dbConnection.Execute(sql, userdetail);
+                result = count > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
+        }
+
+        public bool updatepswd(LoginDetails userdetail)
+        {
+            var result = false;
+            try
+            {
+                string sql = string.Format("UPDATE user SET password = '{1}' WHERE ID = {0}",
+                                            userdetail.id,
+                                            userdetail.password);
 
                 Console.WriteLine(sql);
 

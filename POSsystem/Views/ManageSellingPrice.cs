@@ -116,5 +116,48 @@ namespace POSsystem.Views
             }
 
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.F1))
+            {
+                btnnewprice.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F2))
+            {
+                bteditprice.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F3))
+            {
+                btndeleteprice.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Delete))
+            {
+                btndeleteprice.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Escape))
+            {
+                Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void gvsellprice_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            bteditprice.PerformClick();
+        }
+
+        private void gvsellprice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                    bteditprice.PerformClick();
+            }
+        }
     }
 }

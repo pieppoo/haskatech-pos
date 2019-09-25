@@ -99,7 +99,18 @@ namespace POSsystem.Repository
 
         public ProductDetails GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var queryResult = dbConnection.Query<ProductDetails>("SELECT * FROM item where id = " + id);
+
+                return queryResult.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
         }
 
         public List<ProductDetails> Search(params object[] args)
