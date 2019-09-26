@@ -320,7 +320,7 @@ namespace POSsystem.Views
 
                     var receipt = new Receipt { Data = receiptData };
                     receipt.CompileReceipt();
-                    receipt.ShowPreviewDialog();
+                    receipt.Print();
                 }
             }
 
