@@ -39,6 +39,8 @@
             // 
             // lbunitcode
             // 
+            this.lbunitcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbunitcode.AutoSize = true;
             this.lbunitcode.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbunitcode.Location = new System.Drawing.Point(22, 92);
@@ -49,6 +51,8 @@
             // 
             // tbunitcode
             // 
+            this.tbunitcode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbunitcode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tbunitcode.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbunitcode.Location = new System.Drawing.Point(27, 124);
@@ -61,6 +65,8 @@
             // 
             // lbunitname
             // 
+            this.lbunitname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbunitname.AutoSize = true;
             this.lbunitname.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbunitname.Location = new System.Drawing.Point(27, 187);
@@ -72,6 +78,8 @@
             // 
             // btnSave
             // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -88,10 +96,13 @@
             // 
             // tbunitname
             // 
+            this.tbunitname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbunitname.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tbunitname.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbunitname.Location = new System.Drawing.Point(27, 219);
             this.tbunitname.Margin = new System.Windows.Forms.Padding(4);
+            this.tbunitname.MaxLength = 50;
             this.tbunitname.Name = "tbunitname";
             this.tbunitname.Size = new System.Drawing.Size(320, 39);
             this.tbunitname.TabIndex = 1;
@@ -99,6 +110,8 @@
             // 
             // name_mandatory
             // 
+            this.name_mandatory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.name_mandatory.AutoSize = true;
             this.name_mandatory.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.name_mandatory.ForeColor = System.Drawing.Color.Red;
@@ -110,6 +123,8 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
@@ -131,6 +146,7 @@
             this.Controls.Add(this.lbunitname);
             this.Controls.Add(this.tbunitcode);
             this.Controls.Add(this.lbunitcode);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "AddEditUnit";
             this.Text = "HaskaTech POS";

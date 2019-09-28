@@ -41,6 +41,7 @@
             // 
             // btdeleteunit
             // 
+            this.btdeleteunit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btdeleteunit.BackColor = System.Drawing.Color.Teal;
             this.btdeleteunit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btdeleteunit.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -56,6 +57,7 @@
             // 
             // bteditunit
             // 
+            this.bteditunit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bteditunit.BackColor = System.Drawing.Color.Teal;
             this.bteditunit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bteditunit.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -71,6 +73,7 @@
             // 
             // btaddunit
             // 
+            this.btaddunit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btaddunit.BackColor = System.Drawing.Color.Teal;
             this.btaddunit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btaddunit.Font = new System.Drawing.Font("Segoe UI", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -88,6 +91,9 @@
             // 
             this.gvunititem.AllowUserToAddRows = false;
             this.gvunititem.AllowUserToDeleteRows = false;
+            this.gvunititem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gvunititem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvunititem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -114,21 +120,24 @@
             // 
             // runno
             // 
+            this.runno.FillWeight = 40F;
             this.runno.HeaderText = "No";
             this.runno.Name = "runno";
             this.runno.ReadOnly = true;
+            this.runno.Width = 40;
             // 
             // code
             // 
-            this.code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.code.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.code.FillWeight = 20F;
             this.code.HeaderText = "Kode Kemasan";
             this.code.Name = "code";
             this.code.ReadOnly = true;
-            this.code.Width = 118;
             // 
             // name
             // 
             this.name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.name.FillWeight = 80F;
             this.name.HeaderText = "Nama Kemasan";
             this.name.Name = "name";
             this.name.ReadOnly = true;
@@ -142,6 +151,7 @@
             this.Controls.Add(this.btdeleteunit);
             this.Controls.Add(this.bteditunit);
             this.Controls.Add(this.btaddunit);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "ManageUnit";
             this.Text = "HaskaTech POS";

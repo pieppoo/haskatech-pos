@@ -38,6 +38,8 @@
             // 
             // lbbrandname
             // 
+            this.lbbrandname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbbrandname.AutoSize = true;
             this.lbbrandname.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbbrandname.Location = new System.Drawing.Point(19, 87);
@@ -49,10 +51,13 @@
             // 
             // tbbrandname
             // 
+            this.tbbrandname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbbrandname.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tbbrandname.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbbrandname.Location = new System.Drawing.Point(24, 116);
             this.tbbrandname.Margin = new System.Windows.Forms.Padding(4);
+            this.tbbrandname.MaxLength = 50;
             this.tbbrandname.Name = "tbbrandname";
             this.tbbrandname.Size = new System.Drawing.Size(435, 39);
             this.tbbrandname.TabIndex = 0;
@@ -60,10 +65,13 @@
             // 
             // tbremark
             // 
+            this.tbremark.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbremark.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.tbremark.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbremark.Location = new System.Drawing.Point(24, 204);
             this.tbremark.Margin = new System.Windows.Forms.Padding(4);
+            this.tbremark.MaxLength = 500;
             this.tbremark.Multiline = true;
             this.tbremark.Name = "tbremark";
             this.tbremark.Size = new System.Drawing.Size(435, 73);
@@ -72,6 +80,8 @@
             // 
             // lbremark
             // 
+            this.lbremark.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbremark.AutoSize = true;
             this.lbremark.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbremark.Location = new System.Drawing.Point(19, 175);
@@ -83,6 +93,8 @@
             // 
             // btnSave
             // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.BackColor = System.Drawing.Color.MidnightBlue;
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -99,6 +111,8 @@
             // 
             // name_mandatory
             // 
+            this.name_mandatory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.name_mandatory.AutoSize = true;
             this.name_mandatory.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.name_mandatory.ForeColor = System.Drawing.Color.Red;
@@ -119,6 +133,7 @@
             this.Controls.Add(this.lbremark);
             this.Controls.Add(this.tbbrandname);
             this.Controls.Add(this.lbbrandname);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "AddEditBrand";
             this.Text = "HaskaTech POS";

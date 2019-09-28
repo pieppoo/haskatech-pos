@@ -170,5 +170,10 @@ namespace POSsystem.Views
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+        private void lbpcsincontainer_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

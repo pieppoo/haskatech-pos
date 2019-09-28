@@ -43,6 +43,9 @@
             // 
             this.gvbrand.AllowUserToAddRows = false;
             this.gvbrand.AllowUserToDeleteRows = false;
+            this.gvbrand.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gvbrand.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvbrand.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
@@ -71,11 +74,15 @@
             // No
             // 
             this.No.HeaderText = "No";
+            this.No.MinimumWidth = 40;
             this.No.Name = "No";
             this.No.ReadOnly = true;
+            this.No.Width = 40;
             // 
             // brandname
             // 
+            this.brandname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.brandname.FillWeight = 50F;
             this.brandname.HeaderText = "Nama Merek";
             this.brandname.Name = "brandname";
             this.brandname.ReadOnly = true;
@@ -83,12 +90,14 @@
             // remaark
             // 
             this.remaark.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.remaark.FillWeight = 50F;
             this.remaark.HeaderText = "Keterangan";
             this.remaark.Name = "remaark";
             this.remaark.ReadOnly = true;
             // 
             // btdeletebrand
             // 
+            this.btdeletebrand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btdeletebrand.BackColor = System.Drawing.Color.Teal;
             this.btdeletebrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btdeletebrand.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -104,6 +113,7 @@
             // 
             // bteditbrand
             // 
+            this.bteditbrand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bteditbrand.BackColor = System.Drawing.Color.Teal;
             this.bteditbrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bteditbrand.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -119,6 +129,7 @@
             // 
             // btaddbrand
             // 
+            this.btaddbrand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btaddbrand.BackColor = System.Drawing.Color.Teal;
             this.btaddbrand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btaddbrand.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -141,6 +152,7 @@
             this.Controls.Add(this.bteditbrand);
             this.Controls.Add(this.btaddbrand);
             this.Controls.Add(this.gvbrand);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "ManageBrand";
             this.Text = "HaskaTech POS";
