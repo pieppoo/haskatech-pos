@@ -114,6 +114,8 @@
     <Compile Include="Common\ReportGenerator.cs" />
     <Compile Include="Common\Utils.cs" />
     <Compile Include="Model\Database\DetailReportMonthly.cs" />
+    <Compile Include="Model\Database\ProductCategory.cs" />
+    <Compile Include="Model\Database\ProductUnitsDetails.cs" />
     <Compile Include="Model\Database\QtySaleItem.cs" />
     <Compile Include="Model\Database\LoginDetails.cs" />
     <Compile Include="Model\Database\PaymentModeDetails.cs" />
@@ -135,6 +137,8 @@
     </Compile>
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\PaymentModeRepository.cs" />
+    <Compile Include="Repository\ProductCategoryRepository.cs" />
+    <Compile Include="Repository\ProductUnitsRepository.cs" />
     <Compile Include="Repository\SaleFindItemRepository.cs" />
     <Compile Include="Repository\SaleHistoryRepository.cs" />
     <Compile Include="Repository\SaleListRepository.cs" />
@@ -149,6 +153,12 @@
     </Compile>
     <Compile Include="Model\Database\Brand.cs" />
     <Compile Include="Model\Database\IRepository.cs" />
+    <Compile Include="Views\AddEditCategories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddEditCategories.Designer.cs">
+      <DependentUpon>AddEditCategories.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddEditProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +182,24 @@
     </Compile>
     <Compile Include="Views\AddEditPurchase.Designer.cs">
       <DependentUpon>AddEditPurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditUnitNOTRelated.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddEditUnitNOTRelated.Designer.cs">
+      <DependentUpon>AddEditUnitNOTRelated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditUnitRelated.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddEditUnitRelated.Designer.cs">
+      <DependentUpon>AddEditUnitRelated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddEditUnitRelation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddEditUnitRelation.Designer.cs">
+      <DependentUpon>AddEditUnitRelation.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Base\BaseForm.cs">
       <SubType>Form</SubType>
@@ -209,6 +237,12 @@
     </Compile>
     <Compile Include="Views\ManageBrand.Designer.cs">
       <DependentUpon>ManageBrand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManageCategories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ManageCategories.Designer.cs">
+      <DependentUpon>ManageCategories.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ManagePassword.cs">
       <SubType>Form</SubType>
@@ -249,6 +283,12 @@
     </Compile>
     <Compile Include="Views\ManagePurchase.Designer.cs">
       <DependentUpon>ManagePurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManageUnitInProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ManageUnitInProduct.Designer.cs">
+      <DependentUpon>ManageUnitInProduct.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\PayForm.cs">
       <SubType>Form</SubType>
@@ -295,6 +335,9 @@
     <EmbeddedResource Include="Views\AddEditBrand.resx">
       <DependentUpon>AddEditBrand.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddEditCategories.resx">
+      <DependentUpon>AddEditCategories.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\AddEditProduct.resx">
       <DependentUpon>AddEditProduct.cs</DependentUpon>
     </EmbeddedResource>
@@ -306,6 +349,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\AddEditPurchase.resx">
       <DependentUpon>AddEditPurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddEditUnitNOTRelated.resx">
+      <DependentUpon>AddEditUnitNOTRelated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddEditUnitRelated.resx">
+      <DependentUpon>AddEditUnitRelated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddEditUnitRelation.resx">
+      <DependentUpon>AddEditUnitRelation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Base\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
@@ -324,6 +376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ManageBrand.resx">
       <DependentUpon>ManageBrand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ManageCategories.resx">
+      <DependentUpon>ManageCategories.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ManagePassword.resx">
       <DependentUpon>ManagePassword.cs</DependentUpon>
@@ -347,6 +402,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ManagePurchase.resx">
       <DependentUpon>ManagePurchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ManageUnitInProduct.resx">
+      <DependentUpon>ManageUnitInProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\PayForm.resx">
       <DependentUpon>PayForm.cs</DependentUpon>

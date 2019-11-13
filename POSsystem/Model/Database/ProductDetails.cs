@@ -16,5 +16,7 @@ namespace POSsystem.Database
         public string unit_pcs { get; set; }
         public int qty_pcs_in_container { get; set; }
         public string brandname { get; set; }
+        public int prod_catetogry { get; set; }
+        public string UnitRelated { get; set; }
     }
 }

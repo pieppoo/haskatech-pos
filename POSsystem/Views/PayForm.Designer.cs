@@ -292,10 +292,12 @@
             this.Controls.Add(this.tboritotal);
             this.Controls.Add(this.lboritotal);
             this.Controls.Add(this.panel1);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "PayForm";
             this.Text = "PayForm";
             this.Title = "Pembayaran";
+            this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             this.Load += new System.EventHandler(this.PayForm_Load);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.lboritotal, 0);

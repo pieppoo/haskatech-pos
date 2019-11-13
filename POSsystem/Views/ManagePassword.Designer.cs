@@ -112,10 +112,12 @@
             this.Controls.Add(this.lbname);
             this.Controls.Add(this.tbnewpswd);
             this.Controls.Add(this.lbnewpswd);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "ManagePassword";
             this.Text = "HaskaTech POS";
             this.Title = "Ganti Kata Sandi";
+            this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             this.Load += new System.EventHandler(this.ManagePassword_Load);
             this.Controls.SetChildIndex(this.lbnewpswd, 0);
             this.Controls.SetChildIndex(this.tbnewpswd, 0);

@@ -245,6 +245,18 @@ namespace POSsystem.Views
             gen.GenerateReport();
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+
+            if (keyData == (Keys.Escape))
+            {
+                if (MessageBox.Show("Anda yakin keluar dari halaman Laporan ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private void tbReportFolder_DoubleClick(object sender, EventArgs e)
         {
             Process.Start(@tbReportFolder.Text);

@@ -97,7 +97,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -115,13 +115,13 @@
             this.totalsale,
             this.item_id,
             this.unitcode});
-            this.gvsales.Location = new System.Drawing.Point(23, 113);
+            this.gvsales.Location = new System.Drawing.Point(23, 105);
             this.gvsales.MultiSelect = false;
             this.gvsales.Name = "gvsales";
             this.gvsales.RowHeadersVisible = false;
             this.gvsales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvsales.Size = new System.Drawing.Size(651, 395);
-            this.gvsales.TabIndex = 11;
+            this.gvsales.Size = new System.Drawing.Size(664, 345);
+            this.gvsales.TabIndex = 1;
             this.gvsales.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvsales_CellEndEdit);
             this.gvsales.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gvsales_CellValidating);
             // 
@@ -223,8 +223,8 @@
             this.btpay.Location = new System.Drawing.Point(10, 7);
             this.btpay.Margin = new System.Windows.Forms.Padding(4);
             this.btpay.Name = "btpay";
-            this.btpay.Size = new System.Drawing.Size(201, 56);
-            this.btpay.TabIndex = 4;
+            this.btpay.Size = new System.Drawing.Size(204, 56);
+            this.btpay.TabIndex = 0;
             this.btpay.Text = "BAYAR\r\n(F5)";
             this.btpay.UseVisualStyleBackColor = false;
             this.btpay.Click += new System.EventHandler(this.btpay_Click);
@@ -241,8 +241,8 @@
             this.btnewsale.Location = new System.Drawing.Point(8, 7);
             this.btnewsale.Margin = new System.Windows.Forms.Padding(4);
             this.btnewsale.Name = "btnewsale";
-            this.btnewsale.Size = new System.Drawing.Size(201, 56);
-            this.btnewsale.TabIndex = 2;
+            this.btnewsale.Size = new System.Drawing.Size(206, 56);
+            this.btnewsale.TabIndex = 0;
             this.btnewsale.Text = "PENJUALAN BARU \r\n(F3)";
             this.btnewsale.UseVisualStyleBackColor = false;
             this.btnewsale.Click += new System.EventHandler(this.btnewsale_Click);
@@ -254,7 +254,7 @@
             this.lbbarcode.Location = new System.Drawing.Point(8, 3);
             this.lbbarcode.Name = "lbbarcode";
             this.lbbarcode.Size = new System.Drawing.Size(120, 25);
-            this.lbbarcode.TabIndex = 12;
+            this.lbbarcode.TabIndex = 1;
             this.lbbarcode.Text = "No. Barcode";
             // 
             // lbitemname
@@ -275,8 +275,8 @@
             this.tbitemname.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbitemname.Location = new System.Drawing.Point(11, 30);
             this.tbitemname.Name = "tbitemname";
-            this.tbitemname.Size = new System.Drawing.Size(261, 30);
-            this.tbitemname.TabIndex = 1;
+            this.tbitemname.Size = new System.Drawing.Size(267, 30);
+            this.tbitemname.TabIndex = 0;
             this.tbitemname.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbitemname_KeyDown);
             // 
             // lbpay
@@ -308,7 +308,7 @@
             this.tbtotaltopay.Name = "tbtotaltopay";
             this.tbtotaltopay.ReadOnly = true;
             this.tbtotaltopay.Size = new System.Drawing.Size(146, 55);
-            this.tbtotaltopay.TabIndex = 8;
+            this.tbtotaltopay.TabIndex = 2;
             this.tbtotaltopay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbpay
@@ -319,7 +319,7 @@
             this.tbpay.Name = "tbpay";
             this.tbpay.ReadOnly = true;
             this.tbpay.Size = new System.Drawing.Size(146, 36);
-            this.tbpay.TabIndex = 9;
+            this.tbpay.TabIndex = 3;
             this.tbpay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbbalance
@@ -340,7 +340,7 @@
             this.tbbalance.Name = "tbbalance";
             this.tbbalance.ReadOnly = true;
             this.tbbalance.Size = new System.Drawing.Size(146, 36);
-            this.tbbalance.TabIndex = 10;
+            this.tbbalance.TabIndex = 4;
             this.tbbalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lbdiscount
@@ -371,7 +371,7 @@
             this.tboritotal.Name = "tboritotal";
             this.tboritotal.ReadOnly = true;
             this.tboritotal.Size = new System.Drawing.Size(146, 36);
-            this.tboritotal.TabIndex = 6;
+            this.tboritotal.TabIndex = 0;
             this.tboritotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox1
@@ -388,10 +388,10 @@
             this.groupBox1.Controls.Add(this.tbtotaltopay);
             this.groupBox1.Controls.Add(this.lbtotaltopay);
             this.groupBox1.Controls.Add(this.lbpay);
-            this.groupBox1.Location = new System.Drawing.Point(692, 94);
+            this.groupBox1.Location = new System.Drawing.Point(705, 105);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(170, 495);
-            this.groupBox1.TabIndex = 32;
+            this.groupBox1.Size = new System.Drawing.Size(170, 432);
+            this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             // 
             // tbdiscount
@@ -402,7 +402,7 @@
             this.tbdiscount.Name = "tbdiscount";
             this.tbdiscount.ReadOnly = true;
             this.tbdiscount.Size = new System.Drawing.Size(146, 36);
-            this.tbdiscount.TabIndex = 7;
+            this.tbdiscount.TabIndex = 1;
             this.tbdiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbbarcodeno
@@ -413,7 +413,7 @@
             this.tbbarcodeno.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbbarcodeno.Location = new System.Drawing.Point(8, 30);
             this.tbbarcodeno.Name = "tbbarcodeno";
-            this.tbbarcodeno.Size = new System.Drawing.Size(265, 30);
+            this.tbbarcodeno.Size = new System.Drawing.Size(271, 30);
             this.tbbarcodeno.TabIndex = 0;
             this.tbbarcodeno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbbarcodeno_KeyDown);
             this.tbbarcodeno.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbbarcodeno_KeyPress);
@@ -430,8 +430,8 @@
             this.btdelete.Location = new System.Drawing.Point(7, 7);
             this.btdelete.Margin = new System.Windows.Forms.Padding(4);
             this.btdelete.Name = "btdelete";
-            this.btdelete.Size = new System.Drawing.Size(201, 56);
-            this.btdelete.TabIndex = 5;
+            this.btdelete.Size = new System.Drawing.Size(206, 56);
+            this.btdelete.TabIndex = 0;
             this.btdelete.Text = "HAPUS\r\n(F4)";
             this.btdelete.UseVisualStyleBackColor = false;
             this.btdelete.Click += new System.EventHandler(this.btdelete_Click);
@@ -445,7 +445,7 @@
             this.iconsearch.Image = global::POSsystem.Properties.Resources.search;
             this.iconsearch.Location = new System.Drawing.Point(9, 12);
             this.iconsearch.Name = "iconsearch";
-            this.iconsearch.Size = new System.Drawing.Size(73, 47);
+            this.iconsearch.Size = new System.Drawing.Size(74, 47);
             this.iconsearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.iconsearch.TabIndex = 31;
             this.iconsearch.TabStop = false;
@@ -462,13 +462,13 @@
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel3, 2, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 514);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 467);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(674, 75);
-            this.tableLayoutPanel1.TabIndex = 33;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(687, 75);
+            this.tableLayoutPanel1.TabIndex = 2;
             // 
             // panel1
             // 
@@ -476,31 +476,29 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(218, 69);
+            this.panel1.Size = new System.Drawing.Size(223, 69);
             this.panel1.TabIndex = 0;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.btdelete);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(227, 3);
+            this.panel2.Location = new System.Drawing.Point(232, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(218, 69);
+            this.panel2.Size = new System.Drawing.Size(223, 69);
             this.panel2.TabIndex = 1;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.btpay);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(451, 3);
+            this.panel3.Location = new System.Drawing.Point(461, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(220, 69);
+            this.panel3.Size = new System.Drawing.Size(223, 69);
             this.panel3.TabIndex = 2;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43F));
@@ -508,12 +506,12 @@
             this.tableLayoutPanel2.Controls.Add(this.panel4, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel5, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel6, 2, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 24);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 16);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(671, 74);
-            this.tableLayoutPanel2.TabIndex = 34;
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(684, 74);
+            this.tableLayoutPanel2.TabIndex = 0;
             // 
             // panel4
             // 
@@ -522,7 +520,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(282, 68);
+            this.panel4.Size = new System.Drawing.Size(288, 68);
             this.panel4.TabIndex = 0;
             // 
             // panel5
@@ -530,37 +528,35 @@
             this.panel5.Controls.Add(this.lbitemname);
             this.panel5.Controls.Add(this.tbitemname);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(291, 3);
+            this.panel5.Location = new System.Drawing.Point(297, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(282, 68);
+            this.panel5.Size = new System.Drawing.Size(288, 68);
             this.panel5.TabIndex = 1;
             // 
             // panel6
             // 
             this.panel6.Controls.Add(this.iconsearch);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(579, 3);
+            this.panel6.Location = new System.Drawing.Point(591, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(89, 68);
-            this.panel6.TabIndex = 2;
+            this.panel6.Size = new System.Drawing.Size(90, 68);
+            this.panel6.TabIndex = 0;
             // 
             // POSSalesEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(891, 613);
+            this.ClientSize = new System.Drawing.Size(904, 554);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gvsales);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "POSSalesEntry";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HaskaTech POS";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.POSSalesEntry_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gvsales)).EndInit();
             this.groupBox1.ResumeLayout(false);

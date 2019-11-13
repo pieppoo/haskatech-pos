@@ -272,6 +272,7 @@
             this.Name = "AddEditSellPrice";
             this.Text = "HaskaTech POS";
             this.Title = "Harga Jual";
+            this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             this.Load += new System.EventHandler(this.AddEditSellPrice_Load);
             this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.tbsellprice)).EndInit();

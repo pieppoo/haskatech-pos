@@ -428,6 +428,7 @@
             this.Name = "AddEditPurchase";
             this.Text = "HaskaTech POS";
             this.Title = "Pengaturan Pembelian";
+            this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             this.Load += new System.EventHandler(this.AddEditPurchase_Load);
             this.Controls.SetChildIndex(this.tableLayoutPanel2, 0);
             ((System.ComponentModel.ISupportInitialize)(this.tbpurchaseprice)).EndInit();

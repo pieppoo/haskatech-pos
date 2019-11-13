@@ -151,6 +151,7 @@
             this.Controls.Add(this.btdeleteunit);
             this.Controls.Add(this.bteditunit);
             this.Controls.Add(this.btaddunit);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "ManageUnit";

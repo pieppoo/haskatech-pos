@@ -246,6 +246,7 @@
             this.ClientSize = new System.Drawing.Size(723, 434);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.gvsellprice);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "ManageSellingPrice";

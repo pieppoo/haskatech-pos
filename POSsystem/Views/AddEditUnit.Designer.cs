@@ -151,6 +151,7 @@
             this.Name = "AddEditUnit";
             this.Text = "HaskaTech POS";
             this.Title = "Pengaturan Unit";
+            this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             this.Load += new System.EventHandler(this.AddEditUnit_Load);
             this.Controls.SetChildIndex(this.lbunitcode, 0);
             this.Controls.SetChildIndex(this.tbunitcode, 0);

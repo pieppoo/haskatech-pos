@@ -106,10 +106,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 409);
             this.Controls.Add(this.gvresultitem);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "SearchItemList";
             this.Text = "HaskaTech POS";
             this.Title = "Pilih Barang";
+            this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             this.Load += new System.EventHandler(this.SearchItemList_Load);
             this.Controls.SetChildIndex(this.gvresultitem, 0);
             ((System.ComponentModel.ISupportInitialize)(this.gvresultitem)).EndInit();

@@ -1,4 +1,5 @@
 ﻿using POSsystem.Database;
+using POSsystem.Model.Database;
 using POSsystem.Repository;
 using POSsystem.Views.Base;
 using System;
@@ -20,6 +21,7 @@ namespace POSsystem.Views
         private UnitRepository unitRepository = new UnitRepository();
         private PurchaseRepository purchaseRepository = new PurchaseRepository();
         private SellingPriceRepository sellingPriceRepository = new SellingPriceRepository();
+        private ProductCategoryRepository categoryRepository = new ProductCategoryRepository();
 
         public List<Brand> BrandList { get; set; }
         public List<UnitItem> UnitList { get; set; }
@@ -27,6 +29,7 @@ namespace POSsystem.Views
         public List<SellingPriceDetails> SellingPriceList { get; set; }
         public ProductDetails ProductData { get; set; }
         public List<ProductDetails> ProductList { get; set; }
+        public List<ProductCategory> CategoriesList { get; set; }
 
         public AddEditProduct()
         {
@@ -39,15 +42,18 @@ namespace POSsystem.Views
         private void AddEditProduct_Load(object sender, EventArgs e)
         {
             BrandList = brandRepository.GetAll();
+            CategoriesList = categoryRepository.GetAll();
             UnitList = unitRepository.GetAll();
+
+            
 
             cbbrand.DataSource = new BindingSource(BrandList, null);
             cbbrand.DisplayMember = "name";
             cbbrand.ValueMember = "id";
 
-            cbunitbulk.DataSource = new BindingSource(UnitList, null);
-            cbunitbulk.DisplayMember = "description";
-            cbunitbulk.ValueMember = "unitcode";
+            cbprodcat.DataSource = new BindingSource(CategoriesList, null);
+            cbprodcat.DisplayMember = "category_name";
+            cbprodcat.ValueMember = "id";
 
             cbunitpcs.DataSource = new BindingSource(UnitList, null);
             cbunitpcs.DisplayMember = "description";
@@ -58,30 +64,14 @@ namespace POSsystem.Views
             {
                 cbbrand.SelectedValue = ProductData.brand_id;
                 tbname.Text = ProductData.name;
-                cbunitbulk.SelectedValue = ProductData.unit_bulk;
+                cbprodcat.SelectedValue = ProductData.prod_catetogry;
                 cbunitpcs.SelectedValue = ProductData.unit_pcs;
-                nbqty.Value = ProductData.qty_pcs_in_container;
-
-                PurchaseList = purchaseRepository.GetAll(ProductData.id);
-                SellingPriceList = sellingPriceRepository.GetAll(ProductData.id);
-
-                if (PurchaseList.Count != 0)
-                {
-                    cbunitbulk.Enabled = false;
-                    cbunitpcs.Enabled = false;
-                }
-
-                if (SellingPriceList.Count != 0)
-                {
-                    cbunitbulk.Enabled = false;
-                    cbunitpcs.Enabled = false;
-                }
-
-                if ( ProductData.Stock > 0)
-                {
-                    nbqty.ReadOnly = true;
-                    nbqty.Enabled = false;
-                }
+                if (ProductData.UnitRelated == "Y")
+                    rbyes.Checked = true;
+                else if(ProductData.UnitRelated == "N")
+                    rbnot.Checked = true;
+                cbunitpcs.Enabled = false;
+                gbradiobt.Enabled = false;
             }
         }
 
@@ -116,9 +106,9 @@ namespace POSsystem.Views
                 {
                     ProductData.brand_id = (int)cbbrand.SelectedValue;
                     ProductData.name = tbname.Text;;
-                    ProductData.qty_pcs_in_container = (int)nbqty.Value;
+                    ProductData.prod_catetogry = (int)cbprodcat.SelectedValue;
 
-                    if (productRepository.Update3items(ProductData))
+                    if (productRepository.Update(ProductData))
                     {
                         MessageBox.Show("Data telah berhasil di ubah");
                         Close();
@@ -143,20 +133,21 @@ namespace POSsystem.Views
                     MessageBox.Show("Tidak boleh memasukkan nama produk yang sama");
                     samenameinsamebrand = 0;
                 }
-                else if (nbqty.Value == 0)
-                    MessageBox.Show("Isi tidak boleh nol (0)");
                 else
                 {
                     var product = new ProductDetails();
                     product.brand_id = (int)cbbrand.SelectedValue;
                     product.name = tbname.Text;
-                    product.Stock = 0;
-                    product.unit_bulk = cbunitbulk.SelectedValue.ToString();
+                    product.prod_catetogry = (int)cbprodcat.SelectedValue;
                     product.unit_pcs = cbunitpcs.SelectedValue.ToString();
-                    product.qty_pcs_in_container = (int)nbqty.Value;
+                    if (rbyes.Checked)
+                        product.UnitRelated = "Y";
+                    else if(rbnot.Checked)
+                        product.UnitRelated = "N";
 
-
-                    if (productRepository.Add(product))
+                    if (!rbnot.Checked && !rbyes.Checked)
+                        MessageBox.Show("Silahkan tentukan Produk kemasan berkaitan apa tidak");
+                    else if (productRepository.Add(product))
                     {
                         MessageBox.Show("Data baru telah berhasil di tambahkan");
                         Close();

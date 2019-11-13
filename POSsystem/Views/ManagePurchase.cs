@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using POSsystem.Common;
+using POSsystem.Model.Database;
 
 namespace POSsystem.Views
 {
@@ -20,22 +21,32 @@ namespace POSsystem.Views
         {
             InitializeComponent();
         }
-        private PurchaseRepository purchaseRepository = new PurchaseRepository();
+        public List<UnitItem> unitList { get; set; }
         public List<PurchaseDetails> purchaseList { get; set; }
-
-        private ProductRepository productRepository = new ProductRepository();
         public List<ProductDetails> ProductList { get; set; }
         public ProductDetails ProductData { get; set; }
+        public bool hasUnits { get; set; }
 
+        private ProductRepository productRepository = new ProductRepository();
         private UnitRepository unitRepository = new UnitRepository();
-        public List<UnitItem> unitList{ get; set; }
+        private PurchaseRepository purchaseRepository = new PurchaseRepository();
+        private ProductUnitsRepository productUnitsRepository = new ProductUnitsRepository();
+        
 
 
         private void LoadData()
         {
+            lbitemname.Text = "Nama Produk : " + ProductData.name;
             unitList = unitRepository.GetAll().ToList(); 
             purchaseList = purchaseRepository.GetAll(ProductData.id);
             ProductList = productRepository.GetAll().ToList();
+
+            if(!hasUnits)
+            {
+                btadditem.Enabled = false;
+                btdeleteitem.Enabled = false;
+                btnSellPrice.Enabled = false;
+            }
 
             gvpurchase.Rows.Clear();
 
@@ -50,14 +61,10 @@ namespace POSsystem.Views
 
                     gvpurchase.Rows.Add(
                         purchase.id,
-                        itemname != null ? itemname.name : " - ",
-                        purchase.purchase_qty,
+                        purchase.Created_datetime,
                         unitpurchase != null ? unitpurchase.description : " - ",
-                        Utils.ToRupiah(purchase.purchase_price),
-                        purchase.qty_pcs_in_container,
-                        unitpcs != null ? unitpcs.description : " - ",
-                        purchase.total_in_pcs,
-                        purchase.Created_datetime
+                        purchase.purchase_qty,
+                        Utils.ToRupiah(purchase.purchase_price)
                         );
 
                 }
@@ -65,14 +72,22 @@ namespace POSsystem.Views
 
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+            timer1.Start();
+        }
+
         private void ManageWarehouse_Load(object sender, EventArgs e)
         {
+            lbdate.Text = DateTime.Now.ToLongDateString();
+            timer1.Start();
+            lbtime.Text = DateTime.Now.ToLongTimeString();
             LoadData();
         }
 
         private void btadditem_Click(object sender, EventArgs e)
         {
-
             var form = new AddEditPurchase();
             form.ProductData = ProductData;
             form.ShowDialog();
@@ -85,7 +100,7 @@ namespace POSsystem.Views
                 MessageBox.Show("Tidak ada barang yang akan dihapus");
             else
             {
-                var id = Convert.ToInt32(gvpurchase.Rows[gvpurchase.CurrentCell.RowIndex].Cells[0].Value);
+                var id = Convert.ToInt32(gvpurchase.Rows[gvpurchase.CurrentCell.RowIndex].Cells["id"].Value);
                 var purchaseinfo = purchaseList.FirstOrDefault(x => x.id == id);
 
                 var form = new ConfirmationDialog();
@@ -129,19 +144,34 @@ namespace POSsystem.Views
 
         }
 
+        private void btunitproduk_Click(object sender, EventArgs e)
+        {
+                var form = new ManageUnitInProduct();
+                form.ProductData = ProductData;
+                Hide();
+                form.ShowDialog();
+                Show();
+                LoadData();
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.F1))
             {
-                btadditem.PerformClick();
+                btunitproduk.PerformClick();
                 return true;
             }
             else if (keyData == (Keys.F2))
             {
-                btdeleteitem.PerformClick();
+                btadditem.PerformClick();
                 return true;
             }
             else if (keyData == (Keys.F3))
+            {
+                btdeleteitem.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F4))
             {
                 btnSellPrice.PerformClick();
                 return true;
@@ -158,5 +188,7 @@ namespace POSsystem.Views
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+
     }
 }

@@ -138,6 +138,7 @@
             this.Name = "AddEditBrand";
             this.Text = "HaskaTech POS";
             this.Title = "Pengaturan Merek";
+            this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             this.Load += new System.EventHandler(this.AddEditBrand_Load);
             this.Controls.SetChildIndex(this.lbbrandname, 0);
             this.Controls.SetChildIndex(this.tbbrandname, 0);

@@ -67,23 +67,25 @@ namespace POSsystem.Views
                     {
                         var selectedproduct = new ProductDetails();
                         var salesPrice = saleFindItemRepository.GetByBarcodeNo(barcodeno);
-                        selectedproduct = productRepository.GetById(salesPrice.item_id);
-                        if(selectedproduct.Stock > 0)
+
+                        if (salesPrice != null)
                         {
-                            if (salesPrice != null)
+                            selectedproduct = productRepository.GetById(salesPrice.item_id);
+                            if (selectedproduct.Stock > 0)
                             {
                                 DisplayData(salesPrice);
                                 gvsales.CurrentCell = gvsales.Rows[rowfocusindex].Cells[collsqtyindex];
                                 gvsales.BeginEdit(true);
                             }
                             else
-                            {
-                                MessageBox.Show("Barang tidak ditemukan");
-                                tbbarcodeno.Clear();
-                            }
+                                MessageBox.Show("STOK " + selectedproduct.name + " KOSONG");
                         }
                         else
-                            MessageBox.Show("STOK " + selectedproduct.name + " KOSONG");
+                        {
+                            MessageBox.Show("Barang tidak ditemukan");
+                            tbbarcodeno.Clear();
+                        }
+                                                    
 
                     }
 
@@ -132,10 +134,6 @@ namespace POSsystem.Views
             tbbarcodeno.Focus();
         }
 
-        private void gvsales_CausesValidationChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void gvsales_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
@@ -239,6 +237,10 @@ namespace POSsystem.Views
 
         private void POSSalesEntry_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.None;
+            // fill the screen
+            this.Bounds = Screen.PrimaryScreen.Bounds;
+
             ProductInfo = productRepository.GetAll();
             UnitInfo = unitRepository.GetAll();
         }

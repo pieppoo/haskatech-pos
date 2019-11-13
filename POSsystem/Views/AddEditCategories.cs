@@ -1,4 +1,5 @@
 ﻿using POSsystem.Database;
+using POSsystem.Model.Database;
 using POSsystem.Repository;
 using POSsystem.Views.Base;
 using System;
@@ -11,37 +12,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace POSsystem
+namespace POSsystem.Views
 {
-    public partial class AddEditBrand : BaseForm
+    public partial class AddEditCategories : BaseForm
     {
-        private BrandRepository brandRepository = new BrandRepository();
-
-        public Brand Branddata { get; set; }
-        public List<Brand> BrandList { get; set; }
-
+        public List<ProductCategory> Categorieslist { get; set; }
+        public ProductCategory CategoryData { get; set; }
         public bool Editmode { get; set; }
 
-        public AddEditBrand()
+        private ProductCategoryRepository categoryRepository = new ProductCategoryRepository();
+
+        public AddEditCategories()
         {
             InitializeComponent();
         }
 
-        private void AddEditBrand_Load(object sender, EventArgs e)
+        private void AddEditCategories_Load(object sender, EventArgs e)
         {
-
             if (Editmode)
             {
-                tbbrandname.Text = Branddata.name;
-                tbremark.Text = Branddata.remark;
+                tbcatname.Text = CategoryData.category_name;
+                tbremark.Text = CategoryData.remark;
             }
         }
 
-        private void btsave_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            BrandList = brandRepository.GetAll();
+            Categorieslist = categoryRepository.GetAll();
 
-            if (tbbrandname.Text == "")
+            if (tbcatname.Text == "")
             {
                 MessageBox.Show("Yang bertanda Bintang tidak boleh kosong");
             }
@@ -51,53 +50,53 @@ namespace POSsystem
 
                 if (Editmode)
                 {
-                    Branddata.name = tbbrandname.Text;
-                    Branddata.remark = tbremark.Text;
+                    CategoryData.category_name = tbcatname.Text;
+                    CategoryData.remark = tbremark.Text;
 
 
-                    foreach (var existbrand in BrandList)
+                    foreach (var existcategory in Categorieslist)
                     {
-                        if (tbbrandname.Text == existbrand.name)
+                        if (tbcatname.Text == existcategory.category_name)
                         {
-                                if (existbrand.id != Branddata.id)
-                                    samename += 1;
+                            if (existcategory.id != CategoryData.id)
+                                samename += 1;
                         }
                     }
 
                     if (samename > 0)
                     {
-                        MessageBox.Show("Tidak boleh memasukkan nama merek yang sama");
+                        MessageBox.Show("Tidak boleh memasukkan nama kategori yang sama");
                         samename = 0;
                     }
-                    else if (brandRepository.Update(Branddata))
+                    else if (categoryRepository.Update(CategoryData))
                     {
                         MessageBox.Show("Data telah berhasil di ubah");
                         Close();
                     }
                     else
                         MessageBox.Show("Data gagal diubah");
-                    
+
 
                 }
                 else
                 {
-                    var brand = new Brand();
-                    brand.name = tbbrandname.Text;
-                    brand.remark = tbremark.Text;
+                    var prodcat = new ProductCategory();
+                    prodcat.category_name = tbcatname.Text;
+                    prodcat.remark = tbremark.Text;
 
 
-                    foreach (var existbrand in BrandList)
+                    foreach (var existprodcat in Categorieslist)
                     {
-                        if ( tbbrandname.Text == existbrand.name)
-                            samename = samename +  1;
+                        if (tbcatname.Text == existprodcat.category_name)
+                            samename = samename + 1;
                     }
 
                     if (samename > 0)
                     {
-                        MessageBox.Show("Tidak boleh memasukkan nama merek yang sama");
+                        MessageBox.Show("Tidak boleh memasukkan nama kategori yang sama");
                         samename = 0;
                     }
-                    else if (brandRepository.Add(brand))
+                    else if (categoryRepository.Add(prodcat))
                     {
                         MessageBox.Show("Data baru telah berhasil di tambahkan");
                         Close();
@@ -106,20 +105,21 @@ namespace POSsystem
                         MessageBox.Show("Data baru gagal ditambahkan");
                 }
             }
-
-
         }
 
+        private void tbcatname_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                tbremark.Focus();
+        }
 
-
-
-        private void tbbrandname_KeyDown(object sender, KeyEventArgs e)
+        private void tbremark_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 btnSave.PerformClick();
         }
 
-        private void tbremark_KeyDown(object sender, KeyEventArgs e)
+        private void btnSave_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 btnSave.PerformClick();

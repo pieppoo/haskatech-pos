@@ -27,13 +27,12 @@ namespace POSsystem.Repository
             var result = false;
             try
             {
-                string sql = string.Format("insert into item (brand_id, name, stock, unit_bulk, unit_pcs, qty_pcs_in_container ) values ({0}, '{1}', {2}, '{3}', '{4}', {5})",
+                string sql = string.Format("insert into item (brand_id, name, prod_catetogry, UnitRelated, unit_pcs ) values ({0}, '{1}', {2}, '{3}', '{4}')",
                                             product.brand_id,
                                             product.name,
-                                            product.Stock,
-                                            product.unit_bulk,
-                                            product.unit_pcs,
-                                            product.qty_pcs_in_container
+                                            product.prod_catetogry,
+                                            product.UnitRelated,
+                                            product.unit_pcs
                                             );
                 Console.WriteLine(sql);
 
@@ -140,9 +139,8 @@ namespace POSsystem.Repository
                     }
                     else
                     {
-                        var q2 = string.Format(query_2, args[0] as string);
+                        var q2 = string.Format(query_2, args[0] as string).Replace(";", "");
                         var q3 = string.Format(query_3, Convert.ToInt32(args[1]));
-
                         return dbConnection.Query<ProductDetails>(query_1 + string.Join(" AND ", q2, q3)).ToList();
                     }
                 }
@@ -154,22 +152,63 @@ namespace POSsystem.Repository
             return null;
         }
 
-        public bool Update(ProductDetails product)
+        public List<ProductDetails> SearchProd(string prodname, int brandid, int catid)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query;
+
+                if (prodname.Length != 0 && brandid != 0 && catid != 0) // all have value
+                {
+                    query = "SELECT * FROM item where name LIKE '%" + prodname + "%' and brand_id = " + brandid + " and prod_catetogry = " + catid;
+                }
+                else if (prodname.Length == 0 && brandid != 0 && catid != 0) // name empty but brand and category have 
+                {
+                    query = "SELECT * FROM item where brand_id = " + brandid + " and prod_catetogry = " + catid;
+                }
+                else if (prodname.Length != 0 && brandid == 0 && catid != 0) // brandid empty but name and category have
+                {
+                    query = "SELECT * FROM item where name LIKE '%" + prodname + "%' and prod_catetogry = " + catid;
+                }
+                else if (prodname.Length != 0 && brandid != 0 && catid == 0) // Category empty but name and brandid have
+                {
+                    query = "SELECT * FROM item where name LIKE '%" + prodname + "%' and brand_id = " + brandid;
+                }
+                else if (prodname.Length != 0 && brandid == 0 && catid == 0) // brandid and category empty but name have
+                {
+                    query = "SELECT * FROM item where name LIKE'%" + prodname + "%'";
+                }
+                else if (prodname.Length == 0 && brandid != 0 && catid == 0) // name and category empty but brandid have
+                {
+                    query = "SELECT * FROM item where brand_id = " + brandid;
+                }
+                else  // name and brandid empty but category have
+                {
+                    query = "SELECT * FROM item where prod_catetogry = " + catid;
+                }
+
+                return dbConnection.Query<ProductDetails>(query).ToList();
+                //return queryResult.ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
-        public bool Update3items(ProductDetails product)
+
+        public bool Update(ProductDetails product)
         {
             var result = false;
             try
             {
-                string sql = string.Format("UPDATE item SET name = '{1}', brand_id = {2}, qty_pcs_in_container = {3} WHERE ID = {0}",
+                string sql = string.Format("UPDATE item SET name = '{1}', brand_id = {2}, prod_catetogry = {3} WHERE ID = {0}",
                                             product.id,
                                             product.name,
                                             product.brand_id,
-                                            product.qty_pcs_in_container);
-                                            
+                                            product.prod_catetogry);
+
                 Console.WriteLine(sql);
 
                 var count = dbConnection.Execute(sql, product);
@@ -182,6 +221,30 @@ namespace POSsystem.Repository
 
             return result;
         }
+
+        //public bool Update3items(ProductDetails product)
+        //{
+        //    var result = false;
+        //    try
+        //    {
+        //        string sql = string.Format("UPDATE item SET name = '{1}', brand_id = {2}, qty_pcs_in_container = {3} WHERE ID = {0}",
+        //                                    product.id,
+        //                                    product.name,
+        //                                    product.brand_id,
+        //                                    product.qty_pcs_in_container);
+                                            
+        //        Console.WriteLine(sql);
+
+        //        var count = dbConnection.Execute(sql, product);
+        //        result = count > 0;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.Message);
+        //    }
+
+        //    return result;
+        //}
 
         public bool updateproductstock(ProductDetails product)
         {
@@ -205,6 +268,28 @@ namespace POSsystem.Repository
             return result;
         }
 
+        public bool UpdateProductUnit(int itemid, string yesRelate, string unitcode)
+        {
+            var result = false;
+            try
+            {
+                string sql = string.Format("UPDATE item SET UnitRelated = '{1}', unit_pcs = '{2}' WHERE ID = {0}",
+                                            itemid,
+                                            yesRelate,
+                                            unitcode);
+
+                Console.WriteLine(sql);
+
+                var count = dbConnection.Execute(sql);
+                result = count > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
+        }
 
     }
 }

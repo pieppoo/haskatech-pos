@@ -62,7 +62,7 @@ namespace POSsystem.Repository
         {
             try
             {
-                var queryResult = dbConnection.Query<Brand>("SELECT * FROM Brand ");
+                var queryResult = dbConnection.Query<Brand>("SELECT * FROM Brand order by name ");
 
                 return queryResult.ToList();
             }

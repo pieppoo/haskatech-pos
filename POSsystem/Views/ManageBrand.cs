@@ -35,6 +35,15 @@ namespace POSsystem
             Console.WriteLine(List[0].name);
             Console.WriteLine(List[0].remark);
             */
+            lbdate.Text = DateTime.Now.ToLongDateString();
+            timer1.Start();
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+            timer1.Start();
         }
 
         private void LoadData()
@@ -95,16 +104,21 @@ namespace POSsystem
                 var id = Convert.ToInt32(gvbrand.Rows[gvbrand.CurrentCell.RowIndex].Cells[0].Value);
 
                 var form = new ConfirmationDialog();
-                form.Message = "Apa anda yakin menghapus Brand terpilih?";
+                form.Message = "Apa anda yakin menghapus Merek terpilih?";
                 form.ShowDialog();
 
                 if (form.YES)
                 {
                     if (!brandRepository.Delete(id))
-                        MessageBox.Show("Gagal menghapus brand");
+                        MessageBox.Show("Gagal menghapus Merek");
                     LoadData();
                 }
             }
+
+        }
+
+        private void btsearch_Click(object sender, EventArgs e)
+        {
 
         }
 
@@ -148,5 +162,6 @@ namespace POSsystem
                 }
             }
         }
+
     }
 }

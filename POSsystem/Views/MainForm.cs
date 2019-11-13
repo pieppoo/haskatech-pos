@@ -42,7 +42,6 @@ namespace POSsystem.Views
         {
             var form = new Report();
             form.userdata = userdata;
-            Hide();
             form.ShowDialog();
             Show();
         }
@@ -51,7 +50,6 @@ namespace POSsystem.Views
         {
             var form = new ManagePassword();
             form.userdata = userdata;
-            Hide();
             form.ShowDialog();
             Show();
         }

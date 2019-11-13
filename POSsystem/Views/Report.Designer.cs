@@ -154,10 +154,12 @@
             this.Controls.Add(this.printmonthlyreport);
             this.Controls.Add(this.cbmonthlyreport);
             this.Controls.Add(this.lbreportsummary);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Report";
-            this.Text = "HaskaTech POS";
+            this.Text = " ";
             this.Title = "Laporan Bulanan";
+            this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             this.Load += new System.EventHandler(this.Report_Load);
             this.Controls.SetChildIndex(this.lbreportsummary, 0);
             this.Controls.SetChildIndex(this.cbmonthlyreport, 0);

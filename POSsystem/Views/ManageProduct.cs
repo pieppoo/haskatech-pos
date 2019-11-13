@@ -1,5 +1,6 @@
 ﻿using POSsystem.Database;
 using POSsystem.Model;
+using POSsystem.Model.Database;
 using POSsystem.Repository;
 using POSsystem.Views;
 using POSsystem.Views.Base;
@@ -22,10 +23,13 @@ namespace POSsystem
         public List<Brand> BrandList { get; set; }
         public List<UnitItem> UnitList { get; set; }
         public LoginDetails userdata { get; set; }
+        public List<ProductCategory> CategoriesList { get; set; }
+        public List<ProductUnitsDetails> ProductUnitList { get; set; }
 
         private ProductRepository productRepository = new ProductRepository();
         private BrandRepository brandRepository = new BrandRepository();
-        private UnitRepository unitRepository = new UnitRepository();
+        private ProductCategoryRepository categoryRepository = new ProductCategoryRepository();
+        private ProductUnitsRepository productUnitsRepository = new ProductUnitsRepository();
 
 
 
@@ -34,8 +38,17 @@ namespace POSsystem
             InitializeComponent();
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+            timer1.Start();
+        }
+
         private void ManageProduct_Load(object sender, EventArgs e)
         {
+            lbdate.Text = DateTime.Now.ToLongDateString();
+            timer1.Start();
+            lbtime.Text = DateTime.Now.ToLongTimeString();
             LoadData();
         }
 
@@ -51,6 +64,8 @@ namespace POSsystem
 
         private void LoadData()
         {
+            
+
             if (userdata.user_role == "kasir")
             {
                 btadditem.Visible = false;
@@ -63,64 +78,63 @@ namespace POSsystem
             try
             {
                 BrandList = brandRepository.GetAll().ToList();
-                //ProductList = productRepository.GetAll().OrderBy(x => x.brand_id).ThenBy(x => x.name).ToList();
                 ProductList = productRepository.GetAll().ToList();
-                UnitList = unitRepository.GetAll();
+                CategoriesList = categoryRepository.GetAll().ToList();
                 var tempproductlist = new List<TempProductDetails>();
 
-                foreach (var item in ProductList)
+                if (ProductList != null)
                 {
-                    var brand = BrandList.FirstOrDefault(x => x.id == item.brand_id);
-                    var unitbulkinfo = UnitList.FirstOrDefault(x => x.unitcode == item.unit_bulk);
-                    var unitpcsinfo = UnitList.FirstOrDefault(x => x.unitcode == item.unit_pcs);
+                    foreach (var item in ProductList)
+                    {
+                        var brand = BrandList.FirstOrDefault(x => x.id == item.brand_id);
+                        var prodcat = CategoriesList.FirstOrDefault(x => x.id == item.prod_catetogry);
 
-                    var itemstock = "stock";
-                                        
-                    int stockbulk = (item.Stock / item.qty_pcs_in_container);
-                    int stockpcs = item.Stock - (stockbulk * item.qty_pcs_in_container);
-                    itemstock = stockbulk + " " + unitbulkinfo.description + " " + stockpcs + " " + unitpcsinfo.description;
 
-                    var itemDetail = new TempProductDetails();
-                    itemDetail.id = item.id;
-                    itemDetail.brand_id = item.brand_id;
-                    itemDetail.name = item.name;
-                    itemDetail.unit_bulk = unitbulkinfo != null ? unitbulkinfo.description : " - ";
-                    itemDetail.unit_pcs = unitpcsinfo != null ? unitpcsinfo.description : " - ";
-                    itemDetail.Stock = itemstock;
-                    itemDetail.qty_pcs_in_container = item.qty_pcs_in_container;
-                    itemDetail.brandname = brand != null ? brand.name : " - ";
-                    tempproductlist.Add(itemDetail);
+                        var itemDetail = new TempProductDetails();
+                        itemDetail.id = item.id;
+                        itemDetail.brand_id = item.brand_id;
+                        itemDetail.name = item.name;
+                        itemDetail.brandname = brand != null ? brand.name : " - ";
+                        itemDetail.prod_catetogry = item.prod_catetogry;
+                        itemDetail.prodcat_name = prodcat != null ? prodcat.category_name : " - ";
+                        tempproductlist.Add(itemDetail);
+                    }
+
+                    gvitem.Rows.Clear();
+
+                    foreach (var item in tempproductlist.OrderBy(x => x.prodcat_name).ThenBy(x => x.brandname).ThenBy(x => x.name))
+                    {
+                        gvitem.Rows.Add(
+                            item.id,
+                            item.prodcat_name,
+                            item.brandname,
+                            item.name
+                            );
+                    }
                 }
 
-                gvitem.Rows.Clear();
-
-                foreach (var item in tempproductlist.OrderBy(x => x.brandname))
-                {
-                    gvitem.Rows.Add(
-                        item.id,
-                        item.brandname,
-                        item.name,
-                        item.unit_bulk,
-                        item.unit_pcs,
-                        item.Stock,
-                        item.qty_pcs_in_container
-                        );
-                }
 
 
                 var cbData = BrandList;
-                cbData.Insert(0, new Brand { id = -1, name = "--- Pilih Brand ---" });
+                cbData.Insert(0, new Brand { id = -1, name = "--- Pilih Merek ---" });
 
                 cbbrand.DataSource = new BindingSource(BrandList, null);
                 cbbrand.DisplayMember = "name";
                 cbbrand.ValueMember = "id";
+
+                var cbcatdata = CategoriesList;
+                cbcatdata.Insert(0, new ProductCategory { id = -1, category_name = "--- Pilih Kategori ---" });
+
+                cbcategory.DataSource = new BindingSource(CategoriesList, null);
+                cbcategory.DisplayMember = "category_name";
+                cbcategory.ValueMember = "id";
             }
             catch (Exception ex)
             {
                 var errMsg = "Details : " + ex.Message + Environment.NewLine + "Stacktrace : " + ex.StackTrace;
                 MessageBox.Show(errMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            gvitem.Focus();
+            tbitemname.Focus();
         }
 
         private void btadditem_Click(object sender, EventArgs e)
@@ -144,7 +158,18 @@ namespace POSsystem
                     form.Editmode = true;
                     form.ProductData = product;
                     form.ShowDialog();
-                    LoadData();
+
+                    var updatedProduct = ProductList.FirstOrDefault(x => x.id == id);
+                    var brand = BrandList.FirstOrDefault(x => x.id == updatedProduct.brand_id);
+                    var prodcat = CategoriesList.FirstOrDefault(x => x.id == updatedProduct.prod_catetogry);
+
+
+                    gvitem.Rows.RemoveAt(gvitem.CurrentCell.RowIndex);
+                    gvitem.Rows.Insert(gvitem.CurrentCell.RowIndex,
+                        updatedProduct.id,
+                        prodcat != null ? prodcat.category_name : " - ",
+                        brand != null ? brand.name : " - " ,
+                        updatedProduct.name);
                 }
             }
 
@@ -186,10 +211,16 @@ namespace POSsystem
                 {
                     var form = new ManagePurchase();
                     form.ProductData = product;
+
+                    ProductUnitList = productUnitsRepository.GetAll(product.id).ToList();
+                    if (ProductUnitList.Count != 0)
+                    {
+                        form.hasUnits = true;
+                    }
+
                     Hide();
                     form.ShowDialog();
                     Show();
-                    LoadData();
                 }
             }
 
@@ -197,27 +228,46 @@ namespace POSsystem
 
         private void gvitem_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (userdata.user_role == "admin")
             {
-                if(gvitem.Rows.Count > 0)
+                if (e.KeyCode == Keys.Enter)
                 {
-                    int currIndex = gvitem.CurrentRow.Index;
-                    var id = Convert.ToInt32(gvitem.Rows[currIndex].Cells[0].Value);
-                    var product = ProductList.FirstOrDefault(x => x.id == id);
-
-
-                    if (product != null)
+                    if (gvitem.Rows.Count > 0)
                     {
-                        var form = new ManagePurchase();
-                        form.ProductData = product;
-                        Hide();
-                        form.ShowDialog();
-                        Show();
-                        LoadData();
-                    }
-                }
+                        int currIndex = gvitem.CurrentRow.Index;
+                        var id = Convert.ToInt32(gvitem.Rows[currIndex].Cells[0].Value);
+                        var product = ProductList.FirstOrDefault(x => x.id == id);
 
+
+                        if (product != null)
+                        {
+                            var form = new ManagePurchase();
+                            form.ProductData = product;
+
+                            ProductUnitList = productUnitsRepository.GetAll(product.id).ToList();
+                            if (ProductUnitList.Count != 0)
+                            {
+                                form.hasUnits = true;
+                            }
+
+                            Hide();
+                            form.ShowDialog();
+                            Show();
+                        }
+                    }
+
+                }
             }
+
+
+        }
+        private void bcategory_Click(object sender, EventArgs e)
+        {
+            var form = new ManageCategories();
+            Hide();
+            form.ShowDialog();
+            Show();
+            LoadData();
         }
 
         private void btunitmanage_Click(object sender, EventArgs e)
@@ -231,8 +281,9 @@ namespace POSsystem
 
         private void btsearch_Click(object sender, EventArgs e)
         {
-            var args = new List<object>();
 
+            /*
+            var args = new List<object>();
             if (!string.IsNullOrEmpty(tbitemname.Text))
             {
                 args.Add(tbitemname.Text);
@@ -243,37 +294,70 @@ namespace POSsystem
                 args.Add((int)cbbrand.SelectedValue);
             }
 
-            var result = productRepository.Search(args.ToArray());
-
-            if(result != null)
+            if ((int)cbcategory.SelectedValue != -1)
             {
-                gvitem.Rows.Clear();
-
-                foreach (var item in result)
-                {
-                    var brand = BrandList.FirstOrDefault(x => x.id == item.brand_id);
-                    var unitbulkinfo = UnitList.FirstOrDefault(x => x.unitcode == item.unit_bulk);
-                    var unitpcsinfo = UnitList.FirstOrDefault(x => x.unitcode == item.unit_pcs);
-
-                    gvitem.Rows.Add(
-                        item.id,
-                        brand != null ? brand.name : " - ",
-                        item.name,
-                        unitbulkinfo != null ? unitbulkinfo.description : " - ",
-                        unitpcsinfo != null ? unitpcsinfo.description : " - ",
-                        item.Stock
-                        );
-
-                }
+                args.Add((int)cbcategory.SelectedValue);
             }
-            else
-                MessageBox.Show("Barang tidak ditemukan");
+
+            var result = productRepository.Search(args.ToArray());
+            */
+
+            var itemname = tbitemname.Text;
+            int brandid = (int)cbbrand.SelectedValue;
+            int catid = ((int)cbcategory.SelectedValue);
+
+            if (brandid == -1)
+                brandid = 0;
+            if (catid == -1)
+                catid = 0;
+
+            if (itemname.Length > 0 || brandid > 0 || catid > 0)
+            {
+                var result = productRepository.SearchProd(itemname, brandid, catid);
+                if (result != null)
+                {
+                    var tempproductlist = new List<TempProductDetails>();
+
+                    foreach (var item in result)
+                    {
+                        var brand = BrandList.FirstOrDefault(x => x.id == item.brand_id);
+                        var prodcat = CategoriesList.FirstOrDefault(x => x.id == item.prod_catetogry);
+
+
+                        var itemDetail = new TempProductDetails();
+                        itemDetail.id = item.id;
+                        itemDetail.brand_id = item.brand_id;
+                        itemDetail.name = item.name;
+                        itemDetail.brandname = brand != null ? brand.name : " - ";
+                        itemDetail.prod_catetogry = item.prod_catetogry;
+                        itemDetail.prodcat_name = prodcat != null ? prodcat.category_name : " - ";
+                        tempproductlist.Add(itemDetail);
+                    }
+
+                    gvitem.Rows.Clear();
+
+                    foreach (var item in tempproductlist.OrderBy(x => x.prodcat_name).ThenBy(x => x.brandname).ThenBy(x => x.name))
+                    {
+                        gvitem.Rows.Add(
+                            item.id,
+                            item.prodcat_name,
+                            item.brandname,
+                            item.name
+                            );
+                    }
+                }
+                else
+                    MessageBox.Show("Barang tidak ditemukan");
+            }
+
+
         }
 
         private void btnreset_Click(object sender, EventArgs e)
         {
             LoadData();
             tbitemname.Clear();
+            tbitemname.Focus();
         }
 
         private void tbitemname_KeyDown(object sender, KeyEventArgs e)
@@ -331,6 +415,11 @@ namespace POSsystem
                 btunitmanage.PerformClick();
                 return true;
             }
+            else if (keyData == (Keys.F10))
+            {
+                btcategory.PerformClick();
+                return true;
+            }
             else if (keyData == (Keys.Delete))
             {
                 btdeleteitem.PerformClick();
@@ -343,7 +432,6 @@ namespace POSsystem
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
 
     }
 }
