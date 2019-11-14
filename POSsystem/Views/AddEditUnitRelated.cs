@@ -37,9 +37,6 @@ namespace POSsystem.Views
 
         private void AddEditUnitRelated_Load(object sender, EventArgs e)
         {
-            lbunitparent.Text = "Kemasan " + seqno;
-            lbunitchild.Text = "Kemasan " + (seqno + 1);
-
             UnitList = unitRepository.GetAll();
 
             cbunitparent.DataSource = new BindingSource(UnitList, null);
@@ -54,22 +51,30 @@ namespace POSsystem.Views
             {
                 productUnitsList = productUnitsRepository.GetAll(SelectedUnitData.itemid).ToList();
                 var childunit = productUnitsList.FirstOrDefault(x => x.seq == SelectedUnitData.seq + 1);
+                maxseq = productUnitsList.Count;
 
                 cbunitparent.SelectedValue = SelectedUnitData.unitcode;
-                nbqty.Value = SelectedUnitData.qty;
+                nbqtyparent.Value = SelectedUnitData.qty;
                 cbunitchild.Enabled = false;
 
+                lbunitchildcopy.Visible = false;
+                tbchildcopy.Visible = false;
+                lbqtychild.Visible = false;
+                nbqtychild.Visible = false;
+                lb2ndchild.Visible = false;
+                tbsecondchild.Visible = false;
+                mandatory2.Visible = false;
 
-                if (productUnitsList.Count == SelectedUnitData.seq)
+                lbunitparent.Text = "Kemasan " + SelectedUnitData.seq;
+
+                if (productUnitsList.Count == SelectedUnitData.seq) //lastseq
                 {
-                    nbqty.Enabled = false;
+                    nbqtyparent.Enabled = false;
                     lbunitchild.Visible = false;
                     cbunitchild.Visible = false;
-                    lbunitparent.Text = "Kemasan " + SelectedUnitData.seq;
                 }
                 else
                 {
-                    lbunitparent.Text = "Kemasan " + SelectedUnitData.seq;
                     lbunitchild.Text = "Kemasan " + childunit.seq;
                     cbunitchild.SelectedValue = childunit.unitcode;
                 }
@@ -82,33 +87,104 @@ namespace POSsystem.Views
                 if (productUnitsList.Count != 0)
                 {
                     maxseq = productUnitsList.Count;
-                    var parentsunit = productUnitsList.FirstOrDefault(x => x.seq == seqno - 1);
-
-                    cbunitparent.SelectedValue = parentsunit.unitcode;
-
-                    if (seqno == 1)
+                    
+                    if (seqno > maxseq || seqno == 1)
                     {
-                        cbunitchild.Enabled = false;
-                    }
-                    else if (seqno < maxseq && seqno > 1)
-                    {
-                        cbunitparent.Enabled = false;
+                        lbunitchildcopy.Visible = false;
+                        tbchildcopy.Visible = false;
+                        lbqtychild.Visible = false;
+                        nbqtychild.Visible = false;
+                        lb2ndchild.Visible = false;
+                        tbsecondchild.Visible = false;
+                        mandatory2.Visible = false;
                     }
                     else
                     {
+                        int totalunit = UnitList.Count;
+
+                        Random rnd = new Random();
+                        int unitrandom = rnd.Next(0, totalunit);
+
+                        cbunitchild.SelectedIndex = unitrandom;
+                        var childunitcode = cbunitchild.SelectedValue.ToString();
+                        var childunitdesc = UnitList.FirstOrDefault(x => x.unitcode == childunitcode);
+
+                        var secondchildunit = productUnitsList.FirstOrDefault(x => x.seq == seqno);
+
+                        var secondchildunitdet = UnitList.FirstOrDefault(x => x.unitcode == secondchildunit.unitcode);
+
+                        tbchildcopy.Text = childunitdesc.description;
+                        tbsecondchild.Text = secondchildunitdet.description;
+                        tbsecondchild.Enabled = false;
+                    }
+
+                    if (seqno == 1)
+                    {
+                        lbunitparent.Text = "Kemasan " + seqno;
+                        lbunitchild.Text = "Kemasan " + (seqno + 1);
+
+                        var childunit = productUnitsList.FirstOrDefault(x => x.seq == seqno);
+                        cbunitchild.SelectedValue = childunit.unitcode;
+                        cbunitchild.Enabled = false;
+                    }
+                    else
+                    {
+                        lbunitparent.Text = "Kemasan " + (seqno-1);
+                        lbunitchild.Text = "Kemasan " + seqno;
+                        lb2ndchild.Text = "Kemasan " + (seqno + 1);
+                        lbunitchildcopy.Text = lbunitchild.Text;
+
                         cbunitparent.Enabled = false;
+                        var parentsunit = productUnitsList.FirstOrDefault(x => x.seq == seqno - 1);
+                        cbunitparent.SelectedValue = parentsunit.unitcode;
                     }
                 }
+                else
+                {
+                    lbunitparent.Text = "Kemasan " + seqno;
+                    lbunitchild.Text = "Kemasan " + (seqno + 1);
+
+                    lbunitchildcopy.Visible = false;
+                    tbchildcopy.Visible = false;
+                    lbqtychild.Visible = false;
+                    nbqtychild.Visible = false;
+                    lb2ndchild.Visible = false;
+                    tbsecondchild.Visible = false;
+                    mandatory2.Visible = false;
+                }
             }
-            
+
         }
 
+        private void cbunitchild_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            UnitList = unitRepository.GetAll();
+            var childunitcode = cbunitchild.SelectedValue;
+            var childunitdesc = UnitList.FirstOrDefault(x => x.unitcode == childunitcode.ToString());
+            tbchildcopy.Text = childunitdesc.description;
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             if(Editmode)
             {
+                SelectedUnitData.unitcode = cbunitparent.SelectedValue.ToString();
+                SelectedUnitData.qty = (int)nbqtyparent.Value;
 
+                var sameunit = productUnitsList.FirstOrDefault(x => x.unitcode == SelectedUnitData.unitcode && x.seq != SelectedUnitData.seq);
+
+                if (sameunit != null)
+                    MessageBox.Show("Kemasan yang anda pilih sudah terdaftar");
+                else if (nbqtyparent.Value == 0 && SelectedUnitData.seq != maxseq)
+                    MessageBox.Show("Silahkan isi jumlah nya");
+                else if (productUnitsRepository.Update(SelectedUnitData))
+                {
+
+                    MessageBox.Show("Kemasan data berhasil di ubah");
+                    Close();
+                }
+                else
+                    MessageBox.Show("Gagal mengubah data kemasan");
             }
             else
             {
@@ -120,7 +196,7 @@ namespace POSsystem.Views
                     produnitparent.itemid = ProductData.id;
                     produnitparent.seq = 1;
                     produnitparent.unitcode = cbunitparent.SelectedValue.ToString();
-                    produnitparent.qty = (int)nbqty.Value;
+                    produnitparent.qty = (int)nbqtyparent.Value;
                     produnitparent.pcsflag = "N";
 
                     produnitchild.itemid = ProductData.id;
@@ -131,13 +207,14 @@ namespace POSsystem.Views
 
                     if (produnitparent.unitcode == produnitchild.unitcode)
                         MessageBox.Show("Kemasan 1 dan Kemasan 2 tidak boleh sama");
-                    else if (nbqty.Value == 0)
+                    else if (nbqtyparent.Value == 0)
                         MessageBox.Show("Silahkan isi jumlah nya");
                     else
                     {
                         if (productUnitsRepository.Addtwounits(produnitparent, produnitchild))
                         {
                             MessageBox.Show("Data baru telah berhasil di tambahkan");
+                            seqno = 0;
                             Close();
                         }
                         else
@@ -157,23 +234,26 @@ namespace POSsystem.Views
                         newunit.itemid = ProductData.id;
                         newunit.seq = seqno;
                         newunit.unitcode = cbunitparent.SelectedValue.ToString();
-                        newunit.qty = (int)nbqty.Value;
+                        newunit.qty = (int)nbqtyparent.Value;
                         newunit.pcsflag = "N";
 
                         var sameunit = productUnitsList.FirstOrDefault(x => x.unitcode == newunit.unitcode);
 
                         if(sameunit != null)
                             MessageBox.Show("Kemasan baru yang anda masukkan sudah terdaftar");
+                        else if (nbqtyparent.Value == 0)
+                            MessageBox.Show("Silahkan isi jumlah nya");
                         else if (productUnitsRepository.AddUnitinfirstOfList(newunit))
                         {
                             MessageBox.Show("Kemasan baru berhasil ditambahkan");
+                            seqno = 0;
                             Close();
                         }
                         else
                             MessageBox.Show("Kemasan baru gagal ditambahkan");
                        
                     }
-                    else if (seqno < maxseq && seqno > 1)
+                    else if (seqno <= maxseq && seqno > 1)
                     {
                         //adding new unit in the middle of the list (random seq)
                         //in the screen parent unit dropdownlist will disable while child unit dropdownlist is enable.
@@ -185,16 +265,21 @@ namespace POSsystem.Views
                         newunit.itemid = ProductData.id;
                         newunit.seq = seqno;
                         newunit.unitcode = cbunitchild.SelectedValue.ToString();
-                        newunit.qty = 0;
+                        newunit.qty = (int)nbqtychild.Value;
                         newunit.pcsflag = "N";
 
                         var sameunit = productUnitsList.FirstOrDefault(x => x.unitcode == newunit.unitcode);
 
                         if (sameunit != null)
                             MessageBox.Show("Kemasan baru yang anda masukkan sudah terdaftar");
-                        else if (productUnitsRepository.AddUnitinmiddletOfList(newunit, (int)nbqty.Value))
+                        else if (nbqtyparent.Value == 0)
+                            MessageBox.Show("Silahkan isi jumlah nya");
+                        else if (nbqtychild.Value == 0)
+                            MessageBox.Show("Silahkan isi jumlah nya");
+                        else if (productUnitsRepository.AddUnitinmiddletOfList(newunit, (int)nbqtyparent.Value))
                         {
                             MessageBox.Show("Kemasan baru berhasil ditambahkan");
+                            seqno = 0;
                             Close();
                         }
                         else
@@ -219,9 +304,12 @@ namespace POSsystem.Views
 
                         if (sameunit != null)
                             MessageBox.Show("Kemasan baru yang anda masukkan sudah terdaftar");
-                        else if (productUnitsRepository.AddUnitinLastOfList(newunit, (int)nbqty.Value))
+                        else if (nbqtyparent.Value == 0)
+                            MessageBox.Show("Silahkan isi jumlah nya");
+                        else if (productUnitsRepository.AddUnitinLastOfList(newunit, (int)nbqtyparent.Value))
                         {
                             MessageBox.Show("Kemasan baru berhasil ditambahkan");
+                            seqno = 0;
                             Close();
                         }
                         else
@@ -229,8 +317,23 @@ namespace POSsystem.Views
 
                     }
                 }
-                seqno = 0;
+                
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Enter))
+            {
+                btnSave.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Escape))
+            {
+                Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

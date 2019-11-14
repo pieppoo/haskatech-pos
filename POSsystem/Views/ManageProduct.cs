@@ -420,6 +420,16 @@ namespace POSsystem
                 btcategory.PerformClick();
                 return true;
             }
+            else if (keyData == (Keys.Space))
+            {
+                gvitem.Focus();
+                return true;
+            }
+            else if (keyData == (Keys.Q))
+            {
+                tbitemname.Focus();
+                return true;
+            }
             else if (keyData == (Keys.Delete))
             {
                 btdeleteitem.PerformClick();

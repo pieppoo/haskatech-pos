@@ -21,6 +21,9 @@ namespace POSsystem.Views
         public ProductDetails ProductData { get; set; }
         public List<ProductUnitsDetails> productUnitsList { get; set; }
         public List<UnitItem> unitItemsList { get; set; }
+        private bool Editflag { get; set; }
+        private int Editseq { get; set; }
+        private bool Deleteflag { get; set; }
 
         private ProductUnitsRepository productUnitsRepository = new ProductUnitsRepository();
         private UnitRepository unitRepository = new UnitRepository();
@@ -31,7 +34,10 @@ namespace POSsystem.Views
 
         private void ManageUnitInProduct_Load(object sender, EventArgs e)
         {
-            int seq = 0;
+            Editflag = false;
+            Deleteflag = false;
+            Editseq = 0;
+           // int seq = 0;
             lbdate.Text = DateTime.Now.ToLongDateString();
             timer1.Start();
             lbtime.Text = DateTime.Now.ToLongTimeString();
@@ -101,11 +107,26 @@ namespace POSsystem.Views
                             additional_seq = item.seq + 1;
                         }
 
-                        seqlist.Add(additional_seq);
+                        if(additional_seq <11)
+                        {
+                            seqlist.Add(additional_seq);
+                        }
                         cbseq.DataSource = new BindingSource(seqlist, null);
 
                         cbseq.SelectedItem = additional_seq;
                         additional_seq = 0;
+                        if (Editflag == true)
+                        {
+                           // gvunitlist.Rows[Editseq-1].Selected = true;
+                            gvunitlist.CurrentCell = gvunitlist[2,Editseq-1];
+                            Editflag = false;
+                            Editseq = 0;
+                        }
+                        else if (Deleteflag == true)
+                        {
+                            gvunitlist.CurrentCell = gvunitlist[2, gvunitlist.Rows.Count-1];
+                            Deleteflag = false;
+                        }
                     }
 
                     
@@ -150,7 +171,40 @@ namespace POSsystem.Views
 
         private void btdeleteunit_Click(object sender, EventArgs e)
         {
+            if (gvunitlist.SelectedRows.Count == 0)
+                MessageBox.Show("Tidak ada Kemasan yang akan dihapus");
+            else if(ProductData.UnitRelated == "Y")
+            {
+                int totalunit = gvunitlist.Rows.Count;
 
+                var seq_no = Convert.ToInt32(gvunitlist.Rows[gvunitlist.CurrentCell.RowIndex].Cells["seq_no"].Value);
+
+                if(totalunit == seq_no)
+                {
+                    var form = new ConfirmationDialog();
+                    form.Message = "Apa anda yakin menghapus kemasan terpilih?";
+                    form.ShowDialog();
+
+                    if (form.YES)
+                    {
+
+                        if (productUnitsRepository.DeleteRelated(ProductData.id, seq_no))
+                            MessageBox.Show("Kemasan terpilih sudah dihapus");
+                        else
+                            MessageBox.Show("Gagal menghapus kemasan");
+
+                        Deleteflag = true;
+                        LoadData();
+                    }
+                }
+                else
+                    MessageBox.Show("Anda tidak dibenarkan menghapus selain kemasan pada urutan terakhir");
+            }
+            else
+            {
+                var seq_no = Convert.ToInt32(gvunitlist.Rows[gvunitlist.CurrentCell.RowIndex].Cells["seq_no"].Value);
+                var selectedUnit = productUnitsList.FirstOrDefault(x => x.itemid == ProductData.id && x.seq == seq_no);
+            }
         }
 
         private void btaddunit_Click(object sender, EventArgs e)
@@ -181,6 +235,8 @@ namespace POSsystem.Views
                     form.Editmode = true;
                     form.SelectedUnitData = selectedUnit;
                     form.ShowDialog();
+                    Editflag = true;
+                    Editseq = seq_no;
                     LoadData();
                 }
             }
@@ -209,6 +265,11 @@ namespace POSsystem.Views
             else if (keyData == (Keys.F3))
             {
                 btdeleteunit.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F4))
+            {
+                cbseq.Focus();
                 return true;
             }
             else if (keyData == (Keys.Delete))

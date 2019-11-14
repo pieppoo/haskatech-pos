@@ -34,6 +34,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageUnitInProduct));
             this.gvunitlist = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.itemid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.seq_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isPCS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbitemname = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -55,12 +61,6 @@
             this.lbtime = new System.Windows.Forms.Label();
             this.lbdate = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.itemid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.seq_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isPCS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvunitlist)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -110,15 +110,60 @@
             this.gvunitlist.Size = new System.Drawing.Size(716, 279);
             this.gvunitlist.TabIndex = 11;
             // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // itemid
+            // 
+            this.itemid.HeaderText = "itemid";
+            this.itemid.Name = "itemid";
+            this.itemid.ReadOnly = true;
+            this.itemid.Visible = false;
+            // 
+            // seq_no
+            // 
+            this.seq_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.seq_no.HeaderText = "No urut";
+            this.seq_no.Name = "seq_no";
+            this.seq_no.ReadOnly = true;
+            this.seq_no.Width = 74;
+            // 
+            // unit
+            // 
+            this.unit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.unit.FillWeight = 200F;
+            this.unit.HeaderText = "Kemasan";
+            this.unit.Name = "unit";
+            this.unit.ReadOnly = true;
+            // 
+            // qty
+            // 
+            this.qty.HeaderText = "Jumlah";
+            this.qty.Name = "qty";
+            this.qty.ReadOnly = true;
+            // 
+            // isPCS
+            // 
+            this.isPCS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.isPCS.DefaultCellStyle = dataGridViewCellStyle1;
+            this.isPCS.HeaderText = "Kemasan Eceran?";
+            this.isPCS.Name = "isPCS";
+            this.isPCS.ReadOnly = true;
+            // 
             // lbitemname
             // 
             this.lbitemname.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lbitemname.AutoSize = true;
-            this.lbitemname.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbitemname.Location = new System.Drawing.Point(11, 15);
+            this.lbitemname.Font = new System.Drawing.Font("Cambria", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbitemname.Location = new System.Drawing.Point(11, 8);
             this.lbitemname.Name = "lbitemname";
-            this.lbitemname.Size = new System.Drawing.Size(122, 22);
+            this.lbitemname.Size = new System.Drawing.Size(183, 34);
             this.lbitemname.TabIndex = 12;
             this.lbitemname.Text = "Nama Produk";
             // 
@@ -189,12 +234,12 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(7, 15);
+            this.label2.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(0, 16);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 22);
+            this.label2.Size = new System.Drawing.Size(98, 19);
             this.label2.TabIndex = 13;
-            this.label2.Text = "No Urut";
+            this.label2.Text = "No Urut (F4)";
             // 
             // btaddunit
             // 
@@ -375,51 +420,6 @@
             this.lbdate.TabIndex = 1;
             this.lbdate.Text = "date";
             this.lbdate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // itemid
-            // 
-            this.itemid.HeaderText = "itemid";
-            this.itemid.Name = "itemid";
-            this.itemid.ReadOnly = true;
-            this.itemid.Visible = false;
-            // 
-            // seq_no
-            // 
-            this.seq_no.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.seq_no.HeaderText = "No urut";
-            this.seq_no.Name = "seq_no";
-            this.seq_no.ReadOnly = true;
-            this.seq_no.Width = 80;
-            // 
-            // unit
-            // 
-            this.unit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.unit.FillWeight = 200F;
-            this.unit.HeaderText = "Kemasan";
-            this.unit.Name = "unit";
-            this.unit.ReadOnly = true;
-            // 
-            // qty
-            // 
-            this.qty.HeaderText = "Jumlah";
-            this.qty.Name = "qty";
-            this.qty.ReadOnly = true;
-            // 
-            // isPCS
-            // 
-            this.isPCS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.isPCS.DefaultCellStyle = dataGridViewCellStyle1;
-            this.isPCS.HeaderText = "Kemasan Eceran?";
-            this.isPCS.Name = "isPCS";
-            this.isPCS.ReadOnly = true;
             // 
             // ManageUnitInProduct
             // 
