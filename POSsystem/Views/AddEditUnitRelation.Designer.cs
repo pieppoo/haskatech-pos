@@ -32,8 +32,6 @@
             this.lbunitrelate = new System.Windows.Forms.Label();
             this.rbyes = new System.Windows.Forms.RadioButton();
             this.rbno = new System.Windows.Forms.RadioButton();
-            this.lbpcs = new System.Windows.Forms.Label();
-            this.cbunitpcs = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.lbitemname = new System.Windows.Forms.Label();
@@ -77,42 +75,16 @@
             this.rbno.Text = "Tidak";
             this.rbno.UseVisualStyleBackColor = true;
             // 
-            // lbpcs
-            // 
-            this.lbpcs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbpcs.AutoSize = true;
-            this.lbpcs.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbpcs.Location = new System.Drawing.Point(2, 55);
-            this.lbpcs.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbpcs.Name = "lbpcs";
-            this.lbpcs.Size = new System.Drawing.Size(144, 22);
-            this.lbpcs.TabIndex = 4;
-            this.lbpcs.Text = "Kemasan Eceran";
-            // 
-            // cbunitpcs
-            // 
-            this.cbunitpcs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbunitpcs.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbunitpcs.FormattingEnabled = true;
-            this.cbunitpcs.Location = new System.Drawing.Point(163, 52);
-            this.cbunitpcs.Margin = new System.Windows.Forms.Padding(2);
-            this.cbunitpcs.Name = "cbunitpcs";
-            this.cbunitpcs.Size = new System.Drawing.Size(142, 30);
-            this.cbunitpcs.TabIndex = 2;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.rbno);
-            this.groupBox1.Controls.Add(this.cbunitpcs);
-            this.groupBox1.Controls.Add(this.lbpcs);
             this.groupBox1.Controls.Add(this.lbunitrelate);
             this.groupBox1.Controls.Add(this.rbyes);
             this.groupBox1.Location = new System.Drawing.Point(16, 72);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(326, 95);
+            this.groupBox1.Size = new System.Drawing.Size(326, 60);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -123,7 +95,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.Transparent;
-            this.btnSave.Location = new System.Drawing.Point(16, 184);
+            this.btnSave.Location = new System.Drawing.Point(16, 146);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(326, 51);
             this.btnSave.TabIndex = 1;
@@ -146,7 +118,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(372, 253);
+            this.ClientSize = new System.Drawing.Size(372, 217);
             this.Controls.Add(this.lbitemname);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupBox1);
@@ -167,8 +139,6 @@
         private System.Windows.Forms.Label lbunitrelate;
         private System.Windows.Forms.RadioButton rbyes;
         private System.Windows.Forms.RadioButton rbno;
-        private System.Windows.Forms.Label lbpcs;
-        private System.Windows.Forms.ComboBox cbunitpcs;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lbitemname;

@@ -27,12 +27,10 @@ namespace POSsystem.Repository
             var result = false;
             try
             {
-                string sql = string.Format("insert into item (brand_id, name, prod_catetogry, UnitRelated, unit_pcs ) values ({0}, '{1}', {2}, '{3}', '{4}')",
+                string sql = string.Format("insert into item (brand_id, name, prod_catetogry ) values ({0}, '{1}', {2})",
                                             product.brand_id,
                                             product.name,
-                                            product.prod_catetogry,
-                                            product.UnitRelated,
-                                            product.unit_pcs
+                                            product.prod_catetogry
                                             );
                 Console.WriteLine(sql);
 
@@ -268,15 +266,14 @@ namespace POSsystem.Repository
             return result;
         }
 
-        public bool UpdateProductUnit(int itemid, string yesRelate, string unitcode)
+        public bool UpdateProductUnit(int itemid, string yesRelate)
         {
             var result = false;
             try
             {
-                string sql = string.Format("UPDATE item SET UnitRelated = '{1}', unit_pcs = '{2}' WHERE ID = {0}",
+                string sql = string.Format("UPDATE item SET UnitRelated = '{1}' WHERE ID = {0}",
                                             itemid,
-                                            yesRelate,
-                                            unitcode);
+                                            yesRelate);
 
                 Console.WriteLine(sql);
 

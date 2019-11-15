@@ -32,17 +32,12 @@ namespace POSsystem.Views
 
         private void AddEditUnitRelation_Load(object sender, EventArgs e)
         {
-            unitList = unitRepository.GetAll();
-            cbunitpcs.DataSource = new BindingSource(unitList, null);
-            cbunitpcs.DisplayMember = "description";
-            cbunitpcs.ValueMember = "unitcode";
-
             lbitemname.Text = ProductData.name;
             if (ProductData.UnitRelated == "Y")
                 rbyes.Checked = true;
             else
                 rbno.Checked = true;
-            cbunitpcs.SelectedValue = ProductData.unit_pcs;
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -53,16 +48,16 @@ namespace POSsystem.Views
             }
             else
             {
-                var hasRelation = "Y";
+                if (rbyes.Checked)
+                    ProductData.UnitRelated = "Y";
+                else
+                {
+                    ProductData.UnitRelated = "N";
+                }
 
-                if (rbno.Checked)
-                    hasRelation = "N";
-
-                if (productRepository.UpdateProductUnit(ProductData.id, hasRelation, cbunitpcs.SelectedValue.ToString()))
+                if (productRepository.UpdateProductUnit(ProductData.id, ProductData.UnitRelated))
                 {
                     MessageBox.Show("Data telah berhasil di ubah");
-                    ProductData.UnitRelated = hasRelation;
-                    ProductData.unit_pcs = cbunitpcs.SelectedValue.ToString();
                     Close();
                 }
                 else

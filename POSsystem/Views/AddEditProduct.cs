@@ -43,9 +43,6 @@ namespace POSsystem.Views
         {
             BrandList = brandRepository.GetAll();
             CategoriesList = categoryRepository.GetAll();
-            UnitList = unitRepository.GetAll();
-
-            
 
             cbbrand.DataSource = new BindingSource(BrandList, null);
             cbbrand.DisplayMember = "name";
@@ -55,23 +52,12 @@ namespace POSsystem.Views
             cbprodcat.DisplayMember = "category_name";
             cbprodcat.ValueMember = "id";
 
-            cbunitpcs.DataSource = new BindingSource(UnitList, null);
-            cbunitpcs.DisplayMember = "description";
-            cbunitpcs.ValueMember = "unitcode";
-
 
             if (Editmode)
             {
                 cbbrand.SelectedValue = ProductData.brand_id;
                 tbname.Text = ProductData.name;
                 cbprodcat.SelectedValue = ProductData.prod_catetogry;
-                cbunitpcs.SelectedValue = ProductData.unit_pcs;
-                if (ProductData.UnitRelated == "Y")
-                    rbyes.Checked = true;
-                else if(ProductData.UnitRelated == "N")
-                    rbnot.Checked = true;
-                cbunitpcs.Enabled = false;
-                gbradiobt.Enabled = false;
             }
         }
 
@@ -139,15 +125,8 @@ namespace POSsystem.Views
                     product.brand_id = (int)cbbrand.SelectedValue;
                     product.name = tbname.Text;
                     product.prod_catetogry = (int)cbprodcat.SelectedValue;
-                    product.unit_pcs = cbunitpcs.SelectedValue.ToString();
-                    if (rbyes.Checked)
-                        product.UnitRelated = "Y";
-                    else if(rbnot.Checked)
-                        product.UnitRelated = "N";
 
-                    if (!rbnot.Checked && !rbyes.Checked)
-                        MessageBox.Show("Silahkan tentukan Produk kemasan berkaitan apa tidak");
-                    else if (productRepository.Add(product))
+                    if (productRepository.Add(product))
                     {
                         MessageBox.Show("Data baru telah berhasil di tambahkan");
                         Close();

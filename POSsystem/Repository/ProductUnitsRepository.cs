@@ -45,7 +45,7 @@ namespace POSsystem.Repository
                     var count = dbConnection.Execute(sql);
                     var firstresult = count > 0;
 
-                    if(firstresult == true)
+                    if(firstresult)
                     {
                         //Step 2: Adding new unit
                         string sql2 = string.Format("insert into productunits (itemid, seq, unitcode, qty, pcsflag ) values ({0}, {1}, '{2}', {3}, '{4}')",
@@ -97,7 +97,7 @@ namespace POSsystem.Repository
                     var count = dbConnection.Execute(sql);
                     var firstresult = count > 0;
 
-                    if (firstresult == true)
+                    if (firstresult)
                     {
                         //step 2: adding new unit to database
                         string sql2 = string.Format("insert into productunits (itemid, seq, unitcode, qty, pcsflag ) values ({0}, {1}, '{2}', {3}, '{4}')",
@@ -151,7 +151,7 @@ namespace POSsystem.Repository
                     var count = dbConnection.Execute(sql);
                     var firsResult = count > 0;
 
-                    if (firsResult == true)
+                    if (firsResult)
                     {
                         //step 2: update all sequence in DB from current seq to last seq
                         string sql2 = string.Format("update productunits set seq = seq + 1 where itemid = {0} and seq >= {1} ",
@@ -160,7 +160,7 @@ namespace POSsystem.Repository
                         var count2 = dbConnection.Execute(sql2);
                         var SecondResult = count2 > 0;
 
-                        if (SecondResult == true)
+                        if (SecondResult)
                         {
                             //step 3: adding new unit to database
                             string sql3 = string.Format("insert into productunits (itemid, seq, unitcode, qty, pcsflag ) values ({0}, {1}, '{2}', {3}, '{4}')",
@@ -219,7 +219,7 @@ namespace POSsystem.Repository
                     var count = dbConnection.Execute(sql, parent);
                     var firstResult = count > 0;
 
-                    if (firstResult == true)
+                    if (firstResult)
                     {
                         //step 2: adding new unit to database
                         string sql2 = string.Format("insert into productunits (itemid, seq, unitcode, qty, pcsflag ) values ({0}, {1}, '{2}', {3}, '{4}')",
@@ -259,8 +259,6 @@ namespace POSsystem.Repository
                                             produnit.qty,
                                             produnit.pcsflag
                                             );
-                Console.WriteLine(sql);
-
                 var count = dbConnection.Execute(sql, produnit);
                 result = count > 0;
             }
@@ -274,17 +272,182 @@ namespace POSsystem.Repository
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            var result = false;
+            try
+            {
+                string sql = string.Format("delete from productunits where id = {0} ",
+                                             id);
+
+                var count = dbConnection.Execute(sql);
+                result = count > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
         }
 
-        public bool DeleteRelated(int itemid, int seqno)
+        public bool DeleteNOTRelated(int itemid, int seqno)
+        {
+            var result = false;
+            if (dbConnection.State != ConnectionState.Open)
+            {
+                dbConnection.Close();
+                dbConnection.Open();
+            }
+            using (var tran = dbConnection.BeginTransaction())
+            {
+                try
+                {
+                    // multiple operations involving here
+
+                    //step 1: remove selected unit
+                    string sql = string.Format("delete from productunits where itemid = {0} and seq = {1} ",
+                                                 itemid,
+                                                 seqno);
+
+                    var count = dbConnection.Execute(sql);
+                     var firstResult = count > 0;
+
+                    if (firstResult)
+                    {
+                        //step 2: update seq for all unit after the selected unit 
+                        string sql2 = string.Format("update productunits set seq = seq - 1 where itemid = {0} and seq > {1} ",
+                                                    itemid,
+                                                    seqno);
+                        var count2 = dbConnection.Execute(sql2);
+                        result = count2 > 0;
+
+                        tran.Commit();
+                        return result;
+                    }
+                    else
+                        return firstResult;
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    Console.WriteLine(ex.Message);
+                    return result;
+                }
+            }
+        }
+
+        public bool DeleteRelatedmiddle(int itemid, int seqno)
+        {
+            var result = false;
+            if (dbConnection.State != ConnectionState.Open)
+            {
+                dbConnection.Close();
+                dbConnection.Open();
+            }
+            using (var tran = dbConnection.BeginTransaction())
+            {
+                try
+                {
+                    // multiple operations involving here
+
+                    //step 1: remove selected unit
+                    string sql = string.Format("delete from productunits where itemid = {0} and seq = {1} ",
+                                                 itemid,
+                                                 seqno);
+
+                    var count = dbConnection.Execute(sql);
+                    var firstResult = count > 0;
+
+                    if (firstResult)
+                    {
+                        //step 2: update seq for all unit after the selected unit 
+                        string sql2 = string.Format("update productunits set seq = seq - 1 where itemid = {0} and seq > {1} ",
+                                                    itemid,
+                                                    seqno);
+                        var count2 = dbConnection.Execute(sql2);
+                        var secondresult = count2 > 0;
+
+                        if (secondresult)
+                        {
+                            // step 3: update qty parent
+                            string sql3 = string.Format("update productunits set qty = 0 where itemid = {0} and seq = {1} ",
+                                                    itemid,
+                                                    seqno-1);
+                            var count3 = dbConnection.Execute(sql3);
+                            result = count3 > 0;
+
+                            tran.Commit();
+                            return result;
+                        }
+                        else
+                            return secondresult;
+
+
+                    }
+                    else
+                        return firstResult;
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    Console.WriteLine(ex.Message);
+                    return result;
+                }
+            }
+        }
+
+        public bool DeleteRelatedfirst(int itemid, int seqno)
+        {
+            var result = false;
+            if (dbConnection.State != ConnectionState.Open)
+            {
+                dbConnection.Close();
+                dbConnection.Open();
+            }
+            using (var tran = dbConnection.BeginTransaction())
+            {
+                try
+                {
+                    // multiple operations involving here
+
+                    //step 1: remove selected unit
+                    string sql = string.Format("delete from productunits where itemid = {0} and seq = {1} ",
+                                                 itemid,
+                                                 seqno);
+
+                    var count = dbConnection.Execute(sql);
+                    var firstResult = count > 0;
+
+                    if (firstResult)
+                    {
+                        //step 2: update seq for all unit after the selected unit 
+                        string sql2 = string.Format("update productunits set seq = seq - 1 where itemid = {0} and seq > {1} ",
+                                                    itemid,
+                                                    seqno);
+                        var count2 = dbConnection.Execute(sql2);
+                        result = count2 > 0;
+
+                        tran.Commit();
+                        return result;
+                    }
+                    else
+                        return firstResult;
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    Console.WriteLine(ex.Message);
+                    return result;
+                }
+            }
+        }
+
+        public bool DeleteAll(int itemid)
         {
             var result = false;
             try
             {
-                string sql = string.Format("delete from productunits where itemid = {0} and seq = {1} ",
-                                             itemid,
-                                             seqno);
+                string sql = string.Format("delete from productunits where itemid = {0}",
+                                             itemid);
 
                 var count = dbConnection.Execute(sql);
                 result = count > 0;
