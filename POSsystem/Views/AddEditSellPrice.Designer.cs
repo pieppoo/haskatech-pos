@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.lbitemname = new System.Windows.Forms.Label();
-            this.tbitemname = new System.Windows.Forms.TextBox();
             this.lbunitsell = new System.Windows.Forms.Label();
             this.lbsellprice = new System.Windows.Forms.Label();
             this.cbunitsell = new System.Windows.Forms.ComboBox();
@@ -57,27 +56,15 @@
             this.lbitemname.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbitemname.AutoSize = true;
-            this.lbitemname.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbitemname.Font = new System.Drawing.Font("Cambria", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbitemname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.lbitemname.Location = new System.Drawing.Point(18, 10);
             this.lbitemname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbitemname.Name = "lbitemname";
-            this.lbitemname.Size = new System.Drawing.Size(135, 25);
+            this.lbitemname.Size = new System.Drawing.Size(514, 69);
             this.lbitemname.TabIndex = 18;
             this.lbitemname.Text = "Nama Produk";
-            // 
-            // tbitemname
-            // 
-            this.tbitemname.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbitemname.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbitemname.Location = new System.Drawing.Point(18, 39);
-            this.tbitemname.Margin = new System.Windows.Forms.Padding(4);
-            this.tbitemname.Name = "tbitemname";
-            this.tbitemname.ReadOnly = true;
-            this.tbitemname.Size = new System.Drawing.Size(516, 39);
-            this.tbitemname.TabIndex = 19;
+            this.lbitemname.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbunitsell
             // 
@@ -212,7 +199,6 @@
             // panelprod
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.panelprod, 2);
-            this.panelprod.Controls.Add(this.tbitemname);
             this.panelprod.Controls.Add(this.lbitemname);
             this.panelprod.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelprod.Location = new System.Drawing.Point(3, 3);
@@ -278,7 +264,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbsellprice)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panelprod.ResumeLayout(false);
-            this.panelprod.PerformLayout();
             this.panelsave.ResumeLayout(false);
             this.panelbarcode.ResumeLayout(false);
             this.panelbarcode.PerformLayout();
@@ -292,7 +277,6 @@
 
         #endregion
         private System.Windows.Forms.Label lbitemname;
-        private System.Windows.Forms.TextBox tbitemname;
         private System.Windows.Forms.Label lbsellprice;
         private System.Windows.Forms.NumericUpDown tbsellprice;
         private System.Windows.Forms.Button btsave;

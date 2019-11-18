@@ -25,13 +25,22 @@ namespace POSsystem.Views
 
         private void ManageUnit_Load(object sender, EventArgs e)
         {
+            lbdate.Text = DateTime.Now.ToLongDateString();
+            timer1.Start();
+            lbtime.Text = DateTime.Now.ToLongTimeString();
             LoadData();
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+            timer1.Start();
+        }
+
 
         private void LoadData()
         {
             UnitList = unitRepository.GetAll().OrderBy(x => x.unitcode).ThenBy(x => x.description).ToList();
-
             gvunititem.Rows.Clear();
             int runningno = 1;
 
@@ -113,6 +122,51 @@ namespace POSsystem.Views
             }
         }
 
+        private void btsearch_Click(object sender, EventArgs e)
+        {
+            var args = new List<object>();
+
+            if (!string.IsNullOrEmpty(tbunitname.Text))
+            {
+                args.Add(tbunitname.Text);
+            }
+
+            var result = unitRepository.Search(args.ToArray());
+
+            if (result.Count != 0)
+            {
+                gvunititem.Rows.Clear();
+                int runningno = 1;
+
+                foreach (var item in result)
+                {
+
+                    gvunititem.Rows.Add(item.id,
+                        runningno,
+                        item.unitcode,
+                        item.description);
+                    runningno = runningno + 1;
+                }
+                runningno = 1;
+            }
+            else
+                MessageBox.Show("Kemasan tidak ditemukan");
+        }
+
+        private void btnreset_Click(object sender, EventArgs e)
+        {
+            LoadData();
+            tbunitname.Clear();
+            tbunitname.Focus();
+        }
+        private void tbunitname_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btsearch.PerformClick();
+            }
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.F1))
@@ -130,6 +184,16 @@ namespace POSsystem.Views
                 btdeleteunit.PerformClick();
                 return true;
             }
+            else if (keyData == (Keys.F4))
+            {
+                btsearch.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F5))
+            {
+                btnreset.PerformClick();
+                return true;
+            }
             else if (keyData == (Keys.Delete))
             {
                 btdeleteunit.PerformClick();
@@ -142,5 +206,7 @@ namespace POSsystem.Views
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+
     }
 }

@@ -25,14 +25,11 @@ namespace POSsystem.Repository
             var result = false;
             try
             {
-                string sql = string.Format("insert into purchase_item (itemid, purchase_qty, purchase_unit, purchase_price, qty_pcs_in_container, pcs_unit, total_in_pcs) value ({0}, {1}, '{2}', {3}, {4}, '{5}', {6})",
+                string sql = string.Format("insert into purchase_item (itemid, purchase_qty, purchase_unit, purchase_price) value ({0}, {1}, '{2}', {3})",
                                             purchaseitem.itemid,
                                             purchaseitem.purchase_qty,
                                             purchaseitem.purchase_unit,
-                                            purchaseitem.purchase_price,
-                                            purchaseitem.qty_pcs_in_container,
-                                            purchaseitem.pcs_unit,
-                                            purchaseitem.total_in_pcs
+                                            purchaseitem.purchase_price
                                             );
                 Console.WriteLine(sql);
 
@@ -45,6 +42,55 @@ namespace POSsystem.Repository
             }
 
             return result;
+        }
+
+        public bool AddwithStock(PurchaseDetails purchaseitem, int prodstock)
+        {
+            var result = false;
+            if (dbConnection.State != ConnectionState.Open)
+            {
+                dbConnection.Close();
+                dbConnection.Open();
+            }
+            using (var tran = dbConnection.BeginTransaction())
+            {
+                try
+                {
+                    // multiple operations involving here
+
+                    //step 1: insert new purchase data
+                    string sql = string.Format("insert into purchase_item (itemid, purchase_qty, purchase_unit, purchase_price) value ({0}, {1}, '{2}', {3})",
+                                            purchaseitem.itemid,
+                                            purchaseitem.purchase_qty,
+                                            purchaseitem.purchase_unit,
+                                            purchaseitem.purchase_price
+                                            );
+
+                    var count = dbConnection.Execute(sql);
+                    var firstResult = count > 0;
+
+                    if (firstResult)
+                    {
+                        //step 2: update stock
+                        string sql2 = string.Format("update item set stock = stock + {0} where id = {1}",
+                                                    prodstock,
+                                                    purchaseitem.itemid);
+                        var count2 = dbConnection.Execute(sql2);
+                        result = count2 > 0;
+
+                        tran.Commit();
+                        return result;
+                    }
+                    else
+                        return firstResult;
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    Console.WriteLine(ex.Message);
+                    return result;
+                }
+            }
         }
 
         public bool Delete(int id)
@@ -65,6 +111,54 @@ namespace POSsystem.Repository
 
             return result;
         }
+
+        public bool deletewithstock(int id, int itemid, int prodstock)
+        {
+            var result = false;
+            if (dbConnection.State != ConnectionState.Open)
+            {
+                dbConnection.Close();
+                dbConnection.Open();
+            }
+            using (var tran = dbConnection.BeginTransaction())
+            {
+                try
+                {
+                    // multiple operations involving here
+
+                    //step 1: delete purchase data
+                    string sql = string.Format("DELETE FROM purchase_item WHERE ID = {0}",
+                                            id
+                                            );
+
+                    var count = dbConnection.Execute(sql);
+                    var firstResult = count > 0;
+
+                    if (firstResult)
+                    {
+                        
+                        //step 2: update stock
+                        string sql2 = string.Format("update item set stock = stock - {0} where id = {1}",
+                                                    prodstock,
+                                                    itemid);
+                        var count2 = dbConnection.Execute(sql2);
+                        result = count2 > 0;
+
+                        tran.Commit();
+                        return result;
+                    }
+                    else
+                        return firstResult;
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    Console.WriteLine(ex.Message);
+                    return result;
+                }
+
+        }
+    }
 
         public List<PurchaseDetails> GetAll()
         {

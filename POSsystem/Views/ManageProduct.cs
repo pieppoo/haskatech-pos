@@ -24,13 +24,13 @@ namespace POSsystem
         public List<UnitItem> UnitList { get; set; }
         public LoginDetails userdata { get; set; }
         public List<ProductCategory> CategoriesList { get; set; }
-        public List<ProductUnitsDetails> ProductUnitList { get; set; }
 
         private ProductRepository productRepository = new ProductRepository();
         private BrandRepository brandRepository = new BrandRepository();
         private ProductCategoryRepository categoryRepository = new ProductCategoryRepository();
         private ProductUnitsRepository productUnitsRepository = new ProductUnitsRepository();
-
+        private UnitRepository unitRepository = new UnitRepository();
+        
 
 
         public ManageProduct()
@@ -80,15 +80,25 @@ namespace POSsystem
                 BrandList = brandRepository.GetAll().ToList();
                 ProductList = productRepository.GetAll().ToList();
                 CategoriesList = categoryRepository.GetAll().ToList();
+                UnitList = unitRepository.GetAll().ToList();
                 var tempproductlist = new List<TempProductDetails>();
+                var unitproduct = new List<ProductUnitsDetails>();
 
                 if (ProductList != null)
                 {
                     foreach (var item in ProductList)
                     {
+                        var pcsunit = new ProductUnitsDetails();
+                        unitproduct = productUnitsRepository.GetAll(item.id);
+                        if (unitproduct.Count > 0)
+                        {
+                            pcsunit = unitproduct.FirstOrDefault(x => x.pcsflag == "Y");
+                        }
+                            
+                       
                         var brand = BrandList.FirstOrDefault(x => x.id == item.brand_id);
                         var prodcat = CategoriesList.FirstOrDefault(x => x.id == item.prod_catetogry);
-
+                        var selectedunit = UnitList.FirstOrDefault(x => x.unitcode == pcsunit.unitcode);
 
                         var itemDetail = new TempProductDetails();
                         itemDetail.id = item.id;
@@ -97,6 +107,7 @@ namespace POSsystem
                         itemDetail.brandname = brand != null ? brand.name : " - ";
                         itemDetail.prod_catetogry = item.prod_catetogry;
                         itemDetail.prodcat_name = prodcat != null ? prodcat.category_name : " - ";
+                        itemDetail.Stock = selectedunit != null ? item.Stock + " " + selectedunit.description : item.Stock.ToString();
                         tempproductlist.Add(itemDetail);
                     }
 
@@ -108,7 +119,8 @@ namespace POSsystem
                             item.id,
                             item.prodcat_name,
                             item.brandname,
-                            item.name
+                            item.name,
+                            item.Stock
                             );
                     }
                 }
@@ -159,9 +171,20 @@ namespace POSsystem
                     form.ProductData = product;
                     form.ShowDialog();
 
+                    var unitproduct = new List<ProductUnitsDetails>();
+                    unitproduct = productUnitsRepository.GetAll(id);
+
+                    var pcsunit = new ProductUnitsDetails();
+
+                    if (unitproduct.Count > 0)
+                    {
+                        pcsunit = unitproduct.FirstOrDefault(x => x.pcsflag == "Y");
+                    }
+
                     var updatedProduct = ProductList.FirstOrDefault(x => x.id == id);
                     var brand = BrandList.FirstOrDefault(x => x.id == updatedProduct.brand_id);
                     var prodcat = CategoriesList.FirstOrDefault(x => x.id == updatedProduct.prod_catetogry);
+                    var selectedunit = UnitList.FirstOrDefault(x => x.unitcode == pcsunit.unitcode);
 
 
                     gvitem.Rows.RemoveAt(gvitem.CurrentCell.RowIndex);
@@ -169,7 +192,8 @@ namespace POSsystem
                         updatedProduct.id,
                         prodcat != null ? prodcat.category_name : " - ",
                         brand != null ? brand.name : " - " ,
-                        updatedProduct.name);
+                        updatedProduct.name,
+                        selectedunit != null ? updatedProduct.Stock + " " + selectedunit.description : updatedProduct.Stock.ToString());
                 }
             }
 
@@ -203,6 +227,7 @@ namespace POSsystem
         {
             if (userdata.user_role == "admin")
             {
+                
                 var id = Convert.ToInt32(gvitem.Rows[e.RowIndex].Cells[0].Value);
                 var product = ProductList.FirstOrDefault(x => x.id == id);
 
@@ -211,15 +236,33 @@ namespace POSsystem
                 {
                     var form = new ManagePurchase();
                     form.ProductData = product;
-
-                    ProductUnitList = productUnitsRepository.GetAll(product.id).ToList();
-                    if (ProductUnitList.Count != 0)
-                    {
-                        form.hasUnits = true;
-                    }
-
                     Hide();
                     form.ShowDialog();
+
+                    var unitproduct = new List<ProductUnitsDetails>();
+                    unitproduct = productUnitsRepository.GetAll(id);
+                    ProductList = productRepository.GetAll();
+
+                    var pcsunit = new ProductUnitsDetails();
+
+                    if (unitproduct.Count > 0)
+                    {
+                        pcsunit = unitproduct.FirstOrDefault(x => x.pcsflag == "Y");
+                    }
+
+                    var updatedProduct = ProductList.FirstOrDefault(x => x.id == id);
+                    var brand = BrandList.FirstOrDefault(x => x.id == updatedProduct.brand_id);
+                    var prodcat = CategoriesList.FirstOrDefault(x => x.id == updatedProduct.prod_catetogry);
+                    var selectedunit = UnitList.FirstOrDefault(x => x.unitcode == pcsunit.unitcode);
+
+                    gvitem.Rows.RemoveAt(gvitem.CurrentCell.RowIndex);
+                    gvitem.Rows.Insert(gvitem.CurrentCell.RowIndex,
+                        updatedProduct.id,
+                        prodcat != null ? prodcat.category_name : " - ",
+                        brand != null ? brand.name : " - ",
+                        updatedProduct.name,
+                        selectedunit != null ? updatedProduct.Stock + " " + selectedunit.description : updatedProduct.Stock.ToString());
+
                     Show();
                 }
             }
@@ -243,15 +286,33 @@ namespace POSsystem
                         {
                             var form = new ManagePurchase();
                             form.ProductData = product;
-
-                            ProductUnitList = productUnitsRepository.GetAll(product.id).ToList();
-                            if (ProductUnitList.Count != 0)
-                            {
-                                form.hasUnits = true;
-                            }
-
                             Hide();
                             form.ShowDialog();
+
+                            var unitproduct = new List<ProductUnitsDetails>();
+                            unitproduct = productUnitsRepository.GetAll(id);
+                            ProductList = productRepository.GetAll();
+
+                            var pcsunit = new ProductUnitsDetails();
+
+                            if (unitproduct.Count > 0)
+                            {
+                                pcsunit = unitproduct.FirstOrDefault(x => x.pcsflag == "Y");
+                            }
+
+                            var updatedProduct = ProductList.FirstOrDefault(x => x.id == id);
+                            var brand = BrandList.FirstOrDefault(x => x.id == updatedProduct.brand_id);
+                            var prodcat = CategoriesList.FirstOrDefault(x => x.id == updatedProduct.prod_catetogry);
+                            var selectedunit = UnitList.FirstOrDefault(x => x.unitcode == pcsunit.unitcode);
+
+                            gvitem.Rows.RemoveAt(gvitem.CurrentCell.RowIndex);
+                            gvitem.Rows.Insert(gvitem.CurrentCell.RowIndex,
+                                updatedProduct.id,
+                                prodcat != null ? prodcat.category_name : " - ",
+                                brand != null ? brand.name : " - ",
+                                updatedProduct.name,
+                                selectedunit != null ? updatedProduct.Stock + " " + selectedunit.description : updatedProduct.Stock.ToString());
+
                             Show();
                         }
                     }
@@ -317,12 +378,20 @@ namespace POSsystem
                 if (result != null)
                 {
                     var tempproductlist = new List<TempProductDetails>();
+                    var unitproduct = new List<ProductUnitsDetails>();
 
                     foreach (var item in result)
                     {
+                        var pcsunit = new ProductUnitsDetails();
+                        unitproduct = productUnitsRepository.GetAll(item.id);
+                        if (unitproduct.Count > 0)
+                        {
+                            pcsunit = unitproduct.FirstOrDefault(x => x.pcsflag == "Y");
+                        }
+
                         var brand = BrandList.FirstOrDefault(x => x.id == item.brand_id);
                         var prodcat = CategoriesList.FirstOrDefault(x => x.id == item.prod_catetogry);
-
+                        var selectedunit = UnitList.FirstOrDefault(x => x.unitcode == pcsunit.unitcode);
 
                         var itemDetail = new TempProductDetails();
                         itemDetail.id = item.id;
@@ -331,6 +400,7 @@ namespace POSsystem
                         itemDetail.brandname = brand != null ? brand.name : " - ";
                         itemDetail.prod_catetogry = item.prod_catetogry;
                         itemDetail.prodcat_name = prodcat != null ? prodcat.category_name : " - ";
+                        itemDetail.Stock =  selectedunit != null ? item.Stock + " " + selectedunit.description : item.Stock.ToString();
                         tempproductlist.Add(itemDetail);
                     }
 
@@ -342,7 +412,8 @@ namespace POSsystem
                             item.id,
                             item.prodcat_name,
                             item.brandname,
-                            item.name
+                            item.name,
+                            item.Stock
                             );
                     }
                 }

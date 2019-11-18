@@ -119,7 +119,60 @@ namespace POSsystem
 
         private void btsearch_Click(object sender, EventArgs e)
         {
+            var args = new List<object>();
 
+            if (!string.IsNullOrEmpty(tbbrandname.Text))
+            {
+                args.Add(tbbrandname.Text);
+            }
+
+            var result = brandRepository.Search(args.ToArray());
+
+            if (result.Count != 0)
+            {
+                gvbrand.Rows.Clear();
+                int runningno = 1;
+
+                foreach (var item in result)
+                {
+
+                    gvbrand.Rows.Add(item.id,
+                        runningno,
+                        item.name,
+                        item.remark);
+                    runningno = runningno + 1;
+                }
+                runningno = 1;
+            }
+            else
+                MessageBox.Show("Barang tidak ditemukan");
+        }
+
+        private void gvbrand_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (gvbrand.Rows.Count > 0)
+                {
+                    bteditbrand.PerformClick();
+                }
+            }
+        }
+
+        private void btnreset_Click(object sender, EventArgs e)
+        {
+            LoadData();
+            tbbrandname.Clear();
+            tbbrandname.Focus();
+
+        }
+
+        private void tbbrandname_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btsearch.PerformClick();
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -139,6 +192,16 @@ namespace POSsystem
                 btdeletebrand.PerformClick();
                 return true;
             }
+            else if (keyData == (Keys.F4))
+            {
+                btsearch.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F5))
+            {
+                btnreset.PerformClick();
+                return true;
+            }
             else if (keyData == (Keys.Delete))
             {
                 btdeletebrand.PerformClick();
@@ -152,16 +215,6 @@ namespace POSsystem
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void gvbrand_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (gvbrand.Rows.Count > 0)
-                {
-                    bteditbrand.PerformClick();
-                }
-            }
-        }
 
     }
 }

@@ -21,14 +21,17 @@ namespace POSsystem.Views
         public ProductDetails ProductData { get; set; }
         public List<ProductUnitsDetails> productUnitsList { get; set; }
         public List<UnitItem> unitItemsList { get; set; }
+        
         private bool Editflag { get; set; }
         private int selectseq { get; set; }
         private bool Deleteflag { get; set; }
         private bool Addflag { get; set; }
+        private bool sellpricelist { get; set; }
 
-        private int runningno;
         private ProductUnitsRepository productUnitsRepository = new ProductUnitsRepository();
         private UnitRepository unitRepository = new UnitRepository();
+        private SellingPriceRepository sellingPriceRepository = new SellingPriceRepository();
+        private ProductRepository productRepository = new ProductRepository();
         public ManageUnitInProduct()
         {
             InitializeComponent();
@@ -43,7 +46,7 @@ namespace POSsystem.Views
             lbdate.Text = DateTime.Now.ToLongDateString();
             timer1.Start();
             lbtime.Text = DateTime.Now.ToLongTimeString();
-            unitItemsList = unitRepository.GetAll().ToList();
+            
 
             lbitemname.Text = "Nama Produk : " + ProductData.name;
 
@@ -54,6 +57,8 @@ namespace POSsystem.Views
 
         private void LoadData()
         {
+            unitItemsList = unitRepository.GetAll().ToList();
+
             if (!string.IsNullOrEmpty(ProductData.UnitRelated))
             {
                 var relation = "Ya";
@@ -121,14 +126,16 @@ namespace POSsystem.Views
                         additional_seq = 0;
                         if (Editflag == true)
                         {
-                           // gvunitlist.Rows[Editseq-1].Selected = true;
-                            gvunitlist.CurrentCell = gvunitlist[2, selectseq - 1];
+                            // gvunitlist.Rows[Editseq-1].Selected = true;
+                            if (gvunitlist.Rows.Count > 0)
+                                gvunitlist.CurrentCell = gvunitlist[2, selectseq - 1];
                             Editflag = false;
                             selectseq = 0;
                         }
                         else if (Deleteflag == true)
                         {
-                            gvunitlist.CurrentCell = gvunitlist[2, gvunitlist.Rows.Count-1];
+                            if (gvunitlist.Rows.Count > 0)
+                                gvunitlist.CurrentCell = gvunitlist[2, gvunitlist.Rows.Count-1];
                             Deleteflag = false;
                         }
                     }
@@ -162,13 +169,16 @@ namespace POSsystem.Views
                     if (Editflag)
                     {
                         // gvunitlist.Rows[Editseq-1].Selected = true;
-                        gvunitlist.CurrentCell = gvunitlist[2, selectseq - 1];
+                        if (gvunitlist.Rows.Count > 0)
+                            gvunitlist.CurrentCell = gvunitlist[2, selectseq - 1];
                         Editflag = false;
                         selectseq = 0;
                     }
                     else if (Addflag)
                     {
-                        gvunitlist.CurrentCell = gvunitlist[2, gvunitlist.Rows.Count -1];
+                        if (gvunitlist.Rows.Count > 0)
+                            gvunitlist.CurrentCell = gvunitlist[2, gvunitlist.Rows.Count -1];
+                        
                         Addflag = false;
                     }
                 }
@@ -192,13 +202,23 @@ namespace POSsystem.Views
 
         private void btdeleteunit_Click(object sender, EventArgs e)
         {
-            if (gvunitlist.SelectedRows.Count == 0)
+            var seq_no = Convert.ToInt32(gvunitlist.Rows[gvunitlist.CurrentCell.RowIndex].Cells["seq_no"].Value);
+            var selectedUnit = productUnitsList.FirstOrDefault(x => x.itemid == ProductData.id && x.seq == seq_no);
+            int totalunit = gvunitlist.Rows.Count;
+
+            var prodlist = productRepository.GetById(ProductData.id);
+            var sellpriceitem = sellingPriceRepository.GetAll(ProductData.id).ToList();
+            var unitinsellprice = sellpriceitem.FirstOrDefault(x => x.sell_unit == selectedUnit.unitcode);
+
+            if (totalunit == 0)
                 MessageBox.Show("Tidak ada Kemasan yang akan dihapus");
+            else if (prodlist.Stock > 0 && selectedUnit.pcsflag == "Y")
+                MessageBox.Show("Tidak boleh menghapus kemasan eceran karna stock produk ini masih ada");
+            else if (unitinsellprice != null)
+                MessageBox.Show("Tidak boleh menghapus karna kemasan terpilih masih digunakan pada kemasan jual");
             else if(ProductData.UnitRelated == "Y")
             {
-                int totalunit = gvunitlist.Rows.Count;
-
-                var seq_no = Convert.ToInt32(gvunitlist.Rows[gvunitlist.CurrentCell.RowIndex].Cells["seq_no"].Value);
+                
                 var id = Convert.ToInt32(gvunitlist.Rows[gvunitlist.CurrentCell.RowIndex].Cells["id"].Value);
 
                 if (seq_no == totalunit && totalunit != 1)
@@ -245,10 +265,7 @@ namespace POSsystem.Views
             }
             else
             {
-                var seq_no = Convert.ToInt32(gvunitlist.Rows[gvunitlist.CurrentCell.RowIndex].Cells["seq_no"].Value);
-                var selectedUnit = productUnitsList.FirstOrDefault(x => x.itemid == ProductData.id && x.seq == seq_no);
-
-                if (seq_no == 1 && gvunitlist.Rows.Count !=1) //seq 1 means unit eceran
+                if (seq_no == 1 && totalunit != 1) //seq 1 means unit eceran
                     MessageBox.Show("Anda tidak dibenarkan menghapus Kemasan eceran sebelum menghapus kemasan lainnya");
                 else
                 {
@@ -259,25 +276,19 @@ namespace POSsystem.Views
                     
                     if (form.YES && seq_no == 1)//delete the pcs unit 
                     {
-                        if (productUnitsRepository.Delete(selectedUnit.id))
-                            MessageBox.Show("Kemasan terpilih berhasil dihapus");
-                        else
+                        if (!productUnitsRepository.Delete(selectedUnit.id))
                             MessageBox.Show("Gagal menghapus kemasan");
                         LoadData();
                     }
                     else if (form.YES && seq_no != gvunitlist.Rows.Count)
                     {
-                        if (productUnitsRepository.DeleteNOTRelated(selectedUnit.itemid, seq_no))
-                            MessageBox.Show("Kemasan terpilih berhasil dihapus");
-                        else
+                        if (!productUnitsRepository.DeleteNOTRelated(selectedUnit.itemid, seq_no))
                             MessageBox.Show("Gagal menghapus kemasan");
                         LoadData();
                     }
                     else if (form.YES && seq_no == gvunitlist.Rows.Count) //last unit in the list when the list have more than 1 units
                     {
-                        if (productUnitsRepository.Delete(selectedUnit.id))
-                            MessageBox.Show("Kemasan terpilih berhasil dihapus");
-                        else
+                        if (!productUnitsRepository.Delete(selectedUnit.id))
                             MessageBox.Show("Gagal menghapus kemasan");
                         LoadData();
                     }
@@ -287,8 +298,15 @@ namespace POSsystem.Views
 
         private void btdeleteall_Click(object sender, EventArgs e)
         {
+            var prodlist = productRepository.GetById(ProductData.id);
+            var sellpriceitem = sellingPriceRepository.GetAll(ProductData.id).ToList();
+
             if (gvunitlist.SelectedRows.Count == 0)
                 MessageBox.Show("Tidak ada Kemasan yang akan dihapus");
+            else if (prodlist.Stock > 0)
+                MessageBox.Show("Tidak boleh menghapus kemasan eceran karna stock produk ini masih ada");
+            else if (sellpriceitem.Count > 0)
+                MessageBox.Show("Tidak boleh menghapus karna ada kemasan yang digunakan pada kemasan jual");
             else 
             {
                 var form = new ConfirmationDialog();
@@ -424,6 +442,13 @@ namespace POSsystem.Views
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-
+        private void btmanageunit_Click(object sender, EventArgs e)
+        {
+            var form = new ManageUnit();
+            Hide();
+            form.ShowDialog();
+            Show();
+            LoadData();
+        }
     }
 }

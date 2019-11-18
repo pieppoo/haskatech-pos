@@ -89,7 +89,7 @@
             this.gvbrand.RowTemplate.Height = 30;
             this.gvbrand.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gvbrand.Size = new System.Drawing.Size(710, 203);
-            this.gvbrand.TabIndex = 12;
+            this.gvbrand.TabIndex = 1;
             this.gvbrand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gvbrand_KeyDown);
             // 
             // id
@@ -136,7 +136,7 @@
             this.btdeletebrand.Margin = new System.Windows.Forms.Padding(4);
             this.btdeletebrand.Name = "btdeletebrand";
             this.btdeletebrand.Size = new System.Drawing.Size(128, 79);
-            this.btdeletebrand.TabIndex = 15;
+            this.btdeletebrand.TabIndex = 0;
             this.btdeletebrand.Text = "Hapus Merek\r\n(F3)";
             this.btdeletebrand.UseVisualStyleBackColor = false;
             this.btdeletebrand.Click += new System.EventHandler(this.btdeletebrand_Click);
@@ -154,7 +154,7 @@
             this.bteditbrand.Margin = new System.Windows.Forms.Padding(4);
             this.bteditbrand.Name = "bteditbrand";
             this.bteditbrand.Size = new System.Drawing.Size(128, 79);
-            this.bteditbrand.TabIndex = 14;
+            this.bteditbrand.TabIndex = 0;
             this.bteditbrand.Text = "Edit Merek\r\n(F2)";
             this.bteditbrand.UseVisualStyleBackColor = false;
             this.bteditbrand.Click += new System.EventHandler(this.bteditbrand_Click);
@@ -172,7 +172,7 @@
             this.btaddbrand.Margin = new System.Windows.Forms.Padding(4);
             this.btaddbrand.Name = "btaddbrand";
             this.btaddbrand.Size = new System.Drawing.Size(128, 79);
-            this.btaddbrand.TabIndex = 13;
+            this.btaddbrand.TabIndex = 0;
             this.btaddbrand.Text = "Tambah Merek\r\n(F1)";
             this.btaddbrand.UseVisualStyleBackColor = false;
             this.btaddbrand.Click += new System.EventHandler(this.btaddbrand_Click);
@@ -184,7 +184,7 @@
             this.lbtime.Location = new System.Drawing.Point(5, 9);
             this.lbtime.Name = "lbtime";
             this.lbtime.Size = new System.Drawing.Size(266, 30);
-            this.lbtime.TabIndex = 1;
+            this.lbtime.TabIndex = 0;
             this.lbtime.Text = "time";
             this.lbtime.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -195,7 +195,7 @@
             this.lbdate.Location = new System.Drawing.Point(1, 37);
             this.lbdate.Name = "lbdate";
             this.lbdate.Size = new System.Drawing.Size(276, 36);
-            this.lbdate.TabIndex = 0;
+            this.lbdate.TabIndex = 1;
             this.lbdate.Text = "date";
             this.lbdate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -222,7 +222,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(719, 93);
-            this.tableLayoutPanel1.TabIndex = 16;
+            this.tableLayoutPanel1.TabIndex = 2;
             // 
             // panel1
             // 
@@ -277,7 +277,7 @@
             this.groupBox1.Location = new System.Drawing.Point(4, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(277, 79);
-            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
             // tbbrandname
@@ -288,7 +288,8 @@
             this.tbbrandname.Location = new System.Drawing.Point(6, 30);
             this.tbbrandname.Name = "tbbrandname";
             this.tbbrandname.Size = new System.Drawing.Size(410, 32);
-            this.tbbrandname.TabIndex = 18;
+            this.tbbrandname.TabIndex = 0;
+            this.tbbrandname.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbbrandname_KeyDown);
             // 
             // lb_brandsearch
             // 
@@ -299,7 +300,7 @@
             this.lb_brandsearch.Location = new System.Drawing.Point(6, 7);
             this.lb_brandsearch.Name = "lb_brandsearch";
             this.lb_brandsearch.Size = new System.Drawing.Size(113, 22);
-            this.lb_brandsearch.TabIndex = 22;
+            this.lb_brandsearch.TabIndex = 1;
             this.lb_brandsearch.Text = "Nama Merek";
             // 
             // btsearch
@@ -315,7 +316,7 @@
             this.btsearch.Margin = new System.Windows.Forms.Padding(4);
             this.btsearch.Name = "btsearch";
             this.btsearch.Size = new System.Drawing.Size(122, 58);
-            this.btsearch.TabIndex = 20;
+            this.btsearch.TabIndex = 0;
             this.btsearch.Text = "Cari (F4)";
             this.btsearch.UseVisualStyleBackColor = false;
             this.btsearch.Click += new System.EventHandler(this.btsearch_Click);
@@ -333,9 +334,10 @@
             this.btnreset.Margin = new System.Windows.Forms.Padding(4);
             this.btnreset.Name = "btnreset";
             this.btnreset.Size = new System.Drawing.Size(122, 58);
-            this.btnreset.TabIndex = 21;
+            this.btnreset.TabIndex = 0;
             this.btnreset.Text = "Reset (F5)";
             this.btnreset.UseVisualStyleBackColor = false;
+            this.btnreset.Click += new System.EventHandler(this.btnreset_Click);
             // 
             // tableLayoutPanel3
             // 
@@ -353,7 +355,7 @@
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(710, 76);
-            this.tableLayoutPanel3.TabIndex = 23;
+            this.tableLayoutPanel3.TabIndex = 0;
             // 
             // panel5
             // 

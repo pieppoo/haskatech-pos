@@ -103,11 +103,7 @@ namespace POSsystem.Views
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
-
-        private void gvsales_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
+        
 
         private void gvsales_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -243,6 +239,16 @@ namespace POSsystem.Views
 
             ProductInfo = productRepository.GetAll();
             UnitInfo = unitRepository.GetAll();
+
+            lbdate.Text = DateTime.Now.ToLongDateString();
+            timer1.Start();
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+            timer1.Start();
         }
 
 
@@ -411,7 +417,5 @@ namespace POSsystem.Views
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
-
     }
 }

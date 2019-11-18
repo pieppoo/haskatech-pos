@@ -23,9 +23,9 @@ namespace POSsystem.Views
         }
         public List<UnitItem> unitList { get; set; }
         public List<PurchaseDetails> purchaseList { get; set; }
-        public List<ProductDetails> ProductList { get; set; }
         public ProductDetails ProductData { get; set; }
-        public bool hasUnits { get; set; }
+        public List<ProductUnitsDetails> produnitList { get; set; }
+        bool hasUnits { get; set; }
 
         private ProductRepository productRepository = new ProductRepository();
         private UnitRepository unitRepository = new UnitRepository();
@@ -39,9 +39,16 @@ namespace POSsystem.Views
             lbitemname.Text = "Nama Produk : " + ProductData.name;
             unitList = unitRepository.GetAll().ToList(); 
             purchaseList = purchaseRepository.GetAll(ProductData.id);
-            ProductList = productRepository.GetAll().ToList();
+            produnitList = productUnitsRepository.GetAll(ProductData.id).ToList();
+            hasUnits = produnitList.Count>0;
 
-            if(!hasUnits)
+            if (hasUnits)
+            {
+                btadditem.Enabled = true;
+                btdeleteitem.Enabled = true;
+                btnSellPrice.Enabled = true;
+            }
+            else
             {
                 btadditem.Enabled = false;
                 btdeleteitem.Enabled = false;
@@ -55,8 +62,6 @@ namespace POSsystem.Views
                 foreach (var purchase in purchaseList)
                 {
                     var unitpurchase = unitList.FirstOrDefault(x => x.unitcode == purchase.purchase_unit);
-                    var unitpcs = unitList.FirstOrDefault(x => x.unitcode == purchase.pcs_unit);
-                    var itemname = ProductList.FirstOrDefault(x => x.id == purchase.itemid);
 
 
                     gvpurchase.Rows.Add(
@@ -86,10 +91,43 @@ namespace POSsystem.Views
             LoadData();
         }
 
+        private int calculatestock(int purchaseid)
+        {
+            var selectedpurchase = purchaseList.FirstOrDefault(x => x.id == purchaseid);
+
+            var selectedunit = produnitList.FirstOrDefault(x => x.unitcode == selectedpurchase.purchase_unit);
+            var pcsunit = produnitList.FirstOrDefault(x => x.pcsflag == "Y");
+
+            int totalitem = 0;
+
+            if (selectedunit.pcsflag == "Y")
+            {
+                totalitem = selectedpurchase.purchase_qty;
+
+            }
+            else if (ProductData.UnitRelated == "Y")
+            {
+                totalitem = selectedunit.qty * selectedpurchase.purchase_qty;
+                foreach (var item in produnitList.OrderBy(x => x.seq))
+                {
+                    if (item.seq > selectedunit.seq && item.qty != 0)
+                        totalitem = totalitem * item.qty;
+                }
+            }
+            else
+            {
+                totalitem = selectedpurchase.purchase_qty * selectedunit.qty;
+            }
+
+            return totalitem;
+
+        }
+
         private void btadditem_Click(object sender, EventArgs e)
         {
             var form = new AddEditPurchase();
             form.ProductData = ProductData;
+            form.hasUnitList = hasUnits;
             form.ShowDialog();
             LoadData();
         }
@@ -108,23 +146,22 @@ namespace POSsystem.Views
                 form.ShowDialog();
 
 
-                int initial_total = purchaseinfo.purchase_qty * purchaseinfo.qty_pcs_in_container;
-
+                int totalitemtodelete = calculatestock(id);
+                var currentstock = new ProductDetails();
+                currentstock = productRepository.GetById(ProductData.id);
+                if (currentstock.Stock == 0)
+                {
+                    totalitemtodelete = 0;
+                }
 
                 if (form.YES)
                 {
-                    if (initial_total != purchaseinfo.total_in_pcs)
-                        MessageBox.Show("Anda tidak boleh menghapus barang yang sudah terjual");
+                    if (totalitemtodelete > currentstock.Stock && currentstock.Stock != 0)
+                        MessageBox.Show("Tidak boleh menghapus pembelian ini karna total pembelian lebih besar dari pada stok yang tersisa");
                     else
                     {
-                        ProductData.Stock = ProductData.Stock - purchaseinfo.total_in_pcs;
-                        if (productRepository.updateproductstock(ProductData))
-                        {
-                            if (!purchaseRepository.Delete(id))
-                                MessageBox.Show("Gagal menghapus harga");
-                        }
-                        else
-                            MessageBox.Show("Gagal menghapus harga karena error pada pengurangan stok");
+                        if (!purchaseRepository.deletewithstock(id, ProductData.id, totalitemtodelete))
+                            MessageBox.Show("Gagal menghapus pembelian terpilih");
                     }
 
                 }

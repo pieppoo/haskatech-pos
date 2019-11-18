@@ -90,6 +90,16 @@ namespace POSsystem
             if (userdata.user_role == "admin")
                 btfinditem.Visible = false;
 
+            lbdate.Text = DateTime.Now.ToLongDateString();
+            timer1.Start();
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+            timer1.Start();
         }
 
         private void gvhistory_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -101,7 +111,6 @@ namespace POSsystem
             {
                 var form = new SaleDetail();
                 form.SaleHistoryData = history;
-                Hide();
                 form.ShowDialog();
                 Show();
                 LoadData();

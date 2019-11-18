@@ -30,6 +30,7 @@ namespace POSsystem.Views
         public int maxseq = 0;
         private UnitRepository unitRepository = new UnitRepository();
         private ProductUnitsRepository productUnitsRepository = new ProductUnitsRepository();
+        private ProductRepository productRepository = new ProductRepository();
         public AddEditUnitRelated()
         {
             InitializeComponent();
@@ -292,6 +293,7 @@ namespace POSsystem.Views
                         //parent unit dropdownlist will disable while child unit dropdownlist is enable.  parent unit taken from last unit in the list and child unit will be new unit that we will add into list
                         //qty text box in the screen is belong to parent. so when saving the data, we need to update that parent unit become "not" pcs unit(update pcsflag) and update the qty from 0 with the qty input in screen
                         //the new unit will be the pcs unit
+                        //update stock
 
                         var newunit = new ProductUnitsDetails();
                         newunit.itemid = ProductData.id;
@@ -300,13 +302,16 @@ namespace POSsystem.Views
                         newunit.qty = 0;
                         newunit.pcsflag = "Y";
 
+                        var productupdated = productRepository.GetById(ProductData.id);
+                        int newstock = productupdated.Stock * (int)nbqtyparent.Value;
+
                         var sameunit = productUnitsList.FirstOrDefault(x => x.unitcode == newunit.unitcode);
 
                         if (sameunit != null)
                             MessageBox.Show("Kemasan baru yang anda masukkan sudah terdaftar");
                         else if (nbqtyparent.Value == 0)
                             MessageBox.Show("Silahkan isi jumlah nya");
-                        else if (productUnitsRepository.AddUnitinLastOfList(newunit, (int)nbqtyparent.Value))
+                        else if (productUnitsRepository.AddUnitinLastOfList(newunit, (int)nbqtyparent.Value, newstock))
                         {
                             MessageBox.Show("Kemasan baru berhasil ditambahkan");
                             seqno = 0;

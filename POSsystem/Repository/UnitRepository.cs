@@ -60,6 +60,7 @@ namespace POSsystem.Repository
             return result;
         }
 
+
         public List<UnitItem> GetAll()
         {
             try
@@ -79,7 +80,7 @@ namespace POSsystem.Repository
         {
             try
             {
-                var queryResult = dbConnection.Query<UnitItem>("select ref_unit.unitcode, ref_unit.description from ref_unit join item on ref_unit.unitcode = item.unit_pcs or ref_unit.unitcode = item.unit_bulk where item.id =  " + itemid);
+                var queryResult = dbConnection.Query<UnitItem>("select * from ref_unit where unitcode in (select unitcode from productunits where itemid = " + itemid + " )");
                 return queryResult.ToList();
             }
             catch (Exception ex)
@@ -97,7 +98,30 @@ namespace POSsystem.Repository
 
         public List<UnitItem> Search(params object[] args)
         {
-            throw new NotImplementedException();
+            var query_1 = "SELECT * FROM ref_unit where ";
+            var query_2 = "`description` LIKE '%{0}%' ;";
+
+            try
+            {
+                if (args != null)
+                {
+                    if (args.Length == 1)
+                    {
+                        string searchParam;
+                        var val = args[0] as string;
+                        if (val != null)
+                        {
+                            searchParam = string.Format(query_2, val);
+                            return dbConnection.Query<UnitItem>(query_1 + searchParam).ToList();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return null;
         }
 
         public bool Update(UnitItem unit)

@@ -50,7 +50,7 @@
             this.btnSave.Location = new System.Drawing.Point(13, 154);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(478, 51);
-            this.btnSave.TabIndex = 30;
+            this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Simpan";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -64,7 +64,7 @@
             this.lbqty.Location = new System.Drawing.Point(199, 74);
             this.lbqty.Name = "lbqty";
             this.lbqty.Size = new System.Drawing.Size(67, 22);
-            this.lbqty.TabIndex = 28;
+            this.lbqty.TabIndex = 5;
             this.lbqty.Text = "Jumlah";
             // 
             // cbunitchild
@@ -74,7 +74,7 @@
             this.cbunitchild.Location = new System.Drawing.Point(329, 99);
             this.cbunitchild.Name = "cbunitchild";
             this.cbunitchild.Size = new System.Drawing.Size(162, 30);
-            this.cbunitchild.TabIndex = 27;
+            this.cbunitchild.TabIndex = 2;
             // 
             // lbunitchild
             // 
@@ -85,7 +85,7 @@
             this.lbunitchild.Location = new System.Drawing.Point(325, 74);
             this.lbunitchild.Name = "lbunitchild";
             this.lbunitchild.Size = new System.Drawing.Size(144, 22);
-            this.lbunitchild.TabIndex = 26;
+            this.lbunitchild.TabIndex = 7;
             this.lbunitchild.Text = "Kemasan Eceran";
             // 
             // cbunitparent
@@ -95,7 +95,7 @@
             this.cbunitparent.Location = new System.Drawing.Point(13, 99);
             this.cbunitparent.Name = "cbunitparent";
             this.cbunitparent.Size = new System.Drawing.Size(162, 30);
-            this.cbunitparent.TabIndex = 25;
+            this.cbunitparent.TabIndex = 0;
             // 
             // lbunitparent
             // 
@@ -106,7 +106,7 @@
             this.lbunitparent.Location = new System.Drawing.Point(9, 74);
             this.lbunitparent.Name = "lbunitparent";
             this.lbunitparent.Size = new System.Drawing.Size(134, 22);
-            this.lbunitparent.TabIndex = 24;
+            this.lbunitparent.TabIndex = 4;
             this.lbunitparent.Text = "Kemasan Besar";
             // 
             // nbqty
@@ -120,7 +120,7 @@
             0});
             this.nbqty.Name = "nbqty";
             this.nbqty.Size = new System.Drawing.Size(94, 30);
-            this.nbqty.TabIndex = 31;
+            this.nbqty.TabIndex = 1;
             // 
             // mandatory
             // 
@@ -130,7 +130,7 @@
             this.mandatory.Location = new System.Drawing.Point(260, 69);
             this.mandatory.Name = "mandatory";
             this.mandatory.Size = new System.Drawing.Size(22, 28);
-            this.mandatory.TabIndex = 32;
+            this.mandatory.TabIndex = 6;
             this.mandatory.Text = "*";
             // 
             // AddEditUnitNOTRelated

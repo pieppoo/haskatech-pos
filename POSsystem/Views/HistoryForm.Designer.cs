@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -64,6 +65,11 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lbdate = new System.Windows.Forms.Label();
+            this.lbtime = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gvhistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbsearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbreset)).BeginInit();
@@ -78,6 +84,8 @@
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // gvhistory
@@ -419,6 +427,7 @@
             this.tableLayoutPanel2.Controls.Add(this.panel7, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.panel8, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.panel9, 4, 1);
+            this.tableLayoutPanel2.Controls.Add(this.panel10, 3, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(24, 62);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -486,6 +495,58 @@
             this.panel9.Size = new System.Drawing.Size(96, 84);
             this.panel9.TabIndex = 5;
             // 
+            // panel10
+            // 
+            this.panel10.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.SetColumnSpan(this.panel10, 2);
+            this.panel10.Controls.Add(this.groupBox2);
+            this.panel10.Location = new System.Drawing.Point(466, 3);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(195, 84);
+            this.panel10.TabIndex = 6;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.lbdate);
+            this.groupBox2.Controls.Add(this.lbtime);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(6, 7);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(182, 71);
+            this.groupBox2.TabIndex = 21;
+            this.groupBox2.TabStop = false;
+            // 
+            // lbdate
+            // 
+            this.lbdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbdate.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lbdate.Location = new System.Drawing.Point(4, 40);
+            this.lbdate.Name = "lbdate";
+            this.lbdate.Size = new System.Drawing.Size(172, 28);
+            this.lbdate.TabIndex = 1;
+            this.lbdate.Text = "date";
+            this.lbdate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbtime
+            // 
+            this.lbtime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbtime.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbtime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lbtime.Location = new System.Drawing.Point(4, 12);
+            this.lbtime.Name = "lbtime";
+            this.lbtime.Size = new System.Drawing.Size(172, 28);
+            this.lbtime.TabIndex = 0;
+            this.lbtime.Text = "time";
+            this.lbtime.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // HistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -525,6 +586,8 @@
             this.panel8.PerformLayout();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -562,5 +625,10 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lbdate;
+        private System.Windows.Forms.Label lbtime;
+        private System.Windows.Forms.Timer timer1;
     }
 }

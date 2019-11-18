@@ -60,12 +60,12 @@
             this.oritotal,
             this.disc,
             this.totalsell});
-            this.gvsaledetail.Location = new System.Drawing.Point(22, 75);
+            this.gvsaledetail.Location = new System.Drawing.Point(22, 65);
             this.gvsaledetail.MultiSelect = false;
             this.gvsaledetail.Name = "gvsaledetail";
             this.gvsaledetail.ReadOnly = true;
             this.gvsaledetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvsaledetail.Size = new System.Drawing.Size(747, 292);
+            this.gvsaledetail.Size = new System.Drawing.Size(911, 450);
             this.gvsaledetail.TabIndex = 11;
             // 
             // id
@@ -136,7 +136,7 @@
             this.lbtotal.AutoSize = true;
             this.lbtotal.Font = new System.Drawing.Font("Cambria", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbtotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbtotal.Location = new System.Drawing.Point(271, 385);
+            this.lbtotal.Location = new System.Drawing.Point(435, 549);
             this.lbtotal.Name = "lbtotal";
             this.lbtotal.Size = new System.Drawing.Size(182, 28);
             this.lbtotal.TabIndex = 12;
@@ -148,7 +148,7 @@
             this.tbtotal.Enabled = false;
             this.tbtotal.Font = new System.Drawing.Font("Cambria", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbtotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.tbtotal.Location = new System.Drawing.Point(459, 377);
+            this.tbtotal.Location = new System.Drawing.Point(623, 541);
             this.tbtotal.Name = "tbtotal";
             this.tbtotal.ReadOnly = true;
             this.tbtotal.Size = new System.Drawing.Size(310, 36);
@@ -158,14 +158,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(781, 438);
+            this.ClientSize = new System.Drawing.Size(955, 602);
             this.Controls.Add(this.tbtotal);
             this.Controls.Add(this.lbtotal);
             this.Controls.Add(this.gvsaledetail);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "SaleDetail";
             this.Text = "SaleList";
             this.Title = "Rincian penjualan";
+            this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             this.Load += new System.EventHandler(this.SaleDetail_Load);
             this.Controls.SetChildIndex(this.gvsaledetail, 0);
             this.Controls.SetChildIndex(this.lbtotal, 0);

@@ -102,7 +102,7 @@
             this.tbunitname.Font = new System.Drawing.Font("Cambria", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbunitname.Location = new System.Drawing.Point(27, 219);
             this.tbunitname.Margin = new System.Windows.Forms.Padding(4);
-            this.tbunitname.MaxLength = 50;
+            this.tbunitname.MaxLength = 15;
             this.tbunitname.Name = "tbunitname";
             this.tbunitname.Size = new System.Drawing.Size(320, 39);
             this.tbunitname.TabIndex = 1;

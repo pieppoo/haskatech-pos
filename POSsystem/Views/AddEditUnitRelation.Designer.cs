@@ -46,7 +46,7 @@
             this.lbunitrelate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbunitrelate.Name = "lbunitrelate";
             this.lbunitrelate.Size = new System.Drawing.Size(127, 22);
-            this.lbunitrelate.TabIndex = 3;
+            this.lbunitrelate.TabIndex = 2;
             this.lbunitrelate.Text = "Unit Berkaitan";
             // 
             // rbyes

@@ -29,8 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gvpurchase = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Dateitemin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.purchase_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.purchase_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.purchase_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btdeleteitem = new System.Windows.Forms.Button();
             this.btadditem = new System.Windows.Forms.Button();
             this.btnSellPrice = new System.Windows.Forms.Button();
@@ -40,17 +45,12 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.lbitemname = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbtime = new System.Windows.Forms.Label();
             this.lbdate = new System.Windows.Forms.Label();
+            this.lbitemname = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Dateitemin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.purchase_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.purchase_qty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.purchase_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvpurchase)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -75,14 +75,55 @@
             this.purchase_unit,
             this.purchase_qty,
             this.purchase_price});
-            this.gvpurchase.Location = new System.Drawing.Point(21, 102);
+            this.gvpurchase.Location = new System.Drawing.Point(21, 117);
             this.gvpurchase.Name = "gvpurchase";
             this.gvpurchase.ReadOnly = true;
             this.gvpurchase.RowHeadersVisible = false;
             this.gvpurchase.RowTemplate.Height = 30;
             this.gvpurchase.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvpurchase.Size = new System.Drawing.Size(865, 284);
+            this.gvpurchase.Size = new System.Drawing.Size(865, 269);
             this.gvpurchase.TabIndex = 11;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // Dateitemin
+            // 
+            this.Dateitemin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Dateitemin.FillWeight = 25F;
+            this.Dateitemin.HeaderText = "Tanggal Penambahan Barang";
+            this.Dateitemin.Name = "Dateitemin";
+            this.Dateitemin.ReadOnly = true;
+            // 
+            // purchase_unit
+            // 
+            this.purchase_unit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.purchase_unit.FillWeight = 25F;
+            this.purchase_unit.HeaderText = "Kemasan Beli";
+            this.purchase_unit.Name = "purchase_unit";
+            this.purchase_unit.ReadOnly = true;
+            // 
+            // purchase_qty
+            // 
+            this.purchase_qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.purchase_qty.FillWeight = 25F;
+            this.purchase_qty.HeaderText = "Jumlah beli";
+            this.purchase_qty.Name = "purchase_qty";
+            this.purchase_qty.ReadOnly = true;
+            // 
+            // purchase_price
+            // 
+            this.purchase_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.purchase_price.DefaultCellStyle = dataGridViewCellStyle2;
+            this.purchase_price.FillWeight = 25F;
+            this.purchase_price.HeaderText = "Harga Beli (Rp)";
+            this.purchase_price.Name = "purchase_price";
+            this.purchase_price.ReadOnly = true;
             // 
             // btdeleteitem
             // 
@@ -222,18 +263,6 @@
             this.panel4.Size = new System.Drawing.Size(167, 94);
             this.panel4.TabIndex = 3;
             // 
-            // lbitemname
-            // 
-            this.lbitemname.AutoSize = true;
-            this.lbitemname.Font = new System.Drawing.Font("Cambria", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbitemname.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lbitemname.Location = new System.Drawing.Point(16, 64);
-            this.lbitemname.Name = "lbitemname";
-            this.lbitemname.Size = new System.Drawing.Size(135, 25);
-            this.lbitemname.TabIndex = 17;
-            this.lbitemname.Text = "Nama Produk";
-            this.lbitemname.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // panel5
             // 
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -282,46 +311,18 @@
             this.lbdate.Text = "date";
             this.lbdate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // id
+            // lbitemname
             // 
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // Dateitemin
-            // 
-            this.Dateitemin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Dateitemin.FillWeight = 25F;
-            this.Dateitemin.HeaderText = "Tanggal Penambahan Barang";
-            this.Dateitemin.Name = "Dateitemin";
-            this.Dateitemin.ReadOnly = true;
-            // 
-            // purchase_unit
-            // 
-            this.purchase_unit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.purchase_unit.FillWeight = 25F;
-            this.purchase_unit.HeaderText = "Kemasan Beli";
-            this.purchase_unit.Name = "purchase_unit";
-            this.purchase_unit.ReadOnly = true;
-            // 
-            // purchase_qty
-            // 
-            this.purchase_qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.purchase_qty.FillWeight = 25F;
-            this.purchase_qty.HeaderText = "Jumlah beli";
-            this.purchase_qty.Name = "purchase_qty";
-            this.purchase_qty.ReadOnly = true;
-            // 
-            // purchase_price
-            // 
-            this.purchase_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.purchase_price.DefaultCellStyle = dataGridViewCellStyle1;
-            this.purchase_price.FillWeight = 25F;
-            this.purchase_price.HeaderText = "Harga Beli (Rp)";
-            this.purchase_price.Name = "purchase_price";
-            this.purchase_price.ReadOnly = true;
+            this.lbitemname.AutoSize = true;
+            this.lbitemname.Font = new System.Drawing.Font("Cambria", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbitemname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lbitemname.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbitemname.Location = new System.Drawing.Point(16, 64);
+            this.lbitemname.Name = "lbitemname";
+            this.lbitemname.Size = new System.Drawing.Size(206, 37);
+            this.lbitemname.TabIndex = 17;
+            this.lbitemname.Text = "Nama Produk";
+            this.lbitemname.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ManagePurchase
             // 

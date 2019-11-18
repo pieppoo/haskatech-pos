@@ -74,7 +74,7 @@ namespace POSsystem.Views
 
             var result = categoryRepository.Search(args.ToArray());
 
-            if (result != null)
+            if (result.Count != 0)
             {
                 gvcat.Rows.Clear();
                 int runningno = 1;
@@ -91,7 +91,7 @@ namespace POSsystem.Views
                 runningno = 1;
             }
             else
-                MessageBox.Show("Barang tidak ditemukan");
+                MessageBox.Show("Kategori tidak ditemukan");
         }
 
         private void btnreset_Click(object sender, EventArgs e)

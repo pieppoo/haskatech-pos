@@ -46,7 +46,7 @@ namespace POSsystem.Views
                 cbunitsell.Enabled = false;
 
                 var itemname = ProductList.FirstOrDefault(x => x.id == SellingPriceData.item_id);
-                tbitemname.Text = itemname.name;
+                lbitemname.Text = itemname.name;
                 tbsellprice.Text = SellingPriceData.sell_price.ToString();
                 cbunitsell.SelectedValue = SellingPriceData.sell_unit.ToString();
                 tbbarcodeno.Text = SellingPriceData.Barcodeno.ToString();
@@ -57,7 +57,7 @@ namespace POSsystem.Views
                 cbunitsell.DataSource = new BindingSource(UnitList, null);
                 cbunitsell.DisplayMember = "description";
                 cbunitsell.ValueMember = "unitcode";
-                tbitemname.Text = ProductData.name;
+                lbitemname.Text = ProductData.name;
             }
    
         }

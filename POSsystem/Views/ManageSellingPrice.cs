@@ -22,7 +22,6 @@ namespace POSsystem.Views
         }
         private ProductRepository productRepository = new ProductRepository();
         public ProductDetails ProductData { get; set; }
-        public List<ProductDetails> ProductList { get; set; }
         public PurchaseDetails PurchaseData { get; set; }
         public List<SellingPriceDetails> SellpriceList { get; set; }
         private SellingPriceRepository sellingPriceRepository = new SellingPriceRepository();
@@ -34,7 +33,6 @@ namespace POSsystem.Views
         {
             SellpriceList = sellingPriceRepository.GetAll(ProductData.id);
             unitList = unitRepository.GetAll().ToList();
-            ProductList = productRepository.GetAll().ToList();
 
             gvsellprice.Rows.Clear();
 
@@ -42,26 +40,33 @@ namespace POSsystem.Views
             {
                 foreach (var item in SellpriceList)
                 {
-                    var itemname = ProductList.FirstOrDefault(x => x.id == item.item_id);
                     var unitname = unitList.FirstOrDefault(x => x.unitcode == item.sell_unit);
 
                     gvsellprice.Rows.Add(
-                        item.purchaseid,
                         item.item_id,
                         item.id,
-                        itemname != null ? itemname.name : " - ",
-                        Utils.ToRupiah(item.sell_price),
+                        item.Barcodeno,
                         unitname != null ? unitname.description : " - ",
-                        item.Barcodeno
+                        Utils.ToRupiah(item.sell_price)
                         );
                 }
             }
 
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+            timer1.Start();
+        }
+
 
         private void ManageSellingPrice_Load(object sender, EventArgs e)
         {
+            lbitemname.Text = "Nama Produk : " + ProductData.name;
+            lbdate.Text = DateTime.Now.ToLongDateString();
+            timer1.Start();
+            lbtime.Text = DateTime.Now.ToLongTimeString();
             LoadData();
         }
 
@@ -80,7 +85,7 @@ namespace POSsystem.Views
                 MessageBox.Show("Tidak ada harga yang akan diubah");
             else
             {
-                var id = Convert.ToInt32(gvsellprice.Rows[gvsellprice.CurrentCell.RowIndex].Cells[2].Value);
+                var id = Convert.ToInt32(gvsellprice.Rows[gvsellprice.CurrentCell.RowIndex].Cells["id"].Value);
                 var itemprice = SellpriceList.FirstOrDefault(x => x.id == id);
                 if (itemprice != null)
                 {
@@ -100,7 +105,7 @@ namespace POSsystem.Views
                 MessageBox.Show("Tidak ada harga yang akan dihapus");
             else
             {
-                var id = Convert.ToInt32(gvsellprice.Rows[gvsellprice.CurrentCell.RowIndex].Cells[2].Value);
+                var id = Convert.ToInt32(gvsellprice.Rows[gvsellprice.CurrentCell.RowIndex].Cells["id"].Value);
 
                 var form = new ConfirmationDialog();
                 form.Message = "Apa anda yakin menghapus harga jual terpilih?";

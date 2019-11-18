@@ -21,7 +21,7 @@ namespace POSsystem.Repository
             dbConnection = new MySqlConnection(Settings.Default.connection_string);
         }
 
-        public bool AddUnitinLastOfList(ProductUnitsDetails produnit, int newqty)
+        public bool AddUnitinLastOfList(ProductUnitsDetails produnit, int newqty, int newstock)
         {
             var result = false;
             if (dbConnection.State != ConnectionState.Open)
@@ -56,7 +56,18 @@ namespace POSsystem.Repository
                                                     produnit.pcsflag
                                                     );
                         var count2 = dbConnection.Execute(sql2, produnit);
-                        result = count2 > 0;
+                        var result2 = count2 > 0;
+
+                        if(result2)
+                        {
+                            //Step 3: Adding new unit
+                            string sql3 = string.Format("update item set Stock = {0} where id = {1} ", 
+                                                    newstock,
+                                                    produnit.itemid
+                                                    );
+                            var count3 = dbConnection.Execute(sql3);
+                            result = count3 > 0;
+                        }
 
                         tran.Commit();
                         return result;

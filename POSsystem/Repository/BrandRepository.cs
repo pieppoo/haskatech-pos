@@ -81,7 +81,30 @@ namespace POSsystem.Repository
 
         public List<Brand> Search(params object[] args)
         {
-            throw new NotImplementedException();
+            var query_1 = "SELECT * FROM brand where ";
+            var query_2 = "`name` LIKE '%{0}%' ;";
+
+            try
+            {
+                if (args != null)
+                {
+                    if (args.Length == 1)
+                    {
+                        string searchParam;
+                        var val = args[0] as string;
+                        if (val != null)
+                        {
+                            searchParam = string.Format(query_2, val);
+                            return dbConnection.Query<Brand>(query_1 + searchParam).ToList();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return null;
         }
 
         public bool Update(Brand brand)

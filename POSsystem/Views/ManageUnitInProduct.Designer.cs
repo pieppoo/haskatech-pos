@@ -46,6 +46,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbchangerelation = new System.Windows.Forms.Label();
             this.lbunitrelation = new System.Windows.Forms.Label();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.btmanageunit = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btaddunit = new System.Windows.Forms.Button();
             this.bteditunit = new System.Windows.Forms.Button();
@@ -67,6 +69,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -164,6 +167,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.lbitemname.AutoSize = true;
             this.lbitemname.Font = new System.Drawing.Font("Cambria", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbitemname.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.lbitemname.Location = new System.Drawing.Point(4, 4);
             this.lbitemname.Name = "lbitemname";
             this.lbitemname.Size = new System.Drawing.Size(234, 43);
@@ -174,16 +178,17 @@
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel9, 2, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 49);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(717, 56);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
@@ -195,7 +200,7 @@
             this.panel1.Controls.Add(this.lbitemname);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(352, 50);
+            this.panel1.Size = new System.Drawing.Size(316, 50);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -205,9 +210,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.lbchangerelation);
             this.panel2.Controls.Add(this.lbunitrelation);
-            this.panel2.Location = new System.Drawing.Point(361, 3);
+            this.panel2.Location = new System.Drawing.Point(325, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(353, 50);
+            this.panel2.Size = new System.Drawing.Size(316, 50);
             this.panel2.TabIndex = 1;
             // 
             // lbchangerelation
@@ -232,6 +237,35 @@
             this.lbunitrelation.Size = new System.Drawing.Size(133, 22);
             this.lbunitrelation.TabIndex = 13;
             this.lbunitrelation.Text = "Unit berkaitan?";
+            // 
+            // panel9
+            // 
+            this.panel9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel9.Controls.Add(this.btmanageunit);
+            this.panel9.Location = new System.Drawing.Point(647, 3);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(67, 50);
+            this.panel9.TabIndex = 2;
+            // 
+            // btmanageunit
+            // 
+            this.btmanageunit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btmanageunit.BackColor = System.Drawing.Color.Purple;
+            this.btmanageunit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btmanageunit.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btmanageunit.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btmanageunit.Location = new System.Drawing.Point(7, 6);
+            this.btmanageunit.Margin = new System.Windows.Forms.Padding(4);
+            this.btmanageunit.Name = "btmanageunit";
+            this.btmanageunit.Size = new System.Drawing.Size(56, 39);
+            this.btmanageunit.TabIndex = 18;
+            this.btmanageunit.Text = "Pengaturan Kemasan (F5)";
+            this.btmanageunit.UseVisualStyleBackColor = false;
+            this.btmanageunit.Click += new System.EventHandler(this.btmanageunit_Click);
             // 
             // label2
             // 
@@ -482,6 +516,7 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel9.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -527,5 +562,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn isPCS;
         private System.Windows.Forms.Button btdeleteall;
         private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button btmanageunit;
     }
 }

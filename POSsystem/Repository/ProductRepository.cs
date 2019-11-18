@@ -27,7 +27,7 @@ namespace POSsystem.Repository
             var result = false;
             try
             {
-                string sql = string.Format("insert into item (brand_id, name, prod_catetogry ) values ({0}, '{1}', {2})",
+                string sql = string.Format("insert into item (brand_id, name, prod_catetogry, Stock ) values ({0}, '{1}', {2}, 0)",
                                             product.brand_id,
                                             product.name,
                                             product.prod_catetogry
