@@ -449,6 +449,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <Content Include="setup-script.iss">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\search.png" />
     <None Include="Resources\Refresh.png" />
     <None Include="Resources\print.png" />
