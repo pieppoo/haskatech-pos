@@ -110,7 +110,9 @@ namespace POSsystem.Views
 
             if (e.ColumnIndex == 2)
             {
-                var pcsprice = Convert.ToDouble(gvsales.Rows[e.RowIndex].Cells["pcsprice"].Value);
+                var val = gvsales.Rows[e.RowIndex].Cells["pcsprice"].Value.ToString().Replace(".", "");
+
+                var pcsprice = Convert.ToDouble(val);
                 var newqty = Convert.ToInt32(gvsales.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
                 gvsales.Rows[e.RowIndex].Cells["oritotal"].Value = Utils.ToRupiah(newqty * pcsprice);
                 gvsales.Rows[e.RowIndex].Cells["totalsale"].Value = Utils.ToRupiah(newqty * pcsprice);
@@ -120,7 +122,9 @@ namespace POSsystem.Views
 
             if (e.ColumnIndex == 6)
             {
-                var discount = Convert.ToInt32(gvsales.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);
+                var val = gvsales.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Replace(".", "");
+                
+                var discount = Convert.ToInt32(val);
                 var oritotal = Convert.ToInt32(Utils.ToNumbers(gvsales.Rows[e.RowIndex].Cells["oritotal"].Value.ToString()));
                 gvsales.Rows[e.RowIndex].Cells["totalsale"].Value = Utils.ToRupiah( oritotal - discount);
                 gvsales.Rows[e.RowIndex].Cells["discount"].Value = Utils.ToRupiah(discount);
@@ -148,8 +152,9 @@ namespace POSsystem.Views
             if (e.ColumnIndex == 6)
             {
                 int i;
+                var val = Convert.ToString(e.FormattedValue);
 
-                if (!int.TryParse(Convert.ToString(e.FormattedValue), out i))
+                if (!string.IsNullOrEmpty(val) && val.All(char.IsDigit) && !int.TryParse(val, out i))
                 {
                     e.Cancel = true;
                     MessageBox.Show("Anda memasukkan jumlah yang salah");
@@ -162,6 +167,14 @@ namespace POSsystem.Views
         {
             tboritotal.Text = Utils.ToRupiah(gvsales.Rows.Cast<DataGridViewRow>().Sum(t => Convert.ToDouble(t.Cells["totalsale"].Value)));
             tbtotaltopay.Text = Utils.ToRupiah(gvsales.Rows.Cast<DataGridViewRow>().Sum(t => Convert.ToDouble(t.Cells["totalsale"].Value)));
+        }
+
+        private void tbitemname_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                iconsearch_Click(null, null);
+            }
         }
 
         private void iconsearch_Click(object sender, EventArgs e)
@@ -245,12 +258,11 @@ namespace POSsystem.Views
             lbtime.Text = DateTime.Now.ToLongTimeString();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick_1(object sender, EventArgs e)
         {
             lbtime.Text = DateTime.Now.ToLongTimeString();
             timer1.Start();
         }
-
 
         private void btpay_Click(object sender, EventArgs e)
         {
@@ -335,13 +347,7 @@ namespace POSsystem.Views
         }
 
 
-        private void tbitemname_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Enter)
-            {
-                iconsearch_Click(null, null);
-            }
-        }
+
 
         public void reloadafterpay(SaleHistoryDetails historydetails)
         {
@@ -417,5 +423,7 @@ namespace POSsystem.Views
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+
     }
 }

@@ -54,13 +54,6 @@ namespace POSsystem.Views
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lbtime.Text = DateTime.Now.ToLongTimeString();
-            timer1.Start();
-        }
-
-
         private void ManageSellingPrice_Load(object sender, EventArgs e)
         {
             lbitemname.Text = "Nama Produk : " + ProductData.name;
@@ -68,6 +61,12 @@ namespace POSsystem.Views
             timer1.Start();
             lbtime.Text = DateTime.Now.ToLongTimeString();
             LoadData();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+            timer1.Start();
         }
 
         private void btnnewprice_Click(object sender, EventArgs e)
@@ -85,7 +84,7 @@ namespace POSsystem.Views
                 MessageBox.Show("Tidak ada harga yang akan diubah");
             else
             {
-                var id = Convert.ToInt32(gvsellprice.Rows[gvsellprice.CurrentCell.RowIndex].Cells["id"].Value);
+                var id = Convert.ToInt32(gvsellprice.Rows[gvsellprice.CurrentCell.RowIndex].Cells["sellid"].Value);
                 var itemprice = SellpriceList.FirstOrDefault(x => x.id == id);
                 if (itemprice != null)
                 {
@@ -164,5 +163,7 @@ namespace POSsystem.Views
                     bteditprice.PerformClick();
             }
         }
+
+
     }
 }

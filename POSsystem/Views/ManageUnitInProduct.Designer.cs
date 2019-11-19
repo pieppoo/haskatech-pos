@@ -44,7 +44,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lbchangerelation = new System.Windows.Forms.Label();
+            this.btchangerelation = new System.Windows.Forms.Button();
             this.lbunitrelation = new System.Windows.Forms.Label();
             this.panel9 = new System.Windows.Forms.Panel();
             this.btmanageunit = new System.Windows.Forms.Button();
@@ -103,7 +103,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gvunitlist.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gvunitlist.Location = new System.Drawing.Point(13, 112);
+            this.gvunitlist.Location = new System.Drawing.Point(13, 130);
             this.gvunitlist.Margin = new System.Windows.Forms.Padding(4);
             this.gvunitlist.MultiSelect = false;
             this.gvunitlist.Name = "gvunitlist";
@@ -113,7 +113,7 @@
             this.gvunitlist.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.gvunitlist.RowTemplate.Height = 32;
             this.gvunitlist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvunitlist.Size = new System.Drawing.Size(716, 279);
+            this.gvunitlist.Size = new System.Drawing.Size(716, 261);
             this.gvunitlist.TabIndex = 11;
             // 
             // id
@@ -179,9 +179,9 @@
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel9, 2, 0);
@@ -189,7 +189,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(717, 56);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(717, 74);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // panel1
@@ -200,7 +200,7 @@
             this.panel1.Controls.Add(this.lbitemname);
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(316, 50);
+            this.panel1.Size = new System.Drawing.Size(352, 68);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -208,31 +208,33 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.Controls.Add(this.lbchangerelation);
+            this.panel2.Controls.Add(this.btchangerelation);
             this.panel2.Controls.Add(this.lbunitrelation);
-            this.panel2.Location = new System.Drawing.Point(325, 3);
+            this.panel2.Location = new System.Drawing.Point(361, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(316, 50);
+            this.panel2.Size = new System.Drawing.Size(209, 68);
             this.panel2.TabIndex = 1;
             // 
-            // lbchangerelation
+            // btchangerelation
             // 
-            this.lbchangerelation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbchangerelation.AutoSize = true;
-            this.lbchangerelation.Font = new System.Drawing.Font("Cambria", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbchangerelation.ForeColor = System.Drawing.Color.Blue;
-            this.lbchangerelation.Location = new System.Drawing.Point(6, 29);
-            this.lbchangerelation.Name = "lbchangerelation";
-            this.lbchangerelation.Size = new System.Drawing.Size(37, 14);
-            this.lbchangerelation.TabIndex = 14;
-            this.lbchangerelation.Text = "Tukar";
-            this.lbchangerelation.Click += new System.EventHandler(this.lbchangerelation_Click);
+            this.btchangerelation.FlatAppearance.BorderSize = 0;
+            this.btchangerelation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btchangerelation.Font = new System.Drawing.Font("Cambria", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btchangerelation.ForeColor = System.Drawing.Color.MediumBlue;
+            this.btchangerelation.Location = new System.Drawing.Point(4, 35);
+            this.btchangerelation.Name = "btchangerelation";
+            this.btchangerelation.Size = new System.Drawing.Size(109, 28);
+            this.btchangerelation.TabIndex = 19;
+            this.btchangerelation.Text = "Tukar (F6)";
+            this.btchangerelation.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.btchangerelation.UseVisualStyleBackColor = true;
+            this.btchangerelation.Click += new System.EventHandler(this.btchangerelation_Click);
             // 
             // lbunitrelation
             // 
             this.lbunitrelation.AutoSize = true;
             this.lbunitrelation.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbunitrelation.Location = new System.Drawing.Point(4, 7);
+            this.lbunitrelation.Location = new System.Drawing.Point(4, 10);
             this.lbunitrelation.Name = "lbunitrelation";
             this.lbunitrelation.Size = new System.Drawing.Size(133, 22);
             this.lbunitrelation.TabIndex = 13;
@@ -244,15 +246,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel9.Controls.Add(this.btmanageunit);
-            this.panel9.Location = new System.Drawing.Point(647, 3);
+            this.panel9.Location = new System.Drawing.Point(576, 3);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(67, 50);
+            this.panel9.Size = new System.Drawing.Size(138, 68);
             this.panel9.TabIndex = 2;
             // 
             // btmanageunit
             // 
-            this.btmanageunit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.btmanageunit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btmanageunit.BackColor = System.Drawing.Color.Purple;
             this.btmanageunit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -261,7 +262,7 @@
             this.btmanageunit.Location = new System.Drawing.Point(7, 6);
             this.btmanageunit.Margin = new System.Windows.Forms.Padding(4);
             this.btmanageunit.Name = "btmanageunit";
-            this.btmanageunit.Size = new System.Drawing.Size(56, 39);
+            this.btmanageunit.Size = new System.Drawing.Size(127, 57);
             this.btmanageunit.TabIndex = 18;
             this.btmanageunit.Text = "Pengaturan Kemasan (F5)";
             this.btmanageunit.UseVisualStyleBackColor = false;
@@ -491,6 +492,10 @@
             this.lbdate.Text = "date";
             this.lbdate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // ManageUnitInProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -538,7 +543,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lbunitrelation;
-        private System.Windows.Forms.Label lbchangerelation;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btaddunit;
         private System.Windows.Forms.Button bteditunit;
@@ -564,5 +568,6 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Button btmanageunit;
+        private System.Windows.Forms.Button btchangerelation;
     }
 }

@@ -39,16 +39,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POSSalesEntry));
             this.gvsales = new System.Windows.Forms.DataGridView();
-            this.salesId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Itemname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtysale = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitsale = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pcsprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oritotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalsale = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btpay = new System.Windows.Forms.Button();
             this.btnewsale = new System.Windows.Forms.Button();
             this.lbbarcode = new System.Windows.Forms.Label();
@@ -73,14 +63,24 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lbdate = new System.Windows.Forms.Label();
+            this.lbtime = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lbtime = new System.Windows.Forms.Label();
-            this.lbdate = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.salesId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Itemname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtysale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitsale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pcsprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oritotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.discount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totalsale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.item_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvsales)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconsearch)).BeginInit();
@@ -89,11 +89,11 @@
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.panel12.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.panel12.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // gvsales
@@ -132,92 +132,6 @@
             this.gvsales.TabIndex = 1;
             this.gvsales.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvsales_CellEndEdit);
             this.gvsales.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gvsales_CellValidating);
-            // 
-            // salesId
-            // 
-            this.salesId.HeaderText = "salesId";
-            this.salesId.Name = "salesId";
-            this.salesId.Visible = false;
-            // 
-            // Itemname
-            // 
-            this.Itemname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Itemname.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Itemname.FillWeight = 75F;
-            this.Itemname.HeaderText = "Nama Barang";
-            this.Itemname.Name = "Itemname";
-            this.Itemname.ReadOnly = true;
-            // 
-            // qtysale
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.qtysale.DefaultCellStyle = dataGridViewCellStyle3;
-            this.qtysale.FillWeight = 50F;
-            this.qtysale.HeaderText = "Jumlah";
-            this.qtysale.Name = "qtysale";
-            this.qtysale.Width = 50;
-            // 
-            // unitsale
-            // 
-            this.unitsale.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.unitsale.DefaultCellStyle = dataGridViewCellStyle4;
-            this.unitsale.FillWeight = 25F;
-            this.unitsale.HeaderText = "Kemasan";
-            this.unitsale.Name = "unitsale";
-            this.unitsale.ReadOnly = true;
-            // 
-            // pcsprice
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.pcsprice.DefaultCellStyle = dataGridViewCellStyle5;
-            this.pcsprice.FillWeight = 85F;
-            this.pcsprice.HeaderText = "Harga satuan";
-            this.pcsprice.Name = "pcsprice";
-            this.pcsprice.ReadOnly = true;
-            this.pcsprice.Width = 85;
-            // 
-            // oritotal
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.oritotal.DefaultCellStyle = dataGridViewCellStyle6;
-            this.oritotal.FillWeight = 85F;
-            this.oritotal.HeaderText = "Total Awal";
-            this.oritotal.Name = "oritotal";
-            this.oritotal.ReadOnly = true;
-            this.oritotal.Width = 85;
-            // 
-            // discount
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.discount.DefaultCellStyle = dataGridViewCellStyle7;
-            this.discount.FillWeight = 85F;
-            this.discount.HeaderText = "Diskon";
-            this.discount.Name = "discount";
-            this.discount.Width = 85;
-            // 
-            // totalsale
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.totalsale.DefaultCellStyle = dataGridViewCellStyle8;
-            this.totalsale.FillWeight = 85F;
-            this.totalsale.HeaderText = "Total Akhir";
-            this.totalsale.Name = "totalsale";
-            this.totalsale.ReadOnly = true;
-            this.totalsale.Width = 85;
-            // 
-            // item_id
-            // 
-            this.item_id.HeaderText = "item_id";
-            this.item_id.Name = "item_id";
-            this.item_id.Visible = false;
-            // 
-            // unitcode
-            // 
-            this.unitcode.HeaderText = "unitcode";
-            this.unitcode.Name = "unitcode";
-            this.unitcode.Visible = false;
             // 
             // btpay
             // 
@@ -525,6 +439,57 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(863, 93);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
+            // panel12
+            // 
+            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel12.Controls.Add(this.groupBox2);
+            this.panel12.Location = new System.Drawing.Point(693, 3);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(167, 87);
+            this.panel12.TabIndex = 7;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.lbdate);
+            this.groupBox2.Controls.Add(this.lbtime);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(10, 7);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(149, 71);
+            this.groupBox2.TabIndex = 20;
+            this.groupBox2.TabStop = false;
+            // 
+            // lbdate
+            // 
+            this.lbdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbdate.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lbdate.Location = new System.Drawing.Point(4, 40);
+            this.lbdate.Name = "lbdate";
+            this.lbdate.Size = new System.Drawing.Size(139, 28);
+            this.lbdate.TabIndex = 1;
+            this.lbdate.Text = "date";
+            this.lbdate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lbtime
+            // 
+            this.lbtime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbtime.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbtime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lbtime.Location = new System.Drawing.Point(4, 12);
+            this.lbtime.Name = "lbtime";
+            this.lbtime.Size = new System.Drawing.Size(139, 28);
+            this.lbtime.TabIndex = 0;
+            this.lbtime.Text = "time";
+            this.lbtime.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -560,56 +525,95 @@
             this.panel6.Size = new System.Drawing.Size(80, 87);
             this.panel6.TabIndex = 0;
             // 
-            // panel12
+            // timer1
             // 
-            this.panel12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel12.Controls.Add(this.groupBox2);
-            this.panel12.Location = new System.Drawing.Point(693, 3);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(167, 87);
-            this.panel12.TabIndex = 7;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
-            // groupBox2
+            // salesId
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.lbdate);
-            this.groupBox2.Controls.Add(this.lbtime);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(10, 7);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(149, 71);
-            this.groupBox2.TabIndex = 20;
-            this.groupBox2.TabStop = false;
+            this.salesId.HeaderText = "salesId";
+            this.salesId.Name = "salesId";
+            this.salesId.Visible = false;
             // 
-            // lbtime
+            // Itemname
             // 
-            this.lbtime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbtime.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbtime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.lbtime.Location = new System.Drawing.Point(4, 12);
-            this.lbtime.Name = "lbtime";
-            this.lbtime.Size = new System.Drawing.Size(139, 28);
-            this.lbtime.TabIndex = 0;
-            this.lbtime.Text = "time";
-            this.lbtime.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Itemname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Itemname.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Itemname.FillWeight = 75F;
+            this.Itemname.HeaderText = "Nama Barang";
+            this.Itemname.Name = "Itemname";
+            this.Itemname.ReadOnly = true;
             // 
-            // lbdate
+            // qtysale
             // 
-            this.lbdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbdate.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.lbdate.Location = new System.Drawing.Point(4, 40);
-            this.lbdate.Name = "lbdate";
-            this.lbdate.Size = new System.Drawing.Size(139, 28);
-            this.lbdate.TabIndex = 1;
-            this.lbdate.Text = "date";
-            this.lbdate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.qtysale.DefaultCellStyle = dataGridViewCellStyle3;
+            this.qtysale.FillWeight = 50F;
+            this.qtysale.HeaderText = "Jumlah";
+            this.qtysale.Name = "qtysale";
+            this.qtysale.Width = 50;
+            // 
+            // unitsale
+            // 
+            this.unitsale.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.unitsale.DefaultCellStyle = dataGridViewCellStyle4;
+            this.unitsale.FillWeight = 25F;
+            this.unitsale.HeaderText = "Kemasan";
+            this.unitsale.Name = "unitsale";
+            this.unitsale.ReadOnly = true;
+            // 
+            // pcsprice
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.pcsprice.DefaultCellStyle = dataGridViewCellStyle5;
+            this.pcsprice.FillWeight = 85F;
+            this.pcsprice.HeaderText = "Harga satuan";
+            this.pcsprice.Name = "pcsprice";
+            this.pcsprice.ReadOnly = true;
+            this.pcsprice.Width = 85;
+            // 
+            // oritotal
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.oritotal.DefaultCellStyle = dataGridViewCellStyle6;
+            this.oritotal.FillWeight = 85F;
+            this.oritotal.HeaderText = "Total Awal";
+            this.oritotal.Name = "oritotal";
+            this.oritotal.ReadOnly = true;
+            this.oritotal.Width = 85;
+            // 
+            // discount
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.discount.DefaultCellStyle = dataGridViewCellStyle7;
+            this.discount.FillWeight = 85F;
+            this.discount.HeaderText = "Diskon (Rp)";
+            this.discount.Name = "discount";
+            this.discount.Width = 85;
+            // 
+            // totalsale
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.totalsale.DefaultCellStyle = dataGridViewCellStyle8;
+            this.totalsale.FillWeight = 85F;
+            this.totalsale.HeaderText = "Total Akhir";
+            this.totalsale.Name = "totalsale";
+            this.totalsale.ReadOnly = true;
+            this.totalsale.Width = 85;
+            // 
+            // item_id
+            // 
+            this.item_id.HeaderText = "item_id";
+            this.item_id.Name = "item_id";
+            this.item_id.Visible = false;
+            // 
+            // unitcode
+            // 
+            this.unitcode.HeaderText = "unitcode";
+            this.unitcode.Name = "unitcode";
+            this.unitcode.Visible = false;
             // 
             // POSSalesEntry
             // 
@@ -636,13 +640,13 @@
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panel6.ResumeLayout(false);
-            this.panel12.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -669,16 +673,6 @@
         private System.Windows.Forms.TextBox tbbarcodeno;
         private System.Windows.Forms.Button btdelete;
         private System.Windows.Forms.TextBox tbdiscount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn salesId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Itemname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qtysale;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitsale;
-        private System.Windows.Forms.DataGridViewTextBoxColumn pcsprice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn oritotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn discount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalsale;
-        private System.Windows.Forms.DataGridViewTextBoxColumn item_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitcode;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
@@ -692,5 +686,15 @@
         private System.Windows.Forms.Label lbtime;
         private System.Windows.Forms.Label lbdate;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn salesId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Itemname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qtysale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitsale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pcsprice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oritotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn discount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totalsale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn item_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitcode;
     }
 }

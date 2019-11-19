@@ -77,11 +77,6 @@ namespace POSsystem.Views
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lbtime.Text = DateTime.Now.ToLongTimeString();
-            timer1.Start();
-        }
 
         private void ManageWarehouse_Load(object sender, EventArgs e)
         {
@@ -89,6 +84,12 @@ namespace POSsystem.Views
             timer1.Start();
             lbtime.Text = DateTime.Now.ToLongTimeString();
             LoadData();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+            timer1.Start();
         }
 
         private int calculatestock(int purchaseid)

@@ -96,7 +96,7 @@ namespace POSsystem
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick_1(object sender, EventArgs e)
         {
             lbtime.Text = DateTime.Now.ToLongTimeString();
             timer1.Start();
@@ -241,5 +241,7 @@ namespace POSsystem
             if (e.KeyCode == Keys.Enter)
                 pbsearch_Click(null, null);
         }
+
+
     }
 }

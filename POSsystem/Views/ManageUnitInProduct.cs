@@ -51,8 +51,12 @@ namespace POSsystem.Views
             lbitemname.Text = "Nama Produk : " + ProductData.name;
 
             LoadData();
-            
+        }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbtime.Text = DateTime.Now.ToLongTimeString();
+            timer1.Start();
         }
 
         private void LoadData()
@@ -193,11 +197,6 @@ namespace POSsystem.Views
             }
             
             
-        }
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            lbtime.Text = DateTime.Now.ToLongTimeString();
-            timer1.Start();
         }
 
         private void btdeleteunit_Click(object sender, EventArgs e)
@@ -385,7 +384,16 @@ namespace POSsystem.Views
             }
         }
 
-        private void lbchangerelation_Click(object sender, EventArgs e)
+        private void btmanageunit_Click(object sender, EventArgs e)
+        {
+            var form = new ManageUnit();
+            Hide();
+            form.ShowDialog();
+            Show();
+            LoadData();
+        }
+
+        private void btchangerelation_Click(object sender, EventArgs e)
         {
             if (gvunitlist.Rows.Count != 0)
             {
@@ -398,9 +406,7 @@ namespace POSsystem.Views
                 form.ShowDialog();
                 LoadData();
             }
-
         }
-
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -424,6 +430,16 @@ namespace POSsystem.Views
                 cbseq.Focus();
                 return true;
             }
+            else if (keyData == (Keys.F5))
+            {
+                btmanageunit.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.F6))
+            {
+                btchangerelation.PerformClick();
+                return true;
+            }
             else if (keyData == (Keys.F10))
             {
                 btdeleteall.PerformClick();
@@ -442,13 +458,6 @@ namespace POSsystem.Views
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void btmanageunit_Click(object sender, EventArgs e)
-        {
-            var form = new ManageUnit();
-            Hide();
-            form.ShowDialog();
-            Show();
-            LoadData();
-        }
+
     }
 }

@@ -547,6 +547,10 @@
             this.lbtime.Text = "time";
             this.lbtime.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            // 
             // HistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gvpurchase = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dateitemin = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -118,8 +118,8 @@
             // purchase_price
             // 
             this.purchase_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.purchase_price.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.purchase_price.DefaultCellStyle = dataGridViewCellStyle1;
             this.purchase_price.FillWeight = 25F;
             this.purchase_price.HeaderText = "Harga Beli (Rp)";
             this.purchase_price.Name = "purchase_price";
@@ -323,6 +323,10 @@
             this.lbitemname.TabIndex = 17;
             this.lbitemname.Text = "Nama Produk";
             this.lbitemname.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // ManagePurchase
             // 

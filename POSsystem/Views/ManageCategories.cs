@@ -63,6 +63,14 @@ namespace POSsystem.Views
             runningno = 1;
         }
 
+        private void tbcatname_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btsearch.PerformClick();
+            }
+        }
+
         private void btsearch_Click(object sender, EventArgs e)
         {
             var args = new List<object>();
@@ -70,28 +78,29 @@ namespace POSsystem.Views
             if (!string.IsNullOrEmpty(tbcatname.Text))
             {
                 args.Add(tbcatname.Text);
-            }
 
-            var result = categoryRepository.Search(args.ToArray());
+                var result = categoryRepository.Search(args.ToArray());
 
-            if (result.Count != 0)
-            {
-                gvcat.Rows.Clear();
-                int runningno = 1;
-
-                foreach (var item in result)
+                if (result.Count != 0)
                 {
+                    gvcat.Rows.Clear();
+                    int runningno = 1;
 
-                    gvcat.Rows.Add(item.id,
-                        runningno,
-                        item.category_name,
-                        item.remark);
-                    runningno = runningno + 1;
+                    foreach (var item in result)
+                    {
+
+                        gvcat.Rows.Add(item.id,
+                            runningno,
+                            item.category_name,
+                            item.remark);
+                        runningno = runningno + 1;
+                    }
+                    runningno = 1;
                 }
-                runningno = 1;
+                else
+                    MessageBox.Show("Kategori tidak ditemukan");
             }
-            else
-                MessageBox.Show("Kategori tidak ditemukan");
+
         }
 
         private void btnreset_Click(object sender, EventArgs e)
@@ -167,13 +176,6 @@ namespace POSsystem.Views
             }
         }
 
-        private void tbcatname_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btsearch.PerformClick();
-            }
-        }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {

@@ -95,5 +95,7 @@ namespace POSsystem.Views
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+
     }
 }

@@ -32,6 +32,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gvsellprice = new System.Windows.Forms.DataGridView();
+            this.itemid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.barcodeno = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.perUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnnewprice = new System.Windows.Forms.Button();
             this.bteditprice = new System.Windows.Forms.Button();
             this.btndeleteprice = new System.Windows.Forms.Button();
@@ -45,11 +50,6 @@
             this.lbdate = new System.Windows.Forms.Label();
             this.lbitemname = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.itemid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.barcodeno = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.perUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvsellprice)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -93,6 +93,46 @@
             this.gvsellprice.TabIndex = 15;
             this.gvsellprice.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvsellprice_CellContentDoubleClick);
             this.gvsellprice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gvsellprice_KeyDown);
+            // 
+            // itemid
+            // 
+            this.itemid.HeaderText = "itemid";
+            this.itemid.Name = "itemid";
+            this.itemid.ReadOnly = true;
+            this.itemid.Visible = false;
+            // 
+            // sellid
+            // 
+            this.sellid.HeaderText = "sellid";
+            this.sellid.Name = "sellid";
+            this.sellid.ReadOnly = true;
+            this.sellid.Visible = false;
+            // 
+            // barcodeno
+            // 
+            this.barcodeno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.barcodeno.FillWeight = 40F;
+            this.barcodeno.HeaderText = "Nomor Barcode";
+            this.barcodeno.Name = "barcodeno";
+            this.barcodeno.ReadOnly = true;
+            // 
+            // perUnit
+            // 
+            this.perUnit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.perUnit.FillWeight = 30F;
+            this.perUnit.HeaderText = "Kemasan";
+            this.perUnit.Name = "perUnit";
+            this.perUnit.ReadOnly = true;
+            // 
+            // sellprice
+            // 
+            this.sellprice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.sellprice.DefaultCellStyle = dataGridViewCellStyle2;
+            this.sellprice.FillWeight = 30F;
+            this.sellprice.HeaderText = "Harga Jual (Rp)";
+            this.sellprice.Name = "sellprice";
+            this.sellprice.ReadOnly = true;
             // 
             // btnnewprice
             // 
@@ -256,45 +296,9 @@
             this.lbitemname.Text = "Nama Produk";
             this.lbitemname.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // itemid
+            // timer1
             // 
-            this.itemid.HeaderText = "itemid";
-            this.itemid.Name = "itemid";
-            this.itemid.ReadOnly = true;
-            this.itemid.Visible = false;
-            // 
-            // sellid
-            // 
-            this.sellid.HeaderText = "sellid";
-            this.sellid.Name = "sellid";
-            this.sellid.ReadOnly = true;
-            this.sellid.Visible = false;
-            // 
-            // barcodeno
-            // 
-            this.barcodeno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.barcodeno.FillWeight = 40F;
-            this.barcodeno.HeaderText = "Nomor Barcode";
-            this.barcodeno.Name = "barcodeno";
-            this.barcodeno.ReadOnly = true;
-            // 
-            // perUnit
-            // 
-            this.perUnit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.perUnit.FillWeight = 30F;
-            this.perUnit.HeaderText = "Kemasan";
-            this.perUnit.Name = "perUnit";
-            this.perUnit.ReadOnly = true;
-            // 
-            // sellprice
-            // 
-            this.sellprice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.sellprice.DefaultCellStyle = dataGridViewCellStyle2;
-            this.sellprice.FillWeight = 30F;
-            this.sellprice.HeaderText = "Harga Jual (Rp)";
-            this.sellprice.Name = "sellprice";
-            this.sellprice.ReadOnly = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // ManageSellingPrice
             // 
