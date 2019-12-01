@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using MySql.Data.MySqlClient;
+using POSsystem.Common;
 using POSsystem.Database;
 using POSsystem.Properties;
 
@@ -43,13 +44,15 @@ namespace POSsystem.Repository
 
                 var count = dbConnection.Execute(sql);
                 result = count > 0;
+                return result;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
+                return false;
             }
 
-            return result;
+            
         }
 
         public bool Delete(int id)
@@ -67,7 +70,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
                 return null;
             }
         }
@@ -82,7 +85,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
                 return null;
             }
         }
@@ -97,7 +100,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
                 return null;
             }
         }
@@ -115,7 +118,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
                 return null;
             }
         }
@@ -167,7 +170,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
             return null;
         }

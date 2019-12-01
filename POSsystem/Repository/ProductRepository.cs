@@ -8,8 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using POSsystem.Properties;
-
-
+using POSsystem.Common;
 
 namespace POSsystem.Repository
 {
@@ -32,14 +31,13 @@ namespace POSsystem.Repository
                                             product.name,
                                             product.prod_catetogry
                                             );
-                Console.WriteLine(sql);
 
                 var count = dbConnection.Execute(sql, product);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -58,7 +56,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -74,7 +72,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
                 return null;
             }
         }
@@ -89,7 +87,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
                 return null;
             }
         }
@@ -104,7 +102,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
                 return null;
             }
 
@@ -145,7 +143,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
             return null;
         }
@@ -190,7 +188,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
                 return null;
             }
         }
@@ -207,14 +205,12 @@ namespace POSsystem.Repository
                                             product.brand_id,
                                             product.prod_catetogry);
 
-                Console.WriteLine(sql);
-
                 var count = dbConnection.Execute(sql, product);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -253,14 +249,12 @@ namespace POSsystem.Repository
                                             product.id,
                                             product.Stock);
 
-                Console.WriteLine(sql);
-
                 var count = dbConnection.Execute(sql, product);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -275,14 +269,12 @@ namespace POSsystem.Repository
                                             itemid,
                                             yesRelate);
 
-                Console.WriteLine(sql);
-
                 var count = dbConnection.Execute(sql);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using POSsystem.Properties;
+using POSsystem.Common;
 
 namespace POSsystem.Repository
 {
@@ -32,14 +33,13 @@ namespace POSsystem.Repository
                                             sellingPrice.sell_price,
                                             sellingPrice.Barcodeno
                                             );
-                Console.WriteLine(sql);
 
                 var count = dbConnection.Execute(sql, sellingPrice);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -51,14 +51,13 @@ namespace POSsystem.Repository
             try
             {
                 string sql = string.Format("DELETE FROM selling_price WHERE ID = @id");
-                Console.WriteLine(sql);
 
                 var count = dbConnection.Execute(sql, new { Id = id });
                 return count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -79,8 +78,8 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                
+                Logger.Log(ex, true);
+
             }
             return null;
         }
@@ -106,14 +105,12 @@ namespace POSsystem.Repository
                                            sellingPrice.sell_price,
                                            string.IsNullOrWhiteSpace(sellingPrice.Barcodeno) ? "null" : "'" + sellingPrice.Barcodeno + "'");
 
-                Console.WriteLine(sql);
-
                 var count = dbConnection.Execute(sql, sellingPrice);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;

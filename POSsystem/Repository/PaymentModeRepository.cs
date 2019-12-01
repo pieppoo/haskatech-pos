@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using MySql.Data.MySqlClient;
+using POSsystem.Common;
 using POSsystem.Database;
 using POSsystem.Properties;
 
@@ -40,7 +41,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
                 return null;
             }
         }

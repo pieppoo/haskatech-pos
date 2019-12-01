@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using MySql.Data.MySqlClient;
+using POSsystem.Common;
 using POSsystem.Database;
 using POSsystem.Properties;
 using System;
@@ -26,14 +27,13 @@ namespace POSsystem.Repository
                 string sql = string.Format("INSERT INTO Brand (name, remark) VALUES ('{0}', '{1}')",
                                             brand.name,
                                             brand.remark);
-                Console.WriteLine(sql);
 
                 var count = dbConnection.Execute(sql, brand);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -45,14 +45,13 @@ namespace POSsystem.Repository
             try
             {
                 string sql = string.Format("DELETE FROM brand WHERE ID = @id");
-                Console.WriteLine(sql);
 
                 var count = dbConnection.Execute(sql, new { Id = id });
                 return count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -68,8 +67,8 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                Logger.Log(ex, true);
+                return null;
             }
             
         }
@@ -102,7 +101,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
             return null;
         }
@@ -116,14 +115,13 @@ namespace POSsystem.Repository
                                             brand.id,
                                             brand.name,
                                             brand.remark);
-                Console.WriteLine(sql);
 
                 var count = dbConnection.Execute(sql, brand);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;

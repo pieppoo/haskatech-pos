@@ -110,6 +110,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Logger.cs" />
     <Compile Include="Common\ReportDetailsGenerator.cs" />
     <Compile Include="Common\ReportGenerator.cs" />
     <Compile Include="Common\Utils.cs" />

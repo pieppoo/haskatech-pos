@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using POSsystem.Properties;
+using POSsystem.Common;
 
 namespace POSsystem.Repository
 {
@@ -81,7 +82,7 @@ namespace POSsystem.Repository
                 catch (Exception ex)
                 {
                     tran.Rollback(); // I tried commented it but it still rollback, meaning this line is not needed?
-                    Console.WriteLine(ex.Message);
+                    Logger.Log(ex, true);
                     return result;
                 }
             }
@@ -133,7 +134,7 @@ namespace POSsystem.Repository
                 catch (Exception ex)
                 {
                     tran.Rollback();
-                    Console.WriteLine(ex.Message);
+                    Logger.Log(ex, true);
                     return result;
                 }
             }
@@ -199,7 +200,7 @@ namespace POSsystem.Repository
                 catch (Exception ex)
                 {
                     tran.Rollback();
-                    Console.WriteLine(ex.Message);
+                    Logger.Log(ex, true);
                     return result;
                 }
             }
@@ -252,7 +253,7 @@ namespace POSsystem.Repository
                 catch (Exception ex)
                 {
                     tran.Rollback();
-                    Console.WriteLine(ex.Message);
+                    Logger.Log(ex, true);
                     return result;
                 }
             }
@@ -275,7 +276,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -294,7 +295,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -340,7 +341,7 @@ namespace POSsystem.Repository
                 catch (Exception ex)
                 {
                     tran.Rollback();
-                    Console.WriteLine(ex.Message);
+                    Logger.Log(ex, true);
                     return result;
                 }
             }
@@ -400,7 +401,7 @@ namespace POSsystem.Repository
                 catch (Exception ex)
                 {
                     tran.Rollback();
-                    Console.WriteLine(ex.Message);
+                    Logger.Log(ex, true);
                     return result;
                 }
             }
@@ -446,7 +447,7 @@ namespace POSsystem.Repository
                 catch (Exception ex)
                 {
                     tran.Rollback();
-                    Console.WriteLine(ex.Message);
+                    Logger.Log(ex, true);
                     return result;
                 }
             }
@@ -465,7 +466,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -486,7 +487,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
                 return null;
             }
         }
@@ -512,14 +513,12 @@ namespace POSsystem.Repository
                                             produnit.unitcode,
                                             produnit.qty);
 
-                Console.WriteLine(sql);
-
                 var count = dbConnection.Execute(sql);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -534,14 +533,12 @@ namespace POSsystem.Repository
                                             itemid, 
                                             currseq);
 
-                Console.WriteLine(sql);
-
                 var count = dbConnection.Execute(sql);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -556,14 +553,12 @@ namespace POSsystem.Repository
                                             itemid,
                                             currseq);
 
-                Console.WriteLine(sql);
-
                 var count = dbConnection.Execute(sql);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -580,14 +575,13 @@ namespace POSsystem.Repository
                                             newqty,
                                             pcsflag);
 
-                Console.WriteLine(sql);
 
                 var count = dbConnection.Execute(sql);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;

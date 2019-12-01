@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using MySql.Data.MySqlClient;
+using POSsystem.Common;
 using POSsystem.Database;
 using POSsystem.Model.Database;
 using POSsystem.Properties;
@@ -29,21 +30,30 @@ namespace POSsystem.Repository
 
         public bool AddMany(List<SaleItemsDetail> entity, int historyId)
         {
-            var query1 = "INSERT INTO saledetail(historyid, itemid, qtysale, unitsale, priceperitem, originaltotal, discount, totalprice) VALUES ";
-            var query2 = "({0}, {1}, {2}, '{3}', {4}, {5}, {6}, {7})";
-            var list = new List<string>();
-
-            foreach (var item in entity)
+            try
             {
-                list.Add(string.Format(query2, 
-                                       historyId, item.itemid, item.qtysale, item.unitsale, item.priceperitem, item.originaltotal, item.discount, item.totalprice));
+                var query1 = "INSERT INTO saledetail(historyid, itemid, qtysale, unitsale, priceperitem, originaltotal, discount, totalprice) VALUES ";
+                var query2 = "({0}, {1}, {2}, '{3}', {4}, {5}, {6}, {7})";
+                var list = new List<string>();
+
+                foreach (var item in entity)
+                {
+                    list.Add(string.Format(query2,
+                                           historyId, item.itemid, item.qtysale, item.unitsale, item.priceperitem, item.originaltotal, item.discount, item.totalprice));
+                }
+
+                var values = string.Join(",", list);
+                var fullQuery = query1 + values;
+
+                var result = dbConnection.Execute(fullQuery);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex, true);
+                return null;
             }
 
-            var values = string.Join(",", list);
-            var fullQuery = query1 + values;
-
-            var result = dbConnection.Execute(fullQuery);
-            return true;
         }
 
         public bool Delete(int id)
@@ -66,10 +76,10 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-
+                Logger.Log(ex, true);
+                return null;
             }
-            return null;
+            
         }
 
         public List<DetailReportMonthly> GetReportDetail(int datesale)
@@ -95,7 +105,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
 
             }
             return null;

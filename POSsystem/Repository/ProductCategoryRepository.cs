@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using POSsystem.Properties;
 using POSsystem.Model.Database;
+using POSsystem.Common;
 
 namespace POSsystem.Repository
 {
@@ -30,14 +31,12 @@ namespace POSsystem.Repository
                                                 prodcat.category_name,
                                                 prodcat.remark
                                                 );
-                    Console.WriteLine(sql);
-
                     var count = dbConnection.Execute(sql, prodcat);
                     result = count > 0;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Logger.Log(ex, true);
                 }
 
                 return result;
@@ -57,7 +56,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -73,7 +72,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
                 return null;
             }
         }
@@ -106,7 +105,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
             return null;
         }
@@ -121,14 +120,12 @@ namespace POSsystem.Repository
                                             prodcat.category_name,
                                             prodcat.remark);
 
-                Console.WriteLine(sql);
-
                 var count = dbConnection.Execute(sql, prodcat);
                 result = count > 0;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;

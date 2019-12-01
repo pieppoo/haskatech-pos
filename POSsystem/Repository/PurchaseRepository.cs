@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using POSsystem.Properties;
+using POSsystem.Common;
 
 namespace POSsystem.Repository
 {
@@ -38,7 +39,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -87,7 +88,7 @@ namespace POSsystem.Repository
                 catch (Exception ex)
                 {
                     tran.Rollback();
-                    Console.WriteLine(ex.Message);
+                    Logger.Log(ex, true);
                     return result;
                 }
             }
@@ -106,7 +107,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -153,7 +154,7 @@ namespace POSsystem.Repository
                 catch (Exception ex)
                 {
                     tran.Rollback();
-                    Console.WriteLine(ex.Message);
+                    Logger.Log(ex, true);
                     return result;
                 }
 
@@ -174,8 +175,8 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                
+                Logger.Log(ex, true);
+
             }
             return null;
         }
@@ -211,7 +212,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
@@ -233,7 +234,7 @@ namespace POSsystem.Repository
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log(ex, true);
             }
 
             return result;
